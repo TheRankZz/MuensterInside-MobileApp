@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MuensterInside</string>
+    <string name="essen">Essen</string>
+    <string name="party">Party</string>
+    <string name="hotel">Hotel</string>
+    <string name="shopping">Shopping</string>
+    <string name="sehenswuerdigkeiten">Sehens      würdigkeiten</string>
+    <string name="veranstaltungen">Veranstaltungen</string>
+    <string name="title_activity_kategorie">KategorieActivity</string>
+    <string name="Location">Liste aller Locations</string>
+    <string name="title_activity_location">LocationActivity</string>
+
+</resources>
