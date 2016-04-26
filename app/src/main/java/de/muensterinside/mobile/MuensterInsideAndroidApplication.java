@@ -1,12 +1,12 @@
-package de.muensterinside;
+package de.muensterinside.mobile;
 
 
 import android.app.Application;
 
-import de.muensterinside.interfaces.CategoryService;
-import de.muensterinside.interfaces.LocationService;
-import de.muensterinside.modals.Category;
-import de.muensterinside.modals.Location;
+import de.muensterinside.mobile.interfaces.CategoryService;
+import de.muensterinside.mobile.interfaces.LocationService;
+import de.muensterinside.mobile.modals.Category;
+import de.muensterinside.mobile.modals.Location;
 
 public class MuensterInsideAndroidApplication extends Application{
 

@@ -1,4 +1,4 @@
-package de.muensterinside.modals;
+package de.muensterinside.mobile.modals;
 
 import java.io.Serializable;
 

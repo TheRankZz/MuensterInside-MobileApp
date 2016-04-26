@@ -1,11 +1,11 @@
-package de.muensterinside;
+package de.muensterinside.mobile;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.app.Application;
-import de.muensterinside.interfaces.LocationService;
-import de.muensterinside.modals.Category;
-import de.muensterinside.modals.Location;
+
+import de.muensterinside.mobile.interfaces.LocationService;
+import de.muensterinside.mobile.modals.Category;
+import de.muensterinside.mobile.modals.Location;
 
 public class MuensterInsideLocationImplMock implements LocationService {
 

@@ -1,11 +1,10 @@
-package de.muensterinside;
+package de.muensterinside.mobile;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.muensterinside.interfaces.CategoryService;
-import de.muensterinside.modals.Category;
+import de.muensterinside.mobile.interfaces.CategoryService;
+import de.muensterinside.mobile.modals.Category;
 
 /**
  * Diese Klasse ersetzt die Verbindung zum Server als Mock-Objekt.

@@ -1,4 +1,4 @@
-package de.muensterinside;
+package de.muensterinside.mobile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+
+import de.muensterinside.R;
 
 public class LocationActivity extends AppCompatActivity {
 

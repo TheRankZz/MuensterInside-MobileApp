@@ -1,7 +1,7 @@
-package de.muensterinside.interfaces;
+package de.muensterinside.mobile.interfaces;
 
 import java.util.List;
-import de.muensterinside.modals.Location;
+import de.muensterinside.mobile.modals.Location;
 
 public interface VoteService {
 
