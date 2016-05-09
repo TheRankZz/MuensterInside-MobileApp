@@ -5,16 +5,16 @@ import de.muensterinside.mobile.modals.Comment;
 
 public interface CommentService {
 
-	public Comment getComment(int com_id);
+	Comment getComment(int com_id);
 	
-	public List<Comment> getCommentsByLocation(int loc_id);
+	List<Comment> getCommentsByLocation(int loc_id);
 	
-	public List<Comment> getLastCommentByLocation(int loc_id);
+	List<Comment> getLastCommentByLocation(int loc_id);
 	
-	public List<Comment> getMyComments(String deviceId);
+	List<Comment> getMyComments(String deviceId);
 	
-	public boolean addComment(Comment com);
+	boolean addComment(Comment com);
 	
-	public boolean removeComment(int com_id);
+	boolean removeComment(int com_id);
 	
 }

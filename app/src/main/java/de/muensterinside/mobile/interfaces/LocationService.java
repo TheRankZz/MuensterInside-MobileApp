@@ -5,16 +5,16 @@ import de.muensterinside.mobile.modals.Location;
 
 public interface LocationService {
 	
-	public Location getLocation(int loc_id);
+	Location getLocation(int loc_id);
 	
-	public List<Location> getAllLocation();
+	List<Location> getAllLocation();
 	
-	public List<Location> getLocationByCategory(int cat_id);
+	List<Location> getLocationByCategory(int cat_id);
 	
-	public List<Location> getMyLocation(String deviceId);
+	List<Location> getMyLocation(String deviceId);
 	
-	public boolean addLocation(Location loc);
+	boolean addLocation(Location loc);
 	
-	public boolean removeLocation(int loc_id);
+	boolean removeLocation(int loc_id);
 
 }
