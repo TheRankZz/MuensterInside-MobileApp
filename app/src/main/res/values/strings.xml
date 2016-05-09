@@ -9,5 +9,6 @@
     <string name="title_activity_kategorie">KategorieActivity</string>
     <string name="Location">Liste aller Locations</string>
     <string name="title_activity_location">LocationActivity</string>
+    <string name="title_activity_category">CategoryActivity</string>
 
 </resources>

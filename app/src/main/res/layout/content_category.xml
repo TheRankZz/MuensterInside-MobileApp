@@ -9,12 +9,23 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="de.mobile.LocationActivity"
-    tools:showIn="@layout/activity_location">
+    tools:context="de.mobile.KategorieActivity"
+    tools:showIn="@layout/activity_category">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <TextView android:text="@string/Location" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView1" />
+
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@+id/textView1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:choiceMode="singleChoice" />
+
+
 
 </RelativeLayout>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "de.muensterinside"
+        applicationId "de.muensterinside.mobile"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
