@@ -23,6 +23,7 @@ public class CategoryActivity extends AppCompatActivity {
         // generate a ListView to show the categories
         final ListView listView = (ListView) findViewById(R.id.listView);
 
+
         // fill in the test data
         List myList = new ArrayList<String>();
         for(int i=0; i < myApp.getLocationService().getAllLocation().size(); i++){

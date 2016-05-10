@@ -24,6 +24,10 @@
             android:name=".LocationActivity"
             android:label="@string/title_activity_location"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".PrefsActivity"
+            android:label="@string/title_activity_prefs" />
     </application>
 
 </manifest>
