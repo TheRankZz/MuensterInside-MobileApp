@@ -9,52 +9,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.mobile.MainActivity">
 
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:id="@+id/button_essen"
-        android:layout_alignParentTop="true"
+    <TextView android:text="@string/Category" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@+id/textView1"
         android:layout_alignParentStart="true"
-        android:background="#3d6a90" />
-
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:id="@+id/button_hotel"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:background="#3d6a90" />
-
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:id="@+id/button_sehenswuerdigkeiten"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="#3d6a90" />
-
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:id="@+id/button_party"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:background="#3d6a90" />
-
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:id="@+id/button_shopping"
-        android:layout_alignTop="@+id/button_hotel"
-        android:layout_alignEnd="@+id/button_party"
-        android:background="#3d6a90" />
-
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:id="@+id/button_veranstaltungen"
-        android:layout_alignTop="@+id/button_sehenswuerdigkeiten"
-        android:layout_alignEnd="@+id/button_shopping"
-        android:background="#3d6a90" />
+        android:layout_marginTop="40dp"
+        android:choiceMode="singleChoice" />
 
 </RelativeLayout>

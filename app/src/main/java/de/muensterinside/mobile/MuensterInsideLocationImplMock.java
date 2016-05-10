@@ -20,8 +20,59 @@ public class MuensterInsideLocationImplMock implements LocationService {
         locationList.add(new Location("Vapiano","deviceId2",category));
         locationList.add(new Location("Pierhouse","deviceId3",category));
         locationList.add(new Location("Cafe Sieben","deviceId4",category));
-        locationList.add(new Location("Burgercult","deviceId5",category));
-        locationList.add(new Location("Hans im Glück","deviceId6",category));
+        locationList.add(new Location("Extrablatt","deviceId1",category));
+        locationList.add(new Location("Vapiano","deviceId2",category));
+        locationList.add(new Location("Pierhouse","deviceId3",category));
+        locationList.add(new Location("Cafe Sieben","deviceId4",category));
+        locationList.add(new Location("Extrablatt","deviceId1",category));
+        locationList.add(new Location("Vapiano","deviceId2",category));
+        locationList.add(new Location("Pierhouse","deviceId3",category));
+        locationList.add(new Location("Cafe Sieben","deviceId4",category));
+        this.category = new Category("Party");
+        locationList.add(new Location("Blaues Haus","deviceId5",category));
+        locationList.add(new Location("Haifischbar","deviceId6",category));
+        locationList.add(new Location("Blaues Haus","deviceId5",category));
+        locationList.add(new Location("Haifischbar","deviceId6",category));
+        locationList.add(new Location("Blaues Haus","deviceId5",category));
+        locationList.add(new Location("Haifischbar","deviceId6",category));
+        locationList.add(new Location("Blaues Haus","deviceId5",category));
+        locationList.add(new Location("Haifischbar","deviceId6",category));
+        this.category = new Category("Hotel");
+        locationList.add(new Location("Hotel Conti","deviceId5",category));
+        locationList.add(new Location("Example Hotel","deviceId6",category));
+        locationList.add(new Location("Hotel Conti","deviceId5",category));
+        locationList.add(new Location("Example Hotel","deviceId6",category));
+        locationList.add(new Location("Hotel Conti","deviceId5",category));
+        locationList.add(new Location("Example Hotel","deviceId6",category));
+        locationList.add(new Location("Hotel Conti","deviceId5",category));
+        locationList.add(new Location("Example Hotel","deviceId6",category));
+        this.category = new Category("Shopping");
+        locationList.add(new Location("H&M","deviceId5",category));
+        locationList.add(new Location("New Yorker","deviceId6",category));
+        locationList.add(new Location("H&M","deviceId5",category));
+        locationList.add(new Location("New Yorker","deviceId6",category));
+        locationList.add(new Location("H&M","deviceId5",category));
+        locationList.add(new Location("New Yorker","deviceId6",category));
+        locationList.add(new Location("H&M","deviceId5",category));
+        locationList.add(new Location("New Yorker","deviceId6",category));
+        this.category = new Category("Sehenswürdigkeiten");
+        locationList.add(new Location("Schlossplatz","deviceId5",category));
+        locationList.add(new Location("Domplatz","deviceId6",category));
+        locationList.add(new Location("Schlossplatz","deviceId5",category));
+        locationList.add(new Location("Domplatz","deviceId6",category));
+        locationList.add(new Location("Schlossplatz","deviceId5",category));
+        locationList.add(new Location("Domplatz","deviceId6",category));
+        locationList.add(new Location("Schlossplatz","deviceId5",category));
+        locationList.add(new Location("Domplatz","deviceId6",category));
+        this.category = new Category("Veranstaltungen");
+        locationList.add(new Location("I Love FH Party","deviceId5",category));
+        locationList.add(new Location("Netflix & Chill Open Air","deviceId6",category));
+        locationList.add(new Location("I Love FH Party","deviceId5",category));
+        locationList.add(new Location("Netflix & Chill Open Air","deviceId6",category));
+        locationList.add(new Location("I Love FH Party","deviceId5",category));
+        locationList.add(new Location("Netflix & Chill Open Air","deviceId6",category));
+        locationList.add(new Location("I Love FH Party","deviceId5",category));
+        locationList.add(new Location("Netflix & Chill Open Air","deviceId6",category));
     }
 
     public Location getLocation(int loc_id){
@@ -33,12 +84,12 @@ public class MuensterInsideLocationImplMock implements LocationService {
     }
 
     public List<Location> getLocationByCategory(int cat_id){
-        //mocking: do nothing!
+
         return locationList;
     }
 
     public List<Location> getMyLocation(String deviceId){
-        //mocking: do nothing!
+
         return locationList;
     }
 

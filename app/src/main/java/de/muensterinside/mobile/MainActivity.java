@@ -6,7 +6,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,71 +23,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
-        // Get the categories dynamically
-        Button button_essen = (Button) findViewById(R.id.button_essen);
-        button_essen.setText(myApp.getCategoryService().getCategory(0).getName());
-        Button button_party = (Button) findViewById(R.id.button_party);
-        button_party.setText(myApp.getCategoryService().getCategory(1).getName());
-        Button button_sehenswuerdigkeiten = (Button) findViewById(R.id.button_sehenswuerdigkeiten);
-        button_sehenswuerdigkeiten.setText(myApp.getCategoryService().getCategory(2).getName());
-        Button button_hotel = (Button) findViewById(R.id.button_hotel);
-        button_hotel.setText(myApp.getCategoryService().getCategory(3).getName());
-        Button button_shopping = (Button) findViewById(R.id.button_shopping);
-        button_shopping.setText(myApp.getCategoryService().getCategory(4).getName());
-        Button button_veranstaltungen = (Button) findViewById(R.id.button_veranstaltungen);
-        button_veranstaltungen.setText(myApp.getCategoryService().getCategory(5).getName());
-        // Capture button_essen clicks
-        button_essen.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
 
-                // Start NewActivity.class
+        final ListView listView = (ListView) findViewById(R.id.listView);
+        List myList = new ArrayList<String>();
+        for(int i=0; i < myApp.getCategoryService().getCategories().size(); i++){
+            myList.add(myApp.getCategoryService().getCategories().get(i).getName());
+        }
+        ArrayAdapter<String> adapter;
+        adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {
                 Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
+                myIntent.setClassName(getPackageName(), getPackageName() + ".CategoryActivity");
+                myIntent.putExtra("selected", listView.getAdapter().getItem(arg2).toString());
                 startActivity(myIntent);
-            }
-        });
-        // Capture button_party clicks
-        button_party.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
 
-                // Start NewActivity.class
-                Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
-                startActivity(myIntent);
-            }
-        });
-        // Capture button_hotel clicks
-        button_hotel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-
-                // Start NewActivity.class
-                Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
-                startActivity(myIntent);
-            }
-        });
-        // Capture button_sehenswuerdigkeiten clicks
-        button_sehenswuerdigkeiten.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-
-                // Start NewActivity.class
-                Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
-                startActivity(myIntent);
-            }
-        });
-        // Capture button_shopping clicks
-        button_shopping.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-
-                // Start NewActivity.class
-                Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
-                startActivity(myIntent);
-            }
-        });
-        // Capture button_veranstaltungen clicks
-        button_veranstaltungen.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-
-                // Start NewActivity.class
-                Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
-                startActivity(myIntent);
             }
         });
 

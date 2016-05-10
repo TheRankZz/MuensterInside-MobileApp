@@ -8,6 +8,7 @@
     <string name="veranstaltungen">Veranstaltungen</string>
     <string name="title_activity_kategorie">KategorieActivity</string>
     <string name="Location">Liste aller Locations</string>
+    <string name="Category">Liste aller Categories</string>
     <string name="title_activity_location">LocationActivity</string>
     <string name="title_activity_category">CategoryActivity</string>
     <string name="action_settings">Settings</string>

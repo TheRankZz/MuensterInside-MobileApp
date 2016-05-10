@@ -8,9 +8,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.muensterinside.mobile.entities.Category;
 
 public class CategoryActivity extends AppCompatActivity {
 
@@ -18,8 +21,22 @@ public class CategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+        Intent intent = getIntent();
+        // shows the selected button from MainActivity
+        ((TextView)(findViewById(R.id.textView1))).setText("Es wurde " + intent.getStringExtra("selected") + " gewählt!");
 
         final MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+        int cat_id=0;
+        List list = new ArrayList<Category>();
+        for(int i=0; i < myApp.getCategoryService().getCategories().size(); i++){
+            list.add(myApp.getCategoryService().getCategory(i));
+        }
+        for(int i=0; i < list.size(); i++){
+           Category c = (Category) list.get(i);
+            if(c.getName() == intent.getStringExtra("selected")){
+                cat_id = c.getId();
+            }
+        }
         // generate a ListView to show the categories
         final ListView listView = (ListView) findViewById(R.id.listView);
 
@@ -27,11 +44,11 @@ public class CategoryActivity extends AppCompatActivity {
         // fill in the test data
         List myList = new ArrayList<String>();
         for(int i=0; i < myApp.getLocationService().getAllLocation().size(); i++){
-            myList.add(myApp.getLocationService().getAllLocation().get(i).getName());
+            myList.add(myApp.getLocationService().getLocationByCategory(cat_id).get(i).getName());
         }
         // the adapter get the ListView from our Layout
         ArrayAdapter<String> adapter;
-        adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myList);
+        adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
