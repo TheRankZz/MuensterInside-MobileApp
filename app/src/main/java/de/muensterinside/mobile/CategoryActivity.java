@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.muensterinside.mobile.entities.Category;
+import de.muensterinside.mobile.entities.Location;
 
 public class CategoryActivity extends AppCompatActivity {
 
@@ -22,29 +23,24 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         Intent intent = getIntent();
-        // shows the selected button from MainActivity
-        ((TextView)(findViewById(R.id.textView1))).setText("Es wurde " + intent.getStringExtra("selected") + " gewählt!");
+
 
         final MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
-        int cat_id=0;
-        List list = new ArrayList<Category>();
-        for(int i=0; i < myApp.getCategoryService().getCategories().size(); i++){
-            list.add(myApp.getCategoryService().getCategory(i));
-        }
-        for(int i=0; i < list.size(); i++){
-           Category c = (Category) list.get(i);
-            if(c.getName() == intent.getStringExtra("selected")){
-                cat_id = c.getId();
-            }
-        }
+        int cat_id = intent.getIntExtra("selected", 0);
+
         // generate a ListView to show the categories
         final ListView listView = (ListView) findViewById(R.id.listView);
 
 
         // fill in the test data
         List myList = new ArrayList<String>();
-        for(int i=0; i < myApp.getLocationService().getAllLocation().size(); i++){
-            myList.add(myApp.getLocationService().getLocationByCategory(cat_id).get(i).getName());
+        final List<Location> locations = myApp.getLocationService().getAllLocation();
+        for(int i=0; i < locations.size(); i++){
+            Location l = locations.get(i);
+            Category c = l.getCategory();
+            if(c.getId() == cat_id){
+                myList.add(l.getName());
+            }
         }
         // the adapter get the ListView from our Layout
         ArrayAdapter<String> adapter;
@@ -60,7 +56,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {
                 Intent myIntent = new Intent(CategoryActivity.this, LocationActivity.class);
                 myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
-                myIntent.putExtra("selected", listView.getAdapter().getItem(arg2).toString());
+                myIntent.putExtra("selected", arg2);
                 startActivity(myIntent);
 
             }

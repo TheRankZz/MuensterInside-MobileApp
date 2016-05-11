@@ -9,18 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.mobile.MainActivity">
 
-    <TextView android:text="@string/Category" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
-
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/textView1"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp"
-        android:choiceMode="singleChoice" />
+        android:choiceMode="singleChoice"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

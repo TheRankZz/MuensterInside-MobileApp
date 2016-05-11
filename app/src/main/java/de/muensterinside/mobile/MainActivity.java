@@ -14,6 +14,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.muensterinside.mobile.entities.Category;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -25,9 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         final ListView listView = (ListView) findViewById(R.id.listView);
+//        List<Category> categories = myApp.MuensterInsideMobile.getCategories();
+        final List<Category> categories = myApp.getCategoryService().getCategories();
         List myList = new ArrayList<String>();
-        for(int i=0; i < myApp.getCategoryService().getCategories().size(); i++){
-            myList.add(myApp.getCategoryService().getCategories().get(i).getName());
+
+        for(int i=0; i < categories.size(); i++){
+            myList.add(categories.get(i).getName());
         }
         ArrayAdapter<String> adapter;
         adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
@@ -38,7 +43,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {
                 Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
                 myIntent.setClassName(getPackageName(), getPackageName() + ".CategoryActivity");
-                myIntent.putExtra("selected", listView.getAdapter().getItem(arg2).toString());
+                String name = listView.getAdapter().getItem(arg2).toString();
+                int id = 1;
+                for(int i=0; i < categories.size(); i++){
+                    if(categories.get(i).getName().equals(name)){
+                        id = categories.get(i).getId();
+                    }
+                }
+                myIntent.putExtra("selected", id);
                 startActivity(myIntent);
 
             }

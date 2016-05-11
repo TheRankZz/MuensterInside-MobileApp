@@ -12,9 +12,67 @@
     tools:context="de.mobile.LocationActivity"
     tools:showIn="@layout/activity_location">
 
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:text="Picture"
+        android:id="@+id/button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name:"
+        android:id="@+id/textViewName"
+        android:layout_toEndOf="@+id/button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Votes:"
+        android:id="@+id/textViewVote"
+        android:layout_below="@+id/textViewName"
+        android:layout_toEndOf="@+id/button"
+        android:layout_marginTop="55dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Beschreibung:"
+        android:id="@+id/textViewDescription"
+        android:layout_below="@+id/button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="EXAMPLE"
+        android:id="@+id/textViewExampleName"
+        android:layout_below="@+id/textViewName"
+        android:layout_toEndOf="@+id/button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="EXAMPLE"
+        android:id="@+id/textViewExampleVote"
+        android:layout_below="@+id/textViewVote"
+        android:layout_toEndOf="@+id/button" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="EXAMPLE"
+        android:id="@+id/textViewExampleDescription"
+        android:layout_below="@+id/textViewDescription" />
 
 </RelativeLayout>
