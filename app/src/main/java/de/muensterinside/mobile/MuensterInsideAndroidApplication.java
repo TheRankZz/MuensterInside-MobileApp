@@ -3,10 +3,11 @@ package de.muensterinside.mobile;
 
 import android.app.Application;
 
-import de.muensterinside.mobile.interfaces.CategoryService;
-import de.muensterinside.mobile.interfaces.LocationService;
+import de.muensterinside.mobile.mock.MuensterInsideMobile;
 import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Location;
+import de.muensterinside.mobile.mock.MuensterInsideImplMock;
+
 /**
  * Created by Julia Bracht and Nicolas Burchert.
  */
@@ -14,16 +15,15 @@ public class MuensterInsideAndroidApplication extends Application{
 
     private Category category;
     private Location location;
-    private CategoryService categoryService;
-    private LocationService locationService;
+    private MuensterInsideMobile muensterInsideMobile;
 
     /**
      * Konstruktor
      * Serverinterface wird implementiert.
      */
     public MuensterInsideAndroidApplication() {
-        this.categoryService = new MuensterInsideImplMock();
-        this.locationService = new MuensterInsideLocationImplMock();
+        this.muensterInsideMobile = new MuensterInsideImplMock();
+
     }
 
     // Gibt die Category zurück
@@ -39,11 +39,7 @@ public class MuensterInsideAndroidApplication extends Application{
     /**
      * Gibt das implementierte Serverinterface zurück
      */
-    public CategoryService getCategoryService() {
-        return this.categoryService;
-    }
-    public LocationService getLocationService() {
-        return this.locationService;
-    }
+
+    public MuensterInsideMobile getMuensterInsideMobile() { return this.muensterInsideMobile;}
 
 }

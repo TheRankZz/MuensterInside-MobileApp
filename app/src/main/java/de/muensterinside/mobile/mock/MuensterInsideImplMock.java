@@ -1,31 +1,38 @@
-package de.muensterinside.mobile;
+package de.muensterinside.mobile.mock;
+
+import android.bluetooth.BluetoothClass.Device;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.muensterinside.mobile.interfaces.CategoryService;
-import de.muensterinside.mobile.interfaces.LocationService;
-import de.muensterinside.mobile.entities.Category;
-import de.muensterinside.mobile.entities.Location;
+import de.muensterinside.mobile.entities.*;
+
+
 /**
  * Created By Julia Bracht and Nicolas Burchert
  * Diese Klasse ersetzt die Verbindung zum Server als Mock-Objekt.
  * Die Methoden sind aufrufbar, liefern aber nur starre Testdaten.
  */
-public class MuensterInsideLocationImplMock implements LocationService {
+public class MuensterInsideImplMock implements MuensterInsideMobile {
 
     private List<Location> locationList;
     private List<Category> categoryList;
-    CategoryService categoryService = new MuensterInsideImplMock();
+    private List<Comment> commentList;
+    private List<Vote> voteList;
 
     /**
      * Konstruktor
-     * Greift Dynamisch auf MuensterInsideImplMock zu,
-     * um die zuvor erstellten categories zu verwenden.
-     * Erstellt 14 "Test" locations.
+     * erstellt 6 Kategorien
+     * erstellt 14 Locations
      */
-    public MuensterInsideLocationImplMock(){
-        categoryList = categoryService.getCategories();
+    public MuensterInsideImplMock() {
+        categoryList = new ArrayList<>();
+        categoryList.add(new Category("Essen"));
+        categoryList.add(new Category("Party"));
+        categoryList.add(new Category("Hotel"));
+        categoryList.add(new Category("Shopping"));
+        categoryList.add(new Category("Sehenswürdigkeiten"));
+        categoryList.add(new Category("Veranstaltungen"));
         locationList = new ArrayList<>();
         locationList.add(new Location("Extrablatt", "deviceId1", categoryList.get(0)));
         locationList.get(0).setDescription("Man kann hier gut essen.");
@@ -69,21 +76,40 @@ public class MuensterInsideLocationImplMock implements LocationService {
         locationList.add(new Location("Netflix & Chill Open Air", "deviceId6", categoryList.get(5)));
         locationList.get(13).setDescription("Angenehm.");
         locationList.get(13).setVoteValue(20);
+
+    }
+
+    public int register(String deviceId, String username){
+        int i = 0;
+        return i;
+    }
+
+    public Device login(String deviceId){
+        Device d = null;
+        return d;
+    }
+
+    public List<Category> getCategories(){
+        return categoryList;
+    }
+
+    public boolean addCategory(Category cat){
+        return true;
+    }
+
+    public boolean removeCategory(int cat_id){
+        return true;
     }
 
     public Location getLocation(int loc_id){
         return locationList.get(loc_id);
     }
 
-    public List<Location> getAllLocation(){
+    public List<Location> getLocationsByCategory(int cat_id){
         return locationList;
     }
 
-    public List<Location> getLocationByCategory(int cat_id){
-        return locationList;
-    }
-
-    public List<Location> getMyLocation(String deviceId){
+    public List<Location> getMyLocations(String deviceId){
         return locationList;
     }
 
@@ -94,4 +120,46 @@ public class MuensterInsideLocationImplMock implements LocationService {
     public boolean removeLocation(int loc_id){
         return true;
     }
+
+    public int saveLocation(String name, String description, String link, String deviceId){
+        int i = 0;
+        return i;
+    }
+
+    public List<Comment> getCommentsByLocation(int loc_id){
+        return commentList;
+    }
+
+    public List<Comment> getLastCommentsByLocation(int loc_id){
+        return commentList;
+    }
+
+    public List<Comment> getMyComments(String deviceId){
+        return commentList;
+    }
+
+    public int saveComment(String text, String deviceId){
+        int i = 0;
+        return i;
+    }
+
+    public int deleteComment(int comment_id){
+        int i = 0;
+        return i;
+    }
+
+    public List<Vote> getMyVotes(String deviceId){
+        return voteList;
+    }
+
+    public int upVote(int location_id, String deviceId){
+        int i = 0;
+        return i;
+    }
+
+    public int downVote(int location_id, String deviceId){
+        int i = 0;
+        return i;
+    }
+
 }

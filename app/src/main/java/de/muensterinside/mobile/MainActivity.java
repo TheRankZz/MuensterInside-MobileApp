@@ -10,15 +10,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.app.Activity;
+import android.widget.Toast;
+import static de.muensterinside.mobile.Constants.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 import de.muensterinside.mobile.entities.Category;
 /**
  * Created by Julia Bracht and Nicolas Burchert.
  */
 public class MainActivity extends AppCompatActivity {
+    private ArrayList<HashMap<String, String>> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.listView);
 
         // Der Webservice wird aufgerufen und alle Categories werden in eine Liste gespeichert
-        final List<Category> categories = myApp.getCategoryService().getCategories();
+        final List<Category> categories = myApp.getMuensterInsideMobile().getCategories();
         List myList = new ArrayList<String>();
         for(int i=0; i < categories.size(); i++){
             myList.add(categories.get(i).getName());
@@ -41,6 +46,17 @@ public class MainActivity extends AppCompatActivity {
         adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
+
+
+
+
+
+
+
+
+
 
         /**
          * Wenn ein Eintrag aus der listView ausgewählt wird,

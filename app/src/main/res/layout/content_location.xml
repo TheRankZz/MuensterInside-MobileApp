@@ -84,4 +84,22 @@
         android:id="@+id/textViewExampleDescription"
         android:layout_below="@+id/textViewDescription" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:text="Up"
+        android:id="@+id/up"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignStart="@+id/textViewExampleVote" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:text="Down"
+        android:id="@+id/down"
+        android:layout_alignTop="@+id/up"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

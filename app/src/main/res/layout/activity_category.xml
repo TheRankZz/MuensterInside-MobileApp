@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="de.mobile.CategoryActivity">
-    
+
 
     <include layout="@layout/content_category"
         android:id="@+id/include" />

@@ -11,17 +11,25 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.app.Activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Location;
+
+import static de.muensterinside.mobile.Constants.FIRST_COLUMN;
+import static de.muensterinside.mobile.Constants.SECOND_COLUMN;
+
 /**
  * Created by Julia Bracht and Nicolas Burchert.
  */
 public class CategoryActivity extends AppCompatActivity {
 
+    private ArrayList<HashMap<String, String>> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,42 +51,40 @@ public class CategoryActivity extends AppCompatActivity {
         // ListView wird erstellt um Daten anzeigen zu können und bekommt ein Layout
         final ListView listView = (ListView) findViewById(R.id.listView);
 
+        list = new ArrayList<HashMap<String,String>>();
 
+        Location l = null;
+        Category c = null;
         /**
          * Logik zum befüllen der "richtigen" Locations
          */
-        List myList = new ArrayList<String>();
-        final List<Location> locations = myApp.getLocationService().getAllLocation();
+        final List<Location> locations = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
         for(int i=0; i < locations.size(); i++){
-            Location l = locations.get(i);
-            Category c = l.getCategory();
+            l = locations.get(i);
+            c = l.getCategory();
             if(c.getId() == cat_id){
-                myList.add(l.getName());
+                HashMap<String,String> temp = new HashMap<String, String>();
+                temp.put(FIRST_COLUMN, l.getName());
+                temp.put(SECOND_COLUMN, String.valueOf(l.getVoteValue()));
+                list.add(temp);
+
             }
         }
-        ArrayAdapter<String> adapter;
-        adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
-        /**
-         * Wenn ein Eintrag aus der listView ausgewählt wird,
-         * soll die CategoryActivity gestartet werden.
-         * Zusätzlich soll die Id, von der Location die ausgewählt wurde,
-         * an die LocationActivity mit übergeben werden.
-         */
-        listView.setOnItemClickListener(new OnItemClickListener() {
+        ListViewAdapters adapter = new ListViewAdapters(this, list);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
+            {
                 Intent myIntent = new Intent(CategoryActivity.this, LocationActivity.class);
                 myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
-                myIntent.putExtra("selected", arg2);
+                myIntent.putExtra("selected", position);
                 startActivity(myIntent);
-
             }
+
         });
-
-
 
     }
 
