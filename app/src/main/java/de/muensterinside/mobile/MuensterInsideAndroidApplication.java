@@ -7,40 +7,37 @@ import de.muensterinside.mobile.interfaces.CategoryService;
 import de.muensterinside.mobile.interfaces.LocationService;
 import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Location;
-
+/**
+ * Created by Julia Bracht and Nicolas Burchert.
+ */
 public class MuensterInsideAndroidApplication extends Application{
 
-    // holds the category
     private Category category;
-
-    //holds the location
     private Location location;
-
     private CategoryService categoryService;
     private LocationService locationService;
 
     /**
-     * Constructor
-     * Sets the implementation of the ServerInterface to our mock class.
+     * Konstruktor
+     * Serverinterface wird implementiert.
      */
     public MuensterInsideAndroidApplication() {
         this.categoryService = new MuensterInsideImplMock();
         this.locationService = new MuensterInsideLocationImplMock();
     }
 
-    // return the category
+    // Gibt die Category zurück
     public Category getCategory() {
         return this.category;
     }
 
-    // return the location
+    // Gibt die Location zurück
     public Location getLocation() {
         return this.location;
     }
 
     /**
-     * Get the implementation of the Server Interface.
-     * @return an object which implements the server interface
+     * Gibt das implementierte Serverinterface zurück
      */
     public CategoryService getCategoryService() {
         return this.categoryService;

@@ -15,24 +15,36 @@ import java.util.List;
 
 import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Location;
-
+/**
+ * Created by Julia Bracht and Nicolas Burchert.
+ */
 public class CategoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Hier wird das Aussehen der CategoryActivity ausgewählt
         setContentView(R.layout.activity_category);
+
+        // Die von der MainActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
-
-
         final MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+
+        /**
+         * Hier wird explizit auf die übergebende Id,
+         * der ausgewählten Category zugegriffen,
+         * damit wir auch nur die Locations laden,
+         * die zu der ausgewählten Category gehören.
+         */
         int cat_id = intent.getIntExtra("selected", 0);
 
-        // generate a ListView to show the categories
+        // ListView wird erstellt um Daten anzeigen zu können und bekommt ein Layout
         final ListView listView = (ListView) findViewById(R.id.listView);
 
 
-        // fill in the test data
+        /**
+         * Logik zum befüllen der "richtigen" Locations
+         */
         List myList = new ArrayList<String>();
         final List<Location> locations = myApp.getLocationService().getAllLocation();
         for(int i=0; i < locations.size(); i++){
@@ -42,15 +54,17 @@ public class CategoryActivity extends AppCompatActivity {
                 myList.add(l.getName());
             }
         }
-        // the adapter get the ListView from our Layout
         ArrayAdapter<String> adapter;
         adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        /** when you click on an item you start a new activity
-         * the LocationActivity gets the information on wich item you have clicked
-         * */
+        /**
+         * Wenn ein Eintrag aus der listView ausgewählt wird,
+         * soll die CategoryActivity gestartet werden.
+         * Zusätzlich soll die Id, von der Location die ausgewählt wurde,
+         * an die LocationActivity mit übergeben werden.
+         */
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {

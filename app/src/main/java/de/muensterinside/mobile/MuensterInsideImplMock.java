@@ -7,18 +7,19 @@ import de.muensterinside.mobile.interfaces.CategoryService;
 import de.muensterinside.mobile.entities.Category;
 
 /**
+ * Created By Julia Bracht and Nicolas Burchert
  * Diese Klasse ersetzt die Verbindung zum Server als Mock-Objekt.
  * Die Methoden sind aufrufbar, liefern aber nur starre Testdaten.
  */
 public class MuensterInsideImplMock implements CategoryService {
 
-    /**
-     * Mocking class holds a list with predefined categories
-     */
     private List<Category> categoryList;
 
+    /**
+     * Konstruktor
+     * erstellt 6 "Test" categories
+     */
     public MuensterInsideImplMock() {
-        //create 6 test categories
         categoryList = new ArrayList<>();
         categoryList.add(new Category("Essen"));
         categoryList.add(new Category("Party"));
@@ -32,18 +33,15 @@ public class MuensterInsideImplMock implements CategoryService {
         return categoryList.get(cat_id);
     }
 
-    //returns a copy of the private category list.
     public List<Category> getCategories(){
         return categoryList;
     }
 
     public boolean addCategory(Category cat){
-        //mocking: do nothing!
         return true;
     }
 
     public boolean removeCategory(int cat_id){
-        //mocking: do nothing!
         return true;
     }
 

@@ -7,17 +7,25 @@ import de.muensterinside.mobile.interfaces.CategoryService;
 import de.muensterinside.mobile.interfaces.LocationService;
 import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Location;
-
+/**
+ * Created By Julia Bracht and Nicolas Burchert
+ * Diese Klasse ersetzt die Verbindung zum Server als Mock-Objekt.
+ * Die Methoden sind aufrufbar, liefern aber nur starre Testdaten.
+ */
 public class MuensterInsideLocationImplMock implements LocationService {
 
     private List<Location> locationList;
     private List<Category> categoryList;
     CategoryService categoryService = new MuensterInsideImplMock();
 
+    /**
+     * Konstruktor
+     * Greift Dynamisch auf MuensterInsideImplMock zu,
+     * um die zuvor erstellten categories zu verwenden.
+     * Erstellt 14 "Test" locations.
+     */
     public MuensterInsideLocationImplMock(){
-        // create 6 test locations
         categoryList = categoryService.getCategories();
-
         locationList = new ArrayList<>();
         locationList.add(new Location("Extrablatt", "deviceId1", categoryList.get(0)));
         locationList.get(0).setDescription("Man kann hier gut essen.");
@@ -58,7 +66,7 @@ public class MuensterInsideLocationImplMock implements LocationService {
         locationList.add(new Location("I Love FH Party", "deviceId5", categoryList.get(5)));
         locationList.get(12).setDescription("Super Stimmung.");
         locationList.get(12).setVoteValue(20);
-        locationList.add(new Location("Netflix & Chill Open Air","deviceId6",categoryList.get(5)));
+        locationList.add(new Location("Netflix & Chill Open Air", "deviceId6", categoryList.get(5)));
         locationList.get(13).setDescription("Angenehm.");
         locationList.get(13).setVoteValue(20);
     }
@@ -72,22 +80,18 @@ public class MuensterInsideLocationImplMock implements LocationService {
     }
 
     public List<Location> getLocationByCategory(int cat_id){
-
         return locationList;
     }
 
     public List<Location> getMyLocation(String deviceId){
-
         return locationList;
     }
 
     public boolean addLocation(Location loc){
-        //mocking: do nothing!
         return true;
     }
 
     public boolean removeLocation(int loc_id){
-        //mocking: do nothing!
         return true;
     }
 }
