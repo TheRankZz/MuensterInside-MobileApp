@@ -27,7 +27,14 @@
 
         <activity
             android:name=".PrefsActivity"
-            android:label="@string/title_activity_prefs" />
+            android:label="@string/title_activity_prefs"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".CommentActivity"
+            android:label="MuensterInside"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>

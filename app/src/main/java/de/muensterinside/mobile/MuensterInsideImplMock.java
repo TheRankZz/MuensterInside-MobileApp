@@ -17,7 +17,7 @@ public class MuensterInsideImplMock implements CategoryService {
 
     /**
      * Konstruktor
-     * erstellt 6 "Test" categories
+     * erstellt 6 "Test" Kategorien
      */
     public MuensterInsideImplMock() {
         categoryList = new ArrayList<>();
