@@ -62,6 +62,33 @@ public class LocationActivity extends AppCompatActivity {
             }
         });
 
+        Button up = (Button) findViewById(R.id.up);
+        Button down = (Button) findViewById(R.id.down);
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int oldVote = l.getVoteValue();
+                oldVote = oldVote +1;
+                l.setVoteValue(oldVote);
+                String voteString = String.valueOf(oldVote);
+                exampleVote.setText(voteString);
+
+            }
+        });
+
+
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int oldVote = l.getVoteValue();
+                oldVote = oldVote - 1;
+                l.setVoteValue(oldVote);
+                String voteString = String.valueOf(oldVote);
+                exampleVote.setText(voteString);
+
+            }
+        });
+
     }
 
     @Override
@@ -82,33 +109,8 @@ public class LocationActivity extends AppCompatActivity {
         else
             return super.onOptionsItemSelected(item);
     }
-    	Button up = (Button) findViewById(R.id.up);
-        Button down = (Button) findViewById(R.id.down);
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int oldVote = l.getVoteValue();
-                oldVote = oldVote +1;
-                l.setVoteValue(oldVote);
-                String voteString = String.valueOf(oldVote);
-                exampleVote.setText(voteString);
-
-            }
-        });
 
 
-        down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int oldVote = l.getVoteValue();
-                oldVote = oldVote -1;
-                l.setVoteValue(oldVote);
-                String voteString = String.valueOf(oldVote);
-                exampleVote.setText(voteString);
-
-            }
-        });
-    }
 
 
 
