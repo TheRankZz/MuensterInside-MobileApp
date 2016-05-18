@@ -1,16 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="de.mobile.LocationActivity">
 
-   
-
-    <include layout="@layout/content_location" />
 
 
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:text="Picture"
+        android:id="@+id/button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textSize="9pt"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name:"
+        android:id="@+id/textViewName"
+        android:layout_toEndOf="@+id/button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Votes:"
+        android:id="@+id/textViewVote"
+        android:layout_below="@+id/textViewName"
+        android:layout_toEndOf="@+id/button"
+        android:layout_marginTop="55dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Beschreibung:"
+        android:id="@+id/textViewDescription"
+        android:layout_below="@+id/button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="EXAMPLE"
+        android:id="@+id/textViewExampleName"
+        android:layout_below="@+id/textViewName"
+        android:layout_toEndOf="@+id/button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="EXAMPLE"
+        android:id="@+id/textViewExampleVote"
+        android:layout_below="@+id/textViewVote"
+        android:layout_toEndOf="@+id/button" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="EXAMPLE"
+        android:id="@+id/textViewExampleDescription"
+        android:layout_below="@+id/textViewDescription" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:drawableBottom="@drawable/ic_action_arrow_top"
+        android:background="@android:color/transparent"
+        android:id="@+id/up"
+        android:clickable="true"
+        android:layout_alignBottom="@+id/button"
+        android:layout_toEndOf="@+id/button" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:drawableBottom="@drawable/ic_action_arrow_bottom"
+        android:background="@android:color/transparent"
+        android:id="@+id/down"
+        android:layout_alignTop="@+id/up"
+        android:layout_alignParentEnd="true"
+        android:clickable="true" />
+
+    </RelativeLayout>
