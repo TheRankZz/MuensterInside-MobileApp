@@ -6,6 +6,7 @@ import android.app.Application;
 import de.muensterinside.mobile.mock.MuensterInsideMobile;
 import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Location;
+import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.mock.MuensterInsideImplMock;
 
 /**
@@ -15,6 +16,7 @@ public class MuensterInsideAndroidApplication extends Application{
 
     private Category category;
     private Location location;
+    private Comment comment;
     private MuensterInsideMobile muensterInsideMobile;
 
     /**
@@ -35,6 +37,9 @@ public class MuensterInsideAndroidApplication extends Application{
     public Location getLocation() {
         return this.location;
     }
+
+    //Gibt die Kommentare zurück
+    public Comment getComment() {return this.comment;}
 
     /**
      * Gibt das implementierte Serverinterface zurück

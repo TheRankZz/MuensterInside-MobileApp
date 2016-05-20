@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.muensterinside.mobile.entities.Category;
+import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Location;
 /**
  * Created by Julia Bracht and Nicolas Burchert.
@@ -35,7 +36,19 @@ public class LocationActivity extends AppCompatActivity {
          * der ausgewählten Location zugegriffen,
          * damit wir auch nur die ausgewählte Location laden.
          */
+
+
+
         int loc_id = intent.getIntExtra("selected", 0);
+
+       // final List<Comment> c = myApp.getMuensterInsideMobile().getCommentsByLocation(loc_id);
+        // for(int i=0; i<c.size();i++){
+           // Comment comment = c.get(i);
+            //comment.setText();
+            //c.add(comment);
+        //}
+
+
         final Location l = myApp.getMuensterInsideMobile().getLocation(loc_id);
         String voteString = String.valueOf(l.getVoteValue());
 
