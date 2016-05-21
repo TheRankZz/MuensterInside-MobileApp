@@ -1,72 +1,49 @@
 package de.muensterinside.mobile.entities;
 
-import java.io.Serializable;
 
-public class Comment implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private int id;
-	
+
+/**
+ * Datenklasse: Kommentar
+ *
+ * @author Lennart Giesen, Julius Wessing
+ *
+ */
+
+public class Comment {
+
 	private String text;
-	
-	private String deviceId;
-	
-	/* Beziehungen */
-	
+	private Device device;
 	private Location location;
-		
 
-	/**
-	 * 
-	 * @param text
-	 * @param deviceId
-	 * @param location
-	 */
-	public Comment(String text, String deviceId, Location location) {
+	public Comment() {
+	}
+
+	public Comment(String text, Device device, Location location) {
 		this.text = text;
-		this.deviceId = deviceId;
+		this.device = device;
 		this.location = location;
 	}
 
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	
-	/**
-	 * @return the text
-	 */
 	public String getText() {
 		return text;
 	}
 
-	/**
-	 * @param text the text to set
-	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
-	/**
-	 * @return the deviceId
-	 */
-	public String getDeviceId() {
-		return deviceId;
+	public Device getDevice(){
+		return this.device;
 	}
 
-	/**
-	 * @param deviceId the deviceId to set
-	 */
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
+	public void setDevice(Device device){
+		this.device = device;
 	}
 
-	/**
-	 * @return the location
-	 */
+	public void setLocation(Location location){
+		this.location = location;
+	}
+
 	public Location getLocation() {
 		return location;
 	}

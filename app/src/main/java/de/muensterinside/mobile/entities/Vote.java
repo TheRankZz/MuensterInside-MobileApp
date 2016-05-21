@@ -1,62 +1,20 @@
 package de.muensterinside.mobile.entities;
 
-import java.io.Serializable;
 
-public class Vote implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+public class Vote {
 
-	private int locationId;
-	
-	private String deviceId;
-	
-	/* Beziehungen */
-	
 	private VoteType type;
-	
 	private Location location;
-	
+	private Device device;
 
-	/**
-	 * 
-	 * @param locationId
-	 * @param deviceId
-	 * @param location
-	 * @param type
-	 */
-	public Vote(int locationId, String deviceId, Location location, VoteType type) {
-		this.locationId = locationId;
-		this.deviceId = deviceId;
+	public Vote() {
+	}
+
+	public Vote(Location location, Device device, VoteType type) {
 		this.location = location;
+		this.device = device;
 		this.type = type;
-	}
-	
-	/**
-	 * @return the locationId
-	 */
-	public int getLocationId() {
-		return locationId;
-	}
-
-	/**
-	 * @param locationId the locationId to set
-	 */
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
-	}
-
-	/**
-	 * @return the deviceId
-	 */
-	public String getDeviceId() {
-		return deviceId;
-	}
-
-	/**
-	 * @param deviceId the deviceId to set
-	 */
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
 	}
 
 	/**
@@ -67,7 +25,8 @@ public class Vote implements Serializable {
 	}
 
 	/**
-	 * @param type the type to set
+	 * @param type
+	 *            the type to set
 	 */
 	public void setType(VoteType type) {
 		this.type = type;
@@ -78,6 +37,6 @@ public class Vote implements Serializable {
 	 */
 	public Location getLocation() {
 		return location;
-	}	
-	
+	}
+
 }

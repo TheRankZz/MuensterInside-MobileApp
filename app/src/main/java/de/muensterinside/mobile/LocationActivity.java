@@ -40,67 +40,64 @@ public class LocationActivity extends AppCompatActivity {
 
 
         int loc_id = intent.getIntExtra("selected", 0);
+        try{
+            final Location l = myApp.getMuensterInsideMobile().getLocation(loc_id);
+            String voteString = String.valueOf(l.getVoteValue());
 
-       // final List<Comment> c = myApp.getMuensterInsideMobile().getCommentsByLocation(loc_id);
-        // for(int i=0; i<c.size();i++){
-           // Comment comment = c.get(i);
-            //comment.setText();
-            //c.add(comment);
-        //}
+            // TextView für den Namen der Location wird erstellt und befüllt
+            TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
+            exampleName.setText(l.getName());
 
+            // TextView für den Namen der Location wird erstellt und befüllt
+            final TextView exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
+            exampleVote.setText(voteString);
 
-        final Location l = myApp.getMuensterInsideMobile().getLocation(loc_id);
-        String voteString = String.valueOf(l.getVoteValue());
-
-        // TextView für den Namen der Location wird erstellt und befüllt
-        TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
-        exampleName.setText(l.getName());
-
-        // TextView für den Namen der Location wird erstellt und befüllt
-        final TextView exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
-        exampleVote.setText(voteString);
-
-        // TextView für den Namen der Location wird erstellt und befüllt
-        TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
-        exampleDescription.setText(l.getDescription());
+            // TextView für den Namen der Location wird erstellt und befüllt
+            TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
+            exampleDescription.setText(l.getDescription());
 
 
-        // führt zur CommentActivity, wenn der Button gedrückt wird
-        Button b = (Button) findViewById(R.id.button1);
-        
-        b.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LocationActivity.this, CommentActivity.class));
-            }
-        });
+            // führt zur CommentActivity, wenn der Button gedrückt wird
+            Button b = (Button) findViewById(R.id.button1);
 
-        Button up = (Button) findViewById(R.id.up);
-        Button down = (Button) findViewById(R.id.down);
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int oldVote = l.getVoteValue();
-                oldVote = oldVote +1;
-                l.setVoteValue(oldVote);
-                String voteString = String.valueOf(oldVote);
-                exampleVote.setText(voteString);
+            b.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(LocationActivity.this, CommentActivity.class));
+                }
+            });
 
-            }
-        });
+            Button up = (Button) findViewById(R.id.up);
+            Button down = (Button) findViewById(R.id.down);
+            up.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int oldVote = l.getVoteValue();
+                    oldVote = oldVote +1;
+                    l.setVoteValue(oldVote);
+                    String voteString = String.valueOf(oldVote);
+                    exampleVote.setText(voteString);
+
+                }
+            });
 
 
-        down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int oldVote = l.getVoteValue();
-                oldVote = oldVote - 1;
-                l.setVoteValue(oldVote);
-                String voteString = String.valueOf(oldVote);
-                exampleVote.setText(voteString);
+            down.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int oldVote = l.getVoteValue();
+                    oldVote = oldVote - 1;
+                    l.setVoteValue(oldVote);
+                    String voteString = String.valueOf(oldVote);
+                    exampleVote.setText(voteString);
 
-            }
-        });
+                }
+            });
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
 

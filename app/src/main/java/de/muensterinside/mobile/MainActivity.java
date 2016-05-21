@@ -36,51 +36,46 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.listView);
 
         // Der Webservice wird aufgerufen und alle Categories werden in eine Liste gespeichert
-        final List<Category> categories = myApp.getMuensterInsideMobile().getCategories();
-        List myList = new ArrayList<String>();
-        for(int i=0; i < categories.size(); i++){
-            myList.add(categories.get(i).getName());
-        }
-        // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
-        ArrayAdapter<String> adapter;
-        adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-
-
-
-
-
-
-
-
-
-
-
-        /**
-         * Wenn ein Eintrag aus der listView ausgewählt wird,
-         * soll die CategoryActivity gestartet werden.
-         * Zusätzlich soll die Id, von der Category die ausgewählt wurde,
-         * an die CategoryActivity mit übergeben werden.
-         */
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {
-                Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
-                myIntent.setClassName(getPackageName(), getPackageName() + ".CategoryActivity");
-                String name = listView.getAdapter().getItem(arg2).toString();
-                int id = 1;
-                for(int i=0; i < categories.size(); i++){
-                    if(categories.get(i).getName().equals(name)){
-                        id = categories.get(i).getId();
-                    }
-                }
-                myIntent.putExtra("selected", id);
-                startActivity(myIntent);
-
+        try{
+            final List<Category> categories = myApp.getMuensterInsideMobile().getCategories();
+            List myList = new ArrayList<String>();
+            for(int i=0; i < categories.size(); i++){
+                myList.add(categories.get(i).getName());
             }
-        });
+            // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+            ArrayAdapter<String> adapter;
+            adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            /**
+             * Wenn ein Eintrag aus der listView ausgewählt wird,
+             * soll die CategoryActivity gestartet werden.
+             * Zusätzlich soll die Id, von der Category die ausgewählt wurde,
+             * an die CategoryActivity mit übergeben werden.
+             */
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {
+                    Intent myIntent = new Intent(MainActivity.this, CategoryActivity.class);
+                    myIntent.setClassName(getPackageName(), getPackageName() + ".CategoryActivity");
+                    String name = listView.getAdapter().getItem(arg2).toString();
+                    int id = 1;
+                    for(int i=0; i < categories.size(); i++){
+                        if(categories.get(i).getName().equals(name)){
+                            id = categories.get(i).getId();
+                        }
+                    }
+                    myIntent.putExtra("selected", id);
+                    startActivity(myIntent);
+
+                }
+            });
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+
 
 
     }

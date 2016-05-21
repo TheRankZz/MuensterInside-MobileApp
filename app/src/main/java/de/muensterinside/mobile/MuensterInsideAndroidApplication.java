@@ -3,10 +3,10 @@ package de.muensterinside.mobile;
 
 import android.app.Application;
 
-import de.muensterinside.mobile.mock.MuensterInsideMobile;
+import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Location;
-import de.muensterinside.mobile.entities.Comment;
+import de.muensterinside.mobile.mock.MobileWebserviceImpl;
 import de.muensterinside.mobile.mock.MuensterInsideImplMock;
 
 /**
@@ -17,7 +17,7 @@ public class MuensterInsideAndroidApplication extends Application{
     private Category category;
     private Location location;
     private Comment comment;
-    private MuensterInsideMobile muensterInsideMobile;
+    private MobileWebserviceImpl muensterInsideMobile;
 
     /**
      * Konstruktor
@@ -29,22 +29,24 @@ public class MuensterInsideAndroidApplication extends Application{
     }
 
     // Gibt die Category zurück
-    public Category getCategory() {
+    public Category getCategory() throws Exception{
         return this.category;
     }
 
     // Gibt die Location zurück
-    public Location getLocation() {
+    public Location getLocation() throws Exception{
         return this.location;
     }
 
-    //Gibt die Kommentare zurück
-    public Comment getComment() {return this.comment;}
-
+    public Comment getComment() throws Exception{
+        return this.comment;
+    }
     /**
      * Gibt das implementierte Serverinterface zurück
      */
 
-    public MuensterInsideMobile getMuensterInsideMobile() { return this.muensterInsideMobile;}
+    public MobileWebserviceImpl getMuensterInsideMobile() throws Exception{
+        return this.muensterInsideMobile;
+    }
 
 }

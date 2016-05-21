@@ -58,33 +58,39 @@ public class CategoryActivity extends AppCompatActivity {
         /**
          * Logik zum befüllen der "richtigen" Locations
          */
-        final List<Location> locations = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
-        for(int i=0; i < locations.size(); i++){
-            l = locations.get(i);
-            c = l.getCategory();
-            if(c.getId() == cat_id){
-                HashMap<String,String> temp = new HashMap<String, String>();
-                temp.put(FIRST_COLUMN, l.getName());
-                temp.put(SECOND_COLUMN, String.valueOf(l.getVoteValue()));
-                list.add(temp);
+        try{
+            final List<Location> locations = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
+            for(int i=0; i < locations.size(); i++){
+                l = locations.get(i);
+                c = l.getCategory();
+                if(c.getId() == cat_id){
+                    HashMap<String,String> temp = new HashMap<String, String>();
+                    temp.put(FIRST_COLUMN, l.getName());
+                    temp.put(SECOND_COLUMN, String.valueOf(l.getVoteValue()));
+                    list.add(temp);
 
+                }
             }
-        }
 
-        ListViewAdapters adapter = new ListViewAdapters(this, list);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
+            ListViewAdapters adapter = new ListViewAdapters(this, list);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
-                Intent myIntent = new Intent(CategoryActivity.this, LocationActivity.class);
-                myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
-                myIntent.putExtra("selected", position);
-                startActivity(myIntent);
-            }
+                @Override
+                public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
+                {
+                    Intent myIntent = new Intent(CategoryActivity.this, LocationActivity.class);
+                    myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
+                    myIntent.putExtra("selected", position);
+                    startActivity(myIntent);
+                }
 
-        });
+            });
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
 
