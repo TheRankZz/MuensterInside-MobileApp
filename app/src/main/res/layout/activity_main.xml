@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.mobile.MainActivity">
+    tools:context="de.muensterinside.mobile.MainActivity">
 
 
     <ListView
@@ -14,5 +14,6 @@
         android:choiceMode="singleChoice"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>

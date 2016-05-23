@@ -20,6 +20,8 @@ import de.muensterinside.mobile.entities.Location;
  * Created by Julia Bracht and Nicolas Burchert.
  */
 public class LocationActivity extends AppCompatActivity {
+    MuensterInsideAndroidApplication myApp;
+    Location l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class LocationActivity extends AppCompatActivity {
 
         // Die von der MainActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
-        final MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+        myApp = (MuensterInsideAndroidApplication) getApplication();
 
         /**
          * Hier wird explizit auf die übergebende Id,
@@ -41,7 +43,7 @@ public class LocationActivity extends AppCompatActivity {
 
         int loc_id = intent.getIntExtra("selected", 0);
         try{
-            final Location l = myApp.getMuensterInsideMobile().getLocation(loc_id);
+            l = myApp.getMuensterInsideMobile().getLocation(loc_id);
             String voteString = String.valueOf(l.getVoteValue());
 
             // TextView für den Namen der Location wird erstellt und befüllt

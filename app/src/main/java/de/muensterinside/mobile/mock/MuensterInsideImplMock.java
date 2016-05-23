@@ -24,7 +24,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     private List<Category> categoryList;
     private List<Comment> commentList;
     private List<Vote> voteList;
-    private Device device;
+    private Device device = new Device();
     private String deviceId;
 
     /**
@@ -41,7 +41,6 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         categoryList.add(new Category("Sehenswürdigkeiten"));
         categoryList.add(new Category("Veranstaltungen"));
 
-        Device device = new Device("androidId", "username");
         commentList = new ArrayList<>();
         locationList = new ArrayList<>();
 

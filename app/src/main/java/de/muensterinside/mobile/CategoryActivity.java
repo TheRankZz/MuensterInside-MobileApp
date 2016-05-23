@@ -29,7 +29,11 @@ import static de.muensterinside.mobile.Constants.SECOND_COLUMN;
  */
 public class CategoryActivity extends AppCompatActivity {
 
-    private ArrayList<HashMap<String, String>> list;
+    ArrayList<HashMap<String, String>> list;
+    MuensterInsideAndroidApplication myApp;
+    ListView listView;
+    List<Location> locations;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +42,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         // Die von der MainActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
-        final MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+        myApp = (MuensterInsideAndroidApplication) getApplication();
 
         /**
          * Hier wird explizit auf die übergebende Id,
@@ -49,7 +53,7 @@ public class CategoryActivity extends AppCompatActivity {
         int cat_id = intent.getIntExtra("selected", 0);
 
         // ListView wird erstellt um Daten anzeigen zu können und bekommt ein Layout
-        final ListView listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 
         list = new ArrayList<HashMap<String,String>>();
 
@@ -59,7 +63,7 @@ public class CategoryActivity extends AppCompatActivity {
          * Logik zum befüllen der "richtigen" Locations
          */
         try{
-            final List<Location> locations = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
+            locations = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
             for(int i=0; i < locations.size(); i++){
                 l = locations.get(i);
                 c = l.getCategory();

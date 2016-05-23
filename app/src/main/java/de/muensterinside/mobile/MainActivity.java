@@ -1,6 +1,7 @@
 package de.muensterinside.mobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.app.Activity;
+import android.widget.TextView;
 import android.widget.Toast;
 import static de.muensterinside.mobile.Constants.*;
 
@@ -23,21 +26,30 @@ import de.muensterinside.mobile.entities.Category;
  * Created by Julia Bracht and Nicolas Burchert.
  */
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<HashMap<String, String>> list;
+    ArrayList<HashMap<String, String>> list;
+    MuensterInsideAndroidApplication myApp;
+    List<Category> categories;
+    ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Hier wird das Aussehen der MainActivity festgelegt
         setContentView(R.layout.activity_main);
-        final MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+        myApp = (MuensterInsideAndroidApplication) getApplication();
 
         // ListView wird erstellt um Daten anzeigen zu können und bekommt ein Layout
-        final ListView listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 
         // Der Webservice wird aufgerufen und alle Categories werden in eine Liste gespeichert
         try{
-            final List<Category> categories = myApp.getMuensterInsideMobile().getCategories();
+            categories = myApp.getMuensterInsideMobile().getCategories();
+            Intent myIntent = getIntent();
+            String androidId = myIntent.getStringExtra("androidId");
+            String username = myIntent.getStringExtra("username");
+
+
             List myList = new ArrayList<String>();
             for(int i=0; i < categories.size(); i++){
                 myList.add(categories.get(i).getName());
@@ -47,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
             adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+
+
+
             /**
              * Wenn ein Eintrag aus der listView ausgewählt wird,
              * soll die CategoryActivity gestartet werden.
