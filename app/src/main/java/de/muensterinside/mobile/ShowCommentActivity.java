@@ -34,8 +34,9 @@ public class ShowCommentActivity extends AppCompatActivity {
 
         // Der Webservice wird aufgerufen und alle Categories werden in eine Liste gespeichert
         try {
-            comments = myApp.getMuensterInsideMobile().getCommentsByLocation(1);
             Intent myIntent = getIntent();
+            comments = myApp.getMuensterInsideMobile().getCommentsByLocation(myIntent.getIntExtra("selected", 0));
+
 
             List myList = new ArrayList<String>();
             for(int i=0; i < comments.size(); i++){

@@ -47,43 +47,43 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("Extrablatt", "deviceId1", "link", device, categoryList.get(0)));
         locationList.get(0).setDescription("Man kann hier gut essen.");
         locationList.get(0).setVoteValue(10);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(0)));
-        commentList.add(new Comment("Kommentar 2", device, locationList.get(0)));
-        commentList.add(new Comment("Kommentar 3", device, locationList.get(0)));
-        commentList.add(new Comment("Kommentar 4", device, locationList.get(0)));
-        commentList.add(new Comment("Kommentar 5", device, locationList.get(0)));
+        commentList.add(new Comment("Extrablatt ist toll", device, locationList.get(0)));
+        commentList.add(new Comment("Extrablatt enstpricht meinen Erwartungen.", device, locationList.get(0)));
+        commentList.add(new Comment("Bester Laden in Münster.", device, locationList.get(0)));
+        commentList.add(new Comment("Extrablatt4theWin", device, locationList.get(0)));
+        commentList.add(new Comment("genau", device, locationList.get(0)));
 
         locationList.add(new Location("Vapiano", "deviceId2", "link", device, categoryList.get(0)));
         locationList.get(1).setDescription("Gute Auswahl.");
         locationList.get(1).setVoteValue(15);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(1)));
-        commentList.add(new Comment("Kommentar 2", device, locationList.get(1)));
-        commentList.add(new Comment("Kommentar 3", device, locationList.get(1)));
-        commentList.add(new Comment("Kommentar 4", device, locationList.get(1)));
-        commentList.add(new Comment("Kommentar 5", device, locationList.get(1)));
+        commentList.add(new Comment("Vapiano mag ich.", device, locationList.get(1)));
+        commentList.add(new Comment("Die Pizza ist gut.", device, locationList.get(1)));
+        commentList.add(new Comment("Der Salat ist der beste.", device, locationList.get(1)));
+        commentList.add(new Comment("Nico mag das nicht so, ich finds gut.", device, locationList.get(1)));
+        commentList.add(new Comment("Vapiano ist nicht mein Fall.", device, locationList.get(1)));
 
         locationList.add(new Location("Pierhouse", "deviceId3", "link", device, categoryList.get(0)));
         locationList.get(2).setDescription("Gutes Preis/Leistungsverhältnis.");
         locationList.get(2).setVoteValue(20);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(2)));
-        commentList.add(new Comment("Kommentar 2", device, locationList.get(2)));
-        commentList.add(new Comment("Kommentar 3", device, locationList.get(2)));
-        commentList.add(new Comment("Kommentar 4", device, locationList.get(2)));
-        commentList.add(new Comment("Kommentar 5", device, locationList.get(2)));
+        commentList.add(new Comment("Etwas teuer.", device, locationList.get(2)));
+        commentList.add(new Comment("Mittagstisch ist gut.", device, locationList.get(2)));
+        commentList.add(new Comment("Hafen halt.", device, locationList.get(2)));
+        commentList.add(new Comment("Kann man mal machen.", device, locationList.get(2)));
+        commentList.add(new Comment("ChickenWings sind dort die besten.", device, locationList.get(2)));
 
         locationList.add(new Location("Cafe Sieben", "deviceId4", "link", device, categoryList.get(0)));
         locationList.get(3).setDescription("Sehr leckere Chicken-Wings.");
         locationList.get(3).setVoteValue(11);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(3)));
-        commentList.add(new Comment("Kommentar 2", device, locationList.get(3)));
-        commentList.add(new Comment("Kommentar 3", device, locationList.get(3)));
-        commentList.add(new Comment("Kommentar 4", device, locationList.get(3)));
-        commentList.add(new Comment("Kommentar 5", device, locationList.get(3)));
+        commentList.add(new Comment("Hafen halt.", device, locationList.get(3)));
+        commentList.add(new Comment("Beste Location.", device, locationList.get(3)));
+        commentList.add(new Comment("Ich mag es.", device, locationList.get(3)));
+        commentList.add(new Comment("Qualitativ hochwertig.", device, locationList.get(3)));
+        commentList.add(new Comment("Mittags sehr angenehm.", device, locationList.get(3)));
 
         locationList.add(new Location("Blaues Haus", "deviceId5", "link", device, categoryList.get(1)));
         locationList.get(4).setDescription("Der Long Island ist der beste.");
         locationList.get(4).setVoteValue(35);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(4)));
+        commentList.add(new Comment("Blaues Haus ist urig.", device, locationList.get(4)));
         commentList.add(new Comment("Kommentar 2", device, locationList.get(4)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(4)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(4)));
@@ -92,8 +92,8 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("Haifischbar", "deviceId6", "link", device, categoryList.get(1)));
         locationList.get(5).setDescription("Dort kann man Sky gucken.");
         locationList.get(5).setVoteValue(40);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(5)));
-        commentList.add(new Comment("Kommentar 2", device, locationList.get(5)));
+        commentList.add(new Comment("Hier hat Bayern gewonnen.", device, locationList.get(5)));
+        commentList.add(new Comment("Nur der FCB.", device, locationList.get(5)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(5)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(5)));
         commentList.add(new Comment("Kommentar 5", device, locationList.get(5)));
@@ -101,7 +101,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("Hotel Conti", "deviceId5", "link", device, categoryList.get(2)));
         locationList.get(6).setDescription("Der Service ist klasse.");
         locationList.get(6).setVoteValue(9);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(6)));
+        commentList.add(new Comment("Die Lage am  Bahnhof spricht für sich.", device, locationList.get(6)));
         commentList.add(new Comment("Kommentar 2", device, locationList.get(6)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(6)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(6)));
@@ -119,7 +119,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("H&M", "deviceId5", "link", device, categoryList.get(3)));
         locationList.get(8).setDescription("Gutes Preis/Leistungsverhältnis.");
         locationList.get(8).setVoteValue(20);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(8)));
+        commentList.add(new Comment("Kinderarbeit.", device, locationList.get(8)));
         commentList.add(new Comment("Kommentar 2", device, locationList.get(8)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(8)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(8)));
@@ -128,7 +128,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("New Yorker", "deviceId6", "link", device, categoryList.get(3)));
         locationList.get(9).setDescription("Gutes Preis/Leistungsverhältnis.");
         locationList.get(9).setVoteValue(20);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(9)));
+        commentList.add(new Comment("Naja, qualitativ doof.", device, locationList.get(9)));
         commentList.add(new Comment("Kommentar 2", device, locationList.get(9)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(9)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(9)));
@@ -137,7 +137,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("Schlossplatz", "deviceId5", "link", device, categoryList.get(4)));
         locationList.get(10).setDescription("Wunderschön.");
         locationList.get(10).setVoteValue(20);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(10)));
+        commentList.add(new Comment("Super einfach, einfach super.", device, locationList.get(10)));
         commentList.add(new Comment("Kommentar 2", device, locationList.get(10)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(10)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(10)));
@@ -146,7 +146,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("Domplatz", "deviceId6", "link", device, categoryList.get(4)));
         locationList.get(11).setDescription("Tolle Architektur.");
         locationList.get(11).setVoteValue(20);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(11)));
+        commentList.add(new Comment("Super Location, netter Ort.", device, locationList.get(11)));
         commentList.add(new Comment("Kommentar 2", device, locationList.get(11)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(11)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(11)));
@@ -155,7 +155,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("I Love FH Party", "deviceId5", "link", device, categoryList.get(5)));
         locationList.get(12).setDescription("Super Stimmung.");
         locationList.get(12).setVoteValue(20);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(12)));
+        commentList.add(new Comment("Fh Partys sind die besten.", device, locationList.get(12)));
         commentList.add(new Comment("Kommentar 2", device, locationList.get(12)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(12)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(12)));
@@ -164,7 +164,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         locationList.add(new Location("Netflix & Chill Open Air", "deviceId6", "link", device, categoryList.get(5)));
         locationList.get(13).setDescription("Angenehm.");
         locationList.get(13).setVoteValue(20);
-        commentList.add(new Comment("Kommentar 1", device, locationList.get(13)));
+        commentList.add(new Comment("Haha ernsthaft?", device, locationList.get(13)));
         commentList.add(new Comment("Kommentar 2", device, locationList.get(13)));
         commentList.add(new Comment("Kommentar 3", device, locationList.get(13)));
         commentList.add(new Comment("Kommentar 4", device, locationList.get(13)));

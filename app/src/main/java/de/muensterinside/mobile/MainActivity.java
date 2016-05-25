@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         // ListView wird erstellt um Daten anzeigen zu können und bekommt ein Layout
         listView = (ListView) findViewById(R.id.listView);
 
-        // Der Webservice wird aufgerufen und alle Categories werden in eine Liste gespeichert
-        try{
+       try{ // Der Webservice wird aufgerufen und alle Categories werden in eine Liste gespeichert
+
             categories = myApp.getMuensterInsideMobile().getCategories();
             Intent myIntent = getIntent();
             String androidId = myIntent.getStringExtra("androidId");

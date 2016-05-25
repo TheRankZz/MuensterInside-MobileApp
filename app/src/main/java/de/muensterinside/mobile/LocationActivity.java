@@ -41,7 +41,7 @@ public class LocationActivity extends AppCompatActivity {
 
 
 
-        int loc_id = intent.getIntExtra("selected", 0);
+       final int loc_id = intent.getIntExtra("selected", 0);
         try{
             l = myApp.getMuensterInsideMobile().getLocation(loc_id);
             String voteString = String.valueOf(l.getVoteValue());
@@ -65,7 +65,10 @@ public class LocationActivity extends AppCompatActivity {
             b.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(LocationActivity.this, CommentActivity.class));
+                    Intent myIntent = new Intent(LocationActivity.this, CommentActivity.class);
+                    myIntent.setClassName(getPackageName(), getPackageName() + ".ShowCommentActivity");
+                    myIntent.putExtra("selected", loc_id);
+                    startActivity(myIntent);
                 }
             });
 
