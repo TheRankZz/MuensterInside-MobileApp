@@ -34,6 +34,7 @@ public class CategoryActivity extends AppCompatActivity {
     ListView listView;
     List<Location> locations;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,7 @@ public class CategoryActivity extends AppCompatActivity {
         // Die von der MainActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
         myApp = (MuensterInsideAndroidApplication) getApplication();
+        final String androidId = intent.getStringExtra("androidId");
 
         /**
          * Hier wird explizit auf die übergebende Id,
@@ -86,6 +88,7 @@ public class CategoryActivity extends AppCompatActivity {
                     Intent myIntent = new Intent(CategoryActivity.this, LocationActivity.class);
                     myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
                     myIntent.putExtra("selected", position);
+                    myIntent.putExtra("deviceId", androidId);
                     startActivity(myIntent);
                 }
 

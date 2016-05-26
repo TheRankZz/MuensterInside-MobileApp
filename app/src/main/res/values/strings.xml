@@ -5,9 +5,8 @@
     <string name="title_activity_category">CategoryActivity</string>
     <string name="action_settings">Einstellung</string>
     <string name="username">Username</string>
-    <string name="password">Password</string>
+    <string name="kommentare">Kommentare</string>
     <string name="usernameSummary">Hier steht der UserName</string>
-    <string name="passwordSummary">Hier steht das Passwort</string>
     <string name="pref_user_title">Kommentardaten</string>
     <string name="title_activity_prefs">PrefsActivity</string>
     <string name="intentExtra1">content</string>

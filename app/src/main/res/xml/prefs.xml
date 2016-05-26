@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="@string/pref_user_title"
+        android:title="Einstellungen"
         android:key="pref_key_user_settings">
         <EditTextPreference android:key="username"
             android:summary="@string/usernameSummary"
             android:title="@string/username"/>
-        <EditTextPreference android:key="password"
-            android:summary="@string/passwordSummary"
-            android:title="@string/password"
-            android:password="true"/>
+        <PreferenceScreen android:key="Kommentar"
+            android:title="@string/kommentare" android:id="@+id/CommentButton" >
+            <intent android:action="de.muensterinside.mobile.mock.ShowCommentActivity" />
+        </PreferenceScreen>
+        <Preference android:layout="@layout/activity_prefs" android:key="CommentButton" />
     </PreferenceCategory>
 </PreferenceScreen>

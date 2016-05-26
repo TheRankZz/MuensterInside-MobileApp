@@ -32,16 +32,30 @@ public class ShowCommentActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listView);
 
-        // Der Webservice wird aufgerufen und alle Categories werden in eine Liste gespeichert
+        // Der Webservice wird aufgerufen und alle Comments werden in eine Liste gespeichert
         try {
             Intent myIntent = getIntent();
-            comments = myApp.getMuensterInsideMobile().getCommentsByLocation(myIntent.getIntExtra("selected", 0));
+            final String androidId = myIntent.getStringExtra("androidId");
+            final int loc_Id = myIntent.getIntExtra("selected", 0);
+            comments = myApp.getMuensterInsideMobile().getCommentsByLocation(loc_Id);
+
+            String name = myIntent.getStringExtra("name");
+
+
 
 
             List myList = new ArrayList<String>();
+            myApp.getMuensterInsideMobile().saveComment(name, 0 ,loc_Id);
             for(int i=0; i < comments.size(); i++){
                 myList.add(comments.get(i).getText());
+
+
+
             }
+
+
+
+
             // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
             ArrayAdapter<String> adapter;
             adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);

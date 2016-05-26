@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
             categories = myApp.getMuensterInsideMobile().getCategories();
             Intent myIntent = getIntent();
-            String androidId = myIntent.getStringExtra("androidId");
+            final String androidId = myIntent.getStringExtra("androidId");
             String username = myIntent.getStringExtra("username");
 
 
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     myIntent.putExtra("selected", id);
+                    myIntent.putExtra("deviceId", androidId);
                     startActivity(myIntent);
 
                 }
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
+
         else
             return super.onOptionsItemSelected(item);
     }
