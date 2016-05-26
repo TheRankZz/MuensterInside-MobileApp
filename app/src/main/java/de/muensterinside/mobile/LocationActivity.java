@@ -67,7 +67,7 @@ public class LocationActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent myIntent = new Intent(LocationActivity.this, CommentActivity.class);
-                    myIntent.setClassName(getPackageName(), getPackageName() + ".ShowCommentActivity");
+                    myIntent.setClassName(getPackageName(), getPackageName() + ".CommentActivity");
                     myIntent.putExtra("selected", loc_id);
                     startActivity(myIntent);
                 }

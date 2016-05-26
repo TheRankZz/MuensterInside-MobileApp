@@ -3,32 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.muensterinside.mobile.CommentActivity">
+    tools:context="de.muensterinside.mobile.CommentActivity"
+    android:background="#7383fd">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Kommentar hinzufügen"
+        android:text="Schreiben Sie einen Kommentar..."
         android:id="@+id/textView_Comment"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
+
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
+        android:text="Kommentar"
+        android:ems="10"
         android:id="@+id/editText"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_below="@+id/textView_Comment"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="63dp"
+        android:layout_toStartOf="@+id/button" />
+
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Abschicken"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:drawableBottom="@drawable/ic_action_send"
+        android:background="@android:color/transparent"
         android:id="@+id/button"
-        android:layout_below="@+id/editText"
+        android:clickable="true"
+        android:layout_alignBottom="@+id/editText"
         android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>

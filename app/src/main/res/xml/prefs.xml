@@ -10,6 +10,6 @@
             android:title="@string/kommentare" android:id="@+id/CommentButton" >
             <intent android:action="de.muensterinside.mobile.mock.ShowCommentActivity" />
         </PreferenceScreen>
-        <Preference android:layout="@layout/activity_prefs" android:key="CommentButton" />
+
     </PreferenceCategory>
 </PreferenceScreen>

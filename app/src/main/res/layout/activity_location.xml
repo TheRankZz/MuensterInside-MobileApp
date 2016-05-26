@@ -15,14 +15,18 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
+
     <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:drawableBottom="@drawable/ic_action_add"
+        android:background="@android:color/transparent"
         android:id="@+id/button1"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:textSize="9pt"
+        android:clickable="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
 
     <TextView
         android:layout_width="wrap_content"
