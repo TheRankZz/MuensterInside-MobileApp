@@ -1,6 +1,8 @@
 package de.muensterinside.mobile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +37,7 @@ public class ShowCommentActivity extends AppCompatActivity {
         // Der Webservice wird aufgerufen und alle Comments werden in eine Liste gespeichert
         try {
             Intent myIntent = getIntent();
-            final String androidId = myIntent.getStringExtra("androidId");
+
             final int loc_Id = myIntent.getIntExtra("selected", 0);
             comments = myApp.getMuensterInsideMobile().getCommentsByLocation(loc_Id);
 

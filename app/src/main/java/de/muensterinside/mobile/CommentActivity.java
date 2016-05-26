@@ -31,9 +31,6 @@ public class CommentActivity extends AppCompatActivity{
         Button button = (Button) findViewById(R.id.button);
 
 
-        Intent ii = getIntent();
-        final String androidId = ii.getStringExtra("androidId");
-
 
 
         //ClickListener implementieren für den Button zum Wechsel der Activity
@@ -45,7 +42,6 @@ public class CommentActivity extends AppCompatActivity{
                 Intent ii = new Intent(CommentActivity.this,  ShowCommentActivity.class);
 
                 ii.putExtra("name", s);
-                ii.putExtra("deviceId", androidId);
                 startActivity(ii);
             }
         });

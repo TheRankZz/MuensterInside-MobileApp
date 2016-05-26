@@ -5,6 +5,7 @@ import android.app.Application;
 
 import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Category;
+import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.mock.MobileWebserviceImpl;
 import de.muensterinside.mobile.mock.MuensterInsideImplMock;
@@ -17,6 +18,7 @@ public class MuensterInsideAndroidApplication extends Application{
     private Category category;
     private Location location;
     private Comment comment;
+    private Device device;
     private MobileWebserviceImpl muensterInsideMobile;
 
     /**
@@ -40,6 +42,14 @@ public class MuensterInsideAndroidApplication extends Application{
 
     public Comment getComment() throws Exception{
         return this.comment;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
+
+    public Device getDevice() throws Exception{
+        return this.device;
     }
     /**
      * Gibt das implementierte Serverinterface zurück

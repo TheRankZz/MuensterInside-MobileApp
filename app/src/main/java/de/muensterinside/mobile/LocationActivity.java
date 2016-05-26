@@ -31,7 +31,6 @@ public class LocationActivity extends AppCompatActivity {
 
         // Die von der MainActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
-        final String androidId = intent.getStringExtra("androidId");
         myApp = (MuensterInsideAndroidApplication) getApplication();
 
 
@@ -70,7 +69,6 @@ public class LocationActivity extends AppCompatActivity {
                     Intent myIntent = new Intent(LocationActivity.this, CommentActivity.class);
                     myIntent.setClassName(getPackageName(), getPackageName() + ".ShowCommentActivity");
                     myIntent.putExtra("selected", loc_id);
-                    myIntent.putExtra("deviceId", androidId);
                     startActivity(myIntent);
                 }
             });
@@ -127,9 +125,7 @@ public class LocationActivity extends AppCompatActivity {
         else
             return super.onOptionsItemSelected(item);
     }
-
-
-
+    
 
 
 }

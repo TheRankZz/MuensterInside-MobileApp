@@ -1,6 +1,8 @@
 package de.muensterinside.mobile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -28,11 +30,8 @@ import static de.muensterinside.mobile.Constants.SECOND_COLUMN;
  * Created by Julia Bracht and Nicolas Burchert.
  */
 public class CategoryActivity extends AppCompatActivity {
+    int cat_id;
 
-    ArrayList<HashMap<String, String>> list;
-    MuensterInsideAndroidApplication myApp;
-    ListView listView;
-    List<Location> locations;
 
 
     @Override
@@ -43,8 +42,6 @@ public class CategoryActivity extends AppCompatActivity {
 
         // Die von der MainActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
-        myApp = (MuensterInsideAndroidApplication) getApplication();
-        final String androidId = intent.getStringExtra("androidId");
 
         /**
          * Hier wird explizit auf die übergebende Id,
@@ -52,53 +49,10 @@ public class CategoryActivity extends AppCompatActivity {
          * damit wir auch nur die Locations laden,
          * die zu der ausgewählten Category gehören.
          */
-        int cat_id = intent.getIntExtra("selected", 0);
+        cat_id = intent.getIntExtra("selected", 0);
 
-        // ListView wird erstellt um Daten anzeigen zu können und bekommt ein Layout
-        listView = (ListView) findViewById(R.id.listView);
-
-        list = new ArrayList<HashMap<String,String>>();
-
-        Location l = null;
-        Category c = null;
-        /**
-         * Logik zum befüllen der "richtigen" Locations
-         */
-        try{
-            locations = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
-            for(int i=0; i < locations.size(); i++){
-                l = locations.get(i);
-                c = l.getCategory();
-                if(c.getId() == cat_id){
-                    HashMap<String,String> temp = new HashMap<String, String>();
-                    temp.put(FIRST_COLUMN, l.getName());
-                    temp.put(SECOND_COLUMN, String.valueOf(l.getVoteValue()));
-                    list.add(temp);
-
-                }
-            }
-
-            ListViewAdapters adapter = new ListViewAdapters(this, list);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                @Override
-                public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
-                {
-                    Intent myIntent = new Intent(CategoryActivity.this, LocationActivity.class);
-                    myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
-                    myIntent.putExtra("selected", position);
-                    myIntent.putExtra("deviceId", androidId);
-                    startActivity(myIntent);
-                }
-
-            });
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
+        LocationListTask locationListTask = new LocationListTask(this, cat_id);
+        locationListTask.execute();
     }
 
     @Override
@@ -118,6 +72,72 @@ public class CategoryActivity extends AppCompatActivity {
         }
         else
             return super.onOptionsItemSelected(item);
+    }
+
+
+    private class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
+        private MuensterInsideAndroidApplication myApp;
+        private List<Location> locations;
+        private Context context;
+        private int cat_id;
+        private Location l;
+        private Category c;
+
+
+
+
+        public LocationListTask(Context context, int cat_id){
+            this.context = context;
+            this.cat_id = cat_id;
+        }
+
+        @Override
+        protected List<Location> doInBackground(Integer... params){
+            try {
+                this.myApp = (MuensterInsideAndroidApplication) getApplication();
+                this.locations = myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
+                return this.locations;
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(List<Location> locations){
+            ArrayList<HashMap<String, String>> list;
+            list = new ArrayList<HashMap<String,String>>();
+            for(int i=0; i < locations.size(); i++){
+                l = locations.get(i);
+                c = l.getCategory();
+                if(c.getId() == cat_id){
+                    HashMap<String,String> temp = new HashMap<String, String>();
+                    temp.put(FIRST_COLUMN, l.getName());
+                    temp.put(SECOND_COLUMN, String.valueOf(l.getVoteValue()));
+                    list.add(temp);
+
+                }
+            }
+
+            // ListView wird erstellt um Daten anzeigen zu können und bekommt ein Layout
+            ListView listView = (ListView) findViewById(R.id.listView);
+
+            // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+            ListViewAdapters adapter = new ListViewAdapters(context, list);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
+                {
+                    Intent myIntent = new Intent(CategoryActivity.this, LocationActivity.class);
+                    myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
+                    myIntent.putExtra("selected", position);
+                    startActivity(myIntent);
+                }
+
+            });
+        }
     }
 
 }

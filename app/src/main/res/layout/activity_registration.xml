@@ -2,42 +2,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.muensterinside.mobile.MainActivity">
+    tools:context="de.muensterinside.mobile.MainActivity"
+    android:background="#7383fd">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Registrierung"
-        android:id="@+id/textViewRegistrierung"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:id="@+id/linearLayout">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Username Label -->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Benutzername"
+            android:ems="10"
+            android:id="@+id/registration_username"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <Button
+        android:id="@+id/registration"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Wählen Sie einen Username:"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textViewRegistrierung"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="65dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editTextUsername"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true" />
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
         android:text="Registrieren"
-        android:id="@+id/buttonRegistration"
-        android:layout_below="@+id/editTextUsername"
-        android:layout_alignParentStart="true" />
+        android:background="#3030c0"
+        android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Login"
+            android:background="#3030c0"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
 </RelativeLayout>
+

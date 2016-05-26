@@ -4,6 +4,7 @@ import static de.muensterinside.mobile.Constants.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,9 @@ public class ListViewAdapters extends BaseAdapter{
     Activity activity;
     TextView txtFirst;
     TextView txtSecond;
-    public ListViewAdapters(Activity activity,ArrayList<HashMap<String, String>> list){
+    public ListViewAdapters(Context context, ArrayList<HashMap<String, String>> list){
         super();
-        this.activity=activity;
+        this.activity= (Activity) context;
         this.list=list;
     }
 
