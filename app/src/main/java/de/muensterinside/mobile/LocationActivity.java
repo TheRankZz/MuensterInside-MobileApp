@@ -73,6 +73,19 @@ public class LocationActivity extends AppCompatActivity {
                 }
             });
 
+            // führt zur ShowCommentActivity, wenn der Button gedrückt wird
+            Button c = (Button) findViewById(R.id.KommentarAnzeigen);
+
+            c.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent myIntent = new Intent(LocationActivity.this, ShowCommentActivity.class);
+                    myIntent.setClassName(getPackageName(), getPackageName() + ".ShowCommentActivity");
+                    myIntent.putExtra("selected", loc_id);
+                    startActivity(myIntent);
+                }
+            });
+
             Button up = (Button) findViewById(R.id.up);
             Button down = (Button) findViewById(R.id.down);
             up.setOnClickListener(new View.OnClickListener() {

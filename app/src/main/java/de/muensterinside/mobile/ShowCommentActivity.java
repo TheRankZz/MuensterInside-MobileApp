@@ -64,18 +64,6 @@ public class ShowCommentActivity extends AppCompatActivity {
         catch(Exception e){e.printStackTrace();}
 
 
-        Button button = (Button) findViewById(R.id.buttonZuerueck);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-
-                Intent ii = new Intent(ShowCommentActivity.this,  CommentActivity.class);
-                startActivity(ii);
-            }
-        });
-
 
 
 

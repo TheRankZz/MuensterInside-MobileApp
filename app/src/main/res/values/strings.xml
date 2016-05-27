@@ -5,7 +5,7 @@
     <string name="title_activity_category">CategoryActivity</string>
     <string name="action_settings">Einstellung</string>
     <string name="username">Username</string>
-    <string name="kommentare">Kommentare</string>
+    <string name="kommentare">Meine Kommentare</string>
     <string name="usernameSummary">Hier steht der UserName</string>
     <string name="pref_user_title">Kommentardaten</string>
     <string name="title_activity_prefs">PrefsActivity</string>

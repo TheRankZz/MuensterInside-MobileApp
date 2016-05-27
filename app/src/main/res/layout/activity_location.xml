@@ -24,7 +24,7 @@
         android:background="@android:color/transparent"
         android:id="@+id/button1"
         android:clickable="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/KommentarAnzeigen"
         android:layout_alignParentEnd="true" />
 
 
@@ -104,4 +104,12 @@
         android:layout_alignParentEnd="true"
         android:clickable="true" />
 
-    </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kommentare anzeigen"
+        android:id="@+id/KommentarAnzeigen"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textViewExampleVote" />
+
+</RelativeLayout>
