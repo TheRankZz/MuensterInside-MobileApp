@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,10 +14,12 @@ import android.widget.Toast;
 import de.muensterinside.mobile.entities.Device;
 
 public class NewLocationActivity extends AppCompatActivity {
+    public static final String TAG = "NewLocationActivity";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate) gestartet");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_location);
 
@@ -41,6 +44,7 @@ public class NewLocationActivity extends AppCompatActivity {
         saveLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "saveLocation.onClick() gestartet");
                 Intent myIntent = new Intent(NewLocationActivity.this, MainActivity.class);
                 myIntent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
 
@@ -55,8 +59,10 @@ public class NewLocationActivity extends AppCompatActivity {
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    Log.i(TAG, "Location wurde erfolgreich erstellt");
                 }
                 catch(Exception e){
+                    Log.e(TAG, "Location wurde nicht erfolgreich erstellt");
                     e.printStackTrace();
 
                     CharSequence text = "Location wurde nicht erstellt.";

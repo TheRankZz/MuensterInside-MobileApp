@@ -3,6 +3,7 @@ package de.muensterinside.mobile;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,14 +18,15 @@ import de.muensterinside.mobile.entities.Comment;
 
 public class ShowCommentActivity extends AppCompatActivity {
 
-
-    MuensterInsideAndroidApplication myApp;
-    List<Comment> comments;
-    ListView listView;
+    private MuensterInsideAndroidApplication myApp;
+    private List<Comment> comments;
+    private ListView listView;
+    public static final String TAG = "ShowCommentActivity";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_comment);
         myApp = (MuensterInsideAndroidApplication) getApplication();
@@ -60,8 +62,12 @@ public class ShowCommentActivity extends AppCompatActivity {
             adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            Log.i(TAG, "Kommentare werden erfolgreich angezeigt");
         }
-        catch(Exception e){e.printStackTrace();}
+        catch(Exception e){
+            Log.e(TAG, "Kommentare werden nicht erfolgreich angezeigt");
+            e.printStackTrace();
+        }
 
 
 

@@ -3,6 +3,7 @@ package de.muensterinside.mobile.tasks;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private Button up;
     private Button down;
     private Button c;
+    public static final String TAG = "LocationTask";
 
 
     public LocationTask(Context context, int loc_id, int cat_id,
@@ -52,12 +54,15 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
 
     @Override
     protected Location doInBackground(Integer... params){
+        Log.d(TAG, "doInBackground() gestartet");
         try {
             this.locations = myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
             this.location = this.locations.get(this.loc_id);
+            Log.i(TAG, "doInBackground() erfolgreich");
             return this.location;
         }
         catch (Exception e){
+            Log.e(TAG, "doInBackground() fehlgeschlagen");
             e.printStackTrace();
         }
         return null;
@@ -65,6 +70,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
 
     @Override
     public void onPostExecute(Location location){
+        Log.d(TAG, "onPostExecute() gestartet");
         final Location l = location;
         String voteString = String.valueOf(location.getVoteValue());
 
@@ -82,6 +88,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "b.onClick() gestartet");
                 Intent myIntent = new Intent(context, CommentActivity.class);
                 myIntent.putExtra("selected", loc_id);
                 context.startActivity(myIntent);
@@ -91,6 +98,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "c.onClick() gestartet");
                 Intent myIntent = new Intent(context, ShowCommentActivity.class);
                 myIntent.putExtra("selected", loc_id);
                 context.startActivity(myIntent);
@@ -100,6 +108,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "up.onClick() gestartet");
                 int oldVote = l.getVoteValue();
                 oldVote = oldVote +1;
                 l.setVoteValue(oldVote);
@@ -113,6 +122,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "down.onClick() gestartet");
                 int oldVote = l.getVoteValue();
                 oldVote = oldVote - 1;
                 l.setVoteValue(oldVote);

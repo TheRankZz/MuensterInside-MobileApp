@@ -3,6 +3,7 @@ package de.muensterinside.mobile.tasks;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
     private List<Category> categories;
     private Context context;
     private ListView listView;
+    public static final String TAG = "CategoryTask";
 
 
     public CategoryTask(Context context, MuensterInsideAndroidApplication myApp, ListView listView){
@@ -34,17 +36,21 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
 
     @Override
     protected List<Category> doInBackground(Void... params){
+        Log.d(TAG, "doInBackground() gestartet");
         try {
             this.categories = myApp.getMuensterInsideMobile().getCategories();
+            Log.i(TAG, "doInBackground() erfolgreich");
             return this.categories;
         }
         catch (Exception e){
+            Log.e(TAG, "doInBackground() fehlgeschlagen");
             e.printStackTrace();
         }
         return null;
     }
     @Override
     protected void onPostExecute(List<Category> categories){
+        Log.d(TAG, "onPostExecute() gestartet");
         List myList = new ArrayList<String>();
         for(int i=0; i < categories.size(); i++){
             myList.add(categories.get(i).getName());
@@ -68,6 +74,7 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {
+                Log.d(TAG, "listView.onItemClick() gestartet");
                 Intent myIntent = new Intent(context, CategoryActivity.class);
                 String name = listView.getAdapter().getItem(arg2).toString();
                 int id = 1;

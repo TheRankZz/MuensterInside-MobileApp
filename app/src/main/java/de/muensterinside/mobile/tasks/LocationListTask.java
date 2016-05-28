@@ -3,6 +3,7 @@ package de.muensterinside.mobile.tasks;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private int cat_id;
     private Location l;
     private Category c;
+    public static final String TAG = "LocationListTask";
 
     public LocationListTask(Context context, int cat_id, MuensterInsideAndroidApplication myApp, ListView listView, Button newLocation){
         this.context = context;
@@ -47,12 +49,14 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
 
     @Override
     protected List<Location> doInBackground(Integer... params){
+        Log.d(TAG, "doInBackground() gestartet");
         try {
             locations = myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
-
+            Log.i(TAG, "doInBackground() erfolgreich");
             return locations;
         }
         catch (Exception e){
+            Log.e(TAG, "doInBackground() fehlgeschlagen");
             e.printStackTrace();
         }
         return null;
@@ -60,7 +64,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
 
     @Override
     protected void onPostExecute(List<Location> locations){
-
+        Log.d(TAG, "onPostExecute() gestartet");
         ArrayList<HashMap<String, String>> list;
         list = new ArrayList<HashMap<String,String>>();
         for(int i=0; i < locations.size(); i++){
@@ -86,6 +90,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
             {
+                Log.d(TAG, "listView.onItemClick() gestartet");
                 Intent myIntent = new Intent(context, LocationActivity.class);
                 myIntent.putExtra("loc_id", position);
                 context.startActivity(myIntent);
@@ -96,6 +101,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
         newLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "newLocation.onClick() gestartet");
                 Intent myIntent = new Intent(context, NewLocationActivity.class);
                 context.startActivity(myIntent);
             }

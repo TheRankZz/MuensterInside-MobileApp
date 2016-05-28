@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,14 +18,16 @@ import de.muensterinside.mobile.tasks.RegistrationTask;
  * Created by Julia Bracht and Nicolas Burchert
  */
 public class RegistrationActivity extends AppCompatActivity {
-    EditText username;
-    MuensterInsideAndroidApplication myApp;
-    String android_id;
+    private EditText username;
+    private MuensterInsideAndroidApplication myApp;
+    private String android_id;
+    public static final String TAG = "RegistrationActivity";
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
@@ -44,12 +47,15 @@ public class RegistrationActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "login.onClick() gestartet");
                 try {
                     String name = username.getText().toString();
                     LoginTask loginTask = new LoginTask(view.getContext(),myApp);
                     loginTask.execute(android_id, name);
+                    Log.i(TAG, "login.onClick() erfolgreich");
                 }
                 catch(Exception e){
+                    Log.e(TAG, "login.onClick() fehlgeschlagen");
                     e.printStackTrace();
                 }
 
@@ -59,13 +65,15 @@ public class RegistrationActivity extends AppCompatActivity {
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "registration.onClick() gestartet");
                 try {
                     String name = username.getText().toString();
                     RegistrationTask registrationTask = new RegistrationTask(view.getContext(), myApp);
                     registrationTask.execute(android_id,name);
-
+                    Log.i(TAG, "registration.onClick() erfolgreich");
                 }
                 catch(Exception e){
+                    Log.e(TAG, "registration.onClick() fehlgeschlagen");
                     e.printStackTrace();
                 }
 

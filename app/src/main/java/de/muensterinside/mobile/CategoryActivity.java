@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -16,12 +17,14 @@ import de.muensterinside.mobile.tasks.LocationListTask;
  * Created by Julia Bracht and Nicolas Burchert.
  */
 public class CategoryActivity extends AppCompatActivity {
-    int cat_id;
+    public static final String TAG = "CategoryActivity";
+    private int cat_id;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
         // Hier wird das Aussehen der CategoryActivity ausgewählt
         setContentView(R.layout.activity_category);
@@ -55,6 +58,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu() gestartet");
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -62,6 +66,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected() gestartet");
         //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
         if (item.getItemId() == R.id.action_settings) {
             Intent i = new Intent(this, PrefsActivity.class);

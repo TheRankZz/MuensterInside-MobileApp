@@ -51,10 +51,10 @@ public class MuensterInsideAndroidApplication extends Application{
     public Device getDevice() throws Exception{
         return this.device;
     }
+
     /**
      * Gibt das implementierte Serverinterface zurück
      */
-
     public MobileWebserviceImpl getMuensterInsideMobile() throws Exception{
         return this.muensterInsideMobile;
     }
