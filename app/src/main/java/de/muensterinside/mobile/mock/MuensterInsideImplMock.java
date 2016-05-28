@@ -24,8 +24,9 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     private List<Category> categoryList;
     private List<Comment> commentList;
     private List<Vote> voteList;
-    private Device device = new Device();
+    private Device device;
     private String deviceId;
+    private String username;
 
     /**
      * Konstruktor
@@ -35,14 +36,21 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     public MuensterInsideImplMock() {
         categoryList = new ArrayList<>();
         categoryList.add(new Category("Essen"));
+        categoryList.get(0).setId(0);
         categoryList.add(new Category("Party"));
+        categoryList.get(1).setId(1);
         categoryList.add(new Category("Hotel"));
+        categoryList.get(2).setId(2);
         categoryList.add(new Category("Shopping"));
+        categoryList.get(3).setId(3);
         categoryList.add(new Category("Sehenswürdigkeiten"));
+        categoryList.get(4).setId(4);
         categoryList.add(new Category("Veranstaltungen"));
+        categoryList.get(5).setId(5);
 
         commentList = new ArrayList<>();
         locationList = new ArrayList<>();
+        device = new Device();
 
         locationList.add(new Location("Extrablatt", "deviceId1", "link", device, categoryList.get(0)));
         locationList.get(0).setDescription("Man kann hier gut essen.");
@@ -180,12 +188,15 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     public Device register(String deviceId, String username){
         this.device.setAndroidUuid(deviceId);
         this.device.setUsername(username);
+        this.device.setId(0);
         this.deviceId = deviceId;
+        this.username = username;
         return this.device;
     }
 
 
     public Device login(String deviceId)throws Exception{
+        register(this.deviceId, this.username);
         if(this.device.getAndroidUuid()==deviceId){
             return this.device;
         }

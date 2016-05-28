@@ -32,6 +32,10 @@ public class ListViewAdapters extends BaseAdapter{
         return list.size();
     }
 
+    public void add(HashMap<String, String> item){
+        this.list.add(item);
+    }
+
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub

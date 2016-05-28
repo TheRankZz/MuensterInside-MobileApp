@@ -20,6 +20,7 @@ public class Device {
 
 	private String androidUuid;
 	private String username;
+	private int id;
 	private List<Comment> comments;
 	private List<Location> locations;
 	private List<Vote> votes;
@@ -38,6 +39,14 @@ public class Device {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public int getId(){
+		return id;
+	}
+
+	public void setId(int id){
+		this.id = id;
 	}
 
 	public String getAndroidUuid() {

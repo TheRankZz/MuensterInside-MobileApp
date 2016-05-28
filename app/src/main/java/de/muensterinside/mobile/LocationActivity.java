@@ -1,21 +1,18 @@
 package de.muensterinside.mobile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Button;
-import android.view.View;
-import android.view.View.OnClickListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import de.muensterinside.mobile.entities.Category;
-import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Location;
+import de.muensterinside.mobile.tasks.LocationTask;
+
 /**
  * Created by Julia Bracht and Nicolas Burchert.
  */
@@ -39,84 +36,27 @@ public class LocationActivity extends AppCompatActivity {
          * der ausgewählten Location zugegriffen,
          * damit wir auch nur die ausgewählte Location laden.
          */
+        int loc_id = intent.getIntExtra("loc_id", 0);
+
+        SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
+        int cat_id = myCatIdPref.getInt("catId", 0);
+
+        TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
+
+        final TextView exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
 
 
-
-       final int loc_id = intent.getIntExtra("selected", 0);
-        try{
-            l = myApp.getMuensterInsideMobile().getLocation(loc_id);
-            String voteString = String.valueOf(l.getVoteValue());
-
-            // TextView für den Namen der Location wird erstellt und befüllt
-            TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
-            exampleName.setText(l.getName());
-
-            // TextView für den Namen der Location wird erstellt und befüllt
-            final TextView exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
-            exampleVote.setText(voteString);
-
-            // TextView für den Namen der Location wird erstellt und befüllt
-            TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
-            exampleDescription.setText(l.getDescription());
+        TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
 
 
-            // führt zur CommentActivity, wenn der Button gedrückt wird
-            Button b = (Button) findViewById(R.id.button1);
+        Button b = (Button) findViewById(R.id.button1);
+        Button up = (Button) findViewById(R.id.up);
+        Button down = (Button) findViewById(R.id.down);
 
-            b.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent myIntent = new Intent(LocationActivity.this, CommentActivity.class);
-                    myIntent.setClassName(getPackageName(), getPackageName() + ".CommentActivity");
-                    myIntent.putExtra("selected", loc_id);
-                    startActivity(myIntent);
-                }
-            });
+        LocationTask locationTask = new LocationTask(this, loc_id, cat_id, myApp, exampleName,
+                exampleVote, exampleDescription, b, up, down);
+        locationTask.execute();
 
-            // führt zur ShowCommentActivity, wenn der Button gedrückt wird
-            Button c = (Button) findViewById(R.id.KommentarAnzeigen);
-
-            c.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent myIntent = new Intent(LocationActivity.this, ShowCommentActivity.class);
-                    myIntent.setClassName(getPackageName(), getPackageName() + ".ShowCommentActivity");
-                    myIntent.putExtra("selected", loc_id);
-                    startActivity(myIntent);
-                }
-            });
-
-            Button up = (Button) findViewById(R.id.up);
-            Button down = (Button) findViewById(R.id.down);
-            up.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int oldVote = l.getVoteValue();
-                    oldVote = oldVote +1;
-                    l.setVoteValue(oldVote);
-                    String voteString = String.valueOf(oldVote);
-                    exampleVote.setText(voteString);
-
-                }
-            });
-
-
-            down.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int oldVote = l.getVoteValue();
-                    oldVote = oldVote - 1;
-                    l.setVoteValue(oldVote);
-                    String voteString = String.valueOf(oldVote);
-                    exampleVote.setText(voteString);
-
-                }
-            });
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
 
     }
 
@@ -138,7 +78,4 @@ public class LocationActivity extends AppCompatActivity {
         else
             return super.onOptionsItemSelected(item);
     }
-    
-
-
 }
