@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="de.muensterinside.mobile.MainActivity"
+    android:background="#7383fd">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:id="@+id/linearLayout">
+
+    <!-- Username Label -->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Benutzername"
+            android:ems="10"
+            android:id="@+id/registration_username"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/colorPrimary"/>
+
+        <Button
+        android:id="@+id/registration"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:text="Registrieren"
+        android:background="#3030c0"
+        android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Login"
+            android:background="#3030c0"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Einstellungen"
+        android:key="pref_key_user_settings">
+        <EditTextPreference android:key="username"
+            android:summary="@string/usernameSummary"
+            android:title="@string/username"/>
+        <PreferenceScreen android:key="Kommentar"
+            android:title="@string/kommentare" android:id="@+id/CommentButton" >
+            <intent android:action="de.muensterinside.mobile.mock.ShowCommentActivity" />
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+</PreferenceScreen>
