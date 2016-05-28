@@ -52,9 +52,10 @@ public class LocationActivity extends AppCompatActivity {
         Button b = (Button) findViewById(R.id.button1);
         Button up = (Button) findViewById(R.id.up);
         Button down = (Button) findViewById(R.id.down);
+        Button c = (Button) findViewById(R.id.KommentarAnzeigen);
 
         LocationTask locationTask = new LocationTask(this, loc_id, cat_id, myApp, exampleName,
-                exampleVote, exampleDescription, b, up, down);
+                exampleVote, exampleDescription, b, up, down, c);
         locationTask.execute();
 
 

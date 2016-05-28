@@ -11,6 +11,7 @@ import java.util.List;
 
 import de.muensterinside.mobile.CommentActivity;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
+import de.muensterinside.mobile.ShowCommentActivity;
 import de.muensterinside.mobile.entities.Location;
 
 /**
@@ -29,12 +30,13 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private Button b;
     private Button up;
     private Button down;
+    private Button c;
 
 
     public LocationTask(Context context, int loc_id, int cat_id,
                         MuensterInsideAndroidApplication myApp, TextView exampleName,
                         TextView exampleVote, TextView exampleDescription, Button b,
-                        Button up, Button down){
+                        Button up, Button down, Button c){
         this.context = context;
         this.loc_id = loc_id;
         this.cat_id = cat_id;
@@ -45,6 +47,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         this.b = b;
         this.up = up;
         this.down = down;
+        this.c = c;
     }
 
     @Override
@@ -80,6 +83,15 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(context, CommentActivity.class);
+                myIntent.putExtra("selected", loc_id);
+                context.startActivity(myIntent);
+            }
+        });
+
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(context, ShowCommentActivity.class);
                 myIntent.putExtra("selected", loc_id);
                 context.startActivity(myIntent);
             }
