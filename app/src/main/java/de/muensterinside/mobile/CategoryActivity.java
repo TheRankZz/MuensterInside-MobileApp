@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import de.muensterinside.mobile.tasks.LocationListTask;
@@ -53,13 +54,13 @@ public class CategoryActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         // Es wird eine ListView erzeugt um eine Liste von Locations anzuzeigen
-        ListView listView = (ListView) findViewById(R.id.listView);
+        GridView gridView = (GridView) findViewById(R.id.gridView);
 
         // Es wird ein Button erzeugt um eine neue Location anlegen zu können
         Button newLocation = (Button) findViewById(R.id.newLocation);
 
         // Der LocationListTask wird aufgerufen
-        LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, listView, newLocation);
+        LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, gridView, newLocation);
         locationListTask.execute();
     }
 

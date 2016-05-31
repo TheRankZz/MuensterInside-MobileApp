@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,13 +25,13 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
     private MuensterInsideAndroidApplication myApp;
     private List<Category> categories;
     private Context context;
-    private ListView listView;
+    private GridView listView;
     public static final String TAG = "CategoryTask";
 
     /* Der Konstruktor erwartet ein Context Objekt,
      * ein Application Objekt und ein ListView Objekt.
      */
-    public CategoryTask(Context context, MuensterInsideAndroidApplication myApp, ListView listView){
+    public CategoryTask(Context context, MuensterInsideAndroidApplication myApp, GridView listView){
         this.context = context;
         this.myApp = myApp;
         this.listView = listView;

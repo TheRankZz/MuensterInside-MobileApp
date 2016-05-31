@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private List<Location> locations;
     private ListViewAdapters adapter;
     private Context context;
-    private ListView listView;
+    private GridView listView;
     private Button newLocation;
     private int cat_id;
     private Location l;
@@ -42,7 +43,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     /* Der Konstruktor erwartet ein Context Objekt,
      * ein Application Objekt, eine ListView und einen Button.
      */
-    public LocationListTask(Context context, int cat_id, MuensterInsideAndroidApplication myApp, ListView listView, Button newLocation){
+    public LocationListTask(Context context, int cat_id, MuensterInsideAndroidApplication myApp, GridView listView, Button newLocation){
         this.context = context;
         this.cat_id = cat_id;
         this.myApp = myApp;

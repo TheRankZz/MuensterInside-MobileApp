@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import de.muensterinside.mobile.tasks.CategoryTask;
@@ -29,10 +30,14 @@ public class MainActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         // ListView zum anzeigen der Kategorien wird erzeugt
-        final ListView listView = (ListView) findViewById(R.id.listView);
+        //final ListView listView = (ListView) findViewById(R.id.listView);
+
+        final GridView gridView =(GridView) findViewById(R.id.gridview);
+
+
 
         // Der CategoryTask wird ausgeführt
-        CategoryTask categoryTask = new CategoryTask(this, myApp, listView);
+        CategoryTask categoryTask = new CategoryTask(this, myApp, gridView);
         categoryTask.execute();
     }
 
