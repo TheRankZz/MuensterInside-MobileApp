@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
 
 import de.muensterinside.mobile.entities.Location;
+import de.muensterinside.mobile.tasks.LocationCommentTask;
 import de.muensterinside.mobile.tasks.LocationTask;
 
 /**
@@ -50,6 +52,8 @@ public class LocationActivity extends AppCompatActivity {
 
         TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
 
+        ListView kommentare = (ListView) findViewById(R.id.kommentare);
+
 
         Button b = (Button) findViewById(R.id.button1);
         Button up = (Button) findViewById(R.id.up);
@@ -57,8 +61,9 @@ public class LocationActivity extends AppCompatActivity {
         Button c = (Button) findViewById(R.id.KommentarAnzeigen);
 
         LocationTask locationTask = new LocationTask(this, loc_id, cat_id, myApp, exampleName,
-                exampleVote, exampleDescription, b, up, down, c);
+                exampleVote,kommentare , exampleDescription, b, up, down, c);
         locationTask.execute();
+
 
 
     }

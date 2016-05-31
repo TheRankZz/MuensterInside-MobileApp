@@ -1,6 +1,8 @@
 package de.muensterinside.mobile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,12 +10,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.muensterinside.mobile.entities.Comment;
+import de.muensterinside.mobile.tasks.ShowCommentTask;
 
 
 public class ShowCommentActivity extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class ShowCommentActivity extends AppCompatActivity {
     private MuensterInsideAndroidApplication myApp;
     private List<Comment> comments;
     private ListView listView;
+    private int loc_id;
     public static final String TAG = "ShowCommentActivity";
 
 
@@ -29,45 +33,26 @@ public class ShowCommentActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_comment);
-        myApp = (MuensterInsideAndroidApplication) getApplication();
 
 
-        listView = (ListView) findViewById(R.id.listView);
+     Intent intent = getIntent();
 
-        // Der Webservice wird aufgerufen und alle Comments werden in eine Liste gespeichert
-        try {
-            Intent myIntent = getIntent();
-            final int loc_Id = myIntent.getIntExtra("selected", 0);
-            comments = myApp.getMuensterInsideMobile().getCommentsByLocation(loc_Id);
-
-            String name = myIntent.getStringExtra("name");
+        loc_id = intent.getIntExtra("selected", 0);
 
 
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences("MyLocIdPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("locId", loc_id);
+        editor.commit();
 
 
-            List myList = new ArrayList<String>();
-            myApp.getMuensterInsideMobile().saveComment(name, 2 ,loc_Id);
-            for(int i=0; i < comments.size(); i++){
-                myList.add(comments.get(i).getText());
+        MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+        ListView listView = (ListView) findViewById(R.id.listView);
 
+        ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id, listView);
+        showCommentTask.execute();
 
-
-            }
-
-
-
-
-            // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
-            ArrayAdapter<String> adapter;
-            adapter=new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
-            listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-            Log.i(TAG, "Kommentare werden erfolgreich angezeigt");
-        }
-        catch(Exception e){
-            Log.e(TAG, "Kommentare werden nicht erfolgreich angezeigt");
-            e.printStackTrace();
-        }
 
 
 
