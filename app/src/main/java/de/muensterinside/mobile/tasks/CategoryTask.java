@@ -27,17 +27,21 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
     private ListView listView;
     public static final String TAG = "CategoryTask";
 
-
+    /* Der Konstruktor erwartet ein Context Objekt,
+     * ein Application Objekt und ein ListView Objekt.
+     */
     public CategoryTask(Context context, MuensterInsideAndroidApplication myApp, ListView listView){
         this.context = context;
         this.myApp = myApp;
         this.listView = listView;
     }
 
+    // Im Hintergrund soll der Webservice aufgerufen werden
     @Override
     protected List<Category> doInBackground(Void... params){
         Log.d(TAG, "doInBackground() gestartet");
         try {
+            // Die Methode getCategories liefert eine Liste zurück
             this.categories = myApp.getMuensterInsideMobile().getCategories();
             Log.i(TAG, "doInBackground() erfolgreich");
             return this.categories;
@@ -48,16 +52,21 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
         }
         return null;
     }
+
+    /* Die onPostExecute Methode erwartet eine Liste,
+     * in der Category Objekte gespeichert sind.
+     */
     @Override
     protected void onPostExecute(List<Category> categories){
         Log.d(TAG, "onPostExecute() gestartet");
+
+        // Die Namen der Kategorien werden in eine Liste gespeichert
         List myList = new ArrayList<String>();
         for(int i=0; i < categories.size(); i++){
             myList.add(categories.get(i).getName());
         }
+
         final List<Category> test = categories;
-
-
 
         // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
         ArrayAdapter<String> adapter;

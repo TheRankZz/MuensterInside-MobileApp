@@ -39,4 +39,16 @@ public class Vote {
 		return location;
 	}
 
+	public void setLocation(Location location){
+		this.location = location;
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device){
+		this.device = device;
+	}
+
 }

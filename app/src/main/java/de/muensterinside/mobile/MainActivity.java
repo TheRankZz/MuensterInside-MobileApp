@@ -25,8 +25,13 @@ public class MainActivity extends AppCompatActivity {
         // Hier wird das Aussehen der MainActivity festgelegt
         setContentView(R.layout.activity_main);
 
+        // Application Objekt wird erzeugt
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+
+        // ListView zum anzeigen der Kategorien wird erzeugt
         final ListView listView = (ListView) findViewById(R.id.listView);
+
+        // Der CategoryTask wird ausgeführt
         CategoryTask categoryTask = new CategoryTask(this, myApp, listView);
         categoryTask.execute();
     }

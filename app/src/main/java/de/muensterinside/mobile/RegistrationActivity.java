@@ -32,18 +32,32 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         myApp = (MuensterInsideAndroidApplication) getApplication();
+
+        // Die Android Device-ID wird ermittelt
         android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        // Hier wird der vom Benutzer eingegene Benutzername gespeichert
         username = (EditText) findViewById(R.id.registration_username);
+
+        /* SharedPreferences wird benutzt um,
+         * die androidId und den usernamen unter dem Schlüssel "MyPref",
+         * zu speichern
+         */
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString("androidId", android_id);
         editor.putString("username", username.getText().toString());
         editor.commit();
 
-
+        // Button für die Registrierung wird angelegt
         Button registration = (Button) findViewById(R.id.registration);
+
+        // Button für das Login wird angelegt
         Button login = (Button) findViewById(R.id.login);
 
+        /* Wenn der Button login gedrückt wurde,
+         * soll der LoginTask ausgeführt werden.
+         */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +76,9 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        /* Wenn der Button registration gedrückt wurde,
+         * soll der RegistrationTask ausgeführt werden
+         */
         registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

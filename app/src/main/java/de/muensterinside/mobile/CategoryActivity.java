@@ -40,20 +40,27 @@ public class CategoryActivity extends AppCompatActivity {
          */
         cat_id = intent.getIntExtra("selected", 0);
 
+        /* In einer SharedPreference wird die vorher ausgewählte
+         * ID einer Kategorie gespeichert.
+         */
         SharedPreferences sharedPreferences;
         sharedPreferences = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("catId", cat_id);
         editor.commit();
 
+        // Es wird ein Application Objekt erzeugt
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+
+        // Es wird eine ListView erzeugt um eine Liste von Locations anzuzeigen
         ListView listView = (ListView) findViewById(R.id.listView);
+
+        // Es wird ein Button erzeugt um eine neue Location anlegen zu können
         Button newLocation = (Button) findViewById(R.id.newLocation);
 
+        // Der LocationListTask wird aufgerufen
         LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, listView, newLocation);
         locationListTask.execute();
-
-
     }
 
     @Override

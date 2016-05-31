@@ -3,7 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7383fd"
     tools:context=".NewLocationActivity">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:id="@+id/linearLayout">
 
     <EditText
         android:layout_width="wrap_content"
@@ -25,15 +36,6 @@
         android:layout_below="@+id/locationName"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Erstelle Location"
-        android:id="@+id/confirmLocation"
-        android:clickable="true"
-        android:layout_below="@+id/locationLink"
-        android:layout_alignParentStart="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,4 +46,34 @@
         android:layout_below="@+id/locationDescription"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Erstelle Location"
+        android:id="@+id/confirmLocation"
+        android:clickable="true"
+        android:layout_below="@+id/locationLink"
+        android:layout_alignParentStart="true"
+        android:background="#3030c0"
+        android:textColor="#ffffff" />
+
+    </LinearLayout>
+
 </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
