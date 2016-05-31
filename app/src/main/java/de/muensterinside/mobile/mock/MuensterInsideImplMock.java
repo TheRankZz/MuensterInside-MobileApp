@@ -186,22 +186,23 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
 
 
     public Device register(String deviceId, String username){
-        this.device.setAndroidUuid(deviceId);
-        this.device.setUsername(username);
-        this.device.setId(0);
+        Device device = new Device();
+        device.setAndroidUuid(deviceId);
+        device.setUsername(username);
+        device.setId(0);
         this.deviceId = deviceId;
         this.username = username;
-        return this.device;
+        this.device = device;
+        return device;
     }
 
 
     public Device login(String deviceId)throws Exception{
-        register(this.deviceId, this.username);
         if(this.device.getAndroidUuid()==deviceId){
             return this.device;
         }
         else {
-            throw new Exception("Device nicht gefunden");
+            return null;
         }
     }
 

@@ -15,10 +15,10 @@ import de.muensterinside.mobile.entities.Vote;
 /**
  * Created by Julia Bracht and Nicolas Burchert
  */
-public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
+public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
     private Context context;
     private MuensterInsideAndroidApplication myApp;
-    public static final String TAG = "UpVoteTask";
+    public static final String TAG = "DownVoteTask";
     private int loc_id;
     private int deviceId;
     private TextView exampleVote;
@@ -26,7 +26,7 @@ public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
     private Location location;
     private List<Location> locations;
 
-    public UpVoteTask(Context context, MuensterInsideAndroidApplication myApp, int loc_id, int deviceId, TextView exampleVote, int cat_id){
+    public DownVoteTask(Context context, MuensterInsideAndroidApplication myApp, int loc_id, int deviceId, TextView exampleVote, int cat_id){
         this.context = context;
         this.myApp = myApp;
         this.loc_id = loc_id;
@@ -42,7 +42,7 @@ public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
             this.locations = this.myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
             this.location = this.locations.get(loc_id);
             if(isVoted == false){
-                int result = this.myApp.getMuensterInsideMobile().upVote(loc_id, deviceId);
+                int result = this.myApp.getMuensterInsideMobile().downVote(loc_id, deviceId);
                 return result;
             }
             else {
@@ -58,11 +58,11 @@ public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
     @Override
     public void onPostExecute(Integer result){
         if(result != null && result == 0){
-            CharSequence text = "UpVote erfolgreich";
+            CharSequence text = "DownVote erfolgreich";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-            Log.i(TAG, "UpVote erfolgreich");
+            Log.i(TAG, "DownVote erfolgreich");
         }
         else if(result == 2) {
             CharSequence text = "Es gab schon ein Vote";

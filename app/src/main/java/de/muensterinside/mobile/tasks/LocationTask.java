@@ -54,7 +54,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     public LocationTask(Context context, int loc_id, int cat_id,
                         MuensterInsideAndroidApplication myApp, TextView exampleName,
                         TextView exampleVote, TextView exampleDescription, Button b,
-                        Button up, Button down, Button c, String deviceId, String username){
+                        Button up, Button down, Button c, String deviceId, String username, ListView kommentare){
         this.context = context;
         this.loc_id = loc_id;
         this.cat_id = cat_id;
@@ -178,10 +178,10 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "down.onClick() gestartet");
-                int oldVote = l.getVoteValue();
-                oldVote = oldVote - 1;
-                l.setVoteValue(oldVote);
-                String voteString = String.valueOf(oldVote);
+                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId(), exampleVote, cat_id);
+                downVoteTask.execute();
+                int voteVote = l.getVoteValue();
+                String voteString = String.valueOf(voteVote);
                 exampleVote.setText(voteString);
 
             }

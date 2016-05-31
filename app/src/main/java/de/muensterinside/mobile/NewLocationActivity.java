@@ -15,6 +15,10 @@ import de.muensterinside.mobile.entities.Device;
 
 public class NewLocationActivity extends AppCompatActivity {
     public static final String TAG = "NewLocationActivity";
+    private Context context;
+    private EditText name;
+    private EditText description;
+    private EditText link;
 
 
     @Override
@@ -26,16 +30,13 @@ public class NewLocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_location);
 
         //Eingabefeld für den Namen wird erzeugt
-        EditText name = (EditText) findViewById(R.id.locationName);
-        final String locationName = name.getText().toString();
+        name = (EditText) findViewById(R.id.locationName);
 
         // Eingabefeld für die Beschreibung wird erzeugt
-        EditText description = (EditText) findViewById(R.id.locationDescription);
-        final String locationDescription = description.getText().toString();
+        description = (EditText) findViewById(R.id.locationDescription);
 
         // Eingabefeld für den Link wird erzeugt
-        EditText link = (EditText) findViewById(R.id.locationLink);
-        final String locationLink = link.getText().toString();
+        link = (EditText) findViewById(R.id.locationLink);
 
         /* Die ID der ursprünglich ausgewählten Kategorie,
          * die jeweilige Android Device-ID und
@@ -46,7 +47,7 @@ public class NewLocationActivity extends AppCompatActivity {
         final int cat_id = myCatIdPref.getInt("catId", 1);
         final String androidId = sharedPreferences.getString("androidId", "Default");
         final String username = sharedPreferences.getString("username", "Default");
-        final Context context = this;
+        context = this;
 
 
         Button saveLocation = (Button) findViewById(R.id.confirmLocation);
@@ -59,6 +60,9 @@ public class NewLocationActivity extends AppCompatActivity {
 
                 Device device;
                 MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+                String locationName = name.getText().toString();
+                String locationDescription = description.getText().toString();
+                String locationLink = link.getText().toString();
 
                 try {
                     device = myApp.getMuensterInsideMobile().register(androidId,username);

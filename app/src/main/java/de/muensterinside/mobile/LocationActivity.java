@@ -77,7 +77,7 @@ public class LocationActivity extends AppCompatActivity {
 
         // LocationTask wird aufgerufen
         LocationTask locationTask = new LocationTask(this, loc_id, cat_id, myApp, exampleName,
-                exampleVote, exampleDescription, b, up, down, c, deviceId, username);
+                exampleVote, exampleDescription, b, up, down, c, deviceId, username, kommentare);
         locationTask.execute();
     }
 
