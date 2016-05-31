@@ -34,7 +34,12 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private Button c;
     public static final String TAG = "LocationTask";
 
-
+    /* Konstruktor erwartet ein Context Objekt,
+     * die ID der Location die ausgewählt wurde,
+     * die ID der Kategorie die ausgewählt wurde,
+     * ein Application Objekt und mehrere TextViews/Buttons
+     * für die Darstellung der LocationActivity.
+     */
     public LocationTask(Context context, int loc_id, int cat_id,
                         MuensterInsideAndroidApplication myApp, TextView exampleName,
                         TextView exampleVote, TextView exampleDescription, Button b,
@@ -52,12 +57,21 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         this.c = c;
     }
 
+    // Im Hintergrund wird der Webservice aufgerufen
     @Override
     protected Location doInBackground(Integer... params){
         Log.d(TAG, "doInBackground() gestartet");
         try {
+            /* Die Methode getLocationsByCategory liefert anhand der ID der ausgewählten
+             * Kategorie eine Liste mit Locations zurück.
+             */
             this.locations = myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
+
+            /* Von der Liste mit Location Objekten wird anhand der ID
+             * der ausgewählten Location die richtige zurück geliefert.
+             */
             this.location = this.locations.get(this.loc_id);
+
             Log.i(TAG, "doInBackground() erfolgreich");
             return this.location;
         }
@@ -68,10 +82,13 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         return null;
     }
 
+    // onPostExecute Methode erwartet ein Location Objekt von der doInBackground Methode
     @Override
     public void onPostExecute(Location location){
         Log.d(TAG, "onPostExecute() gestartet");
+
         final Location l = location;
+
         String voteString = String.valueOf(location.getVoteValue());
 
         // TextView für den Namen der Location wird befüllt
@@ -105,6 +122,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             }
         });
 
+        // Es wird ein Upvote durchgeführt
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +136,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             }
         });
 
-
+        // Es wird ein Downvote durchgeführt
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

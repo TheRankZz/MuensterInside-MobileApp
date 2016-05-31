@@ -39,6 +39,9 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private Category c;
     public static final String TAG = "LocationListTask";
 
+    /* Der Konstruktor erwartet ein Context Objekt,
+     * ein Application Objekt, eine ListView und einen Button.
+     */
     public LocationListTask(Context context, int cat_id, MuensterInsideAndroidApplication myApp, ListView listView, Button newLocation){
         this.context = context;
         this.cat_id = cat_id;
@@ -47,10 +50,14 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
         this.newLocation = newLocation;
     }
 
+    // Im Hintergrund soll der Webservice aufgerufen werden
     @Override
     protected List<Location> doInBackground(Integer... params){
         Log.d(TAG, "doInBackground() gestartet");
         try {
+            /* Die Methode getLocationsByCateogry liefert anhand
+             * der cat_id eine Liste mit Locations.
+             */
             locations = myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return locations;
@@ -62,9 +69,17 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
         return null;
     }
 
+    /* Die onPostExecute Methode erwartet eine Liste,
+     * in der Location Objekte gespeichert sind.
+     */
     @Override
     protected void onPostExecute(List<Location> locations){
         Log.d(TAG, "onPostExecute() gestartet");
+
+        /* Es wird eine ArrayList vom Typ HashMap<String, String> erzeugt.
+         * In einer jeden HashMap wird der Name und der VoteValue
+         * einer jeden Location gespeichert.
+         */
         ArrayList<HashMap<String, String>> list;
         list = new ArrayList<HashMap<String,String>>();
         for(int i=0; i < locations.size(); i++){
@@ -85,6 +100,11 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
 
         listView.setAdapter(adapter);
 
+        /* Wenn ein Eintrag in der Liste ausgewählt wird,
+         * soll die LocationActivity starten. Anhand der
+         * mitgegebenen loc_id, soll die richtige Location in der
+         * LocationActivity angezeigt werden.
+         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -97,7 +117,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
             }
         });
 
-
+        // Wenn der Button newLocation angeklickt wurde, soll die NewLocationActivity aufgerufen werden
         newLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

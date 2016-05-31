@@ -18,7 +18,6 @@ import de.muensterinside.mobile.tasks.LocationTask;
  * Created by Julia Bracht and Nicolas Burchert.
  */
 public class LocationActivity extends AppCompatActivity {
-    private MuensterInsideAndroidApplication myApp;
     public static final String TAG = "LocationActivity";
 
     @Override
@@ -28,10 +27,11 @@ public class LocationActivity extends AppCompatActivity {
         // Hier wird das Aussehen der CategoryActivity ausgewählt
         setContentView(R.layout.activity_location);
 
-        // Die von der MainActivity übergebenden Parameter werden hier zugewiesen
+        // Die von der CategoryActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
-        myApp = (MuensterInsideAndroidApplication) getApplication();
 
+        // Ein Application Objekt wird erzeugt
+        MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         /**
          * Hier wird explizit auf die übergebende Id,
@@ -40,27 +40,37 @@ public class LocationActivity extends AppCompatActivity {
          */
         int loc_id = intent.getIntExtra("loc_id", 0);
 
+        /* In der MainActivity wurde mittels myIntent.putExtra() die vom User ausgewählte
+         * ID der Kategorie an die CategoryActivity übergeben.
+         * In der CategoryActivity wurde diese ID in eine SharedPreference gespeichert.
+         * Diese wird hier nun in die Variable cat_id gespeichert.
+         */
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         int cat_id = myCatIdPref.getInt("catId", 0);
 
+        // TextView wird erzeugt
         TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
 
+        // TextView wird erzeugt
         final TextView exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
 
-
+        // TextView wird erzeugt
         TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
 
 
         Button b = (Button) findViewById(R.id.button1);
+
+        // Button für den Upvote wird erzeugt
         Button up = (Button) findViewById(R.id.up);
+
+        // Button für den Downvote wird erzeugt
         Button down = (Button) findViewById(R.id.down);
         Button c = (Button) findViewById(R.id.KommentarAnzeigen);
 
+        // LocationTask wird aufgerufen
         LocationTask locationTask = new LocationTask(this, loc_id, cat_id, myApp, exampleName,
                 exampleVote, exampleDescription, b, up, down, c);
         locationTask.execute();
-
-
     }
 
     @Override

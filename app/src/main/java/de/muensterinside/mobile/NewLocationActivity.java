@@ -21,17 +21,26 @@ public class NewLocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate) gestartet");
         super.onCreate(savedInstanceState);
+
+        // Aussehen der Activity wird festgelegt
         setContentView(R.layout.activity_new_location);
 
+        //Eingabefeld für den Namen wird erzeugt
         EditText name = (EditText) findViewById(R.id.locationName);
         final String locationName = name.getText().toString();
 
+        // Eingabefeld für die Beschreibung wird erzeugt
         EditText description = (EditText) findViewById(R.id.locationDescription);
         final String locationDescription = description.getText().toString();
 
+        // Eingabefeld für den Link wird erzeugt
         EditText link = (EditText) findViewById(R.id.locationLink);
         final String locationLink = link.getText().toString();
 
+        /* Die ID der ursprünglich ausgewählten Kategorie,
+         * die jeweilige Android Device-ID und
+         * den ausgewählten Benutzernamen werden aus den SharedPreferences geholt.
+         */
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         final int cat_id = myCatIdPref.getInt("catId", 1);
