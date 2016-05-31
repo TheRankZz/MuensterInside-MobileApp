@@ -71,9 +71,13 @@ public class LocationActivity extends AppCompatActivity {
         Button down = (Button) findViewById(R.id.down);
         Button c = (Button) findViewById(R.id.KommentarAnzeigen);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String deviceId = sharedPreferences.getString("androidId", "Default");
+        String username = sharedPreferences.getString("username", "Default");
+
         // LocationTask wird aufgerufen
         LocationTask locationTask = new LocationTask(this, loc_id, cat_id, myApp, exampleName,
-                exampleVote,kommentare , exampleDescription, b, up, down, c);
+                exampleVote, exampleDescription, b, up, down, c, deviceId, username);
         locationTask.execute();
     }
 

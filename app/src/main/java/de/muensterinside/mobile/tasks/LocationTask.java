@@ -18,6 +18,7 @@ import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.ShowCommentActivity;
 import de.muensterinside.mobile.entities.Comment;
+import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
 
 /**
@@ -29,8 +30,11 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private List<Location> locations;
     private List<Comment>comments;
     private Context context;
-    private final int loc_id;
+    private Device device;
+    private int loc_id;
     private int cat_id;
+    private String deviceId;
+    private String username;
     private TextView exampleName;
     private TextView exampleVote;
     private TextView exampleDescription;
@@ -49,8 +53,8 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
      */
     public LocationTask(Context context, int loc_id, int cat_id,
                         MuensterInsideAndroidApplication myApp, TextView exampleName,
-                        TextView exampleVote, ListView kommentare, TextView exampleDescription, Button b,
-                        Button up, Button down, Button c){
+                        TextView exampleVote, TextView exampleDescription, Button b,
+                        Button up, Button down, Button c, String deviceId, String username){
         this.context = context;
         this.loc_id = loc_id;
         this.cat_id = cat_id;
@@ -63,7 +67,8 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         this.up = up;
         this.down = down;
         this.c = c;
-
+        this.deviceId = deviceId;
+        this.username = username;
     }
 
     // Im Hintergrund wird der Webservice aufgerufen
@@ -77,6 +82,8 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             this.locations = myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
             this.comments = myApp.getMuensterInsideMobile().getCommentsByLocation(this.loc_id);
             this.location = this.locations.get(this.loc_id);
+
+            this.device = myApp.getMuensterInsideMobile().register(this.deviceId, this.username);
 
             Log.i(TAG, "doInBackground() erfolgreich");
             return this.location;
@@ -95,16 +102,16 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
 
         final Location l = location;
 
-        String voteString = String.valueOf(location.getVoteValue());
+        String voteString = String.valueOf(l.getVoteValue());
 
         // TextView für den Namen der Location wird befüllt
-        exampleName.setText(location.getName());
+        exampleName.setText(l.getName());
 
         // TextView für den Namen der Location wird befüllt
         exampleVote.setText(voteString);
 
         // TextView für den Namen der Location wird befüllt
-        exampleDescription.setText(location.getDescription());
+        exampleDescription.setText(l.getDescription());
 
 
         List myList =  new ArrayList<String>();
@@ -157,10 +164,10 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "up.onClick() gestartet");
-                int oldVote = l.getVoteValue();
-                oldVote = oldVote +1;
-                l.setVoteValue(oldVote);
-                String voteString = String.valueOf(oldVote);
+                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId(), exampleVote, cat_id);
+                upVoteTask.execute();
+                int voteValue = l.getVoteValue();
+                String voteString = String.valueOf(voteValue);
                 exampleVote.setText(voteString);
 
             }
