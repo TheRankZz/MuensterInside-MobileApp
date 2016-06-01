@@ -40,7 +40,15 @@ public class LocationActivity extends AppCompatActivity {
          * der ausgewählten Location zugegriffen,
          * damit wir auch nur die ausgewählte Location laden.
          */
-        int loc_id = intent.getIntExtra("loc_id", 0);
+        int loc_id;
+        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
+        if(boolPref.getBoolean("newLocationBool", false)== true){
+            loc_id = boolPref.getInt("loc_id", 0);
+        }
+        else {
+            loc_id = intent.getIntExtra("loc_id", 0);
+        }
+
 
         /* In der MainActivity wurde mittels myIntent.putExtra() die vom User ausgewählte
          * ID der Kategorie an die CategoryActivity übergeben.

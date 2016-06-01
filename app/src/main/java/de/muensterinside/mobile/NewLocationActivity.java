@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 import de.muensterinside.mobile.entities.Device;
+import de.muensterinside.mobile.entities.Location;
 
 public class NewLocationActivity extends AppCompatActivity {
     public static final String TAG = "NewLocationActivity";
@@ -55,8 +58,8 @@ public class NewLocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "saveLocation.onClick() gestartet");
-                Intent myIntent = new Intent(NewLocationActivity.this, MainActivity.class);
-                myIntent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
+                Intent myIntent = new Intent(NewLocationActivity.this, LocationActivity.class);
+                myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
 
                 Device device;
                 MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
@@ -66,7 +69,20 @@ public class NewLocationActivity extends AppCompatActivity {
 
                 try {
                     device = myApp.getMuensterInsideMobile().register(androidId,username);
+
                     myApp.getMuensterInsideMobile().saveLocation(locationName,locationDescription,locationLink,cat_id,device.getId());
+
+                    List<Location> newLocationList = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
+
+                    Location newLocation = newLocationList.get(newLocationList.size()-1);
+
+                    int loc_id = newLocation.getId();
+
+                    SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = boolPref.edit();
+                    editor.putBoolean("newLocationBool", true);
+                    editor.putInt("loc_id", loc_id);
+                    editor.commit();
 
                     CharSequence text = "Location " +locationName+ " wurde erstellt.";
                     int duration = Toast.LENGTH_SHORT;
