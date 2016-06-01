@@ -116,11 +116,13 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         List myList =  new ArrayList<String>();
 
 
-       int laenge = comments.size()-1;
+        //TODO: Wird später nicht mehr rückwärts gezählt!
+        if(comments.size()!= 0) {
+            int laenge = comments.size() - 1;
+            for (int i = laenge; i >= laenge - 2; i--) {
 
-        for(int i = laenge; i >= laenge-2; i--) {
-
-            myList.add(comments.get(i).getText());
+                myList.add(comments.get(i).getText());
+            }
         }
 
 
