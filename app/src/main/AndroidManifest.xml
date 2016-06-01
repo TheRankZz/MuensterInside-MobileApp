@@ -44,7 +44,7 @@
             android:label="MuensterInside"
             android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="de.muensterinside.mobile.mock.ShowCommentActivity" />
+                <action android:name="de.muensterinside.mobile.ShowCommentActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
