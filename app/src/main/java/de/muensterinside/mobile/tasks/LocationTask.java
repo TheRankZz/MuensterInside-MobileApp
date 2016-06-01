@@ -117,13 +117,21 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
 
 
         //TODO: Wird später nicht mehr rückwärts gezählt!
-        if(comments.size()!= 0) {
-            int laenge = comments.size() - 1;
-            for (int i = laenge; i >= laenge - 2; i--) {
-
-                myList.add(comments.get(i).getText());
-            }
+        switch (comments.size()) {
+            case 0: break;
+            case 1: myList.add(comments.get(comments.size()-1).getText());
+                break;
+            case 2: myList.add(comments.get(comments.size()-1).getText());
+                    myList.add(comments.get(comments.size()-2).getText());
+                break;
+            case 3: myList.add(comments.get(comments.size()-1).getText());
+                    myList.add(comments.get(comments.size()-2).getText());
+                    myList.add(comments.get(comments.size()-3).getText());
+                break;
+            default:
+                break;
         }
+
 
 
 

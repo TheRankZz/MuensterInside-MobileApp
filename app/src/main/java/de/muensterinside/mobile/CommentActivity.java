@@ -73,10 +73,20 @@ public class CommentActivity extends AppCompatActivity{
                 Device device;
                 Log.d(TAG, "button.onClick() gestartet");
                 String s = kommentar.getText().toString();
-                Intent intent = new Intent(CommentActivity.this,  MainActivity.class);
-               try{ device = myApp.getMuensterInsideMobile().register(androidId,username);
-                   myApp.getMuensterInsideMobile().saveComment(s, device.getId(), loc_id);}
-               catch(Exception e) { e.printStackTrace();}
+                Intent intent = new Intent(CommentActivity.this,  LocationActivity.class);
+                SharedPreferences newCommentLocationId = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = newCommentLocationId.edit();
+                editor.putInt("loc_id", loc_id);
+                editor.putBoolean("newCommentBool", true);
+                editor.commit();
+
+                try{
+                   device = myApp.getMuensterInsideMobile().register(androidId,username);
+                   myApp.getMuensterInsideMobile().saveComment(s, device.getId(), loc_id);
+               }
+               catch(Exception e) {
+                   e.printStackTrace();
+               }
                 intent.putExtra("name", s);
                 startActivity(intent);
             }

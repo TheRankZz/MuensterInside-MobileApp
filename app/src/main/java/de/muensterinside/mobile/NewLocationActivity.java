@@ -60,8 +60,8 @@ public class NewLocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "saveLocation.onClick() gestartet");
-                Intent myIntent = new Intent(NewLocationActivity.this, LocationActivity.class);
-                myIntent.setClassName(getPackageName(), getPackageName() + ".LocationActivity");
+                Intent myIntent = new Intent(NewLocationActivity.this, CategoryActivity.class);
+                myIntent.setClassName(getPackageName(), getPackageName() + ".CategoryActivity");
 
                 Device device;
                 MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
@@ -83,7 +83,7 @@ public class NewLocationActivity extends AppCompatActivity {
                     SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = boolPref.edit();
                     editor.putBoolean("newLocationBool", true);
-                    editor.putInt("loc_id", loc_id);
+                    editor.putInt("cat_id", cat_id);
                     editor.commit();
 
                     CharSequence text = "Location " +locationName+ " wurde erstellt.";

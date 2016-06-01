@@ -38,7 +38,13 @@ public class CategoryActivity extends AppCompatActivity {
          * damit wir auch nur die Locations laden,
          * die zu der ausgewählten Category gehören.
          */
-        cat_id = intent.getIntExtra("selected", 0);
+        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
+        if(boolPref.getBoolean("newLocationBool", false)== true){
+            cat_id = boolPref.getInt("cat_id", 0);
+        }
+        else {
+            cat_id = intent.getIntExtra("selected", 0);
+        }
 
         /* In einer SharedPreference wird die vorher ausgewählte
          * ID einer Kategorie gespeichert.
@@ -49,10 +55,7 @@ public class CategoryActivity extends AppCompatActivity {
         editor.putInt("catId", cat_id);
         editor.commit();
 
-        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor1 = boolPref.edit();
-        editor1.putBoolean("newLocationBool", false);
-        editor1.commit();
+
 
         // Es wird ein Application Objekt erzeugt
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
