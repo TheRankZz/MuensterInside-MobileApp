@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,16 +25,16 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
     private MuensterInsideAndroidApplication myApp;
     private List<Category> categories;
     private Context context;
-    private ListView listView;
+    private GridView gridView;
     public static final String TAG = "CategoryTask";
 
     /* Der Konstruktor erwartet ein Context Objekt,
      * ein Application Objekt und ein ListView Objekt.
      */
-    public CategoryTask(Context context, MuensterInsideAndroidApplication myApp, ListView listView){
+    public CategoryTask(Context context, MuensterInsideAndroidApplication myApp, GridView gridView){
         this.context = context;
         this.myApp = myApp;
-        this.listView = listView;
+        this.gridView = gridView;
     }
 
     // Im Hintergrund soll der Webservice aufgerufen werden
@@ -71,7 +72,7 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
         // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
         ArrayAdapter<String> adapter;
         adapter=new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
-        listView.setAdapter(adapter);
+        gridView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         /**
@@ -80,12 +81,12 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
          * Zusätzlich soll die Id, von der Category die ausgewählt wurde,
          * an die CategoryActivity mit übergeben werden.
          */
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View arg1, int arg2, long arg3) {
                 Log.d(TAG, "listView.onItemClick() gestartet");
                 Intent myIntent = new Intent(context, CategoryActivity.class);
-                String name = listView.getAdapter().getItem(arg2).toString();
+                String name = gridView.getAdapter().getItem(arg2).toString();
                 int id = 1;
                 for(int i=0; i < test.size(); i++){
                     if(test.get(i).getName().equals(name)){
