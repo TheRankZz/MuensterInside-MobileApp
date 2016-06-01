@@ -18,6 +18,7 @@ import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.ShowCommentActivity;
 import de.muensterinside.mobile.entities.Comment;
+import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
 
 /**
@@ -29,12 +30,15 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private List<Location> locations;
     private List<Comment>comments;
     private Context context;
-    private final int loc_id;
+    private Device device;
+    private int loc_id;
     private int cat_id;
+    private String android_id;
+    private String username;
     private TextView exampleName;
     private TextView exampleVote;
     private TextView exampleDescription;
-    private ListView kommentare;
+    private ListView listView;
     private Button b;
     private Button up;
     private Button down;
@@ -49,21 +53,22 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
      */
     public LocationTask(Context context, int loc_id, int cat_id,
                         MuensterInsideAndroidApplication myApp, TextView exampleName,
-                        TextView exampleVote, ListView kommentare, TextView exampleDescription, Button b,
-                        Button up, Button down, Button c){
+                        TextView exampleVote, TextView exampleDescription, Button b,
+                        Button up, Button down, Button c, String android_id, String username, ListView listView){
         this.context = context;
         this.loc_id = loc_id;
         this.cat_id = cat_id;
         this.myApp = myApp;
         this.exampleName = exampleName;
         this.exampleVote = exampleVote;
-        this.kommentare = kommentare;
+        this.listView = listView;
         this.exampleDescription = exampleDescription;
         this.b = b;
         this.up = up;
         this.down = down;
         this.c = c;
-
+        this.android_id = android_id;
+        this.username = username;
     }
 
     // Im Hintergrund wird der Webservice aufgerufen
@@ -77,6 +82,8 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             this.locations = myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
             this.comments = myApp.getMuensterInsideMobile().getCommentsByLocation(this.loc_id);
             this.location = this.locations.get(this.loc_id);
+
+            this.device = myApp.getMuensterInsideMobile().register(this.android_id, this.username);
 
             Log.i(TAG, "doInBackground() erfolgreich");
             return this.location;
@@ -95,24 +102,24 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
 
         final Location l = location;
 
-        String voteString = String.valueOf(location.getVoteValue());
+        String voteString = String.valueOf(l.getVoteValue());
 
         // TextView für den Namen der Location wird befüllt
-        exampleName.setText(location.getName());
+        exampleName.setText(l.getName());
 
         // TextView für den Namen der Location wird befüllt
         exampleVote.setText(voteString);
 
         // TextView für den Namen der Location wird befüllt
-        exampleDescription.setText(location.getDescription());
+        exampleDescription.setText(l.getDescription());
 
 
         List myList =  new ArrayList<String>();
 
 
-       int laenge = comments.size()-1;
+        int size = comments.size()-1;
 
-        for(int i = laenge; i >= laenge-2; i--) {
+        for(int i = size; i >= size-2; i--) {
 
             myList.add(comments.get(i).getText());
         }
@@ -122,22 +129,22 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
 
-        kommentare.setAdapter(adapter);
+        listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
 
 
 
 
-        final int test = this.loc_id;
+
         // führt zur CommentActivity, wenn der Button gedrückt wird
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "b.onClick() gestartet");
                 Intent myIntent = new Intent(context, CommentActivity.class);
-                myIntent.putExtra("selected", test);
-                myIntent.putExtra ("locId", loc_id);
+                myIntent.putExtra("cat_id", cat_id);
+                myIntent.putExtra ("loc_id", loc_id);
                 context.startActivity(myIntent);
             }
         });
@@ -157,10 +164,10 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "up.onClick() gestartet");
-                int oldVote = l.getVoteValue();
-                oldVote = oldVote +1;
-                l.setVoteValue(oldVote);
-                String voteString = String.valueOf(oldVote);
+                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId(), exampleVote, cat_id);
+                upVoteTask.execute();
+                int voteValue = l.getVoteValue();
+                String voteString = String.valueOf(voteValue);
                 exampleVote.setText(voteString);
 
             }
@@ -171,10 +178,10 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "down.onClick() gestartet");
-                int oldVote = l.getVoteValue();
-                oldVote = oldVote - 1;
-                l.setVoteValue(oldVote);
-                String voteString = String.valueOf(oldVote);
+                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId(), exampleVote, cat_id);
+                downVoteTask.execute();
+                int voteVote = l.getVoteValue();
+                String voteString = String.valueOf(voteVote);
                 exampleVote.setText(voteString);
 
             }

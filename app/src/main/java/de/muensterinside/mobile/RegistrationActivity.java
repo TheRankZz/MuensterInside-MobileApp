@@ -45,12 +45,12 @@ public class RegistrationActivity extends AppCompatActivity {
          */
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("androidId", android_id);
+        editor.putString("android_id", android_id);
         editor.putString("username", username.getText().toString());
         editor.commit();
 
         // Button für die Registrierung wird angelegt
-        Button registration = (Button) findViewById(R.id.registration);
+        final Button registration = (Button) findViewById(R.id.registration);
 
         // Button für das Login wird angelegt
         Button login = (Button) findViewById(R.id.login);
@@ -85,7 +85,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 Log.d(TAG, "registration.onClick() gestartet");
                 try {
                     String name = username.getText().toString();
-                    RegistrationTask registrationTask = new RegistrationTask(view.getContext(), myApp);
+                    RegistrationTask registrationTask = new RegistrationTask(view.getContext(), myApp, registration);
                     registrationTask.execute(android_id,name);
                     Log.i(TAG, "registration.onClick() erfolgreich");
                 }

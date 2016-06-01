@@ -16,13 +16,13 @@
 
 
 
-    <Button
+    <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:text="Picture"
         android:id="@+id/button"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/ic_action_picture" />
 
 
     <Button

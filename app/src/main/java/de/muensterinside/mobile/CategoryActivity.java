@@ -19,9 +19,6 @@ import de.muensterinside.mobile.tasks.LocationListTask;
  */
 public class CategoryActivity extends AppCompatActivity {
     public static final String TAG = "CategoryActivity";
-    private int cat_id;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +36,7 @@ public class CategoryActivity extends AppCompatActivity {
          * damit wir auch nur die Locations laden,
          * die zu der ausgewählten Category gehören.
          */
-        cat_id = intent.getIntExtra("selected", 0);
+        int cat_id = intent.getIntExtra("selected", 0);
 
         /* In einer SharedPreference wird die vorher ausgewählte
          * ID einer Kategorie gespeichert.
@@ -47,7 +44,7 @@ public class CategoryActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences;
         sharedPreferences = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("catId", cat_id);
+        editor.putInt("cat_id", cat_id);
         editor.commit();
 
         // Es wird ein Application Objekt erzeugt
