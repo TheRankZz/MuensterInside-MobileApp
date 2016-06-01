@@ -44,8 +44,8 @@ public class NewLocationActivity extends AppCompatActivity {
          */
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        final int cat_id = myCatIdPref.getInt("catId", 1);
-        final String androidId = sharedPreferences.getString("androidId", "Default");
+        final int cat_id = myCatIdPref.getInt("cat_id", 1);
+        final String android_id = sharedPreferences.getString("android_id", "Default");
         final String username = sharedPreferences.getString("username", "Default");
         context = this;
 
@@ -65,7 +65,7 @@ public class NewLocationActivity extends AppCompatActivity {
                 String locationLink = link.getText().toString();
 
                 try {
-                    device = myApp.getMuensterInsideMobile().register(androidId,username);
+                    device = myApp.getMuensterInsideMobile().register(android_id,username);
                     myApp.getMuensterInsideMobile().saveLocation(locationName,locationDescription,locationLink,cat_id,device.getId());
 
                     CharSequence text = "Location " +locationName+ " wurde erstellt.";

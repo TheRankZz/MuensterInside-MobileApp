@@ -25,8 +25,6 @@ public class CommentActivity extends AppCompatActivity{
     public static final String TAG = "CommentActivity";
     //Anlegen des Textfeldes
     private EditText kommentar;
-    private int cat_id;
-    private int loc_id;
     private List<Comment> comments;
     private MuensterInsideAndroidApplication myApp;
 
@@ -44,19 +42,15 @@ public class CommentActivity extends AppCompatActivity{
         kommentar = (EditText)findViewById(R.id.editText);
         Button button = (Button) findViewById(R.id.button);
 
-        //Die von der MainActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
 
-        cat_id = intent.getIntExtra("selected", 0);
-        loc_id = intent.getIntExtra("locId", 0);
+        final int cat_id = intent.getIntExtra("cat_id", 0);
+        final int loc_id = intent.getIntExtra("loc_id", 0);
 
         SharedPreferences sharedPreferences;
-        sharedPreferences = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("catId", cat_id);
-        editor.commit();
+        sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
 
-        final String androidId = sharedPreferences.getString("androidId", "Default");
+        final String android_id = sharedPreferences.getString("android_id", "Default");
         final String username = sharedPreferences.getString("username", "Default");
 
 
@@ -74,7 +68,7 @@ public class CommentActivity extends AppCompatActivity{
                 Log.d(TAG, "button.onClick() gestartet");
                 String s = kommentar.getText().toString();
                 Intent intent = new Intent(CommentActivity.this,  MainActivity.class);
-               try{ device = myApp.getMuensterInsideMobile().register(androidId,username);
+               try{ device = myApp.getMuensterInsideMobile().register(android_id,username);
                    myApp.getMuensterInsideMobile().saveComment(s, device.getId(), loc_id);}
                catch(Exception e) { e.printStackTrace();}
                 intent.putExtra("name", s);

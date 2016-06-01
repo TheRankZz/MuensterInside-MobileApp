@@ -35,8 +35,8 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private ListView listView;
     private Button newLocation;
     private int cat_id;
-    private Location l;
-    private Category c;
+    private Location location;
+    private Category category;
     public static final String TAG = "LocationListTask";
 
     /* Der Konstruktor erwartet ein Context Objekt,
@@ -83,12 +83,12 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
         ArrayList<HashMap<String, String>> list;
         list = new ArrayList<HashMap<String,String>>();
         for(int i=0; i < locations.size(); i++){
-            l = locations.get(i);
-            c = l.getCategory();
-            if(c.getId() == cat_id){
+            location = locations.get(i);
+            category = location.getCategory();
+            if(category.getId() == cat_id){
                 HashMap<String,String> temp = new HashMap<String, String>();
-                temp.put(FIRST_COLUMN, l.getName());
-                temp.put(SECOND_COLUMN, String.valueOf(l.getVoteValue()));
+                temp.put(FIRST_COLUMN, location.getName());
+                temp.put(SECOND_COLUMN, String.valueOf(location.getVoteValue()));
                 list.add(temp);
 
             }

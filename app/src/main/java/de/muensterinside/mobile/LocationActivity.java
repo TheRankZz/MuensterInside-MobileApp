@@ -48,7 +48,7 @@ public class LocationActivity extends AppCompatActivity {
          * Diese wird hier nun in die Variable cat_id gespeichert.
          */
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
-        int cat_id = myCatIdPref.getInt("catId", 0);
+        int cat_id = myCatIdPref.getInt("cat_id", 0);
 
         // TextView wird erzeugt
         TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
@@ -59,7 +59,7 @@ public class LocationActivity extends AppCompatActivity {
         // TextView wird erzeugt
         TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
 
-        ListView kommentare = (ListView) findViewById(R.id.kommentare);
+        ListView listView = (ListView) findViewById(R.id.kommentare);
 
 
         Button b = (Button) findViewById(R.id.button1);
@@ -72,12 +72,12 @@ public class LocationActivity extends AppCompatActivity {
         Button c = (Button) findViewById(R.id.KommentarAnzeigen);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String deviceId = sharedPreferences.getString("androidId", "Default");
+        String deviceId = sharedPreferences.getString("android_id", "Default");
         String username = sharedPreferences.getString("username", "Default");
 
         // LocationTask wird aufgerufen
         LocationTask locationTask = new LocationTask(this, loc_id, cat_id, myApp, exampleName,
-                exampleVote, exampleDescription, b, up, down, c, deviceId, username, kommentare);
+                exampleVote, exampleDescription, b, up, down, c, deviceId, username, listView);
         locationTask.execute();
     }
 

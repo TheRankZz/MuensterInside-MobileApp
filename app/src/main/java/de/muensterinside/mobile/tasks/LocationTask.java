@@ -33,12 +33,12 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private Device device;
     private int loc_id;
     private int cat_id;
-    private String deviceId;
+    private String android_id;
     private String username;
     private TextView exampleName;
     private TextView exampleVote;
     private TextView exampleDescription;
-    private ListView kommentare;
+    private ListView listView;
     private Button b;
     private Button up;
     private Button down;
@@ -54,20 +54,20 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     public LocationTask(Context context, int loc_id, int cat_id,
                         MuensterInsideAndroidApplication myApp, TextView exampleName,
                         TextView exampleVote, TextView exampleDescription, Button b,
-                        Button up, Button down, Button c, String deviceId, String username, ListView kommentare){
+                        Button up, Button down, Button c, String android_id, String username, ListView listView){
         this.context = context;
         this.loc_id = loc_id;
         this.cat_id = cat_id;
         this.myApp = myApp;
         this.exampleName = exampleName;
         this.exampleVote = exampleVote;
-        this.kommentare = kommentare;
+        this.listView = listView;
         this.exampleDescription = exampleDescription;
         this.b = b;
         this.up = up;
         this.down = down;
         this.c = c;
-        this.deviceId = deviceId;
+        this.android_id = android_id;
         this.username = username;
     }
 
@@ -83,7 +83,7 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             this.comments = myApp.getMuensterInsideMobile().getCommentsByLocation(this.loc_id);
             this.location = this.locations.get(this.loc_id);
 
-            this.device = myApp.getMuensterInsideMobile().register(this.deviceId, this.username);
+            this.device = myApp.getMuensterInsideMobile().register(this.android_id, this.username);
 
             Log.i(TAG, "doInBackground() erfolgreich");
             return this.location;
@@ -117,9 +117,9 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         List myList =  new ArrayList<String>();
 
 
-       int laenge = comments.size()-1;
+        int size = comments.size()-1;
 
-        for(int i = laenge; i >= laenge-2; i--) {
+        for(int i = size; i >= size-2; i--) {
 
             myList.add(comments.get(i).getText());
         }
@@ -129,22 +129,22 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
 
-        kommentare.setAdapter(adapter);
+        listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
 
 
 
 
-        final int test = this.loc_id;
+
         // führt zur CommentActivity, wenn der Button gedrückt wird
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "b.onClick() gestartet");
                 Intent myIntent = new Intent(context, CommentActivity.class);
-                myIntent.putExtra("selected", test);
-                myIntent.putExtra ("locId", loc_id);
+                myIntent.putExtra("cat_id", cat_id);
+                myIntent.putExtra ("loc_id", loc_id);
                 context.startActivity(myIntent);
             }
         });

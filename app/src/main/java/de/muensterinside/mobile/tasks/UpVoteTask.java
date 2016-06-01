@@ -18,13 +18,13 @@ import de.muensterinside.mobile.entities.Vote;
 public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
     private Context context;
     private MuensterInsideAndroidApplication myApp;
-    public static final String TAG = "UpVoteTask";
     private int loc_id;
     private int deviceId;
     private TextView exampleVote;
     private int cat_id;
     private Location location;
     private List<Location> locations;
+    public static final String TAG = "UpVoteTask";
 
     public UpVoteTask(Context context, MuensterInsideAndroidApplication myApp, int loc_id, int deviceId, TextView exampleVote, int cat_id){
         this.context = context;
