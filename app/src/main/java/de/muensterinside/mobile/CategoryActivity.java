@@ -54,13 +54,13 @@ public class CategoryActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         // Es wird eine ListView erzeugt um eine Liste von Locations anzuzeigen
-        GridView gridView = (GridView) findViewById(R.id.gridView);
+        ListView listView = (ListView) findViewById(R.id.listView);
 
         // Es wird ein Button erzeugt um eine neue Location anlegen zu können
         Button newLocation = (Button) findViewById(R.id.newLocation);
 
         // Der LocationListTask wird aufgerufen
-        LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, gridView, newLocation);
+        LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, listView, newLocation);
         locationListTask.execute();
     }
 
