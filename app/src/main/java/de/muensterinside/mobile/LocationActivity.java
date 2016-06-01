@@ -106,7 +106,13 @@ public class LocationActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        else
+        else if(item.getItemId() == R.id.home_button) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
             return super.onOptionsItemSelected(item);
+        }
     }
 }

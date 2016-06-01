@@ -49,6 +49,11 @@ public class CategoryActivity extends AppCompatActivity {
         editor.putInt("catId", cat_id);
         editor.commit();
 
+        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = boolPref.edit();
+        editor1.putBoolean("newLocationBool", false);
+        editor1.commit();
+
         // Es wird ein Application Objekt erzeugt
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
@@ -80,7 +85,13 @@ public class CategoryActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        else
+        else if(item.getItemId() == R.id.home_button) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
             return super.onOptionsItemSelected(item);
+        }
     }
 }

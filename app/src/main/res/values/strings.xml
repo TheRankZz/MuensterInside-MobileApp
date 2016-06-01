@@ -11,6 +11,7 @@
     <string name="title_activity_prefs">PrefsActivity</string>
     <string name="intentExtra1">content</string>
     <string name="fail">Hier ist nichts übergeben worden.</string>
+    <string name="home">Startseite</string>
 
 
 </resources>
