@@ -33,19 +33,19 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
     @Override
     protected Device doInBackground(String... params){
         Log.d(TAG, "doInBackground() gestartet");
-        String android_id = params[0];
+        String androidId = params[0];
         String username = params[1];
         try {
             /* Die register Methode liefert anhand der Android Device-ID
              * und des Usernames ein Device Objekt.
              */
-            Device loginDevice = this.myApp.getMuensterInsideMobile().login(android_id);
+            Device loginDevice = this.myApp.getMuensterInsideMobile().login(androidId);
             if(loginDevice != null){
                 this.isRegistered = true;
                 return null;
             }
             else {
-                Device device = this.myApp.getMuensterInsideMobile().register(android_id, username);
+                Device device = this.myApp.getMuensterInsideMobile().register(androidId, username);
                 Log.i(TAG, "doInBackground() erfolgreich");
                 return device;
             }

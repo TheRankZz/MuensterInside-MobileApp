@@ -45,7 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
          */
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("android_id", android_id);
+        editor.putString("androidId", android_id);
         editor.putString("username", username.getText().toString());
         editor.commit();
 

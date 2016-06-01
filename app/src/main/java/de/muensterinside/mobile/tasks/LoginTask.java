@@ -30,10 +30,11 @@ public class LoginTask extends AsyncTask<String, Integer, Device> {
     @Override
     protected Device doInBackground(String... params){
         Log.d(TAG, "doInBackground() gestartet");
-        String android_id = params[0];
+        String androidId = params[0];
+        String username = params[1];
         try {
             // Die Login Methode liefert anhand der Android Device-ID ein Device Objekt
-            Device device = myApp.getMuensterInsideMobile().login(android_id);
+            Device device = myApp.getMuensterInsideMobile().login(androidId);
             Log.i(TAG, "doInBackground() erfolgreich");
             return device;
         }
