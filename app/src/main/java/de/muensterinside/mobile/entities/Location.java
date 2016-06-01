@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Location {
 
+	private int id;
 	private String name;
 	private String description;
 	private String link;
@@ -26,12 +27,21 @@ public class Location {
 	public Location() {
 	}
 
-	public Location(String name, String description, String link, Device device, Category category) {
+	public Location(int id,String name, String description, String link, Device device, Category category) {
 		this.name = name;
 		this.description = description;
 		this.link = link;
 		this.device = device;
 		this.category = category;
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id){
+		this.id = id;
 	}
 
 	/**

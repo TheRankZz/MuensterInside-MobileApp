@@ -92,7 +92,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
         Enumeration<locationTO> locationEnum = response.locationList.elements();
         while (locationEnum.hasMoreElements()){
             locationTO location = locationEnum.nextElement();
-            result.add(new Location(location.name, location.description, location.link, device, category));
+            result.add(new Location(location.id,location.name, location.description, location.link, device, category));
 
         }
         return result;

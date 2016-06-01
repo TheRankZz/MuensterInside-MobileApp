@@ -79,9 +79,8 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             /* Die Methode getLocationsByCategory liefert anhand der ID der ausgewählten
              * Kategorie eine Liste mit Locations zurück.
              */
-            this.locations = myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
             this.comments = myApp.getMuensterInsideMobile().getCommentsByLocation(this.loc_id);
-            this.location = this.locations.get(this.loc_id);
+            this.location = myApp.getMuensterInsideMobile().getLocation(this.loc_id);
 
             this.device = myApp.getMuensterInsideMobile().register(this.deviceId, this.username);
 

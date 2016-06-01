@@ -35,8 +35,8 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private ListView listView;
     private Button newLocation;
     private int cat_id;
-    private Location l;
-    private Category c;
+    private Location location;
+    private Category category;
     public static final String TAG = "LocationListTask";
 
     /* Der Konstruktor erwartet ein Context Objekt,
@@ -83,15 +83,13 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
         ArrayList<HashMap<String, String>> list;
         list = new ArrayList<HashMap<String,String>>();
         for(int i=0; i < locations.size(); i++){
-            l = locations.get(i);
-            c = l.getCategory();
-            if(c.getId() == cat_id){
-                HashMap<String,String> temp = new HashMap<String, String>();
-                temp.put(FIRST_COLUMN, l.getName());
-                temp.put(SECOND_COLUMN, String.valueOf(l.getVoteValue()));
-                list.add(temp);
+            location = locations.get(i);
+            HashMap<String,String> temp = new HashMap<String, String>();
+            temp.put(FIRST_COLUMN, location.getName());
+            temp.put(SECOND_COLUMN, String.valueOf(location.getVoteValue()));
+            list.add(temp);
 
-            }
+
         }
 
 
@@ -99,6 +97,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
         adapter = new ListViewAdapters(context, list);
 
         listView.setAdapter(adapter);
+        final List<Location> test = locations;
 
         /* Wenn ein Eintrag in der Liste ausgewählt wird,
          * soll die LocationActivity starten. Anhand der
@@ -112,7 +111,9 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
             {
                 Log.d(TAG, "listView.onItemClick() gestartet");
                 Intent myIntent = new Intent(context, LocationActivity.class);
-                myIntent.putExtra("loc_id", position);
+                Location l = test.get(position);
+                int choice = l.getId();
+                myIntent.putExtra("loc_id", choice);
                 context.startActivity(myIntent);
             }
         });
