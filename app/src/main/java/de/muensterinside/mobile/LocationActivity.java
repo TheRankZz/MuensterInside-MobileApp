@@ -69,7 +69,7 @@ public class LocationActivity extends AppCompatActivity {
         // TextView wird erzeugt
         TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
 
-        ListView kommentare = (ListView) findViewById(R.id.kommentare);
+        ListView kommentare = (ListView) findViewById(R.id.smallCommentList);
 
 
         Button b = (Button) findViewById(R.id.button1);

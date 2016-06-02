@@ -88,8 +88,6 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
             temp.put(FIRST_COLUMN, location.getName());
             temp.put(SECOND_COLUMN, String.valueOf(location.getVoteValue()));
             list.add(temp);
-
-
         }
 
 

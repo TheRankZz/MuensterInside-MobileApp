@@ -61,7 +61,7 @@ public class CategoryActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         // Es wird eine ListView erzeugt um eine Liste von Locations anzuzeigen
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.categoryList);
 
         // Es wird ein Button erzeugt um eine neue Location anlegen zu können
         Button newLocation = (Button) findViewById(R.id.newLocation);

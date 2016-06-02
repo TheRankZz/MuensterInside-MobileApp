@@ -128,7 +128,9 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
                     myList.add(comments.get(comments.size()-2).getText());
                     myList.add(comments.get(comments.size()-3).getText());
                 break;
-            default:
+            default: myList.add(comments.get(comments.size()-1).getText());
+                     myList.add(comments.get(comments.size()-2).getText());
+                     myList.add(comments.get(comments.size()-3).getText());
                 break;
         }
 

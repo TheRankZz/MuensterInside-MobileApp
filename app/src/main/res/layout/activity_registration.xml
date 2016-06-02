@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Benutzername"
             android:ems="10"
             android:id="@+id/registration_username"
             android:layout_below="@+id/linearLayout"
