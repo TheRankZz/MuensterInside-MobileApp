@@ -40,11 +40,11 @@
             android:label="MuensterInside"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ShowCommentActivity"
+            android:name=".MyCommentActivity"
             android:label="MuensterInside"
             android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="de.muensterinside.mobile.mock.ShowCommentActivity" />
+                <action android:name="de.muensterinside.mobile.MyCommentActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -53,5 +53,10 @@
             android:name=".NewLocationActivity"
             android:label="MuensterInside"
             android:theme="@style/AppTheme" />
+        <activity android:name=".ShowCommentActivity"
+            android:label = "MuensterInside"
+            android:theme = "@style/AppTheme">
+        </activity>
     </application>
+
 </manifest>

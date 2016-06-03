@@ -254,7 +254,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         List<Comment> result = new ArrayList<Comment>();
         for(int i=0; i<this.commentList.size();i++){
             Comment comment = this.commentList.get(i);
-            if(comment.getDevice().equals(this.device)){
+            if(comment.getDevice().getId() == deviceId){
                 result.add(comment);
             }
         }
