@@ -38,7 +38,13 @@ public class CategoryActivity extends AppCompatActivity {
          * damit wir auch nur die Locations laden,
          * die zu der ausgewählten Category gehören.
          */
-        cat_id = intent.getIntExtra("selected", 0);
+        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
+        if(boolPref.getBoolean("newLocationBool", false)== true){
+            cat_id = boolPref.getInt("cat_id", 0);
+        }
+        else {
+            cat_id = intent.getIntExtra("selected", 0);
+        }
 
         /* In einer SharedPreference wird die vorher ausgewählte
          * ID einer Kategorie gespeichert.
@@ -49,11 +55,13 @@ public class CategoryActivity extends AppCompatActivity {
         editor.putInt("catId", cat_id);
         editor.commit();
 
+
+
         // Es wird ein Application Objekt erzeugt
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         // Es wird eine ListView erzeugt um eine Liste von Locations anzuzeigen
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.categoryList);
 
         // Es wird ein Button erzeugt um eine neue Location anlegen zu können
         Button newLocation = (Button) findViewById(R.id.newLocation);
@@ -80,7 +88,13 @@ public class CategoryActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        else
+        else if(item.getItemId() == R.id.home_button) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
             return super.onOptionsItemSelected(item);
+        }
     }
 }

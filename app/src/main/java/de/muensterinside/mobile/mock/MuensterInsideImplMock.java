@@ -223,6 +223,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
                             String link, int category_id, int deviceId){
         int oldLength = this.locationList.size();
         Location location = new Location();
+        location.setId(oldLength++);
         location.setName(name);
         location.setDescription(description);
         location.setLink(link);

@@ -6,12 +6,17 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 import de.muensterinside.mobile.entities.Device;
+import de.muensterinside.mobile.entities.Location;
 
 public class NewLocationActivity extends AppCompatActivity {
     public static final String TAG = "NewLocationActivity";
@@ -55,8 +60,8 @@ public class NewLocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "saveLocation.onClick() gestartet");
-                Intent myIntent = new Intent(NewLocationActivity.this, MainActivity.class);
-                myIntent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
+                Intent myIntent = new Intent(NewLocationActivity.this, CategoryActivity.class);
+                myIntent.setClassName(getPackageName(), getPackageName() + ".CategoryActivity");
 
                 Device device;
                 MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
@@ -66,7 +71,20 @@ public class NewLocationActivity extends AppCompatActivity {
 
                 try {
                     device = myApp.getMuensterInsideMobile().register(androidId,username);
+
                     myApp.getMuensterInsideMobile().saveLocation(locationName,locationDescription,locationLink,cat_id,device.getId());
+
+                    List<Location> newLocationList = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
+
+                    Location newLocation = newLocationList.get(newLocationList.size()-1);
+
+                    int loc_id = newLocation.getId();
+
+                    SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = boolPref.edit();
+                    editor.putBoolean("newLocationBool", true);
+                    editor.putInt("cat_id", cat_id);
+                    editor.commit();
 
                     CharSequence text = "Location " +locationName+ " wurde erstellt.";
                     int duration = Toast.LENGTH_SHORT;
@@ -86,5 +104,32 @@ public class NewLocationActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu() gestartet");
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onCreateOptionsMenu() gestartet");
+        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
+        if (item.getItemId() == R.id.action_settings) {
+            Intent i = new Intent(this, PrefsActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.home_button) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

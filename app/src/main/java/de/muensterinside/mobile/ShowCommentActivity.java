@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,16 +50,36 @@ public class ShowCommentActivity extends AppCompatActivity {
 
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.commentList);
 
         ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id, listView);
         showCommentTask.execute();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu() gestartet");
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-
-
-
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onCreateOptionsMenu() gestartet");
+        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
+        if (item.getItemId() == R.id.action_settings) {
+            Intent i = new Intent(this, PrefsActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else if(item.getItemId() == R.id.home_button) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -40,7 +40,17 @@ public class LocationActivity extends AppCompatActivity {
          * der ausgewählten Location zugegriffen,
          * damit wir auch nur die ausgewählte Location laden.
          */
-        int loc_id = intent.getIntExtra("loc_id", 0);
+        int loc_id;
+
+        SharedPreferences bool = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
+        if(bool.getBoolean("newCommentBool", false)==true){
+            loc_id = bool.getInt("loc_id", 0);
+        }
+        else {
+            loc_id = intent.getIntExtra("loc_id", 0);
+        }
+
+
 
         /* In der MainActivity wurde mittels myIntent.putExtra() die vom User ausgewählte
          * ID der Kategorie an die CategoryActivity übergeben.
@@ -59,7 +69,7 @@ public class LocationActivity extends AppCompatActivity {
         // TextView wird erzeugt
         TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
 
-        ListView kommentare = (ListView) findViewById(R.id.kommentare);
+        ListView kommentare = (ListView) findViewById(R.id.smallCommentList);
 
 
         Button b = (Button) findViewById(R.id.button1);
@@ -98,7 +108,13 @@ public class LocationActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        else
+        else if(item.getItemId() == R.id.home_button) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
             return super.onOptionsItemSelected(item);
+        }
     }
 }

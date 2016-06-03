@@ -1,7 +1,9 @@
 package de.muensterinside.mobile;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
         // ListView zum anzeigen der Kategorien wird erzeugt
         final GridView gridView = (GridView) findViewById(R.id.gridView);
 
+        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = boolPref.edit();
+        editor1.putBoolean("newLocationBool", false);
+        editor1.commit();
+
+        SharedPreferences boolPref1 = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = boolPref1.edit();
+        editor2.putBoolean("newCommentBool", false);
+        editor2.commit();
+
         // Der CategoryTask wird ausgeführt
         CategoryTask categoryTask = new CategoryTask(this, myApp, gridView);
         categoryTask.execute();
@@ -54,8 +66,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        else
+        else if(item.getItemId() == R.id.home_button) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
             return super.onOptionsItemSelected(item);
+        }
     }
 
 }
