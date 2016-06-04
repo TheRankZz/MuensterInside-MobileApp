@@ -50,13 +50,24 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MyLocationActivity"
+            android:label="MuensterInside"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="de.muensterinside.mobile.MyLocationActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".NewLocationActivity"
             android:label="MuensterInside"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ShowCommentActivity"
-            android:label = "MuensterInside"
-            android:theme = "@style/AppTheme">
-        </activity>
+        <activity
+            android:name=".ShowCommentActivity"
+            android:label="MuensterInside"
+            android:theme="@style/AppTheme"></activity>
+
     </application>
 
 </manifest>

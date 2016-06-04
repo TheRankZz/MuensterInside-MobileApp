@@ -12,6 +12,7 @@
     <string name="intentExtra1">content</string>
     <string name="fail">Hier ist nichts übergeben worden.</string>
     <string name="home">Startseite</string>
+    <string name="location">Meine Locations</string>
 
 
 </resources>
