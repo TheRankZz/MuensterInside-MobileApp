@@ -21,7 +21,7 @@ import org.ksoap2.serialization.SoapPrimitive;
 public class locationResponse implements KvmSerializable {
     
     public String message;
-    public int returnCodeField;
+    public int returnCode;
     
     public locationResponse(){}
     
@@ -44,9 +44,9 @@ public class locationResponse implements KvmSerializable {
             Object obj = soapObject.getProperty("returnCode");
             if (obj != null && obj.getClass().equals(SoapPrimitive.class)){
                 SoapPrimitive j =(SoapPrimitive) obj;
-                returnCodeField = Integer.parseInt(j.toString());
+                returnCode = Integer.parseInt(j.toString());
             }else if (obj!= null && obj instanceof Number){
-                returnCodeField = (Integer) obj;
+                returnCode = (Integer) obj;
             }
         }
     }
@@ -56,7 +56,7 @@ public class locationResponse implements KvmSerializable {
             case 0:
                 return message;
             case 1:
-                return returnCodeField;
+                return returnCode;
         }
         return null;
     }

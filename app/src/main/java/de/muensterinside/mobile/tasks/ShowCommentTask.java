@@ -9,10 +9,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.muensterinside.mobile.ListViewAdapters;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.R;
-import de.muensterinside.mobile.ShowCommentActivity;
 import de.muensterinside.mobile.entities.Comment;
 
 /**
@@ -43,7 +41,7 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     protected List<Comment> doInBackground(Void... params){
         Log.d(TAG, "doInBackground() gestartet" );
         try{
-            comments = myApp.getMuensterInsideMobile().getCommentsByLocation(loc_id);
+            comments = myApp.getMuensterInsideImpl().getCommentsByLocation(loc_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;
         }

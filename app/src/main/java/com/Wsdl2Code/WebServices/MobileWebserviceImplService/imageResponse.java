@@ -23,7 +23,7 @@ public class imageResponse implements KvmSerializable {
     public String imageDataBase64;
     public String mimeType;
     public String message;
-    public int returnCodeField;
+    public int returnCode;
     
     public imageResponse(){}
     
@@ -66,9 +66,9 @@ public class imageResponse implements KvmSerializable {
             Object obj = soapObject.getProperty("returnCode");
             if (obj != null && obj.getClass().equals(SoapPrimitive.class)){
                 SoapPrimitive j =(SoapPrimitive) obj;
-                returnCodeField = Integer.parseInt(j.toString());
+                returnCode = Integer.parseInt(j.toString());
             }else if (obj!= null && obj instanceof Number){
-                returnCodeField = (Integer) obj;
+                returnCode = (Integer) obj;
             }
         }
     }
@@ -82,7 +82,7 @@ public class imageResponse implements KvmSerializable {
             case 2:
                 return message;
             case 3:
-                return returnCodeField;
+                return returnCode;
         }
         return null;
     }

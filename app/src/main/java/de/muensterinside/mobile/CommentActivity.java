@@ -81,8 +81,8 @@ public class CommentActivity extends AppCompatActivity{
                 editor.commit();
 
                 try{
-                   device = myApp.getMuensterInsideMobile().register(androidId,username);
-                   myApp.getMuensterInsideMobile().saveComment(s, device.getId(), loc_id);
+                   device = myApp.getMuensterInsideImpl().register(androidId,username);
+                   myApp.getMuensterInsideImpl().saveComment(s, device.getId(), loc_id);
                }
                catch(Exception e) {
                    e.printStackTrace();

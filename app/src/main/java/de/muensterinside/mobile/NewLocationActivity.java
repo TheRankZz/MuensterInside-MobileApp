@@ -70,11 +70,11 @@ public class NewLocationActivity extends AppCompatActivity {
                 String locationLink = link.getText().toString();
 
                 try {
-                    device = myApp.getMuensterInsideMobile().register(androidId,username);
+                    device = myApp.getMuensterInsideImpl().register(androidId,username);
 
-                    myApp.getMuensterInsideMobile().saveLocation(locationName,locationDescription,locationLink,cat_id,device.getId());
+                    myApp.getMuensterInsideImpl().saveLocation(locationName,locationDescription,locationLink,cat_id,device.getId());
 
-                    List<Location> newLocationList = myApp.getMuensterInsideMobile().getLocationsByCategory(cat_id);
+                    List<Location> newLocationList = myApp.getMuensterInsideImpl().getLocationsByCategory(cat_id);
 
                     Location newLocation = newLocationList.get(newLocationList.size()-1);
 

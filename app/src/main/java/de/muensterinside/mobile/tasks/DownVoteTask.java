@@ -10,7 +10,6 @@ import java.util.List;
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.entities.Location;
-import de.muensterinside.mobile.entities.Vote;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
@@ -38,11 +37,11 @@ public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
     @Override
     protected Integer doInBackground(String... params){
         try{
-            boolean isVoted = this.myApp.getMuensterInsideMobile().isVoted(loc_id, deviceId);
-            this.locations = this.myApp.getMuensterInsideMobile().getLocationsByCategory(this.cat_id);
+            boolean isVoted = this.myApp.getMuensterInsideImpl().isVoted(loc_id, deviceId);
+            this.locations = this.myApp.getMuensterInsideImpl().getLocationsByCategory(this.cat_id);
             this.location = this.locations.get(loc_id);
             if(isVoted == false){
-                int result = this.myApp.getMuensterInsideMobile().downVote(loc_id, deviceId);
+                int result = this.myApp.getMuensterInsideImpl().downVote(loc_id, deviceId);
                 return result;
             }
             else {

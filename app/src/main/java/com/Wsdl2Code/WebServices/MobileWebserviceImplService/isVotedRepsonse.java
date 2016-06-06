@@ -22,7 +22,7 @@ public class isVotedRepsonse implements KvmSerializable {
     
     public boolean isVoted;
     public String message;
-    public int returnCodeField;
+    public int returnCode;
     
     public isVotedRepsonse(){}
     
@@ -55,9 +55,9 @@ public class isVotedRepsonse implements KvmSerializable {
             Object obj = soapObject.getProperty("returnCode");
             if (obj != null && obj.getClass().equals(SoapPrimitive.class)){
                 SoapPrimitive j =(SoapPrimitive) obj;
-                returnCodeField = Integer.parseInt(j.toString());
+                returnCode = Integer.parseInt(j.toString());
             }else if (obj!= null && obj instanceof Number){
-                returnCodeField = (Integer) obj;
+                returnCode = (Integer) obj;
             }
         }
     }
@@ -69,7 +69,7 @@ public class isVotedRepsonse implements KvmSerializable {
             case 1:
                 return message;
             case 2:
-                return returnCodeField;
+                return returnCode;
         }
         return null;
     }

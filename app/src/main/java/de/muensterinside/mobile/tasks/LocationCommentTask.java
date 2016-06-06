@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ public class LocationCommentTask extends AsyncTask<Void, Void ,List <Comment>> {
     {
         Log.d(TAG, "doInBackground() gestartet");
         try {
-            this.comments = myApp.getMuensterInsideMobile().getCommentsByLocation(loc_id);
+            this.comments = myApp.getMuensterInsideImpl().getCommentsByLocation(loc_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;
 

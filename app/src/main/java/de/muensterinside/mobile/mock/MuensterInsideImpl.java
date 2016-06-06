@@ -6,7 +6,6 @@ import com.Wsdl2Code.WebServices.MobileWebserviceImplService.categoryTO;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.commentTO;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.locationTO;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.deviceResponse;
-import com.Wsdl2Code.WebServices.MobileWebserviceImplService.deviceTO;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.returncodeResponse;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.categoryListResponse;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.commentListResponse;
@@ -39,7 +38,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public List<Category> getCategories()throws Exception{
         categoryListResponse response = this.webservice.getCategories();
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("GetCategories fehlgeschlagen");
         }
         List<Category> result = new ArrayList<Category>();
@@ -54,8 +53,8 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public Device register(String deviceId, String username)throws Exception{
         deviceResponse response = this.webservice.register(deviceId, username);
-        if(response.returnCodeField != 0){
-            throw new Exception("Registrierung fehlgeschlagen");
+        if(response.returnCode != 0){
+            throw new Exception("Registrierung fehlgeschlagen!");
         }
         this.myDeviceId = deviceId;
         this.myUsername = username;
@@ -65,7 +64,8 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public Device login(String deviceId)throws Exception{
         deviceResponse response = this.webservice.login(deviceId);
-        if(response.returnCodeField != 0){
+
+        if(response.returnCode != 0){
             throw new Exception("Login fehlgeschlagen");
         }
         this.myDeviceId = deviceId;
@@ -77,7 +77,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public List<Location> getLocationsByCategory(int cat_id)throws Exception{
         locationListResponse response = this.webservice.getLocationsByCategory(cat_id);
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("getLocationsByCategory fehlgeschlagen");
         }
         List<Location> result = new ArrayList<Location>();
@@ -103,7 +103,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
                             String link, int category_id, int deviceId)throws Exception{
         returncodeResponse response = this.webservice.saveLocation(name, description, link, category_id, deviceId);
         int code;
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("Speichern der Location fehlgeschlagen");
         }
         else {
@@ -115,7 +115,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public List<Comment> getCommentsByLocation(int loc_id)throws Exception{
         commentListResponse response = this.webservice.getCommentsByLocation(loc_id);
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("GetCommentsByLocation fehlgeschlagen");
         }
         List<Comment> result = new ArrayList<Comment>();
@@ -132,7 +132,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
 
     public List<Comment> getMyComments(int deviceId)throws Exception{
         commentListResponse response = this.webservice.getMyComments(deviceId);
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("GetMyComments fehlgeschlagen");
         }
         List<Comment> result = new ArrayList<Comment>();
@@ -154,7 +154,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     public int saveComment(String text, int deviceId, int locationId)throws Exception{
         returncodeResponse response = this.webservice.saveComment(text, deviceId, locationId);
         int code;
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("Speichern des Kommentars fehlgeschlagen");
         }
         else {
@@ -167,7 +167,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     public int deleteComment(int comment_id)throws Exception {
         returncodeResponse response = this.webservice.deleteComment(comment_id);
         int code;
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("Löschen des Kommentars fehlgeschlagen");
         }
         else {
@@ -179,7 +179,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
 
     public List<Location> getMyVotes(int deviceId)throws Exception{
         locationListResponse response = this.webservice.getMyVotes(deviceId);
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("GetMyVotes fehlgeschlagen");
         }
         List<Location> result = new ArrayList<Location>();
@@ -201,7 +201,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     public int upVote(int location_id, int deviceId)throws Exception{
         returncodeResponse response = this.webservice.upVote(location_id, deviceId);
         int code;
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("Upvote fehlgeschlagen");
         }
         else {
@@ -214,7 +214,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     public int downVote(int location_id, int deviceId)throws Exception{
         returncodeResponse response = this.webservice.downVote(location_id, deviceId);
         int code;
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("Downvote fehlgeschlagen");
         }
         else {
@@ -226,7 +226,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
 
     public boolean isVoted(int location_id, int deviceId)throws Exception{
         isVotedRepsonse response = this.webservice.isVoted(location_id, deviceId);
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("isVoted fehlgeschlagen");
         }
         else {
@@ -240,7 +240,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
 
         returncodeResponse response = this.webservice.uploadImage(location_id, mimeType, imageDataBase64);
         int code;
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("Bild hochladen fehlgeschlagen");
         }
         else {
@@ -252,7 +252,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
 
     public Image downloadImage(int location_id)throws Exception{
         imageResponse response = this.webservice.downloadImage(location_id);
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("Bild herunterladen fehlgeschlagen");
         }
 
@@ -267,7 +267,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
 
     public Location getLocation(int id)throws Exception{
         locationResponse response = this.webservice.getLocation(id);
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("getLocation fehlgeschlagen");
         }
         Location location = getLocation(id);
@@ -277,7 +277,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
 
     public List<Location> getMyLocations(int deviceId)throws Exception{
         locationListResponse response = this.webservice.getMyLocations(deviceId);
-        if(response.returnCodeField != 0){
+        if(response.returnCode != 0){
             throw new Exception("GetMyLocations fehlgeschlagen");
         }
         List<Location> result = new ArrayList<Location>();

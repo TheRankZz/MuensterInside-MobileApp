@@ -8,7 +8,7 @@ import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.mock.MobileWebserviceImpl;
-import de.muensterinside.mobile.mock.MuensterInsideImplMock;
+import de.muensterinside.mobile.mock.MuensterInsideImpl;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert.
@@ -19,14 +19,14 @@ public class MuensterInsideAndroidApplication extends Application{
     private Location location;
     private Comment comment;
     private Device device;
-    private MobileWebserviceImpl muensterInsideMobile;
+    private MobileWebserviceImpl muensterInsideImpl;
 
     /**
      * Konstruktor
      * Serverinterface wird implementiert.
      */
     public MuensterInsideAndroidApplication() {
-        this.muensterInsideMobile = new MuensterInsideImplMock();
+        this.muensterInsideImpl = new MuensterInsideImpl(); // MuensterInsideImpl
 
     }
 
@@ -55,8 +55,8 @@ public class MuensterInsideAndroidApplication extends Application{
     /**
      * Gibt das implementierte Serverinterface zurück
      */
-    public MobileWebserviceImpl getMuensterInsideMobile() throws Exception{
-        return this.muensterInsideMobile;
+    public MobileWebserviceImpl getMuensterInsideImpl() throws Exception{
+        return this.muensterInsideImpl;
     }
 
 }

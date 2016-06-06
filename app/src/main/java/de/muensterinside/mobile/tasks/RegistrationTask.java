@@ -39,16 +39,12 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
             /* Die register Methode liefert anhand der Android Device-ID
              * und des Usernames ein Device Objekt.
              */
-            Device loginDevice = this.myApp.getMuensterInsideMobile().login(androidId);
-            if(loginDevice != null){
-                this.isRegistered = true;
-                return null;
-            }
-            else {
-                Device device = this.myApp.getMuensterInsideMobile().register(androidId, username);
-                Log.i(TAG, "doInBackground() erfolgreich");
-                return device;
-            }
+
+
+            Device device = this.myApp.getMuensterInsideImpl().register(androidId, username);
+            Log.i(TAG, "doInBackground() erfolgreich");
+            return device;
+
         }
         catch (Exception e){
             Log.e(TAG, "doInBackground() fehlgeschlagen");
@@ -70,13 +66,6 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
             toast.show();
             registration.setVisibility(View.INVISIBLE);
             Log.i(TAG, "Registrierung erfolgreich");
-        }
-        else if(isRegistered == true){
-            CharSequence text = "Sie sind schon registriert.";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.e(TAG, "AndroidId ist schon registriert");
         }
         else {
             CharSequence text = "Registrierung fehlgeschlagen.";

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
         Log.d(TAG, "doInBackground() gestartet");
         try {
             // Die Methode getCategories liefert eine Liste zurück
-            this.categories = myApp.getMuensterInsideMobile().getCategories();
+            this.categories = myApp.getMuensterInsideImpl().getCategories();
             Log.i(TAG, "doInBackground() erfolgreich");
             return this.categories;
         }

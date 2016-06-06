@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import de.muensterinside.mobile.tasks.LoginTask;
 import de.muensterinside.mobile.tasks.RegistrationTask;
+import de.muensterinside.mobile.tasks.StartTask;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
@@ -48,6 +49,9 @@ public class RegistrationActivity extends AppCompatActivity {
         editor.putString("androidId", android_id);
         editor.putString("username", username.getText().toString());
         editor.commit();
+
+        StartTask startTask = new StartTask(this, myApp, android_id);
+        startTask.execute();
 
         // Button für die Registrierung wird angelegt
         final Button registration = (Button) findViewById(R.id.registration);

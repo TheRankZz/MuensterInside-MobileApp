@@ -79,10 +79,10 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             /* Die Methode getLocationsByCategory liefert anhand der ID der ausgewählten
              * Kategorie eine Liste mit Locations zurück.
              */
-            this.comments = myApp.getMuensterInsideMobile().getCommentsByLocation(this.loc_id);
-            this.location = myApp.getMuensterInsideMobile().getLocation(this.loc_id);
+            this.comments = myApp.getMuensterInsideImpl().getCommentsByLocation(this.loc_id);
+            this.location = myApp.getMuensterInsideImpl().getLocation(this.loc_id);
 
-            this.device = myApp.getMuensterInsideMobile().register(this.deviceId, this.username);
+            this.device = myApp.getMuensterInsideImpl().register(this.deviceId, this.username);
 
             Log.i(TAG, "doInBackground() erfolgreich");
             return this.location;
@@ -134,18 +134,11 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
                 break;
         }
 
-
-
-
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
 
         kommentare.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-
-
-
 
         final int test = this.loc_id;
         // führt zur CommentActivity, wenn der Button gedrückt wird
