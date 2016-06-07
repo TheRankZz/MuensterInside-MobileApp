@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import de.muensterinside.mobile.ListViewAdapters;
+import de.muensterinside.mobile.adapter.ListViewAdapters;
 import de.muensterinside.mobile.LocationActivity;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.NewLocationActivity;

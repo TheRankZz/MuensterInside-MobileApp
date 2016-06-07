@@ -30,6 +30,7 @@ import de.muensterinside.mobile.fragments.Category4;
 import de.muensterinside.mobile.fragments.Category5;
 import de.muensterinside.mobile.fragments.Category6;
 import de.muensterinside.mobile.model.ItemSlideMenu;
+import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.tasks.CategoryTask;
 
 /**

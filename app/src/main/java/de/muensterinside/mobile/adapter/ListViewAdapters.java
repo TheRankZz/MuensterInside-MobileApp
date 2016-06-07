@@ -1,4 +1,4 @@
-package de.muensterinside.mobile;
+package de.muensterinside.mobile.adapter;
 
 import static de.muensterinside.mobile.Constants.*;
 import java.util.ArrayList;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import de.muensterinside.mobile.R;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
