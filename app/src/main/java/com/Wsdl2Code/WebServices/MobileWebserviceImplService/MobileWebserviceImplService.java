@@ -28,7 +28,7 @@ import org.ksoap2.serialization.MarshalFloat;
 public class MobileWebserviceImplService {
     
     public String NAMESPACE ="http://webservices.muensterinside.de/";
-    public String url="http://10.60.64.35/muensterinside/mobile";
+    public String url=""; // http://10.60.64.35/muensterinside/mobile
     public int timeOut = 180;
     public IWsdl2CodeEvents eventHandler;
     public SoapProtocolVersion soapVersion;
