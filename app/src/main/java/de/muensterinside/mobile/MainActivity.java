@@ -16,13 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.muensterinside.mobile.adapter.SlidingMenuAdapter;
+import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.fragments.Category1;
 import de.muensterinside.mobile.fragments.Category2;
 import de.muensterinside.mobile.fragments.Category3;
@@ -66,44 +66,58 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        //Init component
+        MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+        List<Category> categories = null;
+        try {
+            // Die Methode getCategories liefert eine Liste zurück
+            categories = myApp.getMuensterInsideImpl().getCategories();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        List myList = new ArrayList<String>();
+        for (int i = 0; i < categories.size(); i++) {
+            myList.add(categories.get(i).getName());
+        }
+
+        // NavigationBar
         listViewSliding = (ListView) findViewById(R.id.lv_sliding_menu);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listSliding = new ArrayList<>();
-        //Add item for sliding list
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, "Essen"));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, "Party"));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, "Hotel"));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, "Shopping"));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, "Sehenswürdigkeiten"));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, "Veranstaltungen"));
+        //Fügt Items in die NavigationBar ein
+        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(0).toString()));
+        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(1).toString()));
+        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(2).toString()));
+        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(3).toString()));
+        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(4).toString()));
+        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(5).toString()));
         adapter = new SlidingMenuAdapter(this, listSliding);
         listViewSliding.setAdapter(adapter);
 
-        //Display icon to open/ close sliding list
+        //Icon zum öffnen oder schließen der NavigationBar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Set title
+        //Setzt den Titel
         setTitle(listSliding.get(0).getTitle());
-        //item selected
+        //Ausgewähltes Item
         listViewSliding.setItemChecked(0, true);
-        //Close menu
+        //Menü wird geschlossen
         drawerLayout.closeDrawer(listViewSliding);
 
-        //Display fragment 1 when start
+        //Fragment Category1 wird beim Start gezeigt
         replaceFragment(0);
-        //Hanlde on item click
 
+        //Zeigt das ausgewählte Fragment an
         listViewSliding.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Set title
+                //Setzt den Titel
                 setTitle(listSliding.get(position).getTitle());
-                //item selected
+                //Ausgewähltes Item
                 listViewSliding.setItemChecked(position, true);
-                //Replace fragment
+                //Fragment wird gewechselt
                 replaceFragment(position);
-                //Close menu
+                //Menü wird geschlossen
                 drawerLayout.closeDrawer(listViewSliding);
             }
         });
@@ -138,17 +152,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
+        //Wenn "Einstellungen" gedrückt wurde, rufen wir die PrefsActivity auf
         if (item.getItemId() == R.id.action_settings) {
             Intent i = new Intent(this, PrefsActivity.class);
             startActivity(i);
             return true;
         }
+        // Wenn "Startseite" gedrückt wurde, startet die MainActivity
         else if(item.getItemId() == R.id.home_button) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             return true;
         }
+        // NavigationBar wird geöffnet
         else if(actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
@@ -163,8 +179,7 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
     }
 
-    //Create method replace fragment
-
+    //Wechselt das Fragment
     private void replaceFragment(int pos) {
         Fragment fragment = null;
         switch (pos) {
