@@ -18,15 +18,27 @@ import de.muensterinside.mobile.R;
  */
 public class ListViewAdapters extends BaseAdapter{
     public ArrayList<HashMap<String, String>> list;
-    Activity activity;
-    TextView txtFirst;
-    TextView txtSecond;
+    public Activity activity;
+    public TextView txtFirst;
+    public TextView txtSecond;
     public ListViewAdapters(Context context, ArrayList<HashMap<String, String>> list){
         super();
         this.activity= (Activity) context;
         this.list=list;
     }
 
+
+    @Override
+    public int getViewTypeCount() {
+
+        return getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        return position;
+    }
 
     @Override
     public int getCount() {
