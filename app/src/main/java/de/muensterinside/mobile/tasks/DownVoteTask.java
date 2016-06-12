@@ -6,7 +6,6 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.entities.Location;
@@ -21,27 +20,23 @@ public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
     private int loc_id;
     private int deviceId;
     private TextView exampleVote;
-    private int cat_id;
     private Location location;
-    private List<Location> locations;
 
-    public DownVoteTask(Context context, MuensterInsideAndroidApplication myApp, int loc_id, int deviceId, TextView exampleVote, int cat_id){
+    public DownVoteTask(Context context, MuensterInsideAndroidApplication myApp, int loc_id, int deviceId, TextView exampleVote){
         this.context = context;
         this.myApp = myApp;
         this.loc_id = loc_id;
         this.deviceId = deviceId;
         this.exampleVote = exampleVote;
-        this.cat_id = cat_id;
     }
 
     @Override
     protected Integer doInBackground(String... params){
         try{
-            boolean isVoted = this.myApp.getMuensterInsideImpl().isVoted(loc_id, deviceId);
-            this.locations = this.myApp.getMuensterInsideImpl().getLocationsByCategory(this.cat_id);
-            this.location = this.locations.get(loc_id);
+            boolean isVoted = this.myApp.getMuensterInsideImpl().isVoted(this.loc_id, this.deviceId);
+            this.location = this.myApp.getMuensterInsideImpl().getLocation(this.loc_id);
             if(isVoted == false){
-                int result = this.myApp.getMuensterInsideImpl().downVote(loc_id, deviceId);
+                int result = this.myApp.getMuensterInsideImpl().downVote(this.loc_id, this.deviceId);
                 return result;
             }
             else {

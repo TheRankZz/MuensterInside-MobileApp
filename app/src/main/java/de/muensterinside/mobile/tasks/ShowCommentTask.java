@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,8 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     protected List<Comment> doInBackground(Void... params){
         Log.d(TAG, "doInBackground() gestartet" );
         try{
-            comments = myApp.getMuensterInsideImpl().getCommentsByLocation(loc_id);
+            int temp_loc_id = this.loc_id + 1;
+            comments = myApp.getMuensterInsideImpl().getCommentsByLocation(temp_loc_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;
         }
@@ -58,20 +60,25 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     {
         Log.d(TAG, "onPostExecute() gestartet");
 
-        List myList = new ArrayList<String>();
-        for(int i=0; i < comments.size(); i++){
-            myList.add(comments.get(i).getText());
+        if(comments == null){
+            CharSequence text = "Keine Kommentare vorhanden.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
+        else {
+            List myList = new ArrayList<String>();
+            for (int i = 0; i < comments.size(); i++) {
+                myList.add(comments.get(i).getText());
+            }
 
-        ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
+            ArrayAdapter<String> adapter;
+            adapter = new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
 
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
 
-
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-
+        }
     }
 
 }

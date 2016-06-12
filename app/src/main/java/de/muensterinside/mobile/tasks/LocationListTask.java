@@ -35,7 +35,6 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private Button newLocation;
     private int cat_id;
     private Location location;
-    private Category category;
     public static final String TAG = "LocationListTask";
 
     /* Der Konstruktor erwartet ein Context Objekt,
@@ -57,6 +56,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
             /* Die Methode getLocationsByCateogry liefert anhand
              * der cat_id eine Liste mit Locations.
              */
+            this.cat_id = this.cat_id +1;
             locations = myApp.getMuensterInsideImpl().getLocationsByCategory(this.cat_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return locations;
@@ -111,6 +111,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
                 Location l = test.get(position);
                 int choice = l.getId();
                 myIntent.putExtra("loc_id", choice);
+                //myIntent.putExtra("loc_id", position);
                 context.startActivity(myIntent);
             }
         });

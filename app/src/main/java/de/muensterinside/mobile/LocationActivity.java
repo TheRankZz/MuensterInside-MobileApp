@@ -57,8 +57,14 @@ public class LocationActivity extends AppCompatActivity {
          * In der CategoryActivity wurde diese ID in eine SharedPreference gespeichert.
          * Diese wird hier nun in die Variable cat_id gespeichert.
          */
-        SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
-        int cat_id = myCatIdPref.getInt("catId", 0);
+        int cat_id;
+        if(bool.getBoolean("newCommentBool", false)==true){
+            cat_id = bool.getInt("cat_id", 0);
+        }
+        else {
+            SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
+            cat_id = myCatIdPref.getInt("catId", 0);
+        }
 
         // TextView wird erzeugt
         TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
@@ -67,7 +73,7 @@ public class LocationActivity extends AppCompatActivity {
         final TextView exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
 
         // TextView wird erzeugt
-        TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
+        TextView exampleLink = (TextView) findViewById(R.id.textViewExampleLink);
 
         ListView kommentare = (ListView) findViewById(R.id.smallCommentList);
 
@@ -87,7 +93,7 @@ public class LocationActivity extends AppCompatActivity {
 
         // LocationTask wird aufgerufen
         LocationTask locationTask = new LocationTask(this, loc_id, cat_id, myApp, exampleName,
-                exampleVote, exampleDescription, b, up, down, c, deviceId, username, kommentare);
+                exampleVote, exampleLink, b, up, down, c,kommentare);
         locationTask.execute();
     }
 

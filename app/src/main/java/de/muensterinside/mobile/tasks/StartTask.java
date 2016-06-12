@@ -24,19 +24,20 @@ public class StartTask extends AsyncTask<String, Integer, Device> {
 
     @Override
     protected Device doInBackground(String... params){
+        Device result = null;
         try {
-            Device device = this.myApp.getMuensterInsideImpl().login(this.android_id);
-            return device;
+             result = this.myApp.getMuensterInsideImpl().login(this.android_id);
+            this.myApp.setDevice(result);
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 
     @Override
     public void onPostExecute(Device device){
-        if(device != null && android_id == device.getAndroidUuid()){
+        if(device != null){
             Intent myIntent = new Intent(this.context, MainActivity.class);
             this.context.startActivity(myIntent);
         }

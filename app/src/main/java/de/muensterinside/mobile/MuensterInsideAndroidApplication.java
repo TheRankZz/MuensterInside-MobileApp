@@ -2,6 +2,7 @@ package de.muensterinside.mobile;
 
 
 import android.app.Application;
+import android.support.v7.app.ActionBarDrawerToggle;
 
 import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Category;
@@ -20,6 +21,7 @@ public class MuensterInsideAndroidApplication extends Application{
     private Location location;
     private Comment comment;
     private Device device;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     private MobileWebserviceImpl muensterInsideImpl;
 
     /**
@@ -27,7 +29,7 @@ public class MuensterInsideAndroidApplication extends Application{
      * Serverinterface wird implementiert.
      */
     public MuensterInsideAndroidApplication() {
-        this.muensterInsideImpl = new MuensterInsideImplMock(); // MuensterInsideImpl
+        this.muensterInsideImpl = new MuensterInsideImpl(); // MuensterInsideImpl
 
     }
 
@@ -51,6 +53,14 @@ public class MuensterInsideAndroidApplication extends Application{
 
     public Device getDevice() throws Exception{
         return this.device;
+    }
+
+    public ActionBarDrawerToggle getActionBarDrawerToggle() {
+        return actionBarDrawerToggle;
+    }
+
+    public void setActionBarDrawerToggle(ActionBarDrawerToggle actionBarDrawerToggle) {
+        this.actionBarDrawerToggle = actionBarDrawerToggle;
     }
 
     /**

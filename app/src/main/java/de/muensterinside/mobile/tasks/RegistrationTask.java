@@ -42,6 +42,7 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
 
 
             Device device = this.myApp.getMuensterInsideImpl().register(androidId, username);
+            this.myApp.setDevice(device);
             Log.i(TAG, "doInBackground() erfolgreich");
             return device;
 

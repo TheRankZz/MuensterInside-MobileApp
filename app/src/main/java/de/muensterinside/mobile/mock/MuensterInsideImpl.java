@@ -1,16 +1,17 @@
 package de.muensterinside.mobile.mock;
 
 
-import com.Wsdl2Code.WebServices.MobileWebserviceImplService.MobileWebserviceImplService;
+import com.Wsdl2Code.WebServices.MobileWebserviceImplService.VectorcategoryTO;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.categoryTO;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.commentTO;
+import com.Wsdl2Code.WebServices.MobileWebserviceImplService.deviceTO;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.locationTO;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.deviceResponse;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.returncodeResponse;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.categoryListResponse;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.commentListResponse;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.imageResponse;
-import com.Wsdl2Code.WebServices.MobileWebserviceImplService.isVotedRepsonse;
+import com.Wsdl2Code.WebServices.MobileWebserviceImplService.isVotedResponse;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.locationListResponse;
 import com.Wsdl2Code.WebServices.MobileWebserviceImplService.locationResponse;
 
@@ -19,6 +20,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 
+import Soap.KMobileWebserviceImplService;
 import de.muensterinside.mobile.entities.*;
 
 /**
@@ -26,13 +28,13 @@ import de.muensterinside.mobile.entities.*;
  */
 public class MuensterInsideImpl implements MobileWebserviceImpl{
 
-    private MobileWebserviceImplService webservice;
+    private KMobileWebserviceImplService webservice;
     private String myDeviceId;
     private int myIntDeviceId;
     private String myUsername;
 
     public MuensterInsideImpl() {
-        this.webservice = new MobileWebserviceImplService();
+        this.webservice = new KMobileWebserviceImplService();
     }
 
     @Override
@@ -56,9 +58,15 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
         if(response.returnCode != 0){
             throw new Exception("Registrierung fehlgeschlagen!");
         }
-        this.myDeviceId = deviceId;
-        this.myUsername = username;
-        return new Device(response.device.androidUuid, response.device.username);
+        deviceTO device = response.device;
+        this.myDeviceId = device.androidUuid;
+        this.myUsername = device.username;
+
+        Device dev = new Device();
+        dev.setAndroidUuid(device.androidUuid);
+        dev.setId(device.id);
+        dev.setUsername(device.username);
+        return dev;
     }
 
     @Override
@@ -68,10 +76,17 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
         if(response.returnCode != 0){
             throw new Exception("Login fehlgeschlagen");
         }
-        this.myDeviceId = deviceId;
-        Device device = register(myDeviceId, myUsername);
-        this.myIntDeviceId = device.hashCode();
-        return device;
+        deviceTO device = response.device;
+        this.myDeviceId = device.androidUuid;
+        this.myUsername = device.username;
+        this.myIntDeviceId = device.id;
+
+
+        Device dev = new Device();
+        dev.setAndroidUuid(device.androidUuid);
+        dev.setId(device.id);
+        dev.setUsername(device.username);
+        return dev;
     }
 
     @Override
@@ -81,19 +96,16 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
             throw new Exception("getLocationsByCategory fehlgeschlagen");
         }
         List<Location> result = new ArrayList<Location>();
-        List<Category> categories = getCategories();
-        Category category = null;
-        Device device = login(myDeviceId);
-        for(int i=0; i<categories.size();i++){
-            if(categories.get(i).getId() == cat_id){
-                category = categories.get(i);
-            }
-        }
         Enumeration<locationTO> locationEnum = response.locationList.elements();
         while (locationEnum.hasMoreElements()){
             locationTO location = locationEnum.nextElement();
-            result.add(new Location(location.id,location.name, location.description, location.link, device, category));
-
+            Location l = new Location();
+            l.setId(location.id);
+            l.setName(location.name);
+            l.setLink(location.link);
+            l.setDescription(location.description);
+            l.setVoteValue(location.votevalue);
+            result.add(l);
         }
         return result;
     }
@@ -115,16 +127,19 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public List<Comment> getCommentsByLocation(int loc_id)throws Exception{
         commentListResponse response = this.webservice.getCommentsByLocation(loc_id);
+        if(response.returnCode == 20){
+            return null;
+        }
         if(response.returnCode != 0){
             throw new Exception("GetCommentsByLocation fehlgeschlagen");
         }
         List<Comment> result = new ArrayList<Comment>();
-        Location location = getLocation(loc_id);
-        Device device = login(myDeviceId);
         Enumeration<commentTO> commentEnum = response.commentList.elements();
         while (commentEnum.hasMoreElements()){
             commentTO comment = commentEnum.nextElement();
-            result.add(new Comment(comment.text, device, location));
+            Comment c = new Comment();
+            c.setText(comment.text);
+            result.add(c);
         }
         return result;
     }
@@ -136,10 +151,6 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
             throw new Exception("GetMyComments fehlgeschlagen");
         }
         List<Comment> result = new ArrayList<Comment>();
-        Device device = new Device();
-        if(deviceId == myIntDeviceId){
-            device = login(myDeviceId);
-        }
         Enumeration<commentTO> commentEnum = response.commentList.elements();
         while (commentEnum.hasMoreElements()){
             commentTO comment = commentEnum.nextElement();
@@ -225,12 +236,12 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
 
 
     public boolean isVoted(int location_id, int deviceId)throws Exception{
-        isVotedRepsonse response = this.webservice.isVoted(location_id, deviceId);
+        isVotedResponse response = this.webservice.isVoted(location_id, deviceId);
         if(response.returnCode != 0){
             throw new Exception("isVoted fehlgeschlagen");
         }
         else {
-            return true;
+            return response.isVoted;
         }
     }
 
@@ -270,8 +281,13 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
         if(response.returnCode != 0){
             throw new Exception("getLocation fehlgeschlagen");
         }
-        Location location = getLocation(id);
-        return location;
+        locationTO location = response.location;
+        Location l = new Location();
+        l.setId(location.id);
+        l.setName(location.name);
+        l.setDescription(location.description);
+        l.setDescription(location.link);
+        return l;
     }
 
 

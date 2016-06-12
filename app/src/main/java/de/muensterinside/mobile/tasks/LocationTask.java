@@ -26,18 +26,14 @@ import de.muensterinside.mobile.entities.Location;
  */
 public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private MuensterInsideAndroidApplication myApp;
-    private Location location;
-    private List<Location> locations;
     private List<Comment>comments;
     private Context context;
     private Device device;
     private int loc_id;
     private int cat_id;
-    private String deviceId;
-    private String username;
     private TextView exampleName;
     private TextView exampleVote;
-    private TextView exampleDescription;
+    private TextView exampleLink;
     private ListView kommentare;
     private Button b;
     private Button up;
@@ -53,22 +49,20 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
      */
     public LocationTask(Context context, int loc_id, int cat_id,
                         MuensterInsideAndroidApplication myApp, TextView exampleName,
-                        TextView exampleVote, TextView exampleDescription, Button b,
-                        Button up, Button down, Button c, String deviceId, String username, ListView kommentare){
+                        TextView exampleVote, TextView exampleLink, Button b,
+                        Button up, Button down, Button c, ListView kommentare){
         this.context = context;
         this.loc_id = loc_id;
-        this.cat_id = cat_id;
         this.myApp = myApp;
         this.exampleName = exampleName;
         this.exampleVote = exampleVote;
         this.kommentare = kommentare;
-        this.exampleDescription = exampleDescription;
+        this.exampleLink = exampleLink;
         this.b = b;
         this.up = up;
         this.down = down;
         this.c = c;
-        this.deviceId = deviceId;
-        this.username = username;
+        this.cat_id = cat_id;
     }
 
     // Im Hintergrund wird der Webservice aufgerufen
@@ -80,12 +74,11 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
              * Kategorie eine Liste mit Locations zurück.
              */
             this.comments = myApp.getMuensterInsideImpl().getCommentsByLocation(this.loc_id);
-            this.location = myApp.getMuensterInsideImpl().getLocation(this.loc_id);
-
-            this.device = myApp.getMuensterInsideImpl().register(this.deviceId, this.username);
+            Location location = myApp.getMuensterInsideImpl().getLocation(this.loc_id);
+            this.device = myApp.getDevice();
 
             Log.i(TAG, "doInBackground() erfolgreich");
-            return this.location;
+            return location;
         }
         catch (Exception e){
             Log.e(TAG, "doInBackground() fehlgeschlagen");
@@ -101,23 +94,30 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
 
         final Location l = location;
 
-        String voteString = String.valueOf(l.getVoteValue());
+        String voteString = String.valueOf(location.getVoteValue());
 
         // TextView für den Namen der Location wird befüllt
-        exampleName.setText(l.getName());
+        exampleName.setText(location.getName());
 
         // TextView für den Namen der Location wird befüllt
         exampleVote.setText(voteString);
 
         // TextView für den Namen der Location wird befüllt
-        exampleDescription.setText(l.getDescription());
+        exampleLink.setText(location.getDescription());
 
 
         List myList =  new ArrayList<String>();
 
 
         //TODO: Wird später nicht mehr rückwärts gezählt!
-        switch (comments.size()) {
+        int size;
+        if(comments == null){
+            size = 0;
+        }
+        else {
+            size = comments.size();
+        }
+        switch (size) {
             case 0: break;
             case 1: myList.add(comments.get(comments.size()-1).getText());
                 break;
@@ -140,14 +140,14 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         kommentare.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        final int test = this.loc_id;
+        final int cat_id = this.cat_id;
         // führt zur CommentActivity, wenn der Button gedrückt wird
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "b.onClick() gestartet");
                 Intent myIntent = new Intent(context, CommentActivity.class);
-                myIntent.putExtra("selected", test);
+                myIntent.putExtra("selected", cat_id);
                 myIntent.putExtra ("locId", loc_id);
                 context.startActivity(myIntent);
             }
@@ -168,12 +168,8 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "up.onClick() gestartet");
-                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId(), exampleVote, cat_id);
+                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId(), exampleVote);
                 upVoteTask.execute();
-                int voteValue = l.getVoteValue();
-                String voteString = String.valueOf(voteValue);
-                exampleVote.setText(voteString);
-
             }
         });
 
@@ -182,12 +178,8 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "down.onClick() gestartet");
-                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId(), exampleVote, cat_id);
+                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId(), exampleVote);
                 downVoteTask.execute();
-                int voteVote = l.getVoteValue();
-                String voteString = String.valueOf(voteVote);
-                exampleVote.setText(voteString);
-
             }
         });
     }

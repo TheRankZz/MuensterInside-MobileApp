@@ -46,7 +46,7 @@ public class MyLocationTask extends AsyncTask<Void,Void, List<Location>> {
 
         Device device;
         try{
-            device = myApp.getMuensterInsideImpl().register(androidId,username);
+            device = myApp.getMuensterInsideImpl().login(androidId);
             locations = myApp.getMuensterInsideImpl().getMyLocations(device.getId());
             Log.i(TAG, "doInBackground() erfolgreich");
             return locations;

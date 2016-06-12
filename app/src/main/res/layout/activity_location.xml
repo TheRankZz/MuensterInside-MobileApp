@@ -13,7 +13,7 @@
         android:choiceMode="singleChoice"
         android:layout_alignEnd="@+id/button1"
         android:layout_above="@+id/button1"
-        android:layout_below="@+id/textViewExampleDescription" />
+        android:layout_below="@+id/textViewExampleLink" />
 
 
 
@@ -63,8 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Beschreibung:"
-        android:id="@+id/textViewDescription"
+        android:text="Link:"
+        android:id="@+id/textViewLink"
         android:textColor="#ffffff"
         android:layout_below="@+id/button" />
 
@@ -94,9 +94,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="EXAMPLE"
-        android:id="@+id/textViewExampleDescription"
+        android:id="@+id/textViewExampleLink"
         android:textColor="#ffffff"
-        android:layout_below="@+id/textViewDescription"
+        android:layout_below="@+id/textViewLink"
         android:layout_alignParentStart="true" />
 
     <Button

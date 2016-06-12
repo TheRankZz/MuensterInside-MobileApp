@@ -68,14 +68,18 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
-        List<Category> categories = null;
-        try {
-            // Die Methode getCategories liefert eine Liste zurück
-            categories = myApp.getMuensterInsideImpl().getCategories();
-        } catch (Exception e) {
+        CategoryTask categoryTask = new CategoryTask(this,myApp);
+        categoryTask.execute();
+        List<Category> categories;
+        try{
+            categories = categoryTask.get();
+        }
+        catch (Exception e){
+            categories = null;
             e.printStackTrace();
         }
 
+        // Die Namen der Kategorien werden in eine Liste gespeichert
         List myList = new ArrayList<String>();
         for (int i = 0; i < categories.size(); i++) {
             myList.add(categories.get(i).getName());
@@ -86,12 +90,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listSliding = new ArrayList<>();
         //Fügt Items in die NavigationBar ein
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(0).toString()));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(1).toString()));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(2).toString()));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(3).toString()));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(4).toString()));
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(5).toString()));
+        for(int i=0; i < myList.size();i++){
+            listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(i).toString()));
+        }
         adapter = new SlidingMenuAdapter(this, listSliding);
         listViewSliding.setAdapter(adapter);
 
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawer(listViewSliding);
 
         //Fragment Category1 wird beim Start gezeigt
+        editor.putInt("catId", 0);
         replaceFragment(0);
 
         //Zeigt das ausgewählte Fragment an

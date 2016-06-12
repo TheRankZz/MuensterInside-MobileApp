@@ -18,15 +18,15 @@ import java.util.Hashtable;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
-public class isVotedRepsonse implements KvmSerializable {
+public class isVotedResponse implements KvmSerializable {
     
     public boolean isVoted;
     public String message;
     public int returnCode;
     
-    public isVotedRepsonse(){}
+    public isVotedResponse(){}
     
-    public isVotedRepsonse(SoapObject soapObject)
+    public isVotedResponse(SoapObject soapObject)
     {
         if (soapObject == null)
             return;

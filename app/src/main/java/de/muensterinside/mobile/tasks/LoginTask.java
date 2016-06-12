@@ -35,6 +35,7 @@ public class LoginTask extends AsyncTask<String, Integer, Device> {
         try {
             // Die Login Methode liefert anhand der Android Device-ID ein Device Objekt
             Device device = myApp.getMuensterInsideImpl().login(androidId);
+            this.myApp.setDevice(device);
             Log.i(TAG, "doInBackground() erfolgreich");
             return device;
         }

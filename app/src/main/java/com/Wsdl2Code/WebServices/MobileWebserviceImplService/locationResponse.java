@@ -18,10 +18,12 @@ import java.util.Hashtable;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
+
 public class locationResponse implements KvmSerializable {
     
     public String message;
     public int returnCode;
+    public locationTO location;
     
     public locationResponse(){}
     
@@ -38,6 +40,11 @@ public class locationResponse implements KvmSerializable {
             }else if (obj!= null && obj instanceof String){
                 message = (String) obj;
             }
+        }
+        if (soapObject.hasProperty("location"))
+        {
+            SoapObject j = (SoapObject)soapObject.getProperty("location");
+            location = new locationTO(j);
         }
         if (soapObject.hasProperty("returnCode"))
         {

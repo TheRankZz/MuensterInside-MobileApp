@@ -37,7 +37,7 @@ public class ShowCommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_comment);
 
 
-     Intent intent = getIntent();
+        Intent intent = getIntent();
 
         loc_id = intent.getIntExtra("selected", 0);
 
