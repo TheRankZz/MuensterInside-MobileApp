@@ -53,25 +53,33 @@ public class MainActivity extends AppCompatActivity {
         // Hier wird das Aussehen der MainActivity festgelegt
         setContentView(R.layout.activity_main);
 
+        // Für die spätere Nutzung wird ein Boolean mit einem Standartwert in "MyBoolPref" gespeichert
         SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor1 = boolPref.edit();
         editor1.putBoolean("newLocationBool", false);
         editor1.commit();
 
+        // Für die spätere Nutzung wird ein Boolean mit einem Standartwert in "MyCommentBoolPref" gespeichert
         SharedPreferences boolPref1 = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor2 = boolPref1.edit();
         editor2.putBoolean("newCommentBool", false);
         editor2.commit();
 
+        // Die ID der ausgewählten Kategorie soll unter "MyCatIdPref" gespeichert werden
         SharedPreferences sharedPreferences;
         sharedPreferences = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+
+        // Kategorien werden im Hintergrund geladen
         CategoryTask categoryTask = new CategoryTask(this,myApp);
         categoryTask.execute();
+
         List<Category> categories;
         try{
+            // Kategorien aus dem CategoryTask werden für die Weiterverwendung gespeichert
             categories = categoryTask.get();
         }
         catch (Exception e){
@@ -89,10 +97,12 @@ public class MainActivity extends AppCompatActivity {
         listViewSliding = (ListView) findViewById(R.id.lv_sliding_menu);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listSliding = new ArrayList<>();
+
         //Fügt Items in die NavigationBar ein
         for(int i=0; i < myList.size();i++){
             listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(i).toString()));
         }
+
         adapter = new SlidingMenuAdapter(this, listSliding);
         listViewSliding.setAdapter(adapter);
 

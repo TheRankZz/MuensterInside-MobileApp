@@ -26,12 +26,6 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
     private MuensterInsideAndroidApplication myApp;
     private List<Category> categories;
     private Context context;
-    private ListView listViewSliding;
-    private DrawerLayout drawerLayout;
-    private List<ItemSlideMenu> listSliding;
-    private SlidingMenuAdapter adapter;
-    private SharedPreferences.Editor editor;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
     public static final String TAG = "CategoryTask";
 
     /* Der Konstruktor erwartet ein Context Objekt,

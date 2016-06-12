@@ -1,6 +1,7 @@
 package de.muensterinside.mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -9,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
+import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.tasks.LoginTask;
 import de.muensterinside.mobile.tasks.RegistrationTask;
 import de.muensterinside.mobile.tasks.StartTask;
@@ -22,6 +25,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText username;
     private MuensterInsideAndroidApplication myApp;
     private String android_id;
+    private Context context;
     public static final String TAG = "RegistrationActivity";
 
 
@@ -35,7 +39,9 @@ public class RegistrationActivity extends AppCompatActivity {
         myApp = (MuensterInsideAndroidApplication) getApplication();
 
         // Die Android Device-ID wird ermittelt
-        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        android_id = Settings.Secure.getString(getApplicationContext()
+                .getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.i(TAG, "Android Device-ID: " + android_id);
 
         // Hier wird der vom Benutzer eingegene Benutzername gespeichert
         username = (EditText) findViewById(R.id.registration_username);
@@ -50,6 +56,7 @@ public class RegistrationActivity extends AppCompatActivity {
         editor.putString("username", username.getText().toString());
         editor.commit();
 
+        // Wenn ein Gerät schon registriert ist, wird beim Start automatisch ein Login durchgeführt
         StartTask startTask = new StartTask(this, myApp, android_id);
         startTask.execute();
 
@@ -59,6 +66,8 @@ public class RegistrationActivity extends AppCompatActivity {
         // Button für das Login wird angelegt
         Button login = (Button) findViewById(R.id.login);
 
+        context = this;
+
         /* Wenn der Button login gedrückt wurde,
          * soll der LoginTask ausgeführt werden.
          */
@@ -66,15 +75,38 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "login.onClick() gestartet");
+                String name = username.getText().toString();
+                Log.i(TAG, "Username: " + name);
+                LoginTask loginTask = new LoginTask(view.getContext(), myApp, android_id);
+                loginTask.execute(android_id, name);
+                Device device;
                 try {
-                    String name = username.getText().toString();
-                    LoginTask loginTask = new LoginTask(view.getContext(),myApp);
-                    loginTask.execute(android_id, name);
+                    device = loginTask.get();
                     Log.i(TAG, "login.onClick() erfolgreich");
                 }
                 catch(Exception e){
                     Log.e(TAG, "login.onClick() fehlgeschlagen");
+                    device = null;
                     e.printStackTrace();
+                }
+
+                if(device != null){
+                    Intent myIntent = new Intent(context, MainActivity.class);
+                    startActivity(myIntent);
+
+                    CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
+                            + "AndroidId: " + device.getAndroidUuid();
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Login erfolgreich");
+                }
+                else {
+                    CharSequence text = "Login fehlgeschlagen!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Login fehlgeschlagen");
                 }
 
             }
@@ -87,22 +119,42 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "registration.onClick() gestartet");
+                String name = username.getText().toString();
+                Log.i(TAG, "Username: " + name);
+                RegistrationTask registrationTask = new RegistrationTask(view.getContext(), myApp,
+                        android_id, name);
+                registrationTask.execute(android_id,name);
+                Device device;
                 try {
-                    String name = username.getText().toString();
-                    RegistrationTask registrationTask = new RegistrationTask(view.getContext(), myApp, registration);
-                    registrationTask.execute(android_id,name);
+                    device = registrationTask.get();
                     Log.i(TAG, "registration.onClick() erfolgreich");
                 }
                 catch(Exception e){
                     Log.e(TAG, "registration.onClick() fehlgeschlagen");
+                    device = null;
                     e.printStackTrace();
                 }
 
+                if(device != null){
+                    CharSequence text = "Registrierung erfolgreich! Registrierter Benutzername: "
+                            + device.getUsername()
+                            + " Registrierte AndroidId: "
+                            + device.getAndroidUuid();
+
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    registration.setVisibility(View.INVISIBLE);
+                    Log.i(TAG, "Registrierung erfolgreich");
+                }
+                else {
+                    CharSequence text = "Registrierung fehlgeschlagen.";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.e(TAG, "Registrierung fehlgeschlagen");
+                }
             }
         });
     }
-
-
-
-
 }

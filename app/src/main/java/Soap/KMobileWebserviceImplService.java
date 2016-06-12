@@ -19,7 +19,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.util.List;
 
 /**
- * Created by Nicol on 08.06.2016.
+ * Created by Julia Bracht and Nicolas Burchert
  */
 public class KMobileWebserviceImplService {
 

@@ -22,20 +22,14 @@ public class MyCommentTask extends AsyncTask<Void,Void, List<Comment>> {
     private Context context;
     private MuensterInsideAndroidApplication myApp;
     private static final String TAG = "MyCommentTask";
-    private ListView listView;
+    private int device_id;
     private List<Comment> comments;
-    private ArrayAdapter<String> adapter;
-    private String androidId;
-    private String username;
 
-    public MyCommentTask(Context context, MuensterInsideAndroidApplication myApp,String androidId, String username, ListView listView)
+    public MyCommentTask(Context context, MuensterInsideAndroidApplication myApp)
 
     {
         this.myApp = myApp;
-        this.listView = listView;
         this.context = context;
-        this.androidId = androidId;
-        this.username = username;
     }
 
     @Override
@@ -43,10 +37,9 @@ public class MyCommentTask extends AsyncTask<Void,Void, List<Comment>> {
     {
         Log.d(TAG, "doInBackground() gestartet" );
 
-        Device device;
         try{
-            device = myApp.getMuensterInsideImpl().login(androidId);
-            comments = myApp.getMuensterInsideImpl().getMyComments(device.getId());
+            device_id = this.myApp.getDevice().getId();
+            comments = myApp.getMuensterInsideImpl().getMyComments(device_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;
         }
@@ -62,21 +55,6 @@ public class MyCommentTask extends AsyncTask<Void,Void, List<Comment>> {
     protected void onPostExecute(List<Comment> comments)
     {
         Log.d(TAG, "onPostExecute() gestartet");
-
-        List myList = new ArrayList<String>();
-        for(int i=0; i < comments.size(); i++){
-            myList.add(comments.get(i).getText());
-        }
-
-        ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
-
-
-
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-
     }
 
 }
