@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ShowCommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_comment);
 
 
-     Intent intent = getIntent();
+        Intent intent = getIntent();
 
         loc_id = intent.getIntExtra("selected", 0);
 
@@ -50,13 +51,38 @@ public class ShowCommentActivity extends AppCompatActivity {
 
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.commentList);
 
 
-        ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id, listView);
+        ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id);
         showCommentTask.execute();
 
+        try{
+            comments = showCommentTask.get();
+        }
+        catch (Exception e){
+            comments = null;
+            e.printStackTrace();
+        }
 
+        if(comments == null){
+            CharSequence text = "Keine Kommentare vorhanden.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+        }
+        else {
+            List myList = new ArrayList<String>();
+            for (int i = 0; i < comments.size(); i++) {
+                myList.add(comments.get(i).getText());
+            }
+
+            ArrayAdapter<String> adapter;
+            adapter = new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
+
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

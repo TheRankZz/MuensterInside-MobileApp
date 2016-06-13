@@ -19,16 +19,14 @@ import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.ksoap2.HeaderProperty;
-import java.util.Hashtable;
 import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
+
 import android.os.AsyncTask;
-import org.ksoap2.serialization.MarshalFloat;
 
 public class MobileWebserviceImplService {
     
     public String NAMESPACE ="http://webservices.muensterinside.de/";
-    public String url="";
+    public String url="http://10.60.64.35/muensterinside/mobile"; // http://10.60.64.35/muensterinside/mobile
     public int timeOut = 180;
     public IWsdl2CodeEvents eventHandler;
     public SoapProtocolVersion soapVersion;
@@ -1054,17 +1052,17 @@ public class MobileWebserviceImplService {
     
     public void isVotedAsync(final int arg0,final int arg1,final List<HeaderProperty> headers) throws Exception{
         
-        new AsyncTask<Void, Void, isVotedRepsonse>(){
+        new AsyncTask<Void, Void, isVotedResponse>(){
             @Override
             protected void onPreExecute() {
                 eventHandler.Wsdl2CodeStartedRequest();
             };
             @Override
-            protected isVotedRepsonse doInBackground(Void... params) {
+            protected isVotedResponse doInBackground(Void... params) {
                 return isVoted(arg0, arg1, headers);
             }
             @Override
-            protected void onPostExecute(isVotedRepsonse result)
+            protected void onPostExecute(isVotedResponse result)
             {
                 eventHandler.Wsdl2CodeEndedRequest();
                 if (result != null){
@@ -1074,11 +1072,11 @@ public class MobileWebserviceImplService {
         }.execute();
     }
     
-    public isVotedRepsonse isVoted(int arg0,int arg1){
+    public isVotedResponse isVoted(int arg0, int arg1){
         return isVoted(arg0, arg1, null);
     }
     
-    public isVotedRepsonse isVoted(int arg0,int arg1,List<HeaderProperty> headers){
+    public isVotedResponse isVoted(int arg0, int arg1, List<HeaderProperty> headers){
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
@@ -1104,7 +1102,7 @@ public class MobileWebserviceImplService {
                 if (result.getPropertyCount() > 0){
                     Object obj = result.getProperty(0);
                     SoapObject j = (SoapObject)obj;
-                    isVotedRepsonse resultVariable =  new isVotedRepsonse (j);
+                    isVotedResponse resultVariable =  new isVotedResponse(j);
                     return resultVariable;
                     
                 }

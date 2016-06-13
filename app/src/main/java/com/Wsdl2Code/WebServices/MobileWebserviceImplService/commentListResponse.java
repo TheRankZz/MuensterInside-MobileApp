@@ -32,8 +32,8 @@ public class commentListResponse implements KvmSerializable {
             return;
         if (soapObject.hasProperty("commentList"))
         {
-            SoapObject j = (SoapObject)soapObject.getProperty("commentList");
-            commentList = new VectorcommentTO(j);
+            //SoapObject j = (SoapObject)soapObject.getProperty("commentList");
+            commentList = new VectorcommentTO(soapObject);
         }
         if (soapObject.hasProperty("message"))
         {

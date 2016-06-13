@@ -16,25 +16,26 @@ import de.muensterinside.mobile.entities.Device;
 public class LoginTask extends AsyncTask<String, Integer, Device> {
     private Context context;
     private MuensterInsideAndroidApplication myApp;
+    private String android_id;
     public final static String TAG = "LoginTask";
 
     /* Der Konstruktor erwartet ein Context Objekt
      * und ein Application Objekt
      */
-    public LoginTask(Context context, MuensterInsideAndroidApplication myApp){
+    public LoginTask(Context context, MuensterInsideAndroidApplication myApp, String android_id){
         this.context = context;
         this.myApp = myApp;
+        this.android_id = android_id;
     }
 
     // Aufruf des Webservice soll im Hintergrund geschehen
     @Override
     protected Device doInBackground(String... params){
         Log.d(TAG, "doInBackground() gestartet");
-        String androidId = params[0];
-        String username = params[1];
         try {
             // Die Login Methode liefert anhand der Android Device-ID ein Device Objekt
-            Device device = myApp.getMuensterInsideImpl().login(androidId);
+            Device device = myApp.getMuensterInsideImpl().login(this.android_id);
+            this.myApp.setDevice(device);
             Log.i(TAG, "doInBackground() erfolgreich");
             return device;
         }
@@ -44,28 +45,10 @@ public class LoginTask extends AsyncTask<String, Integer, Device> {
         }
         return null;
     }
-    /* Die onPostExecute Methode bekommt von der doInBackground Methode
-     * ein Device Objekt. Wenn es != null ist soll die MainActivity aufgerufen werden
-     * und der User soll mittels Toasts über Erfolg/Misserfolg informiert werden.
-     */
+
+    @Override
     protected void onPostExecute(Device device){
         Log.d(TAG, "onPostExecute() gestartet");
-        if(device != null){
-            Intent myIntent = new Intent(this.context, MainActivity.class);
-            this.context.startActivity(myIntent);
 
-            CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername() + "AndroidId: " + device.getAndroidUuid();
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "Login erfolgreich");
-        }
-        else {
-            CharSequence text = "Login fehlgeschlagen!";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "Login fehlgeschlagen");
-        }
     }
 }

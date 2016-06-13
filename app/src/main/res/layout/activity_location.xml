@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7383fd"
     tools:context="de.muensterinside.mobile.LocationActivity">
 
     <ListView
@@ -12,7 +13,7 @@
         android:choiceMode="singleChoice"
         android:layout_alignEnd="@+id/button1"
         android:layout_above="@+id/button1"
-        android:layout_below="@+id/textViewExampleDescription" />
+        android:layout_below="@+id/textViewExampleLink" />
 
 
 
@@ -43,6 +44,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Name:"
         android:id="@+id/textViewName"
+        android:textColor="#ffffff"
         android:layout_toEndOf="@+id/button" />
 
     <TextView
@@ -51,6 +53,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Votes:"
         android:id="@+id/textViewVote"
+        android:textColor="#ffffff"
         android:layout_below="@+id/textViewName"
         android:layout_toEndOf="@+id/button"
         android:layout_marginTop="55dp" />
@@ -60,8 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Beschreibung:"
-        android:id="@+id/textViewDescription"
+        android:text="Link:"
+        android:id="@+id/textViewLink"
+        android:textColor="#ffffff"
         android:layout_below="@+id/button" />
 
     <TextView
@@ -70,6 +74,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="EXAMPLE"
         android:id="@+id/textViewExampleName"
+        android:textColor="#ffffff"
         android:layout_below="@+id/textViewName"
         android:layout_toEndOf="@+id/button" />
 
@@ -79,6 +84,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="EXAMPLE"
         android:id="@+id/textViewExampleVote"
+        android:textColor="#ffffff"
         android:layout_below="@+id/textViewVote"
         android:layout_toEndOf="@+id/button" />
 
@@ -88,8 +94,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="EXAMPLE"
-        android:id="@+id/textViewExampleDescription"
-        android:layout_below="@+id/textViewDescription"
+        android:id="@+id/textViewExampleLink"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/textViewLink"
         android:layout_alignParentStart="true" />
 
     <Button

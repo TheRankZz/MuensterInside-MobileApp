@@ -32,8 +32,8 @@ public class locationListResponse implements KvmSerializable {
             return;
         if (soapObject.hasProperty("locationList"))
         {
-            SoapObject j = (SoapObject)soapObject.getProperty("locationList");
-            locationList = new VectorlocationTO(j);
+            //SoapObject j = (SoapObject)soapObject.getProperty("locationList");
+            locationList = new VectorlocationTO(soapObject);
         }
         if (soapObject.hasProperty("message"))
         {

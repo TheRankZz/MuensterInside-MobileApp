@@ -11,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.List;
 
 import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Device;
+import de.muensterinside.mobile.tasks.WriteCommentTask;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
@@ -23,11 +25,11 @@ import de.muensterinside.mobile.entities.Device;
 public class CommentActivity extends AppCompatActivity{
 
     public static final String TAG = "CommentActivity";
-    //Anlegen des Textfeldes
     private EditText kommentar;
     private int cat_id;
     private int loc_id;
     private List<Comment> comments;
+    private Context context;
     private MuensterInsideAndroidApplication myApp;
 
 
@@ -56,14 +58,7 @@ public class CommentActivity extends AppCompatActivity{
         editor.putInt("catId", cat_id);
         editor.commit();
 
-        final String androidId = sharedPreferences.getString("androidId", "Default");
-        final String username = sharedPreferences.getString("username", "Default");
-
-
-
-
-
-
+        context = this;
 
 
         //ClickListener implementieren für den Button zum Wechsel der Activity
@@ -77,17 +72,36 @@ public class CommentActivity extends AppCompatActivity{
                 SharedPreferences newCommentLocationId = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = newCommentLocationId.edit();
                 editor.putInt("loc_id", loc_id);
+                editor.putInt("cat_id", cat_id);
                 editor.putBoolean("newCommentBool", true);
                 editor.commit();
 
+                WriteCommentTask writeCommentTask = new WriteCommentTask(context,myApp,s,loc_id);
+                writeCommentTask.execute();
+                int code = 1;
                 try{
-                   device = myApp.getMuensterInsideImpl().register(androidId,username);
-                   myApp.getMuensterInsideImpl().saveComment(s, device.getId(), loc_id);
-               }
-               catch(Exception e) {
+                   code = writeCommentTask.get();
+                }
+                catch(Exception e) {
                    e.printStackTrace();
-               }
-                intent.putExtra("name", s);
+                }
+
+                if(code == 0){
+                    intent.putExtra("name", s);
+
+                    CharSequence text = "Kommentar " + s + " wurde erstellt.";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Kommentar wurde erfolgreich erstellt");
+                }
+                else {
+                    CharSequence text = "Kommentar " + s + " wurde nicht erstellt.";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Kommentar wurde nicht erfolgreich erstellt");
+                }
                 startActivity(intent);
             }
         });

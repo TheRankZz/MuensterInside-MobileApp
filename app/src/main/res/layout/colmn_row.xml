@@ -11,7 +11,8 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:background="#7ea4f8" />
+        android:textColor="#ffffff"
+        android:background="#3030c0" />
 
     <TextView
         android:id="@+id/vote"
@@ -22,7 +23,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical|right"
         android:textSize="20sp"
-        android:background="#7ea4f8" />
+        android:textColor="#ffffff"
+        android:background="#3030c0" />
 </LinearLayout>
 
 

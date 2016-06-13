@@ -25,18 +25,13 @@ public class MyLocationTask extends AsyncTask<Void,Void, List<Location>> {
     private static final String TAG = "MyLocationTask";
     private ListView listView;
     private List<Location> locations;
-    private ArrayAdapter<String> adapter;
-    private String androidId;
-    private String username;
+    private int device_id;
 
-    public MyLocationTask(Context context, MuensterInsideAndroidApplication myApp,String androidId, String username, ListView listView)
+    public MyLocationTask(Context context, MuensterInsideAndroidApplication myApp)
 
     {
         this.myApp = myApp;
-        this.listView = listView;
         this.context = context;
-        this.androidId = androidId;
-        this.username = username;
     }
 
     @Override
@@ -44,10 +39,9 @@ public class MyLocationTask extends AsyncTask<Void,Void, List<Location>> {
     {
         Log.d(TAG, "doInBackground() gestartet" );
 
-        Device device;
         try{
-            device = myApp.getMuensterInsideImpl().register(androidId,username);
-            locations = myApp.getMuensterInsideImpl().getMyLocations(device.getId());
+            device_id = this.myApp.getDevice().getId();
+            locations = this.myApp.getMuensterInsideImpl().getMyLocations(device_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return locations;
         }
@@ -64,20 +58,5 @@ public class MyLocationTask extends AsyncTask<Void,Void, List<Location>> {
     {
         Log.d(TAG, "onPostExecute() gestartet");
 
-        List myList = new ArrayList<String>();
-        for(int i=0; i < locations.size(); i++){
-            myList.add(locations.get(i).getName());
-        }
-
-        ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
-
-
-
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-
     }
-
 }

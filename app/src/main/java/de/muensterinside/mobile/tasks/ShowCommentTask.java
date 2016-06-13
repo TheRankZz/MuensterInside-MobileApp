@@ -6,13 +6,14 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import de.muensterinside.mobile.CommentAdapters;
-import de.muensterinside.mobile.ListViewAdapters;
+import de.muensterinside.mobile.adapter.ListViewAdapters;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.entities.Comment;
@@ -29,18 +30,14 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     private MuensterInsideAndroidApplication myApp;
     private static final String TAG = "ShowCommentTask";
     private final int loc_id;
-    private ListView listView;
     private List<Comment> comments;
-    private ArrayAdapter<String> adapter;
 
 
 
-
-    public ShowCommentTask(Context context, MuensterInsideAndroidApplication myApp,int loc_id, ListView listView )
+    public ShowCommentTask(Context context, MuensterInsideAndroidApplication myApp,int loc_id)
     {
         this.loc_id = loc_id;
         this.myApp = myApp;
-        this.listView = listView;
         this.context = context;
 
 
@@ -50,7 +47,7 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     protected List<Comment> doInBackground(Void... params){
         Log.d(TAG, "doInBackground() gestartet" );
         try{
-            comments = myApp.getMuensterInsideImpl().getCommentsByLocation(loc_id);
+            comments = myApp.getMuensterInsideImpl().getCommentsByLocation(this.loc_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;
         }
@@ -66,22 +63,6 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     protected void onPostExecute(List<Comment> comments)
     {
         Log.d(TAG, "onPostExecute() gestartet");
-
-
-
-        List myList = new ArrayList<String>();
-        for(int i=0; i < comments.size(); i++){
-           myList.add(comments.get(i).getText());
-        }
-
-        ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String>(context, R.layout.content_item_list_category, myList);
-
-
-
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
 
 
 

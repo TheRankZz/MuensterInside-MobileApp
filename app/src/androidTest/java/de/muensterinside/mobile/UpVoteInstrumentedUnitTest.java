@@ -7,13 +7,22 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.HashMap;
+
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
-
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.collection.IsMapContaining.hasEntry;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 
 /**
@@ -23,15 +32,23 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class UpVoteInstrumentedUnitTest {
 
     @Rule
-    public ActivityTestRule<LocationActivity> registrationActivityActivityTestRule =
-            new ActivityTestRule<LocationActivity>(LocationActivity.class);
+    public ActivityTestRule<RegistrationActivity> registrationActivityActivityTestRule =
+            new ActivityTestRule<RegistrationActivity>(RegistrationActivity.class);
 
     @Test
     public void testVoteALocationInstrumentedUnitTest() throws Exception {
 
+
+        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Nico"))))
+                .inAdapterView(withId(R.id.categoryList))
+                .perform(click());
+
+        onView(withId(R.id.textViewExampleName))
+                .check(matches(withText("Nico")));
+
         onView(withId(R.id.up)).perform(click());
-        onView(withId(R.id.textViewExampleVote)).check(matches(withText("11")));
+        onView(withId(R.id.textViewExampleVote)).check(matches(withText("0")));
         onView(withId(R.id.up)).perform(click());
-        onView(withId(R.id.textViewExampleVote)).check(matches(withText("11")));
+        onView(withId(R.id.textViewExampleVote)).check(matches(withText("0")));
     }
 }

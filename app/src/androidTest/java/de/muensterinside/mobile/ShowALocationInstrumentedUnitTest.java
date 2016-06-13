@@ -42,14 +42,13 @@ public class ShowALocationInstrumentedUnitTest {
 
     @Test
     public void testShowALocationInstrumentedUnitTest() throws Exception {
-        onData(allOf(is(instanceOf(String.class)), is("Essen"))).perform(click());
 
-
-        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Extrablatt"))))
+        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Nico"))))
+                .inAdapterView(withId(R.id.categoryList))
                 .perform(click());
 
         onView(withId(R.id.textViewExampleName))
-                .check(matches(withText("Extrablatt")));
+                .check(matches(withText("Nico")));
 
     }
 

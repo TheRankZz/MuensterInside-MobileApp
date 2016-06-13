@@ -17,6 +17,7 @@ import java.util.List;
 
 import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
+import de.muensterinside.mobile.tasks.NewLocationTask;
 
 public class NewLocationActivity extends AppCompatActivity {
     public static final String TAG = "NewLocationActivity";
@@ -60,8 +61,8 @@ public class NewLocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "saveLocation.onClick() gestartet");
-                Intent myIntent = new Intent(NewLocationActivity.this, CategoryActivity.class);
-                myIntent.setClassName(getPackageName(), getPackageName() + ".CategoryActivity");
+                Intent myIntent = new Intent(NewLocationActivity.this, MainActivity.class);
+                myIntent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
 
                 Device device;
                 MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
@@ -69,37 +70,38 @@ public class NewLocationActivity extends AppCompatActivity {
                 String locationDescription = description.getText().toString();
                 String locationLink = link.getText().toString();
 
+
+                NewLocationTask newLocationTask = new NewLocationTask(context,myApp,
+                        locationName,locationDescription,locationLink, cat_id);
+                newLocationTask.execute();
+                int code = 1;
                 try {
-                    device = myApp.getMuensterInsideImpl().register(androidId,username);
+                    code = newLocationTask.get();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
 
-                    myApp.getMuensterInsideImpl().saveLocation(locationName,locationDescription,locationLink,cat_id,device.getId());
-
-                    List<Location> newLocationList = myApp.getMuensterInsideImpl().getLocationsByCategory(cat_id);
-
-                    Location newLocation = newLocationList.get(newLocationList.size()-1);
-
-                    int loc_id = newLocation.getId();
-
+                if(code == 0) {
                     SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = boolPref.edit();
                     editor.putBoolean("newLocationBool", true);
                     editor.putInt("cat_id", cat_id);
                     editor.commit();
 
-                    CharSequence text = "Location " +locationName+ " wurde erstellt.";
+                    CharSequence text = "Location " + locationName + " wurde erstellt.";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                     Log.i(TAG, "Location wurde erfolgreich erstellt");
-                }
-                catch(Exception e){
-                    Log.e(TAG, "Location wurde nicht erfolgreich erstellt");
-                    e.printStackTrace();
 
-                    CharSequence text = "Location wurde nicht erstellt.";
+                }
+                else {
+                    CharSequence text = "Location " + locationName + " wurde nicht erstellt.";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
+                    Log.i(TAG, "Location wurde nicht erfolgreich erstellt");
                 }
                 startActivity(myIntent);
             }

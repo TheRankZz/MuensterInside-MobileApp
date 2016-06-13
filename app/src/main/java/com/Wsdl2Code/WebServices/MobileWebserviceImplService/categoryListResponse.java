@@ -32,8 +32,8 @@ public class categoryListResponse implements KvmSerializable {
             return;
         if (soapObject.hasProperty("categoryList"))
         {
-            SoapObject j = (SoapObject)soapObject.getProperty("categoryList");
-            categoryList = new VectorcategoryTO(j);
+            //SoapObject j = (SoapObject)soapObject.getProperty("categoryList");
+            categoryList = new VectorcategoryTO(soapObject);
         }
         if (soapObject.hasProperty("message"))
         {
