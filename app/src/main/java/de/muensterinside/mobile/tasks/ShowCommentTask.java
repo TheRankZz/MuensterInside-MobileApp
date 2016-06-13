@@ -4,14 +4,21 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import de.muensterinside.mobile.CommentAdapters;
+import de.muensterinside.mobile.ListViewAdapters;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.entities.Comment;
+
+import static de.muensterinside.mobile.Constants.FIRST_COLUMN;
+import static de.muensterinside.mobile.Constants.SECOND_COLUMN;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
@@ -28,12 +35,14 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
 
 
 
-    public ShowCommentTask(Context context, MuensterInsideAndroidApplication myApp,int loc_id, ListView listView  )
+
+    public ShowCommentTask(Context context, MuensterInsideAndroidApplication myApp,int loc_id, ListView listView )
     {
         this.loc_id = loc_id;
         this.myApp = myApp;
         this.listView = listView;
         this.context = context;
+
 
     }
 
@@ -58,9 +67,11 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     {
         Log.d(TAG, "onPostExecute() gestartet");
 
+
+
         List myList = new ArrayList<String>();
         for(int i=0; i < comments.size(); i++){
-            myList.add(comments.get(i).getText());
+           myList.add(comments.get(i).getText());
         }
 
         ArrayAdapter<String> adapter;
@@ -70,6 +81,8 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
 
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
 
 
     }

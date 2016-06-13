@@ -50,10 +50,13 @@ public class ShowCommentActivity extends AppCompatActivity {
 
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
-        ListView listView = (ListView) findViewById(R.id.commentList);
+        ListView listView = (ListView) findViewById(R.id.listView);
+
 
         ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id, listView);
         showCommentTask.execute();
+
+
     }
 
     @Override

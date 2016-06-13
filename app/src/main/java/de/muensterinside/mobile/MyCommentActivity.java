@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class MyCommentActivity extends AppCompatActivity {
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
         ListView listView = (ListView) findViewById(R.id.liste);
+        Button button = (Button) findViewById(R.id.delete_btn);
 
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -36,7 +38,7 @@ public class MyCommentActivity extends AppCompatActivity {
         final String androidId = sharedPreferences.getString("androidId", "Default");
         final String username = sharedPreferences.getString("username", "Default");
 
-        MyCommentTask myCommentTask = new MyCommentTask(this, myApp, androidId, username, listView);
+        MyCommentTask myCommentTask = new MyCommentTask(this, myApp, androidId, username, listView, button);
         myCommentTask.execute();
     }
 }
