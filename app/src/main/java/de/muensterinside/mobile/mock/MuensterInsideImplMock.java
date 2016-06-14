@@ -348,7 +348,7 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         List<Location> result = new ArrayList<Location>();
         for(int i=0; i<this.locationList.size();i++){
             Location location = this.locationList.get(i);
-            if(location.getDevice().equals(this.device)){
+            if(location.getId() == deviceId){
                 result.add(location);
             }
         }

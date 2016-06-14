@@ -6,6 +6,7 @@
     <string name="action_settings">Einstellung</string>
     <string name="username">Username</string>
     <string name="kommentare">Meine Kommentare</string>
+    <string name="votes">Meine Votes</string>
     <string name="usernameSummary">Hier steht der UserName</string>
     <string name="pref_user_title">Kommentardaten</string>
     <string name="title_activity_prefs">PrefsActivity</string>
@@ -15,8 +16,8 @@
     <string name="location">Meine Locations</string>
     <string name="drawer_opened">Opened</string>
     <string name="drawer_closed">Closed</string>
-    <string name ="hallo">Hallo</string>
-   <string name= "willkommen">
+    <string name="hallo">Hallo</string>
+   <string name="willkommen">
        herzlich Willkommen auf unserer App.
        \n \n Lerne neue Locations kennen und lass dich von den Geschmaeckern der Muensteraner inspirieren.
         \n \n Nach dem Besuch einer Location laden wir dich herzlich dazu ein, einen Kommentar und eine Bewertung für die Location da zu lassen.

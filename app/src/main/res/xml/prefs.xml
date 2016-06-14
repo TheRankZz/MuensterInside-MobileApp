@@ -14,6 +14,10 @@
             android:title="@string/location" android:id="@+id/LocationButton" >
             <intent android:action="de.muensterinside.mobile.MyLocationActivity" />
         </PreferenceScreen>
+        <PreferenceScreen android:key="Votes"
+            android:title="@string/votes" android:id="@+id/VotesButton" >
+            <intent android:action="de.muensterinside.mobile.MyVoteActivity" />
+        </PreferenceScreen>
 
 
     </PreferenceCategory>

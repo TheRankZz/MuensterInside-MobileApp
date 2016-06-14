@@ -62,6 +62,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MyVoteActivity"
+            android:label="MuensterInside"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="de.muensterinside.mobile.MyVoteActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".NewLocationActivity"
             android:label="MuensterInside"
             android:theme="@style/AppTheme" />
@@ -69,7 +79,7 @@
             android:name=".ShowCommentActivity"
             android:label="MuensterInside"
             android:theme="@style/AppTheme" />
-        <activity android:name=".WelcomeActivity"></activity>
+        <activity android:name=".WelcomeActivity" />
     </application>
 
 </manifest>
