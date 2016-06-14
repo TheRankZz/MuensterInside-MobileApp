@@ -5,7 +5,7 @@ package de.muensterinside.mobile.entities;
 /**
  * Datenklasse: Kommentar
  *
- * @author Lennart Giesen, Julius Wessing
+ * @author Julia Bracht, Nicolas Burchert, Lennart Giesen, Julius Wessing
  *
  */
 
@@ -14,6 +14,7 @@ public class Comment {
 	private String text;
 	private Device device;
 	private Location location;
+	private int id;
 
 	public Comment() {
 	}
@@ -27,6 +28,10 @@ public class Comment {
 	public String getText() {
 		return text;
 	}
+
+	public Integer getId() {return id;}
+
+	public void setId(int id) {this.id = id;}
 
 	public void setText(String text) {
 		this.text = text;

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Datenklasse: Location
  *
- * @author Lennart Giesen, Julius Wessing
+ * @author Julia Bracht, Nicolas Burchert, Lennart Giesen, Julius Wessing
  *
  */
 

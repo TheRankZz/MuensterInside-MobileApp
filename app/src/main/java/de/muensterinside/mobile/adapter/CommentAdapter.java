@@ -1,5 +1,5 @@
 
-package de.muensterinside.mobile;
+package de.muensterinside.mobile.adapter;
 
 import android.content.Context;
 import android.widget.BaseAdapter;
@@ -16,22 +16,34 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
+import de.muensterinside.mobile.R;
+import de.muensterinside.mobile.entities.Comment;
+import de.muensterinside.mobile.tasks.DeleteCommentTask;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CommentAdapters extends BaseAdapter implements ListAdapter {
+/**
+ * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
+ */
+
+public class CommentAdapter extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
     private MuensterInsideAndroidApplication myApp;
     private Activity activity;
+    private int id;
+    private List<Comment>comments;
 
 
 
-    public CommentAdapters(ArrayList<String> list, Context context,MuensterInsideAndroidApplication myApp) {
+    public CommentAdapter(ArrayList<String> list, Context context, MuensterInsideAndroidApplication myApp, List<Comment>comments) {
         this.list = list;
         this.context = context;
         this.myApp = myApp;
         this.activity = (Activity) context;
+        this.comments = comments;
     }
 
     @Override
@@ -73,6 +85,10 @@ public class CommentAdapters extends BaseAdapter implements ListAdapter {
                 //do something
                 list.remove(position); //or some other task
                 notifyDataSetChanged();
+
+                id = comments.get(position).getId();
+                DeleteCommentTask deleteCommentTask = new DeleteCommentTask(context, myApp, id);
+                deleteCommentTask.execute();
 
 
             }

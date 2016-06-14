@@ -27,6 +27,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 @RunWith(AndroidJUnit4.class)
 public class NewCommentInstrumentedUnitTest {

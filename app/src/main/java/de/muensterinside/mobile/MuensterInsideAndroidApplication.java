@@ -13,7 +13,8 @@ import de.muensterinside.mobile.mock.MuensterInsideImpl;
 import de.muensterinside.mobile.mock.MuensterInsideImplMock;
 
 /**
- * Created by Julia Bracht and Nicolas Burchert.
+ * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class MuensterInsideAndroidApplication extends Application{
 
@@ -29,7 +30,7 @@ public class MuensterInsideAndroidApplication extends Application{
      * Serverinterface wird implementiert.
      */
     public MuensterInsideAndroidApplication() {
-        this.muensterInsideImpl = new MuensterInsideImpl(); // MuensterInsideImpl
+        this.muensterInsideImpl = new MuensterInsideImplMock(); // MuensterInsideImpl
 
     }
 

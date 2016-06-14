@@ -21,6 +21,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 @RunWith(AndroidJUnit4.class)
 public class RegistrationAndLoginInstrumentedUnitTest {

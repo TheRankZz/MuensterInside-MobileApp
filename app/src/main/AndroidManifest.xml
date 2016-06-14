@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.muensterinside.mobile">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MuensterInsideAndroidApplication"
         android:allowBackup="true"
@@ -66,8 +68,8 @@
         <activity
             android:name=".ShowCommentActivity"
             android:label="MuensterInside"
-            android:theme="@style/AppTheme"></activity>
-
+            android:theme="@style/AppTheme" />
+        <activity android:name=".WelcomeActivity"></activity>
     </application>
 
 </manifest>

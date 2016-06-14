@@ -13,7 +13,7 @@ import de.muensterinside.mobile.entities.Vote;
 
 /**
  * 
- * @author Lennart Giesen, Julius Wessing
+ * @author Julia Bracht, Nicolas Burchert, Lennart Giesen, Julius Wessing
  *
  */
 

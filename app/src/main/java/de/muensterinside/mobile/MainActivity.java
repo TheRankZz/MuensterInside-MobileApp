@@ -34,7 +34,8 @@ import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.tasks.CategoryTask;
 
 /**
- * Created by Julia Bracht and Nicolas Burchert.
+ * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";

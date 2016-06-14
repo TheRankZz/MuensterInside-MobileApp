@@ -15,5 +15,15 @@
     <string name="location">Meine Locations</string>
     <string name="drawer_opened">Opened</string>
     <string name="drawer_closed">Closed</string>
+    <string name ="hallo">Hallo</string>
+   <string name= "willkommen">
+       herzlich Willkommen auf unserer App.
+       \n \n Lerne neue Locations kennen und lass dich von den Geschmaeckern der Muensteraner inspirieren.
+        \n \n Nach dem Besuch einer Location laden wir dich herzlich dazu ein, einen Kommentar und eine Bewertung für die Location da zu lassen.
+         \n\nNeue Locations können gerne angelegt werden.
+         \n\n Überzeuge dich selbst!
+
+
+   </string>
 
 </resources>

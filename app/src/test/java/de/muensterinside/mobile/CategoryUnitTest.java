@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 /**
+ * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
  */
 @RunWith(MockitoJUnitRunner.class)

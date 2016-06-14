@@ -16,6 +16,10 @@ import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.tasks.MyLocationTask;
 
+/**
+ * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
+ */
 public class MyLocationActivity extends AppCompatActivity {
 
     public static final String TAG = "MyLocationActivity";

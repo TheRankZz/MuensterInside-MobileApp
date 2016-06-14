@@ -12,8 +12,10 @@ import java.util.List;
 import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.model.ItemSlideMenu;
 
+
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class SlidingMenuAdapter extends BaseAdapter {
 

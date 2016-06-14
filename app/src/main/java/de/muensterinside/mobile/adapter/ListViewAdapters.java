@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import de.muensterinside.mobile.R;
 
+
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class ListViewAdapters extends BaseAdapter{
     public ArrayList<HashMap<String, String>> list;

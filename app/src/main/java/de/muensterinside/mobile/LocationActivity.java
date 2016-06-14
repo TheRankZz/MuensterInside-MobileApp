@@ -29,7 +29,8 @@ import de.muensterinside.mobile.tasks.ShowCommentTask;
 import de.muensterinside.mobile.tasks.UpVoteTask;
 
 /**
- * Created by Julia Bracht and Nicolas Burchert.
+ * Created by Julia Bracht and Nicolas Burchert
+ *  @author Julia Bracht, Nicolas Burchert
  */
 public class LocationActivity extends AppCompatActivity {
     private int loc_id;

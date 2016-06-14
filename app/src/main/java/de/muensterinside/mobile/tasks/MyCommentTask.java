@@ -1,25 +1,13 @@
 package de.muensterinside.mobile.tasks;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import de.muensterinside.mobile.CommentActivity;
-import de.muensterinside.mobile.CommentAdapters;
-import de.muensterinside.mobile.adapter.ListViewAdapters;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
-import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.entities.Comment;
-import de.muensterinside.mobile.entities.Device;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert

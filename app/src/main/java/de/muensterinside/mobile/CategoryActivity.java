@@ -15,6 +15,7 @@ import de.muensterinside.mobile.tasks.LocationListTask;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert.
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class CategoryActivity extends AppCompatActivity {
     public static final String TAG = "CategoryActivity";

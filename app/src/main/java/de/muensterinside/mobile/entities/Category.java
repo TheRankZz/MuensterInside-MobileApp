@@ -3,6 +3,13 @@ package de.muensterinside.mobile.entities;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Datenklasse: Kategorie
+ *
+ * @author Julia Bracht, Nicolas Burchert, Lennart Giesen, Julius Wessing
+ *
+ */
+
 public class Category implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

@@ -4,6 +4,11 @@ import java.util.List;
 
 import de.muensterinside.mobile.entities.Comment;
 
+/**
+ * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
+ */
+
 public interface CommentService {
 
 	Comment getComment(int com_id);

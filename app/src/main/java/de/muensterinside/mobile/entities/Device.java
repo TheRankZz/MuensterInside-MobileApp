@@ -11,7 +11,7 @@ import de.muensterinside.mobile.entities.Vote;
 /**
  * Datenklasse: Bewertung/Stimme
  * 
- * @author Lennart Giesen, Julius Wessing
+ * @author Julia Bracht, Nicolas Burchert, Lennart Giesen, Julius Wessing
  *
  */
 

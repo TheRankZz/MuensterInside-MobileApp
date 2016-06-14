@@ -21,6 +21,7 @@ import de.muensterinside.mobile.tasks.WriteCommentTask;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ *  @author Julia Bracht, Nicolas Burchert
  */
 public class CommentActivity extends AppCompatActivity{
 

@@ -15,6 +15,7 @@ import de.muensterinside.mobile.entities.*;
 
 /**
  * Created By Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  * Diese Klasse ersetzt die Verbindung zum Server als Mock-Objekt.
  * Die Methoden sind aufrufbar, liefern aber nur starre Testdaten.
  */
@@ -180,11 +181,21 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
 
     }
 
+    /**
+     *
+     * @return categoryList, eine Liste von Kategorien
+     */
     public List<Category> getCategories(){
         return categoryList;
     }
 
 
+    /**
+     *
+     * @param deviceId, die Identifizitaet des Devices
+     * @param username, der Name des Nutzers
+     * @return device, das Device Objekt
+     */
     public Device register(String deviceId, String username){
         Device device = new Device();
         device.setAndroidUuid(deviceId);
@@ -196,6 +207,12 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         return device;
     }
 
+    /**
+     *
+     * @param deviceId, die Identifizitaet des Devices
+     * @return device, das Device Objekt
+     * @throws Exception
+     */
 
     public Device login(String deviceId)throws Exception{
         if(this.device.getAndroidUuid()==deviceId){
@@ -207,6 +224,10 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param cat_id, die Identifizitaet der Kategorie
+     * @return result, eine Liste der Locations
+     */
     public List<Location> getLocationsByCategory(int cat_id){
         List<Location> result = new ArrayList<Location>();
         for(int i=0; i<this.locationList.size(); i++){
@@ -218,6 +239,14 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         return result;
     }
 
+    /**
+     * @param name, der Name der Location
+     * @param description, die Beschreibung der Location
+     * @param link, der Link der Location
+     * @param category_id, die Identifizitaet der Kategorie
+     * @param deviceId, die Identifizitaet des Devices
+     * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     */
 
     public int saveLocation(String name, String description,
                             String link, int category_id, int deviceId){
@@ -239,6 +268,10 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
         }
     }
 
+    /**
+     * @param loc_id, die Identifizitaet der Location
+     * @return result, eine Liste der Kommentare
+     */
     public List<Comment> getCommentsByLocation(int loc_id){
         List<Comment> result = new ArrayList<Comment>();
         for(int i=0; i<this.commentList.size();i++){
@@ -251,6 +284,10 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param deviceId, die Identifizitaet des Devices
+     * @return result, eine Liste der Kommentare
+     */
     public List<Comment> getMyComments(int deviceId){
         List<Comment> result = new ArrayList<Comment>();
         for(int i=0; i<this.commentList.size();i++){
@@ -263,6 +300,12 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param text, der Text des Kommentars
+     * @param deviceId, die Identifizitaet des Devices
+     * @param locationId, die Identifizitaet der Location
+     * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     */
     public int saveComment(String text, int deviceId, int locationId){
         int oldLength = this.commentList.size();
         Comment comment = new Comment();
@@ -280,6 +323,10 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param comment_id, die Identifizaet des Kommentars
+     * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     */
     public int deleteComment(int comment_id){
         int oldLength = this.commentList.size();
         this.commentList.remove(comment_id);
@@ -293,6 +340,10 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param deviceId, die Identifizaet des Devices
+     * @return result, eine Liste der Location
+     */
     public List<Location> getMyVotes(int deviceId){
         List<Location> result = new ArrayList<Location>();
         for(int i=0; i<this.locationList.size();i++){
@@ -305,6 +356,11 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param location_id, die Identifizitaet der Location
+     * @param deviceId, die Identifizitaet des Devices
+     * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     */
     public int upVote(int location_id, int deviceId){
         Location location = this.locationList.get(location_id);
         int oldVoteValue = location.getVoteValue();
@@ -319,6 +375,11 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param location_id, die Identifizitaet der Location
+     * @param deviceId, die Identifizitaet des Devices
+     * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     */
     public int downVote(int location_id, int deviceId){
         Location location = this.locationList.get(location_id);
         int oldVoteValue = location.getVoteValue();
@@ -333,6 +394,11 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param location_id, die Identifizitaet der Location
+     * @param deviceId, die Identifizitaet des Devices
+     * @return boolean , gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     */
     public boolean isVoted(int location_id, int deviceId){
         Location location = this.locationList.get(location_id);
         boolean result = location.isVoted();
@@ -340,12 +406,22 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
+    /**
+     * @param location_id, die Identifizitaet der Location
+     * @param mimeType, der Typ des Bildes
+     * @param imageDataBase64, das Bild im  Base64  String
+     * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     */
     public int uploadImage(int location_id, String mimeType, String imageDataBase64){
         // mocking: do nothing
         return 1;
     }
 
 
+    /**
+     * @param location_id, die Identifizitaet der Location
+     * @return image, gibt das Bild zurueck
+     */
     public Image downloadImage(int location_id){
         // mocking: do nothing
         Image image = null;
@@ -353,11 +429,20 @@ public class MuensterInsideImplMock implements MobileWebserviceImpl {
     }
 
 
-    public Location getLocation(int id){
-        return this.locationList.get(id);
+    /**
+     *
+     * @param loc_id, die Identifizitaet der Location
+     * @return location, ein Location Objekt
+     */
+    public Location getLocation(int loc_id){
+        return this.locationList.get(loc_id);
     }
 
 
+    /**
+     * @param deviceId, die Identifizitaet des Devices
+     * @return result, gibt eine Liste der Locations zurueck
+     */
     public List<Location> getMyLocations(int deviceId){
         List<Location> result = new ArrayList<Location>();
         for(int i=0; i<this.locationList.size();i++){

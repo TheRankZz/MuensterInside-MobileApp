@@ -20,6 +20,7 @@ import de.muensterinside.mobile.tasks.StartTask;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class RegistrationActivity extends AppCompatActivity {
     private EditText username;
@@ -91,7 +92,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
 
                 if(device != null){
-                    Intent myIntent = new Intent(context, MainActivity.class);
+                    Intent myIntent = new Intent(context, WelcomeActivity.class);
+                    myIntent.putExtra(name, 0);
                     startActivity(myIntent);
 
                     CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()

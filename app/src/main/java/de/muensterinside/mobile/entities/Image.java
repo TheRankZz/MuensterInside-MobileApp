@@ -1,6 +1,11 @@
 package de.muensterinside.mobile.entities;
 
-
+/**
+ *
+ *
+ * @author Julia Bracht, Nicolas Burchert, Lennart Giesen, Julius Wessing
+ *
+ */
 
 
 public class Image {

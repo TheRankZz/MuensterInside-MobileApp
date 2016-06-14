@@ -17,6 +17,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 @RunWith(MockitoJUnitRunner.class)
 public class VoteUnitTest {

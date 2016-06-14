@@ -1,21 +1,22 @@
 package de.muensterinside.mobile;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.muensterinside.mobile.adapter.CommentAdapter;
 import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.tasks.MyCommentTask;
-import de.muensterinside.mobile.tasks.ShowCommentTask;
+
+/**
+ * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
+ */
 
 public class MyCommentActivity extends AppCompatActivity {
 
@@ -59,7 +60,7 @@ public class MyCommentActivity extends AppCompatActivity {
         }
 
         //instantiate custom adapter
-        CommentAdapters adapter = new CommentAdapters(list, this, myApp);
+        CommentAdapter adapter = new CommentAdapter(list, this, myApp,comments);
 
         //handle listview and assign adapter
 

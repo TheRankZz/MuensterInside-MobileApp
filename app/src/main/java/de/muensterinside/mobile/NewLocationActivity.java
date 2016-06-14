@@ -19,6 +19,11 @@ import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.tasks.NewLocationTask;
 
+/**
+ * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
+ */
+
 public class NewLocationActivity extends AppCompatActivity {
     public static final String TAG = "NewLocationActivity";
     private Context context;
