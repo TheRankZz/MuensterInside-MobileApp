@@ -7,24 +7,26 @@
         android:id="@+id/name"
         android:paddingTop="25dip"
         android:paddingBottom="25dip"
+        android:paddingLeft="10dip"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="#ffffff"
-        android:background="#3030c0" />
+        android:background="#7383fd" />
 
     <TextView
         android:id="@+id/vote"
         android:paddingTop="25dip"
         android:paddingBottom="25dip"
+        android:paddingRight="10dip"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|right"
         android:textSize="20sp"
         android:textColor="#ffffff"
-        android:background="#3030c0" />
+        android:background="#7383fd" />
 </LinearLayout>
 
 

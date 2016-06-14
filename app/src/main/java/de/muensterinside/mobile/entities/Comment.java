@@ -1,6 +1,7 @@
 package de.muensterinside.mobile.entities;
 
 
+import java.util.Date;
 
 /**
  * Datenklasse: Kommentar
@@ -14,6 +15,7 @@ public class Comment {
 	private String text;
 	private Device device;
 	private Location location;
+	private String date;
 	private int id;
 
 	public Comment() {
@@ -50,6 +52,10 @@ public class Comment {
 	}
 
 	public Location getLocation() {
-		return location;
+		return this.location;
 	}
+
+	public String getDate(){ return this.date; }
+
+	public void setDate(String date){ this.date = date; }
 }

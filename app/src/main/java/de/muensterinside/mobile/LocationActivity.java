@@ -3,6 +3,7 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,8 +17,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import de.muensterinside.mobile.adapter.CommentListViewAdapters;
+import de.muensterinside.mobile.adapter.LocationListViewAdapters;
 import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
@@ -27,6 +31,9 @@ import de.muensterinside.mobile.tasks.LocationTask;
 import de.muensterinside.mobile.tasks.LoginTask;
 import de.muensterinside.mobile.tasks.ShowCommentTask;
 import de.muensterinside.mobile.tasks.UpVoteTask;
+
+import static de.muensterinside.mobile.Constants.FIRST_COLUMN;
+import static de.muensterinside.mobile.Constants.SECOND_COLUMN;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
@@ -39,6 +46,7 @@ public class LocationActivity extends AppCompatActivity {
     private Device device;
     private Location location;
     private List<Comment> comments;
+    private CommentListViewAdapters adapter;
     private MuensterInsideAndroidApplication myApp;
     public static final String TAG = "LocationActivity";
 
@@ -94,6 +102,7 @@ public class LocationActivity extends AppCompatActivity {
 
         // Button zum anzeigen der Kommentare wird erzeugt
         Button showComment = (Button) findViewById(R.id.KommentarAnzeigen);
+        showComment.setPaintFlags(showComment.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
         // LocationTask wird aufgerufen
@@ -132,33 +141,49 @@ public class LocationActivity extends AppCompatActivity {
             else {
                 size = comments.size();
             }
+            ArrayList<HashMap<String, String>> list;
+            list = new ArrayList<HashMap<String,String>>();
 
             switch (size) {
                 case 0: break;
 
-                case 1: myList.add(comments.get(comments.size()-1).getText());
+                case 1: for(int i = 0; i < 1; i++){
+                            HashMap<String,String> temp = new HashMap<String, String>();
+                            temp.put(FIRST_COLUMN, comments.get(i).getText());
+                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
+                            list.add(temp);
+                        }
                     break;
 
-                case 2: myList.add(comments.get(comments.size()-1).getText());
-                    myList.add(comments.get(comments.size()-2).getText());
+                case 2: for(int i = 0; i < 2; i++){
+                            HashMap<String,String> temp = new HashMap<String, String>();
+                            temp.put(FIRST_COLUMN, comments.get(i).getText());
+                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
+                            list.add(temp);
+                        }
                     break;
 
-                case 3: myList.add(comments.get(comments.size()-1).getText());
-                    myList.add(comments.get(comments.size()-2).getText());
-                    myList.add(comments.get(comments.size()-3).getText());
+                case 3: for(int i = 0; i < 3; i++){
+                            HashMap<String,String> temp = new HashMap<String, String>();
+                            temp.put(FIRST_COLUMN, comments.get(i).getText());
+                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
+                            list.add(temp);
+                        }
                     break;
 
-                default: myList.add(comments.get(comments.size()-1).getText());
-                    myList.add(comments.get(comments.size()-2).getText());
-                    myList.add(comments.get(comments.size()-3).getText());
+                default: for(int i = 0; i < 3; i++){
+                            HashMap<String,String> temp = new HashMap<String, String>();
+                            temp.put(FIRST_COLUMN, comments.get(i).getText());
+                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
+                            list.add(temp);
+                        }
                     break;
             }
 
-            ArrayAdapter<String> adapter;
-            adapter = new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
+            // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+            adapter = new CommentListViewAdapters(context, list);
 
             kommentare.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
         }
 
         if(device == null) {

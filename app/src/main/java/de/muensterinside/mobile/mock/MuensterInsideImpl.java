@@ -171,6 +171,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
             Comment c = new Comment();
             c.setId(comment.id);
             c.setText(comment.text);
+            c.setDate(comment.createdAt);
             result.add(c);
         }
         return result;
@@ -196,6 +197,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
             Comment com = new Comment();
             com.setId(comment.id);
             com.setText(comment.text);
+            com.setDate(comment.createdAt);
             result.add(com);
         }
         return result;

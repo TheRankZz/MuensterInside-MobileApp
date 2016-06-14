@@ -16,10 +16,16 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import de.muensterinside.mobile.adapter.CommentListViewAdapters;
+import de.muensterinside.mobile.adapter.LocationListViewAdapters;
 import de.muensterinside.mobile.entities.Comment;
+import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.tasks.ShowCommentTask;
+import static de.muensterinside.mobile.Constants.FIRST_COLUMN;
+import static de.muensterinside.mobile.Constants.SECOND_COLUMN;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
@@ -32,6 +38,7 @@ public class ShowCommentActivity extends AppCompatActivity {
     private List<Comment> comments;
     private ListView listView;
     private int loc_id;
+    private CommentListViewAdapters adapter;
     public static final String TAG = "ShowCommentActivity";
 
 
@@ -76,16 +83,21 @@ public class ShowCommentActivity extends AppCompatActivity {
             toast.show();
         }
         else {
-            List myList = new ArrayList<String>();
-            for (int i = 0; i < comments.size(); i++) {
-                myList.add(comments.get(i).getText());
+            Comment comment;
+            ArrayList<HashMap<String, String>> list;
+            list = new ArrayList<HashMap<String,String>>();
+            for(int i=0; i < comments.size(); i++){
+                comment = comments.get(i);
+                HashMap<String,String> temp = new HashMap<String, String>();
+                temp.put(FIRST_COLUMN, comment.getText());
+                temp.put(SECOND_COLUMN, comment.getDate());
+                list.add(temp);
             }
 
-            ArrayAdapter<String> adapter;
-            adapter = new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
+            // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+            adapter = new CommentListViewAdapters(this, list);
 
             listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
         }
     }
 

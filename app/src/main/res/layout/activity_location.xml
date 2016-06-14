@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7383fd"
+    android:background="#ffffff"
     tools:context="de.muensterinside.mobile.LocationActivity">
 
     <ListView
@@ -44,7 +44,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Name:"
         android:id="@+id/textViewName"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:layout_toEndOf="@+id/button" />
 
     <TextView
@@ -53,7 +53,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Votes:"
         android:id="@+id/textViewVote"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:layout_below="@+id/textViewName"
         android:layout_toEndOf="@+id/button"
         android:layout_marginTop="55dp" />
@@ -65,7 +65,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Link:"
         android:id="@+id/textViewLink"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:layout_below="@+id/button" />
 
     <TextView
@@ -74,7 +74,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="EXAMPLE"
         android:id="@+id/textViewExampleName"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:layout_below="@+id/textViewName"
         android:layout_toEndOf="@+id/button" />
 
@@ -84,7 +84,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="EXAMPLE"
         android:id="@+id/textViewExampleVote"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:layout_below="@+id/textViewVote"
         android:layout_toEndOf="@+id/button" />
 
@@ -95,7 +95,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="EXAMPLE"
         android:id="@+id/textViewExampleLink"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:layout_below="@+id/textViewLink"
         android:layout_alignParentStart="true" />
 
@@ -103,7 +103,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:drawableBottom="@drawable/ic_action_arrow_top"
+        android:drawableBottom="@drawable/ic_action_like"
         android:background="@android:color/transparent"
         android:id="@+id/up"
         android:clickable="true"
@@ -114,19 +114,22 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:drawableBottom="@drawable/ic_action_arrow_bottom"
+        android:drawableBottom="@drawable/ic_action_dontlike"
         android:background="@android:color/transparent"
         android:id="@+id/down"
         android:layout_alignTop="@+id/up"
         android:layout_alignParentEnd="true"
         android:clickable="true" />
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kommentare anzeigen"
+        android:text="Weitere Kommentare anzeigen"
+        android:textColor="#000000"
         android:id="@+id/KommentarAnzeigen"
+        android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/textViewExampleVote" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

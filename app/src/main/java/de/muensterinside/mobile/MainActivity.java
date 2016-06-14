@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Fügt Items in die NavigationBar ein
         for(int i=0; i < myList.size();i++){
-            listSliding.add(new ItemSlideMenu(R.drawable.ic_action_settings, myList.get(i).toString()));
+            listSliding.add(new ItemSlideMenu(R.drawable.ic_action_tiles_large, myList.get(i).toString()));
         }
 
         adapter = new SlidingMenuAdapter(this, listSliding);

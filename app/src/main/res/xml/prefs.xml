@@ -3,9 +3,6 @@
     <PreferenceCategory
         android:title="Einstellungen"
         android:key="pref_key_user_settings">
-        <EditTextPreference android:key="username"
-            android:summary="@string/usernameSummary"
-            android:title="@string/username"/>
         <PreferenceScreen android:key="Kommentar"
         android:title="@string/kommentare" android:id="@+id/CommentButton" >
         <intent android:action="de.muensterinside.mobile.MyCommentActivity" />

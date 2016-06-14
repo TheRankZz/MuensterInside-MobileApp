@@ -13,11 +13,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import de.muensterinside.mobile.adapter.ListViewAdapters;
+import de.muensterinside.mobile.adapter.LocationListViewAdapters;
 import de.muensterinside.mobile.LocationActivity;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.NewLocationActivity;
-import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Location;
 
 import static de.muensterinside.mobile.Constants.FIRST_COLUMN;
@@ -29,7 +28,7 @@ import static de.muensterinside.mobile.Constants.SECOND_COLUMN;
 public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private MuensterInsideAndroidApplication myApp;
     private List<Location> locations;
-    private ListViewAdapters adapter;
+    private LocationListViewAdapters adapter;
     private Context context;
     private ListView listView;
     private Button newLocation;
@@ -91,7 +90,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
 
 
         // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
-        adapter = new ListViewAdapters(context, list);
+        adapter = new LocationListViewAdapters(context, list);
 
         listView.setAdapter(adapter);
         final List<Location> test = locations;
