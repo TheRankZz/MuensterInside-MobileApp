@@ -40,16 +40,19 @@ public class UpVoteInstrumentedUnitTest {
     public void testVoteALocationInstrumentedUnitTest() throws Exception {
 
 
-        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Burgercult"))))
+        onView(withId(R.id.button2))
+                .perform(click());
+
+        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Burger Cult"))))
                 .inAdapterView(withId(R.id.categoryList))
                 .perform(click());
 
         onView(withId(R.id.textViewExampleName))
-                .check(matches(withText("Burgercult")));
+                .check(matches(withText("Burger Cult")));
 
         onView(withId(R.id.up)).perform(click());
-        onView(withId(R.id.textViewExampleVote)).check(matches(withText("36")));
+        onView(withId(R.id.textViewExampleVote)).check(matches(withText("22")));
         onView(withId(R.id.up)).perform(click());
-        onView(withId(R.id.textViewExampleVote)).check(matches(withText("36")));
+        onView(withId(R.id.textViewExampleVote)).check(matches(withText("22")));
     }
 }
