@@ -28,12 +28,12 @@
 
         <Button
         android:id="@+id/registration"
-        android:layout_width="fill_parent"
+        android:layout_width="342dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
-        android:text="Registrieren"
+        android:text="@string/register"
         android:background="#3030c0"
         android:textColor="#ffffff" />
 
@@ -44,7 +44,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="Login"
+            android:text="@string/login"
             android:background="#3030c0"
             android:textColor="#ffffff" />
 

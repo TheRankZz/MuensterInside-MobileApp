@@ -39,8 +39,8 @@ public class WelcomeActivity extends AppCompatActivity {
         //sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         //username.setText(name);
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-        username.setText(name);
+        String name = intent.getStringExtra("username");
+        username.setText(name + ",");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,7 +16,6 @@ import android.widget.Toast;
 import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.tasks.LoginTask;
 import de.muensterinside.mobile.tasks.RegistrationTask;
-import de.muensterinside.mobile.tasks.StartTask;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
@@ -47,6 +46,8 @@ public class RegistrationActivity extends AppCompatActivity {
         // Hier wird der vom Benutzer eingegene Benutzername gespeichert
         username = (EditText) findViewById(R.id.registration_username);
 
+        context = this;
+
         /* SharedPreferences wird benutzt um,
          * die androidId und den usernamen unter dem Schlüssel "MyPref",
          * zu speichern
@@ -58,8 +59,40 @@ public class RegistrationActivity extends AppCompatActivity {
         editor.commit();
 
         // Wenn ein Gerät schon registriert ist, wird beim Start automatisch ein Login durchgeführt
-        StartTask startTask = new StartTask(this, myApp, android_id);
-        startTask.execute();
+        LoginTask loginTask = new LoginTask(this, myApp, android_id);
+        loginTask.execute();
+
+        Device device;
+        try {
+            device = loginTask.get();
+            Log.i(TAG, "login.onClick() erfolgreich");
+        }
+        catch(Exception e){
+            Log.e(TAG, "login.onClick() fehlgeschlagen");
+            device = null;
+            e.printStackTrace();
+        }
+
+        if(device != null){
+            String name = username.getText().toString();
+            Intent myIntent = new Intent(context, WelcomeActivity.class);
+            myIntent.putExtra("username", name);
+            startActivity(myIntent);
+
+            CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
+                    + "AndroidId: " + device.getAndroidUuid();
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            Log.i(TAG, "Login erfolgreich");
+        }
+        else {
+            CharSequence text = "Login fehlgeschlagen!";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            Log.i(TAG, "Login fehlgeschlagen");
+        }
 
         // Button für die Registrierung wird angelegt
         final Button registration = (Button) findViewById(R.id.registration);
@@ -67,7 +100,6 @@ public class RegistrationActivity extends AppCompatActivity {
         // Button für das Login wird angelegt
         Button login = (Button) findViewById(R.id.login);
 
-        context = this;
 
         /* Wenn der Button login gedrückt wurde,
          * soll der LoginTask ausgeführt werden.
@@ -93,7 +125,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if(device != null){
                     Intent myIntent = new Intent(context, WelcomeActivity.class);
-                    myIntent.putExtra(name, 0);
+                    myIntent.putExtra("username", name);
                     startActivity(myIntent);
 
                     CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()

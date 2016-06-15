@@ -17,6 +17,18 @@
     <string name="drawer_opened">Opened</string>
     <string name="drawer_closed">Closed</string>
     <string name="hallo">Hallo</string>
+    <string name="showComment">Schreiben Sie einen Kommentar...</string>
+    <string name="comment">Kommentar</string>
+    <string name="location_name">Name:</string>
+    <string name="location_vote">Votes:</string>
+    <string name="location_link">Link:</string>
+    <string name="example">EXAMPLE</string>
+    <string name="showMoreComments">Weitere Kommentare anzeigen</string>
+    <string name="description">Beschreibung</string>
+    <string name="newLocation">Erstelle Location</string>
+    <string name="register">Registrieren</string>
+    <string name="login">Login</string>
+    <string name="delete">Löschen</string>
    <string name="willkommen">
        herzlich Willkommen auf unserer App.
        \n \n Lerne neue Locations kennen und lass dich von den Geschmaeckern der Muensteraner inspirieren.

@@ -26,8 +26,7 @@
         android:background="@drawable/ic_action_picture" />
 
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
+    <Button style="?android:attr/buttonStyleSmall"
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:drawableBottom="@drawable/ic_action_add"
@@ -42,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Name:"
+        android:text="@string/location_name"
         android:id="@+id/textViewName"
         android:textColor="#000000"
         android:layout_toEndOf="@+id/button" />
@@ -51,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Votes:"
+        android:text="@string/location_vote"
         android:id="@+id/textViewVote"
         android:textColor="#000000"
         android:layout_below="@+id/textViewName"
@@ -63,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Link:"
+        android:text="@string/location_link"
         android:id="@+id/textViewLink"
         android:textColor="#000000"
         android:layout_below="@+id/button" />
@@ -72,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="EXAMPLE"
+        android:text="@string/example"
         android:id="@+id/textViewExampleName"
         android:textColor="#000000"
         android:layout_below="@+id/textViewName"
@@ -82,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="EXAMPLE"
+        android:text="@string/example"
         android:id="@+id/textViewExampleVote"
         android:textColor="#000000"
         android:layout_below="@+id/textViewVote"
@@ -93,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="EXAMPLE"
+        android:text="@string/example"
         android:id="@+id/textViewExampleLink"
         android:textColor="#000000"
         android:layout_below="@+id/textViewLink"
@@ -125,7 +124,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weitere Kommentare anzeigen"
+        android:text="@string/showMoreComments"
         android:textColor="#000000"
         android:id="@+id/KommentarAnzeigen"
         android:background="@android:color/transparent"
