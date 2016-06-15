@@ -39,12 +39,12 @@ public class NewCommentInstrumentedUnitTest {
     @Test
     public void testVoteALocationInstrumentedUnitTest() throws Exception {
 
-        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Nico"))))
+        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Burgercult"))))
                 .inAdapterView(withId(R.id.categoryList))
                 .perform(click());
 
         onView(withId(R.id.textViewExampleName))
-                .check(matches(withText("Nico")));
+                .check(matches(withText("Burgercult")));
 
         onView(withId(R.id.button1)).perform(click());
         onView(withId(R.id.editText)).perform(clearText()).perform(typeText("Kommentar"));

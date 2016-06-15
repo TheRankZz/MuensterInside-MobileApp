@@ -33,20 +33,20 @@ public class RegistrationAndLoginInstrumentedUnitTest {
     public void testRegistrationAndLogin() throws Exception{
 
         // Gibt einen Usernamen ein
-        onView(withId(R.id.registration_username))
-                .perform(typeText("name"), closeSoftKeyboard());
+        //onView(withId(R.id.registration_username))
+                //.perform(typeText("name"), closeSoftKeyboard());
 
         // Klickt auf den Button Registrieren
-        onView(withId(R.id.registration))
-                .perform(click());
+        //onView(withId(R.id.registration))
+                //.perform(click());
 
         // Prüft ob der eingegebene Username wirklich übernommen wurde
-        onView(withId(R.id.registration_username))
-                .check(matches(withText("name")));
+        //onView(withId(R.id.registration_username))
+                //.check(matches(withText("name")));
 
         // Klickt auf den Button Login
-        onView(withId(R.id.login))
-                .perform(click());
+        //onView(withId(R.id.login))
+                //.perform(click());
 
         /* Prüft ob der Activity Wechsel erfolgreich war,
          * da in der MainActivity kein Login Button vorhanden ist.
