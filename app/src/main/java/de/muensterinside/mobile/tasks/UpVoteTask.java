@@ -20,22 +20,18 @@ public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
     public static final String TAG = "UpVoteTask";
     private int loc_id;
     private int deviceId;
-    private TextView exampleVote;
-    private Location location;
 
-    public UpVoteTask(Context context, MuensterInsideAndroidApplication myApp, int loc_id, int deviceId, TextView exampleVote){
+    public UpVoteTask(Context context, MuensterInsideAndroidApplication myApp, int loc_id, int deviceId){
         this.context = context;
         this.myApp = myApp;
         this.loc_id = loc_id;
         this.deviceId = deviceId;
-        this.exampleVote = exampleVote;
     }
 
     @Override
     protected Integer doInBackground(String... params){
         try{
             boolean isVoted = this.myApp.getMuensterInsideImpl().isVoted(this.loc_id, deviceId);
-            this.location = this.myApp.getMuensterInsideImpl().getLocation(this.loc_id);
             if(isVoted == false){
                 int result = this.myApp.getMuensterInsideImpl().upVote(loc_id, deviceId);
                 return result;
@@ -52,29 +48,6 @@ public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
 
     @Override
     public void onPostExecute(Integer result){
-        if(result != null && result == 0){
-            CharSequence text = "UpVote erfolgreich";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "UpVote erfolgreich");
-        }
-        else if(result == 2) {
-            CharSequence text = "Es gab schon ein Vote";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "Es gab schon ein Vote");
-        }
-        else {
-            CharSequence text = "UpVote nicht erfolgreich";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "UpVote nicht erfolgreich");
-        }
-        int voteValue = location.getVoteValue();
-        String voteString = String.valueOf(voteValue);
-        exampleVote.setText(voteString);
+
     }
 }

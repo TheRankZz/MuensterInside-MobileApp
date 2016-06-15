@@ -48,6 +48,8 @@ public class LocationActivity extends AppCompatActivity {
     private List<Comment> comments;
     private CommentListViewAdapters adapter;
     private MuensterInsideAndroidApplication myApp;
+    private String voteString;
+    private TextView exampleVote;
     public static final String TAG = "LocationActivity";
 
     @Override
@@ -83,7 +85,7 @@ public class LocationActivity extends AppCompatActivity {
         TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
 
         // TextView für die Darstellung des VoteValues wird erzeugt
-        final TextView exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
+        exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
 
         // TextView für die Darstellung des Links wird erzeugt
         TextView exampleLink = (TextView) findViewById(R.id.textViewExampleLink);
@@ -132,7 +134,6 @@ public class LocationActivity extends AppCompatActivity {
             toast.show();
         }
         else {
-            List myList =  new ArrayList<String>();
 
             int size;
             if(comments == null){
@@ -196,16 +197,16 @@ public class LocationActivity extends AppCompatActivity {
 
         final Location l = location;
 
-        String voteString = String.valueOf(location.getVoteValue());
+        voteString = String.valueOf(location.getVoteValue());
 
         // TextView für den Namen der Location wird befüllt
         exampleName.setText(location.getName());
 
-        // TextView für den Namen der Location wird befüllt
+        // TextView für den VoteValue der Location wird befüllt
         exampleVote.setText(voteString);
 
-        // TextView für den Namen der Location wird befüllt
-        exampleLink.setText(location.getDescription());
+        // TextView für den Link der Location wird befüllt
+        exampleLink.setText(location.getLink());
 
         // führt zur CommentActivity, wenn der Button gedrückt wird
         writeComment.setOnClickListener(new View.OnClickListener() {
@@ -234,8 +235,50 @@ public class LocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "up.onClick() gestartet");
-                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId(), exampleVote);
+                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId());
                 upVoteTask.execute();
+                int code;
+                try{
+                    code = upVoteTask.get();
+                }
+                catch (Exception e){
+                    code = 1;
+                    e.printStackTrace();
+                }
+                if(code == 0){
+                    CharSequence text = "UpVote erfolgreich";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    LocationTask locationTask1 = new LocationTask(context,myApp,loc_id);
+                    locationTask1.execute();
+                    Location location;
+                    try{
+                        location = locationTask1.get();
+                    }
+                    catch(Exception e){
+                        location = l;
+                        e.printStackTrace();
+                    }
+                    String newVoteValue = String.valueOf(location.getVoteValue());
+                    exampleVote.setText(newVoteValue);
+                    Log.i(TAG, "UpVote erfolgreich");
+                }
+                else if(code == 2) {
+                    CharSequence text = "Es gab schon ein Vote";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Es gab schon ein Vote");
+                }
+                else {
+                    CharSequence text = "UpVote nicht erfolgreich";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "UpVote nicht erfolgreich");
+                }
             }
         });
 
@@ -244,8 +287,50 @@ public class LocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "down.onClick() gestartet");
-                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId(), exampleVote);
+                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId());
                 downVoteTask.execute();
+                int code;
+                try{
+                    code = downVoteTask.get();
+                }
+                catch (Exception e){
+                    code = 1;
+                    e.printStackTrace();
+                }
+                if(code == 0){
+                    CharSequence text = "DownVote erfolgreich";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    LocationTask locationTask1 = new LocationTask(context,myApp,loc_id);
+                    locationTask1.execute();
+                    Location location;
+                    try{
+                        location = locationTask1.get();
+                    }
+                    catch(Exception e){
+                        location = l;
+                        e.printStackTrace();
+                    }
+                    String newVoteValue = String.valueOf(location.getVoteValue());
+                    exampleVote.setText(newVoteValue);
+                    Log.i(TAG, "DownVote erfolgreich");
+                }
+                else if(code == 2) {
+                    CharSequence text = "Es gab schon ein Vote";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Es gab schon ein Vote");
+                }
+                else {
+                    CharSequence text = "UpVote nicht erfolgreich";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "UpVote nicht erfolgreich");
+                }
             }
         });
     }
