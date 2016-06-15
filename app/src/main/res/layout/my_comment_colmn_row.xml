@@ -17,6 +17,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="#ffffff"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/delete_btn"
         android:background="#7383fd" />
 
     <TextView
@@ -33,15 +35,12 @@
 
     <Button
         android:id="@+id/delete_btn"
-        android:paddingTop="25dip"
-        android:paddingBottom="25dip"
         android:text="@string/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/created_at" />
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:textSize="15sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
 
 
 

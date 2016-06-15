@@ -30,7 +30,7 @@ public class MuensterInsideAndroidApplication extends Application{
      * Serverinterface wird implementiert.
      */
     public MuensterInsideAndroidApplication() {
-        this.muensterInsideImpl = new MuensterInsideImplMock(); // MuensterInsideImpl
+        this.muensterInsideImpl = new MuensterInsideImpl(); // MuensterInsideImpl
 
     }
 

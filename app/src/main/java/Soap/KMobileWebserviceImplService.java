@@ -32,7 +32,7 @@ public class KMobileWebserviceImplService {
     /**
      * The WSDL URL.
      */
-    private static final String URL = ""; //http://10.60.64.35/muensterinside/mobile
+    private static final String URL = "http://10.60.64.35:8080/muensterinside/mobile"; //http://10.60.64.35/muensterinside/mobile
 
 
     public deviceResponse register(String arg0,String arg1) throws Exception{

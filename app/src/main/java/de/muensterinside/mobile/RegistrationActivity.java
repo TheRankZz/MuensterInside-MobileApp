@@ -74,9 +74,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
         if(device != null){
-            String name = username.getText().toString();
-
-            //Hier wird der Username der WelcomeActivity übergeben
+            String name = device.getUsername();
             Intent myIntent = new Intent(context, WelcomeActivity.class);
             myIntent.putExtra("username", name);
             startActivity(myIntent);
@@ -110,10 +108,9 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "login.onClick() gestartet");
-                String name = username.getText().toString();
-                Log.i(TAG, "Username: " + name);
+
                 LoginTask loginTask = new LoginTask(view.getContext(), myApp, android_id);
-                loginTask.execute(android_id, name);
+                loginTask.execute();
                 Device device;
                 try {
                     device = loginTask.get();
@@ -126,6 +123,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
 
                 if(device != null){
+                    String name = device.getUsername();
+                    Log.i(TAG, "Username: " + name);
                     Intent myIntent = new Intent(context, WelcomeActivity.class);
                     myIntent.putExtra("username", name);
                     startActivity(myIntent);

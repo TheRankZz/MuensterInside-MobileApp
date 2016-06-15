@@ -48,13 +48,15 @@ public class LocationActivity extends AppCompatActivity {
     private List<Comment> comments;
     private CommentListViewAdapters adapter;
     private MuensterInsideAndroidApplication myApp;
+    private String voteString;
+    private TextView exampleVote;
     public static final String TAG = "LocationActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
-        // Hier wird der Activity das Aussehen zugeordnet
+        // Hier wird das Aussehen der CategoryActivity ausgewählt
         setContentView(R.layout.activity_location);
 
         // Die von der CategoryActivity übergebenden Parameter werden hier zugewiesen
@@ -63,10 +65,6 @@ public class LocationActivity extends AppCompatActivity {
         // Ein Application Objekt wird erzeugt
         myApp = (MuensterInsideAndroidApplication) getApplication();
 
-
-         /* In der SharedPreference wird die vorher ausgewählte
-         * ID einer Kategorie und die ID einer Location ausgelesen.
-         */
         SharedPreferences bool = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
 
@@ -87,7 +85,7 @@ public class LocationActivity extends AppCompatActivity {
         TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);
 
         // TextView für die Darstellung des VoteValues wird erzeugt
-        final TextView exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
+        exampleVote = (TextView) findViewById(R.id.textViewExampleVote);
 
         // TextView für die Darstellung des Links wird erzeugt
         TextView exampleLink = (TextView) findViewById(R.id.textViewExampleLink);
@@ -136,7 +134,6 @@ public class LocationActivity extends AppCompatActivity {
             toast.show();
         }
         else {
-            List myList =  new ArrayList<String>();
 
             int size;
             if(comments == null){
@@ -152,35 +149,35 @@ public class LocationActivity extends AppCompatActivity {
                 case 0: break;
 
                 case 1: for(int i = 0; i < 1; i++){
-                            HashMap<String,String> temp = new HashMap<String, String>();
-                            temp.put(FIRST_COLUMN, comments.get(i).getText());
-                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
-                            list.add(temp);
-                        }
+                    HashMap<String,String> temp = new HashMap<String, String>();
+                    temp.put(FIRST_COLUMN, comments.get(i).getText());
+                    temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
+                    list.add(temp);
+                }
                     break;
 
                 case 2: for(int i = 0; i < 2; i++){
-                            HashMap<String,String> temp = new HashMap<String, String>();
-                            temp.put(FIRST_COLUMN, comments.get(i).getText());
-                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
-                            list.add(temp);
-                        }
+                    HashMap<String,String> temp = new HashMap<String, String>();
+                    temp.put(FIRST_COLUMN, comments.get(i).getText());
+                    temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
+                    list.add(temp);
+                }
                     break;
 
                 case 3: for(int i = 0; i < 3; i++){
-                            HashMap<String,String> temp = new HashMap<String, String>();
-                            temp.put(FIRST_COLUMN, comments.get(i).getText());
-                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
-                            list.add(temp);
-                        }
+                    HashMap<String,String> temp = new HashMap<String, String>();
+                    temp.put(FIRST_COLUMN, comments.get(i).getText());
+                    temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
+                    list.add(temp);
+                }
                     break;
 
                 default: for(int i = 0; i < 3; i++){
-                            HashMap<String,String> temp = new HashMap<String, String>();
-                            temp.put(FIRST_COLUMN, comments.get(i).getText());
-                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
-                            list.add(temp);
-                        }
+                    HashMap<String,String> temp = new HashMap<String, String>();
+                    temp.put(FIRST_COLUMN, comments.get(i).getText());
+                    temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
+                    list.add(temp);
+                }
                     break;
             }
 
@@ -200,16 +197,16 @@ public class LocationActivity extends AppCompatActivity {
 
         final Location l = location;
 
-        String voteString = String.valueOf(location.getVoteValue());
+        voteString = String.valueOf(location.getVoteValue());
 
         // TextView für den Namen der Location wird befüllt
         exampleName.setText(location.getName());
 
-        // TextView für den Namen der Location wird befüllt
+        // TextView für den VoteValue der Location wird befüllt
         exampleVote.setText(voteString);
 
-        // TextView für den Namen der Location wird befüllt
-        exampleLink.setText(location.getDescription());
+        // TextView für den Link der Location wird befüllt
+        exampleLink.setText(location.getLink());
 
         // führt zur CommentActivity, wenn der Button gedrückt wird
         writeComment.setOnClickListener(new View.OnClickListener() {
@@ -238,8 +235,50 @@ public class LocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "up.onClick() gestartet");
-                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId(), exampleVote);
+                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId());
                 upVoteTask.execute();
+                int code;
+                try{
+                    code = upVoteTask.get();
+                }
+                catch (Exception e){
+                    code = 1;
+                    e.printStackTrace();
+                }
+                if(code == 0){
+                    CharSequence text = "UpVote erfolgreich";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    LocationTask locationTask1 = new LocationTask(context,myApp,loc_id);
+                    locationTask1.execute();
+                    Location location;
+                    try{
+                        location = locationTask1.get();
+                    }
+                    catch(Exception e){
+                        location = l;
+                        e.printStackTrace();
+                    }
+                    String newVoteValue = String.valueOf(location.getVoteValue());
+                    exampleVote.setText(newVoteValue);
+                    Log.i(TAG, "UpVote erfolgreich");
+                }
+                else if(code == 2) {
+                    CharSequence text = "Es gab schon ein Vote";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Es gab schon ein Vote");
+                }
+                else {
+                    CharSequence text = "UpVote nicht erfolgreich";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "UpVote nicht erfolgreich");
+                }
             }
         });
 
@@ -248,8 +287,50 @@ public class LocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "down.onClick() gestartet");
-                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId(), exampleVote);
+                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId());
                 downVoteTask.execute();
+                int code;
+                try{
+                    code = downVoteTask.get();
+                }
+                catch (Exception e){
+                    code = 1;
+                    e.printStackTrace();
+                }
+                if(code == 0){
+                    CharSequence text = "DownVote erfolgreich";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    LocationTask locationTask1 = new LocationTask(context,myApp,loc_id);
+                    locationTask1.execute();
+                    Location location;
+                    try{
+                        location = locationTask1.get();
+                    }
+                    catch(Exception e){
+                        location = l;
+                        e.printStackTrace();
+                    }
+                    String newVoteValue = String.valueOf(location.getVoteValue());
+                    exampleVote.setText(newVoteValue);
+                    Log.i(TAG, "DownVote erfolgreich");
+                }
+                else if(code == 2) {
+                    CharSequence text = "Es gab schon ein Vote";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Es gab schon ein Vote");
+                }
+                else {
+                    CharSequence text = "UpVote nicht erfolgreich";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "UpVote nicht erfolgreich");
+                }
             }
         });
     }
@@ -257,8 +338,7 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
-        // den wir in der XML-Datei menu_menu_main.xml definiert haben.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -266,15 +346,13 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected() gestartet");
-        //Hier prüfen wir, ob unser Menüeintrag angeklickt wurde und führen die gewünschte Aktion aus.
+        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
         if (item.getItemId() == R.id.action_settings) {
-            //Beim Klicken auf dem Button "Einstellung" öffnet es die passende Activity
             Intent i = new Intent(this, PrefsActivity.class);
             startActivity(i);
             return true;
         }
         else if(item.getItemId() == R.id.home_button) {
-            //Beim Klicken auf dem Button "Startseite" öffnet es die passende Activity
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             return true;

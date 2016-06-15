@@ -368,7 +368,8 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
         l.setId(location.id);
         l.setName(location.name);
         l.setDescription(location.description);
-        l.setDescription(location.link);
+        l.setLink(location.link);
+        l.setVoteValue(location.votevalue);
         return l;
     }
 

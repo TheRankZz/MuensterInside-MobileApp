@@ -24,11 +24,12 @@
     <string name="location_link">Link:</string>
     <string name="example">EXAMPLE</string>
     <string name="showMoreComments">Weitere Kommentare anzeigen</string>
-    <string name="description">Beschreibung</string>
+    <string name="description">Beschreibung:</string>
     <string name="newLocation">Erstelle Location</string>
     <string name="register">Registrieren</string>
     <string name="login">Login</string>
     <string name="delete">Löschen</string>
+    <string name="lets_go">Los gehts!</string>
    <string name="willkommen">
        herzlich Willkommen auf unserer App.
        \n \n Lerne neue Locations kennen und lass dich von den Geschmaeckern der Muensteraner inspirieren.
