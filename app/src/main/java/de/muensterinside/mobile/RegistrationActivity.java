@@ -34,6 +34,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
+        // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_registration);
 
         myApp = (MuensterInsideAndroidApplication) getApplication();
@@ -48,9 +49,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
         context = this;
 
-        /* SharedPreferences wird benutzt um,
-         * die androidId und den usernamen unter dem Schlüssel "MyPref",
-         * zu speichern
+       /* In der SharedPreference wird die vorher ausgewählte
+         * AnroidID des Gerätes und der Username gespeichert.
          */
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -75,6 +75,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if(device != null){
             String name = username.getText().toString();
+
+            //Hier wird der Username der WelcomeActivity übergeben
             Intent myIntent = new Intent(context, WelcomeActivity.class);
             myIntent.putExtra("username", name);
             startActivity(myIntent);

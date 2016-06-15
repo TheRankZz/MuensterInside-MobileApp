@@ -3,21 +3,17 @@ package de.muensterinside.mobile.tasks;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
-import de.muensterinside.mobile.R;
-import de.muensterinside.mobile.entities.Comment;
-import de.muensterinside.mobile.entities.Device;
+
 import de.muensterinside.mobile.entities.Location;
-import de.muensterinside.mobile.entities.Vote;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class MyVoteTask extends AsyncTask<Void,Void, List<Location>> {
 
@@ -28,6 +24,11 @@ public class MyVoteTask extends AsyncTask<Void,Void, List<Location>> {
     private List<Location> votes;
     private int device_id;
 
+    /**
+     * Konstruktor
+     * @param context der Inhalt der Activity
+     * @param myApp der Zustand der Application
+     */
     public MyVoteTask(Context context, MuensterInsideAndroidApplication myApp)
 
     {
@@ -35,6 +36,7 @@ public class MyVoteTask extends AsyncTask<Void,Void, List<Location>> {
         this.context = context;
     }
 
+    // Im Hintergrund wird der Webservice aufgerufen
     @Override
     protected List<Location> doInBackground(Void... params)
     {
@@ -54,10 +56,5 @@ public class MyVoteTask extends AsyncTask<Void,Void, List<Location>> {
         return null;
     }
 
-    @Override
-    protected void onPostExecute(List<Location> votes)
-    {
-        Log.d(TAG, "onPostExecute() gestartet");
 
-    }
 }

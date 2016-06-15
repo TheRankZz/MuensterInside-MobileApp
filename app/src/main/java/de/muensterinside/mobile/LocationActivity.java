@@ -54,7 +54,7 @@ public class LocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
-        // Hier wird das Aussehen der CategoryActivity ausgewählt
+        // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_location);
 
         // Die von der CategoryActivity übergebenden Parameter werden hier zugewiesen
@@ -63,6 +63,10 @@ public class LocationActivity extends AppCompatActivity {
         // Ein Application Objekt wird erzeugt
         myApp = (MuensterInsideAndroidApplication) getApplication();
 
+
+         /* In der SharedPreference wird die vorher ausgewählte
+         * ID einer Kategorie und die ID einer Location ausgelesen.
+         */
         SharedPreferences bool = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
 
@@ -253,7 +257,8 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
+        // den wir in der XML-Datei menu_menu_main.xml definiert haben.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -261,13 +266,15 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected() gestartet");
-        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
+        //Hier prüfen wir, ob unser Menüeintrag angeklickt wurde und führen die gewünschte Aktion aus.
         if (item.getItemId() == R.id.action_settings) {
+            //Beim Klicken auf dem Button "Einstellung" öffnet es die passende Activity
             Intent i = new Intent(this, PrefsActivity.class);
             startActivity(i);
             return true;
         }
         else if(item.getItemId() == R.id.home_button) {
+            //Beim Klicken auf dem Button "Startseite" öffnet es die passende Activity
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             return true;

@@ -37,7 +37,7 @@ public class NewLocationActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate) gestartet");
         super.onCreate(savedInstanceState);
 
-        // Aussehen der Activity wird festgelegt
+        // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_new_location);
 
         //Eingabefeld für den Namen wird erzeugt
@@ -49,9 +49,8 @@ public class NewLocationActivity extends AppCompatActivity {
         // Eingabefeld für den Link wird erzeugt
         link = (EditText) findViewById(R.id.locationLink);
 
-        /* Die ID der ursprünglich ausgewählten Kategorie,
-         * die jeweilige Android Device-ID und
-         * den ausgewählten Benutzernamen werden aus den SharedPreferences geholt.
+          /* In der SharedPreference wird die vorher ausgewählte
+         * ID einer Kategorie, die Identifikation des Gerätes und der Username ausgelesen.
          */
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -88,6 +87,11 @@ public class NewLocationActivity extends AppCompatActivity {
                 }
 
                 if(code == 0) {
+
+                    /* In der SharedPreference wird die vorher ausgewählte
+                    * Id der Location(und ein Boolean der auf true gesetzt wird,
+                     * wenn eine neue Location erzeugt wird) gespeichert.
+                    */
                     SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = boolPref.edit();
                     editor.putBoolean("newLocationBool", true);
@@ -116,21 +120,24 @@ public class NewLocationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
+        // den wir in der XML-Datei menu_menu_main.xml definiert haben.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
+        Log.d(TAG, "onOptionsItemSelected() gestartet");
+        //Hier prüfen wir, ob unser Menüeintrag angeklickt wurde und führen die gewünschte Aktion aus.
         if (item.getItemId() == R.id.action_settings) {
+            //Beim Klicken auf dem Button "Einstellung" öffnet es die passende Activity
             Intent i = new Intent(this, PrefsActivity.class);
             startActivity(i);
             return true;
         }
         else if(item.getItemId() == R.id.home_button) {
+            //Beim Klicken auf dem Button "Startseite" öffnet es die passende Activity
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             return true;

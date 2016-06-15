@@ -24,6 +24,7 @@ public class MyVoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_my_vote);
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();

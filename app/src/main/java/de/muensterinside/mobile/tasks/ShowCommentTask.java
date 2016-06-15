@@ -11,6 +11,7 @@ import de.muensterinside.mobile.entities.Comment;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @auhtor Julia Bracht, Nicolas Burchert
  */
 public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
 
@@ -21,7 +22,12 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     private List<Comment> comments;
 
 
-
+    /**
+     * Konstruktor
+     * @param context der Inhalt der Activity
+     * @param myApp der Zustand der Application
+     * @param loc_id die Identifikation der Location
+     */
     public ShowCommentTask(Context context, MuensterInsideAndroidApplication myApp,int loc_id)
     {
         this.loc_id = loc_id;
@@ -31,6 +37,7 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
 
     }
 
+    // Im Hintergrund wird der Webservice aufgerufen.
     @Override
     protected List<Comment> doInBackground(Void... params){
         Log.d(TAG, "doInBackground() gestartet" );
@@ -47,13 +54,5 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
         return null;
     }
 
-    @Override
-    protected void onPostExecute(List<Comment> comments)
-    {
-        Log.d(TAG, "onPostExecute() gestartet");
-
-
-
-    }
 
 }

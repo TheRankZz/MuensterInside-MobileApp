@@ -9,6 +9,7 @@ import de.muensterinside.mobile.entities.Location;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private MuensterInsideAndroidApplication myApp;
@@ -16,11 +17,11 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     private int loc_id;
     public static final String TAG = "LocationTask";
 
-    /* Konstruktor erwartet ein Context Objekt,
-     * die ID der Location die ausgewählt wurde,
-     * die ID der Kategorie die ausgewählt wurde,
-     * ein Application Objekt und mehrere TextViews/Buttons
-     * für die Darstellung der LocationActivity.
+    /**
+     * Konstruktor
+     * @param context der Inhalt der Activity
+     * @param myApp repräsentiert den Zustand der Application
+     * @param loc_id die Identifizitaet der Location
      */
     public LocationTask(Context context,MuensterInsideAndroidApplication myApp, int loc_id){
         this.context = context;
@@ -49,11 +50,4 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
         return null;
     }
 
-    // onPostExecute Methode erwartet ein Location Objekt von der doInBackground Methode
-    @Override
-    public void onPostExecute(Location location){
-        Log.d(TAG, "onPostExecute() gestartet");
-
-
-    }
 }

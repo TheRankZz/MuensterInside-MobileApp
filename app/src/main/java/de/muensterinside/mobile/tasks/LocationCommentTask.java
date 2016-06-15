@@ -15,6 +15,7 @@ import de.muensterinside.mobile.entities.Comment;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class LocationCommentTask extends AsyncTask<Void, Void ,List <Comment>> {
     private MuensterInsideAndroidApplication myApp;
@@ -34,6 +35,7 @@ public class LocationCommentTask extends AsyncTask<Void, Void ,List <Comment>> {
 
     }
 
+    // Im Hintergrund wird der Webservice aufgerufen.
     @Override
     public List<Comment> doInBackground(Void... params)
     {
@@ -51,6 +53,7 @@ public class LocationCommentTask extends AsyncTask<Void, Void ,List <Comment>> {
         }
         return null;
     }
+
 
     @Override
     public void onPostExecute(List <Comment> comments)

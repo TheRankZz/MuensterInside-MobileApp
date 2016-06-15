@@ -6,16 +6,15 @@ import android.os.AsyncTask;
 
 import android.util.Log;
 
-import java.util.List;
 
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
-import de.muensterinside.mobile.entities.Category;
 import de.muensterinside.mobile.entities.Device;
 
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class WriteCommentTask extends AsyncTask<Void, Void, Integer> {
     private MuensterInsideAndroidApplication myApp;
@@ -26,8 +25,12 @@ public class WriteCommentTask extends AsyncTask<Void, Void, Integer> {
     private int code = 1;
     public static final String TAG = "WriteCommentTask";
 
-    /* Der Konstruktor erwartet ein Context Objekt,
-     * ein Application Objekt und ein ListView Objekt.
+    /**
+     * Konstruktor
+     * @param context der Inhalt der Activity
+     * @param myApp der Zustand der Application
+     * @param text der Text des Kommentars
+     * @param loc_id die Identifikation der Location
      */
     public WriteCommentTask(Context context, MuensterInsideAndroidApplication myApp,
                             String text, int loc_id) {
@@ -37,7 +40,7 @@ public class WriteCommentTask extends AsyncTask<Void, Void, Integer> {
         this.loc_id = loc_id;
     }
 
-    // Im Hintergrund soll der Webservice aufgerufen werden
+    // Im Hintergrund wird der Webservice aufgerufen.
     @Override
     protected Integer doInBackground(Void... params) {
         Log.d(TAG, "doInBackground() gestartet");
@@ -54,15 +57,6 @@ public class WriteCommentTask extends AsyncTask<Void, Void, Integer> {
         return code;
     }
 
-    /* Die onPostExecute Methode erwartet eine Liste,
-     * in der Category Objekte gespeichert sind.
-     */
-    @Override
-    protected void onPostExecute(Integer code) {
-        Log.d(TAG, "onPostExecute() gestartet");
-
-
-    }
 
 
 }

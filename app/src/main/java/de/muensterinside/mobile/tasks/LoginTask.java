@@ -12,6 +12,7 @@ import de.muensterinside.mobile.entities.Device;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class LoginTask extends AsyncTask<String, Integer, Device> {
     private Context context;
@@ -19,8 +20,11 @@ public class LoginTask extends AsyncTask<String, Integer, Device> {
     private String android_id;
     public final static String TAG = "LoginTask";
 
-    /* Der Konstruktor erwartet ein Context Objekt
-     * und ein Application Objekt
+    /**
+     * Konstruktor
+     * @param context der Inhalt der Activity
+     * @param myApp repräsentiert den Zustand der Application
+     * @param android_id die eindeutige Identifizität des Gerätes (String)
      */
     public LoginTask(Context context, MuensterInsideAndroidApplication myApp, String android_id){
         this.context = context;
@@ -28,7 +32,7 @@ public class LoginTask extends AsyncTask<String, Integer, Device> {
         this.android_id = android_id;
     }
 
-    // Aufruf des Webservice soll im Hintergrund geschehen
+    // Im Hintergrund wird der Webservice aufgerufen
     @Override
     protected Device doInBackground(String... params){
         Log.d(TAG, "doInBackground() gestartet");
@@ -46,9 +50,5 @@ public class LoginTask extends AsyncTask<String, Integer, Device> {
         return null;
     }
 
-    @Override
-    protected void onPostExecute(Device device){
-        Log.d(TAG, "onPostExecute() gestartet");
 
-    }
 }

@@ -12,6 +12,7 @@ import de.muensterinside.mobile.entities.Location;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
     private Context context;
@@ -30,6 +31,7 @@ public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
         this.exampleVote = exampleVote;
     }
 
+    // Im Hintergrund wird der Webservice aufgerufen.
     @Override
     protected Integer doInBackground(String... params){
         try{
@@ -49,28 +51,37 @@ public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
         return null;
     }
 
+
+
+    /**
+     * Hier werden Ausgaben(Toasts) für Downvotes ausgegeben, um den Nutzern zu zeigen, ob der DownVote erfolgreich war.
+     * @param result gibt an, ob der DownVote erfolgreich war (0 == erfolgreich, 2 == es gab schon einen Vote)
+     */
     @Override
     public void onPostExecute(Integer result){
+        //Überprüft, ob DownVote erfolgreich war (Result = 0)
         if(result != null && result == 0){
             CharSequence text = "DownVote erfolgreich";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            toast.show();//Toast ausgeben
             Log.i(TAG, "DownVote erfolgreich");
         }
+        //Überprüft, ob es schon einen Vote gab (Result = 2)
         else if(result == 2) {
             CharSequence text = "Es gab schon ein Vote";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            toast.show(); //Toast ausgeben
             Log.i(TAG, "Es gab schon ein Vote");
         }
+        //Überprüfen ob der Code nicht auf 0 gesetzt wurde und der UpVote nicht erfolgreich war
         else {
             CharSequence text = "UpVote nicht erfolgreich";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "UpVote nicht erfolgreich");
+            toast.show(); //Toast ausgeben
+            Log.i(TAG, "DownVote nicht erfolgreich");
         }
         int voteValue = location.getVoteValue();
         String voteString = String.valueOf(voteValue);

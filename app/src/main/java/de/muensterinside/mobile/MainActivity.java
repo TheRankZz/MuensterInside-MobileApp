@@ -51,22 +51,29 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
 
-        // Hier wird das Aussehen der MainActivity festgelegt
+        // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_main);
 
-        // Für die spätere Nutzung wird ein Boolean mit einem Standartwert in "MyBoolPref" gespeichert
+        /* In der SharedPreference wird die vorher ausgewählte
+         * Id der Location(und ein Boolean der auf true gesetzt wird, wenn ein neue Location erzeugt wird) gespeichert.
+         */
         SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor1 = boolPref.edit();
         editor1.putBoolean("newLocationBool", false);
         editor1.commit();
 
-        // Für die spätere Nutzung wird ein Boolean mit einem Standartwert in "MyCommentBoolPref" gespeichert
+        /* In der SharedPreference wird die vorher ausgewählte
+         * Id des Kommentars(und ein Boolean der auf true gesetzt wird, wenn ein neuer Kommentar erzeugt wird) gespeichert.
+         */
         SharedPreferences boolPref1 = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor2 = boolPref1.edit();
         editor2.putBoolean("newCommentBool", false);
         editor2.commit();
 
-        // Die ID der ausgewählten Kategorie soll unter "MyCatIdPref" gespeichert werden
+
+          /* In der SharedPreference wird die vorher ausgewählte
+         * ID einer Kategorie  ausgelesen.
+         */
         SharedPreferences sharedPreferences;
         sharedPreferences = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -158,7 +165,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
+        // den wir in der XML-Datei menu_menu_main.xml definiert haben.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

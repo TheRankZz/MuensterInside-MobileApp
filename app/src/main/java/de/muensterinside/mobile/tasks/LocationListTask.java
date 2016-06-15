@@ -24,6 +24,7 @@ import static de.muensterinside.mobile.Constants.SECOND_COLUMN;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @auhtor Julia Bracht, Nicolas Burchert
  */
 public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private MuensterInsideAndroidApplication myApp;
@@ -36,8 +37,13 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     private Location location;
     public static final String TAG = "LocationListTask";
 
-    /* Der Konstruktor erwartet ein Context Objekt,
-     * ein Application Objekt, eine ListView und einen Button.
+    /**
+     * Konstruktor
+     * @param context der Inhalt der Activity
+     * @param cat_id die Identifizitaet der Kategorie
+     * @param myApp repräsentiert den Zustand der Application
+     * @param listView stellt die Liste der Locations dar
+     * @param newLocation die neue Location
      */
     public LocationListTask(Context context, int cat_id, MuensterInsideAndroidApplication myApp, ListView listView, Button newLocation){
         this.context = context;
@@ -47,7 +53,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
         this.newLocation = newLocation;
     }
 
-    // Im Hintergrund soll der Webservice aufgerufen werden
+    // Im Hintergrund wird der Webservice aufgerufen.
     @Override
     protected List<Location> doInBackground(Integer... params){
         Log.d(TAG, "doInBackground() gestartet");

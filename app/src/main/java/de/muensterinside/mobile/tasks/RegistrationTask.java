@@ -3,15 +3,14 @@ package de.muensterinside.mobile.tasks;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.entities.Device;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class RegistrationTask extends AsyncTask<String, Integer, Device> {
     private Context context;
@@ -20,8 +19,12 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
     private String username;
     public static final String TAG = "RegistrationTask";
 
-    /* Der Konstruktor erwartet ein Context Objekt
-     * und ein Application Objekt.
+    /**
+     * Konstruktor
+     * @param context der Inhalt der Activity
+     * @param myApp der Zustand der Application
+     * @param android_id die eindeutige Identifizitaet des Gerätes
+     * @param username der Name des Nutzers
      */
     public RegistrationTask(Context context, MuensterInsideAndroidApplication myApp,
                             String android_id, String username){
@@ -31,7 +34,7 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
         this.username = username;
     }
 
-    // Im Hintergrund soll der Webservice aufgerufen werden.
+    // Im Hintergrund wird der Webservice aufgerufen.
     @Override
     protected Device doInBackground(String... params){
         Log.d(TAG, "doInBackground() gestartet");
@@ -52,9 +55,4 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
         return null;
     }
 
-    @Override
-    protected void onPostExecute(Device device){
-        Log.d(TAG, "onPostExecute() gestartet");
-
-    }
 }

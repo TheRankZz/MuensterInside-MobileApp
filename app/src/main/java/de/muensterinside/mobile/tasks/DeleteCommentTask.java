@@ -4,13 +4,14 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.util.List;
+
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 
 
 /**
  * Created by Julia and Nicolas
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class DeleteCommentTask extends AsyncTask<Void, Void, Integer> {
 
@@ -42,11 +43,5 @@ public class DeleteCommentTask extends AsyncTask<Void, Void, Integer> {
         return null;
     }
 
-
-    @Override
-    protected void onPostExecute(Integer code) {
-        Log.d(TAG, "onPostExecute() gestartet");
-
-    }
     
 }

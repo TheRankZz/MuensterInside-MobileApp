@@ -27,6 +27,7 @@ public class MyCommentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_my_comment);
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
