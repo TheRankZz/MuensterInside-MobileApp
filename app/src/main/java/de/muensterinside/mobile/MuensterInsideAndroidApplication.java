@@ -20,6 +20,7 @@ public class MuensterInsideAndroidApplication extends Application{
 
     private Category category;
     private Location location;
+    private String username;
     private Comment comment;
     private Device device;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -37,6 +38,14 @@ public class MuensterInsideAndroidApplication extends Application{
     // Gibt die Category zurück
     public Category getCategory() throws Exception{
         return this.category;
+    }
+
+    public void setUsername(String username) throws Exception{
+        this.username = username;
+    }
+
+    public String getUsername()throws Exception{
+        return username;
     }
 
     // Gibt die Location zurück
