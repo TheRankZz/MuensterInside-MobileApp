@@ -29,7 +29,7 @@ public class PrefsActivity extends PreferenceActivity {
 
 
         SharedPreferences getUsername = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        usernameEditTextPreference.setText(getUsername.getString("username", "0"));
+        usernameEditTextPreference.setSummary(getUsername.getString("username", "0"));
 
     }
 
