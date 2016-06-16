@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -18,24 +19,25 @@ import android.widget.TextView;
 
 public class PrefsActivity extends PreferenceActivity {
     public static final String TAG = "PrefsActivity";
-    EditTextPreference usernameEditTextPreference;
+    PreferenceScreen usernamePreference;
     private MuensterInsideAndroidApplication myApp;
-    String huhu;
+    String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.prefs);
-        usernameEditTextPreference = (EditTextPreference)findPreference("username");
+        usernamePreference = (PreferenceScreen)findPreference("username");
 
         try {
-            huhu = myApp.getUsername();
+            username = myApp.getUsername();
         }
         catch(Exception e){e.printStackTrace();}
 
 
-            usernameEditTextPreference.setSummary(huhu);
+            usernamePreference.setSummary(username);
 
 
     }

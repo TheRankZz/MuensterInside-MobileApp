@@ -40,10 +40,12 @@ public class MuensterInsideAndroidApplication extends Application{
         return this.category;
     }
 
+    //Setzt den Username
     public void setUsername(String username) throws Exception{
         this.username = username;
     }
 
+    //Gibt den Username zurück
     public String getUsername()throws Exception{
         return username;
     }
@@ -53,6 +55,7 @@ public class MuensterInsideAndroidApplication extends Application{
         return this.location;
     }
 
+    //GIbt den Kommentar zurueck
     public Comment getComment() throws Exception{
         return this.comment;
     }

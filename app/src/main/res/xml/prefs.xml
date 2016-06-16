@@ -4,7 +4,7 @@
         android:title="Einstellungen"
         android:key="pref_key_user_settings">
 
-        <EditTextPreference android:key="username"
+        <PreferenceScreen android:key="username"
             android:summary="@string/usernameSummary"
             android:title="@string/username"/>
 
