@@ -6,8 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.preference.RingtonePreference;
+import android.preference.SwitchPreference;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -19,7 +23,7 @@ import android.widget.TextView;
 
 public class PrefsActivity extends PreferenceActivity {
     public static final String TAG = "PrefsActivity";
-    PreferenceScreen usernamePreference;
+    Preference usernamePreference;
     private MuensterInsideAndroidApplication myApp;
     String username;
 
@@ -29,14 +33,16 @@ public class PrefsActivity extends PreferenceActivity {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.prefs);
-        usernamePreference = (PreferenceScreen)findPreference("username");
+        usernamePreference = (Preference)findPreference("username");
 
+        myApp = (MuensterInsideAndroidApplication)getApplication();
         try {
             username = myApp.getUsername();
         }
         catch(Exception e){e.printStackTrace();}
 
 
+        //setzt den Untertitel des Users PreferenceScreen auf username
             usernamePreference.setSummary(username);
 
 

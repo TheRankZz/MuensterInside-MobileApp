@@ -4,7 +4,7 @@
         android:title="Einstellungen"
         android:key="pref_key_user_settings">
 
-        <PreferenceScreen android:key="username"
+        <Preference android:key="username"
             android:summary="@string/usernameSummary"
             android:title="@string/username"/>
 
