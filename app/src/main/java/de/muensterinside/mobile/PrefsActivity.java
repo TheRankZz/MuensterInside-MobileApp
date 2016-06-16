@@ -19,6 +19,7 @@ import android.widget.TextView;
 public class PrefsActivity extends PreferenceActivity {
     public static final String TAG = "PrefsActivity";
     EditTextPreference usernameEditTextPreference;
+    String huhu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,11 @@ public class PrefsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.prefs);
         usernameEditTextPreference = (EditTextPreference)findPreference("username");
+        huhu = "nico";
 
 
-        SharedPreferences getUsername = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        usernameEditTextPreference.setSummary(getUsername.getString("username", "0"));
+        //SharedPreferences getUsername = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        usernameEditTextPreference.setSummary(huhu);
 
     }
 
