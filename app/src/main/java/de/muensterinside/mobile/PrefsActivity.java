@@ -28,14 +28,15 @@ public class PrefsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.prefs);
         usernameEditTextPreference = (EditTextPreference)findPreference("username");
-        huhu = "nico";
 
-
-        //SharedPreferences getUsername = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         try {
-            usernameEditTextPreference.setSummary(myApp.getUsername());
+            huhu = myApp.getUsername();
         }
         catch(Exception e){e.printStackTrace();}
+
+
+            usernameEditTextPreference.setSummary(huhu);
+
 
     }
 
