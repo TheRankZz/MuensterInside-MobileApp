@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,11 @@ public class MyLocationActivity extends AppCompatActivity {
         }
 
         if(locations == null){
-            Log.d(TAG, "Keine Liste mit Locations gefunden.");
+            CharSequence text = "Bisher keine Locations angelegt.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+            Log.i(TAG, "Keine Liste mit Locations gefunden.");
         }
         else {
             List myList = new ArrayList<String>();

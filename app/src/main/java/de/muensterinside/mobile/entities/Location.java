@@ -21,7 +21,7 @@ public class Location {
 	private List<Comment> comments;
 	private Category category;
 	private List<Vote> votes;
-	boolean isVoted = false;
+	boolean isVoted;
 
 
 	public Location() {
@@ -153,6 +153,9 @@ public class Location {
 		return this.isVoted;
 	}
 
+	public void vote(boolean isVoted){
+		this.isVoted = isVoted;
+	}
 	/**
 	 * Zählt den VoteValue um eins hoch
 	 *

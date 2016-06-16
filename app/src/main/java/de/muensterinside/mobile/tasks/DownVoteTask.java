@@ -31,20 +31,15 @@ public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
     // Im Hintergrund wird der Webservice aufgerufen.
     @Override
     protected Integer doInBackground(String... params){
+        int result;
         try{
-            boolean isVoted = this.myApp.getMuensterInsideImpl().isVoted(this.loc_id, this.deviceId);
-            if(isVoted == false){
-                int result = this.myApp.getMuensterInsideImpl().downVote(this.loc_id, this.deviceId);
-                return result;
-            }
-            else {
-                return 2;
-            }
+            result = this.myApp.getMuensterInsideImpl().downVote(this.loc_id, this.deviceId);
         }
         catch(Exception e){
+            result = 2;
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 
     @Override

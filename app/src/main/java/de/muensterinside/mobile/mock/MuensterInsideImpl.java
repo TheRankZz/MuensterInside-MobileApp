@@ -43,14 +43,17 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public List<Category> getCategories()throws Exception{
         categoryListResponse response = this.webservice.getCategories();
+        List<Category> result = new ArrayList<Category>();
         if(response.returnCode != 0){
+            result = null;
             throw new Exception(response.message);
         }
-        List<Category> result = new ArrayList<Category>();
-        Enumeration<categoryTO> categoryEnum = response.categoryList.elements();
-        while (categoryEnum.hasMoreElements()){
-            categoryTO category = categoryEnum.nextElement();
-            result.add(new Category(category.name));
+        else {
+            Enumeration<categoryTO> categoryEnum = response.categoryList.elements();
+            while (categoryEnum.hasMoreElements()) {
+                categoryTO category = categoryEnum.nextElement();
+                result.add(new Category(category.name));
+            }
         }
         return result;
     }
@@ -63,17 +66,20 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public Device register(String deviceId, String username)throws Exception{
         deviceResponse response = this.webservice.register(deviceId, username);
+        Device dev = new Device();
         if(response.returnCode != 0){
+            dev = null;
             throw new Exception(response.message);
         }
-        deviceTO device = response.device;
-        this.myDeviceId = device.androidUuid;
-        this.myUsername = device.username;
+        else {
+            deviceTO device = response.device;
+            this.myDeviceId = device.androidUuid;
+            this.myUsername = device.username;
 
-        Device dev = new Device();
-        dev.setAndroidUuid(device.androidUuid);
-        dev.setId(device.id);
-        dev.setUsername(device.username);
+            dev.setAndroidUuid(device.androidUuid);
+            dev.setId(device.id);
+            dev.setUsername(device.username);
+        }
         return dev;
     }
 
@@ -84,20 +90,21 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public Device login(String deviceId)throws Exception{
         deviceResponse response = this.webservice.login(deviceId);
-
+        Device dev = new Device();
         if(response.returnCode != 0){
+            dev = null;
             throw new Exception(response.message);
         }
-        deviceTO device = response.device;
-        this.myDeviceId = device.androidUuid;
-        this.myUsername = device.username;
-        this.myIntDeviceId = device.id;
+        else {
+            deviceTO device = response.device;
+            this.myDeviceId = device.androidUuid;
+            this.myUsername = device.username;
+            this.myIntDeviceId = device.id;
 
-
-        Device dev = new Device();
-        dev.setAndroidUuid(device.androidUuid);
-        dev.setId(device.id);
-        dev.setUsername(device.username);
+            dev.setAndroidUuid(device.androidUuid);
+            dev.setId(device.id);
+            dev.setUsername(device.username);
+        }
         return dev;
     }
 
@@ -108,20 +115,23 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public List<Location> getLocationsByCategory(int cat_id)throws Exception{
         locationListResponse response = this.webservice.getLocationsByCategory(cat_id);
+        List<Location> result = new ArrayList<Location>();
         if(response.returnCode != 0){
+            result = null;
             throw new Exception(response.message);
         }
-        List<Location> result = new ArrayList<Location>();
-        Enumeration<locationTO> locationEnum = response.locationList.elements();
-        while (locationEnum.hasMoreElements()){
-            locationTO location = locationEnum.nextElement();
-            Location l = new Location();
-            l.setId(location.id);
-            l.setName(location.name);
-            l.setLink(location.link);
-            l.setDescription(location.description);
-            l.setVoteValue(location.votevalue);
-            result.add(l);
+        else {
+            Enumeration<locationTO> locationEnum = response.locationList.elements();
+            while (locationEnum.hasMoreElements()) {
+                locationTO location = locationEnum.nextElement();
+                Location l = new Location();
+                l.setId(location.id);
+                l.setName(location.name);
+                l.setLink(location.link);
+                l.setDescription(location.description);
+                l.setVoteValue(location.votevalue);
+                result.add(l);
+            }
         }
         return result;
     }
@@ -157,21 +167,21 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     @Override
     public List<Comment> getCommentsByLocation(int loc_id)throws Exception{
         commentListResponse response = this.webservice.getCommentsByLocation(loc_id);
-        if(response.returnCode == 20){
-            return null;
-        }
+        List<Comment> result = new ArrayList<Comment>();
         if(response.returnCode != 0){
+            result = null;
             throw new Exception(response.message);
         }
-        List<Comment> result = new ArrayList<Comment>();
-        Enumeration<commentTO> commentEnum = response.commentList.elements();
-        while (commentEnum.hasMoreElements()){
-            commentTO comment = commentEnum.nextElement();
-            Comment c = new Comment();
-            c.setId(comment.id);
-            c.setText(comment.text);
-            c.setDate(comment.createdAt);
-            result.add(c);
+        else {
+            Enumeration<commentTO> commentEnum = response.commentList.elements();
+            while (commentEnum.hasMoreElements()) {
+                commentTO comment = commentEnum.nextElement();
+                Comment c = new Comment();
+                c.setId(comment.id);
+                c.setText(comment.text);
+                c.setDate(comment.createdAt);
+                result.add(c);
+            }
         }
         return result;
     }
@@ -183,21 +193,21 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
      */
     public List<Comment> getMyComments(int deviceId)throws Exception{
         commentListResponse response = this.webservice.getMyComments(deviceId);
+        List<Comment> result = new ArrayList<Comment>();
         if(response.returnCode != 0){
+            result = null;
             throw new Exception(response.message);
         }
-        if(response.returnCode == 20){
-            return null;
-        }
-        List<Comment> result = new ArrayList<Comment>();
-        Enumeration<commentTO> commentEnum = response.commentList.elements();
-        while (commentEnum.hasMoreElements()){
-            commentTO comment = commentEnum.nextElement();
-            Comment com = new Comment();
-            com.setId(comment.id);
-            com.setText(comment.text);
-            com.setDate(comment.createdAt);
-            result.add(com);
+        else {
+            Enumeration<commentTO> commentEnum = response.commentList.elements();
+            while (commentEnum.hasMoreElements()) {
+                commentTO comment = commentEnum.nextElement();
+                Comment com = new Comment();
+                com.setId(comment.id);
+                com.setText(comment.text);
+                com.setDate(comment.createdAt);
+                result.add(com);
+            }
         }
         return result;
     }
@@ -243,19 +253,22 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
      */
     public List<Location> getMyVotes(int deviceId)throws Exception{
         locationListResponse response = this.webservice.getMyVotes(deviceId);
+        List<Location> result = new ArrayList<Location>();
         if(response.returnCode != 0){
+            result = null;
             throw new Exception(response.message);
         }
-        List<Location> result = new ArrayList<Location>();
-        Enumeration<locationTO> locationEnum = response.locationList.elements();
-        while (locationEnum.hasMoreElements()){
-            locationTO location = locationEnum.nextElement();
-            Location loc = new Location();
-            loc.setName(location.name);
-            loc.setDescription(location.description);
-            loc.setLink(location.link);
-            loc.setVoteValue(location.votevalue);
-            result.add(loc);
+        else {
+            Enumeration<locationTO> locationEnum = response.locationList.elements();
+            while (locationEnum.hasMoreElements()) {
+                locationTO location = locationEnum.nextElement();
+                Location loc = new Location();
+                loc.setName(location.name);
+                loc.setDescription(location.description);
+                loc.setLink(location.link);
+                loc.setVoteValue(location.votevalue);
+                result.add(loc);
+            }
         }
         return result;
 
@@ -265,17 +278,15 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     /**
      * @param location_id, die Identifizitaet der Location
      * @param deviceId, die Identifizitaet des Devices
-     * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     * @return response.returnCode, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
      */
     public int upVote(int location_id, int deviceId)throws Exception{
         returncodeResponse response = this.webservice.upVote(location_id, deviceId);
-        int code;
         if(response.returnCode != 0){
             throw new Exception(response.message);
         }
         else {
-            code = 0;
-            return code;
+            return response.returnCode;
         }
     }
 
@@ -283,24 +294,22 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
     /**
      * @param location_id, die Identifizitaet der Location
      * @param deviceId, die Identifizitaet des Devices
-     * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     * @return response.returnCode, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
      */
     public int downVote(int location_id, int deviceId)throws Exception{
         returncodeResponse response = this.webservice.downVote(location_id, deviceId);
-        int code;
         if(response.returnCode != 0){
             throw new Exception(response.message);
         }
         else {
-            code = 0;
-            return code;
+            return response.returnCode;
         }
     }
 
     /**
      * @param location_id, die Identifizitaet der Location
      * @param deviceId, die Identifizitaet des Devices
-     * @return boolean , gibt an, ob Methode erfolgreich war (0 = erfolgreich)
+     * @return response.isVoted , gibt an, ob Methode erfolgreich war (0 = erfolgreich)
      */
 
     public boolean isVoted(int location_id, int deviceId)throws Exception{
@@ -321,8 +330,6 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
      * @return code, gibt an, ob Methode erfolgreich war (0 = erfolgreich)
      */
     public int uploadImage(int location_id, String mimeType, String imageDataBase64)throws Exception{
-
-
         returncodeResponse response = this.webservice.uploadImage(location_id, mimeType, imageDataBase64);
         int code;
         if(response.returnCode != 0){
@@ -341,15 +348,17 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
      */
     public Image downloadImage(int location_id)throws Exception{
         imageResponse response = this.webservice.downloadImage(location_id);
+        Image image = new Image();
         if(response.returnCode != 0){
+            image = null;
             throw new Exception(response.message);
         }
-
-        String encoded = response.imageDataBase64;
-        byte[] decoded = encoded.getBytes();
-        Image image = new Image();
-        image.setContent(decoded);
-        image.setMimeType(response.mimeType);
+        else {
+            String encoded = response.imageDataBase64;
+            byte[] decoded = encoded.getBytes();
+            image.setContent(decoded);
+            image.setMimeType(response.mimeType);
+        }
         return image;
     }
 
@@ -359,16 +368,19 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
      */
     public Location getLocation(int loc_id)throws Exception{
         locationResponse response = this.webservice.getLocation(loc_id);
+        Location l = new Location();
         if(response.returnCode != 0){
+            l = null;
             throw new Exception(response.message);
         }
-        locationTO location = response.location;
-        Location l = new Location();
-        l.setId(location.id);
-        l.setName(location.name);
-        l.setDescription(location.description);
-        l.setLink(location.link);
-        l.setVoteValue(location.votevalue);
+        else {
+            locationTO location = response.location;
+            l.setId(location.id);
+            l.setName(location.name);
+            l.setDescription(location.description);
+            l.setLink(location.link);
+            l.setVoteValue(location.votevalue);
+        }
         return l;
     }
 
@@ -378,19 +390,22 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
      */
     public List<Location> getMyLocations(int deviceId)throws Exception{
         locationListResponse response = this.webservice.getMyLocations(deviceId);
-        if(response.returnCode != 0){
-            throw new Exception(response.message);
-        }
         List<Location> result = new ArrayList<Location>();
         Enumeration<locationTO> locationEnum = response.locationList.elements();
-        while (locationEnum.hasMoreElements()){
-            locationTO location = locationEnum.nextElement();
-            Location loc = new Location();
-            loc.setName(location.name);
-            loc.setDescription(location.description);
-            loc.setLink(location.link);
-            loc.setVoteValue(location.votevalue);
-            result.add(loc);
+        if(response.returnCode != 0){
+            result = null;
+            throw new Exception(response.message);
+        }
+        else {
+            while (locationEnum.hasMoreElements()) {
+                locationTO location = locationEnum.nextElement();
+                Location loc = new Location();
+                loc.setName(location.name);
+                loc.setDescription(location.description);
+                loc.setLink(location.link);
+                loc.setVoteValue(location.votevalue);
+                result.add(loc);
+            }
         }
         return result;
     }

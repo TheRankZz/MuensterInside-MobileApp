@@ -134,8 +134,8 @@ public class CommentActivity extends AppCompatActivity{
             startActivity(i);
             return true;
         }
-        else if(item.getItemId() == R.id.home_button) {
-            //Beim Klicken auf dem Button "Startseite" öffnet es die passende Activity
+        // Home Button
+        else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             return true;
