@@ -1,19 +1,11 @@
 package de.muensterinside.mobile;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
-import android.preference.RingtonePreference;
-import android.preference.SwitchPreference;
 import android.util.Log;
-import android.widget.TextView;
+
 
 
 /**
