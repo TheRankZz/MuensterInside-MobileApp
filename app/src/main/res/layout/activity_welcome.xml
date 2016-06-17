@@ -9,20 +9,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="de.muensterinside.mobile.WelcomeActivity"
-    android:background="#7383fd">
+    android:background="#ffffff">
 
 
     <TextView
         android:id="@+id/text_id"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="@string/hallo"
-        android:textColorHighlight="@android:color/primary_text_dark"
+        android:text="@string/welcome"
         android:textSize="30dp"
         android:layout_alignTop="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="36dp"
-        android:textColor="#ffffff" />
+        android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,6 +29,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/textView"
         android:textSize="30dp"
+        android:textColor="#7383fd"
         android:layout_marginTop="33dp"
         android:textStyle="italic"
         android:layout_alignParentTop="true"
@@ -43,21 +43,27 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text= "@string/willkommen"
+        android:text= "@string/welcomeText"
         android:id="@+id/textView2"
         android:textSize="20dp"
         android:typeface ="serif"
         android:layout_below="@+id/text_id"
         android:layout_alignParentStart="true"
-        android:textColor="#ffffff" />
+        android:textColor="#000000" />
 
-    <Button
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:text="@string/lets_go"
-        android:id="@+id/button2"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
-        android:background="@color/colorPrimary"/>
+        android:paddingTop="50dp">
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/lets_go"
+            android:id="@+id/button2"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
 </RelativeLayout>
 </ScrollView>

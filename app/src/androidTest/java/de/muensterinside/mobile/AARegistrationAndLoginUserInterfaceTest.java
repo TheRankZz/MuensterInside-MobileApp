@@ -1,5 +1,6 @@
 package de.muensterinside.mobile;
 
+import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,7 +25,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  * @author Julia Bracht, Nicolas Burchert
  */
 @RunWith(AndroidJUnit4.class)
-public class RegristrationAndLoginUserInterfaceTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class AARegistrationAndLoginUserInterfaceTest {
     @Rule
     public ActivityTestRule<RegistrationActivity> registrationActivityActivityTestRule =
             new ActivityTestRule<RegistrationActivity>(RegistrationActivity.class);
@@ -33,24 +35,25 @@ public class RegristrationAndLoginUserInterfaceTest {
     public void testRegistrationAndLogin() throws Exception{
 
         // Gibt einen Usernamen ein
-        //onView(withId(R.id.registration_username))
-        //.perform(typeText("name"), closeSoftKeyboard());
+        onView(withId(R.id.registration_username))
+                .perform(typeText("name"), closeSoftKeyboard());
 
         // Klickt auf den Button Registrieren
-        //onView(withId(R.id.registration))
-        //.perform(click());
+        onView(withId(R.id.registration))
+                .perform(click());
 
         // Prüft ob der eingegebene Username wirklich übernommen wurde
-        //onView(withId(R.id.registration_username))
-        //.check(matches(withText("name")));
+        onView(withId(R.id.registration_username))
+                .check(matches(withText("name")));
 
         // Klickt auf den Button Login
-        //onView(withId(R.id.login))
-        //.perform(click());
+        onView(withId(R.id.login))
+                .perform(click());
 
         /* Prüft ob der Activity Wechsel erfolgreich war,
          * da in der MainActivity kein Login Button vorhanden ist.
          */
+
         onView(withId(R.id.login))
                 .check(doesNotExist());
     }

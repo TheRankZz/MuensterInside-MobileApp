@@ -16,7 +16,7 @@
     <string name="location">Meine Locations</string>
     <string name="drawer_opened">Opened</string>
     <string name="drawer_closed">Closed</string>
-    <string name="hallo">Hallo</string>
+    <string name="welcome">Willkommen</string>
     <string name="showComment">Schreiben Sie einen Kommentar...</string>
     <string name="comment">Kommentar</string>
     <string name="location_name">Name:</string>
@@ -30,14 +30,12 @@
     <string name="login">Login</string>
     <string name="delete">Löschen</string>
     <string name="lets_go">Los gehts!</string>
-   <string name="willkommen">
-       herzlich Willkommen auf unserer App.
-       \n \n Lerne neue Locations kennen und lass dich von den Geschmaeckern der Muensteraner inspirieren.
-        \n \n Nach dem Besuch einer Location laden wir dich herzlich dazu ein, einen Kommentar und eine Bewertung für die Location da zu lassen.
+   <string name="welcomeText">
+       auf unserer App.
+       \n \nLerne neue Locations in Münster kennen und lass dich von den Geschmäckern der Muensteraner inspirieren.
+        \n \nNach dem Besuch einer Location laden wir dich herzlich dazu ein, einen Kommentar und eine Bewertung für die Location da zu lassen.
          \n\nNeue Locations können gerne angelegt werden.
          \n\n Überzeuge dich selbst!
-
-
    </string>
 
 </resources>
