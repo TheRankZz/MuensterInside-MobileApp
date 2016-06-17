@@ -41,7 +41,7 @@ public class CommentActivity extends AppCompatActivity{
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
         // Hier wird der Activity das Aussehen zugeordnet
-        setContentView(R.layout.activity_comment);
+        setContentView(R.layout.activity_new_comment);
         myApp = (MuensterInsideAndroidApplication) getApplication();
 
         //Zuweisung der XML Objekte an unsere Variablen
