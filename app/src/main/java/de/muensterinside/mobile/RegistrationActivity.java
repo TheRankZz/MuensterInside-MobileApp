@@ -75,7 +75,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if(device != null){
             String name = device.getUsername();
-            Intent myIntent = new Intent(context, WelcomeActivity.class);
+            Intent myIntent = new Intent(context, MainActivity.class);
             myIntent.putExtra("username", name);
             startActivity(myIntent);
 
@@ -125,7 +125,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 if(device != null){
                     String name = device.getUsername();
                     Log.i(TAG, "Username: " + name);
-                    Intent myIntent = new Intent(context, WelcomeActivity.class);
+                    Intent myIntent = new Intent(context, MainActivity.class);
                     myIntent.putExtra("username", name);
                     startActivity(myIntent);
 

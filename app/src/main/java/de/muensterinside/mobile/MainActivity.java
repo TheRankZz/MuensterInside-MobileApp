@@ -29,6 +29,7 @@ import de.muensterinside.mobile.fragments.Category3;
 import de.muensterinside.mobile.fragments.Category4;
 import de.muensterinside.mobile.fragments.Category5;
 import de.muensterinside.mobile.fragments.Category6;
+import de.muensterinside.mobile.fragments.Home;
 import de.muensterinside.mobile.model.ItemSlideMenu;
 import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.tasks.CategoryTask;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         listSliding = new ArrayList<>();
 
+        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_tiles_large, "Startseite"));
         //Fügt Items in die NavigationBar ein
         for(int i=0; i < myList.size();i++){
             listSliding.add(new ItemSlideMenu(R.drawable.ic_action_tiles_large, myList.get(i).toString()));
@@ -125,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawer(listViewSliding);
 
         //Fragment Category1 wird beim Start gezeigt
-        editor.putInt("catId", 0);
         replaceFragment(0);
 
         //Zeigt das ausgewählte Fragment an
@@ -206,39 +207,35 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         switch (pos) {
             case 0:
+                fragment = new Home();
+                break;
+            case 1:
                 fragment = new Category1();
                 editor.putInt("catId", 0);
                 editor.commit();
                 break;
-            case 1:
+            case 2:
                 fragment = new Category2();
                 editor.putInt("catId", 1);
                 editor.commit();
                 break;
-            case 2:
+            case 3:
                 fragment = new Category3();
                 editor.putInt("catId", 2);
                 editor.commit();
                 break;
-            case 3:
+            case 4:
                 fragment = new Category4();
                 editor.putInt("catId", 3);
                 editor.commit();
                 break;
-            case 4:
+            case 5:
                 fragment = new Category5();
                 editor.putInt("catId", 4);
                 editor.commit();
                 break;
-            case 5:
-                fragment = new Category6();
-                editor.putInt("catId", 5);
-                editor.commit();
-                break;
             default:
-                fragment = new Category1();
-                editor.putInt("catId", 1);
-                editor.commit();
+                fragment = new Home();
                 break;
         }
 
