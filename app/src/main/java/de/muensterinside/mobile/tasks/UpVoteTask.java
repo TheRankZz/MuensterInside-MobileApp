@@ -38,20 +38,15 @@ public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
     // Im Hintergrund wird der Webservice aufgerufen.
     @Override
     protected Integer doInBackground(String... params){
+        int result;
         try{
-            boolean isVoted = this.myApp.getMuensterInsideImpl().isVoted(this.loc_id, deviceId);
-            if(isVoted == false){
-                int result = this.myApp.getMuensterInsideImpl().upVote(loc_id, deviceId);
-                return result;
-            }
-            else {
-                return 2;
-            }
+            result = this.myApp.getMuensterInsideImpl().upVote(loc_id, deviceId);
         }
         catch(Exception e){
+            result = 2;
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 
     @Override

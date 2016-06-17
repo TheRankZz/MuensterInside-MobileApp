@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +48,10 @@ public class MyCommentActivity extends AppCompatActivity {
         }
 
         if(comments == null){
+            CharSequence text = "Bisher keine Kommentare angelegt.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
             Log.e(TAG, "Keine Liste mit Kommentaren gefunden.");
         }
 

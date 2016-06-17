@@ -32,8 +32,8 @@ public class KMobileWebserviceImplService {
     /**
      * The WSDL URL.
      */
-    private static final String URL = "http://10.70.28.9:8080/muensterinside/mobile"; //http://10.60.64.35/muensterinside/mobile
-
+    private static final String URL = "http://10.70.28.9:8080/muensterinside/mobile"; // Lennart Local
+    // private static final String URL = "http://10.60.64.35/muensterinside/mobile"; // Cluster
 
     public deviceResponse register(String arg0,String arg1) throws Exception{
         deviceResponse result = null;
@@ -43,7 +43,7 @@ public class KMobileWebserviceImplService {
         try {
             response = executeSoapAction(METHOD_NAME, arg0, arg1);
         } catch (Exception ex) {
-            throw new Exception("Registrierungs Fehler");
+            throw new Exception("Verbindungsfehler");
         }
 
         result = new deviceResponse(response);
@@ -58,7 +58,7 @@ public class KMobileWebserviceImplService {
         try {
             response = executeSoapAction(METHOD_NAME, arg0);
         } catch (Exception ex) {
-            throw new Exception("Login Fehler");
+            throw new Exception("Verbindungsfehler");
         }
 
         result = new deviceResponse(response);
@@ -74,7 +74,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0, arg1, arg2);
         }
         catch (Exception e) {
-            throw new Exception("Kommentar speichern Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new returncodeResponse(response);
         return result;
@@ -89,7 +89,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME);
         }
         catch (Exception ex) {
-            throw new Exception("Kategorien auslesen Fehler");
+            throw new Exception("Verbindungsfehler");
         }
 
         result = new categoryListResponse(response);
@@ -105,7 +105,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0, arg1, arg2);
         }
         catch (Exception ex) {
-            throw new Exception("Bild Upload Fehler");
+            throw new Exception("Verbindungsfehler");
         }
 
         result = new returncodeResponse(response);
@@ -121,7 +121,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0);
         }
         catch (Exception e) {
-            throw new Exception("Meine Votes Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new locationListResponse(response);
         return result;
@@ -136,7 +136,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0);
         }
         catch (Exception e) {
-            throw new Exception("Bild Download Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new imageResponse(response);
         return result;
@@ -151,7 +151,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0);
         }
         catch (Exception e) {
-            throw new Exception("Meine Locations Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new locationListResponse(response);
         return result;
@@ -166,7 +166,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0, arg1);
         }
         catch (Exception e) {
-            throw new Exception("UpVote Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new returncodeResponse(response);
         return result;
@@ -181,7 +181,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0, arg1);
         }
         catch (Exception e) {
-            throw new Exception("DownVote Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new returncodeResponse(response);
         return result;
@@ -196,7 +196,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0);
         }
         catch (Exception e) {
-            throw new Exception("Location auslesen Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new locationResponse(response);
         return result;
@@ -211,7 +211,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0);
         }
         catch (Exception e) {
-            throw new Exception("Kommentare pro Location auslesen Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new commentListResponse(response);
         return result;
@@ -226,7 +226,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0);
         }
         catch (Exception e) {
-            throw new Exception(" Meine Kommentare auslesen Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new commentListResponse(response);
         return result;
@@ -241,7 +241,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0);
         }
         catch (Exception e) {
-            throw new Exception("Kommentar löschen Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new returncodeResponse(response);
         return result;
@@ -256,7 +256,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0, arg1, arg2, arg3, arg4);
         }
         catch (Exception e) {
-            throw new Exception(" Speicher Location Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new returncodeResponse(response);
         return result;
@@ -271,7 +271,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0, arg1);
         }
         catch (Exception e) {
-            throw new Exception("Schon gevoted Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new isVotedResponse(response);
         return result;
@@ -286,7 +286,7 @@ public class KMobileWebserviceImplService {
             response = executeSoapAction(METHOD_NAME, arg0);
         }
         catch (Exception e) {
-            throw new Exception("Locations pro Kategorie auslesen Fehler");
+            throw new Exception("Verbindungsfehler");
         }
         result = new locationListResponse(response);
         return result;

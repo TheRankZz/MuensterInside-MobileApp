@@ -3,6 +3,7 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,8 @@ public class LocationActivity extends AppCompatActivity {
     private CommentListViewAdapters adapter;
     private MuensterInsideAndroidApplication myApp;
     private String voteString;
+    private Button up;
+    private Button down;
     private TextView exampleVote;
     public static final String TAG = "LocationActivity";
 
@@ -90,6 +93,9 @@ public class LocationActivity extends AppCompatActivity {
         // TextView für die Darstellung des Links wird erzeugt
         TextView exampleLink = (TextView) findViewById(R.id.textViewExampleLink);
 
+        // TextView für die Darstellung der Beschreibung wird erzeugt
+        TextView exampleDescription = (TextView) findViewById(R.id.textViewExampleDescription);
+
         // ListView für die Darstellung der 3 neusten Kommentare wird erzeugt
         ListView kommentare = (ListView) findViewById(R.id.smallCommentList);
 
@@ -97,10 +103,10 @@ public class LocationActivity extends AppCompatActivity {
         Button writeComment = (Button) findViewById(R.id.button1);
 
         // Button für den Upvote wird erzeugt
-        Button up = (Button) findViewById(R.id.up);
+        up = (Button) findViewById(R.id.up);
 
         // Button für den Downvote wird erzeugt
-        Button down = (Button) findViewById(R.id.down);
+        down = (Button) findViewById(R.id.down);
 
         // Button zum anzeigen der Kommentare wird erzeugt
         Button showComment = (Button) findViewById(R.id.KommentarAnzeigen);
@@ -208,6 +214,24 @@ public class LocationActivity extends AppCompatActivity {
         // TextView für den Link der Location wird befüllt
         exampleLink.setText(location.getLink());
 
+        boolean isVoted = location.isVoted();
+        if(isVoted){
+            up.setEnabled(false);
+            up.setBackgroundColor(Color.GRAY);
+            down.setEnabled(false);
+            down.setBackgroundColor(Color.GRAY);
+        }
+
+        if(location.getDescription() != null ){
+            exampleDescription.setText(location.getDescription());
+        }
+        else {
+            TextView locationDescription = (TextView) findViewById(R.id.textViewDescription);
+            locationDescription.setVisibility(View.INVISIBLE);
+            exampleDescription.setVisibility(View.INVISIBLE);
+        }
+
+
         // führt zur CommentActivity, wenn der Button gedrückt wird
         writeComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,6 +287,15 @@ public class LocationActivity extends AppCompatActivity {
                     }
                     String newVoteValue = String.valueOf(location.getVoteValue());
                     exampleVote.setText(newVoteValue);
+
+                    boolean isVoted = location.isVoted();
+                    if(isVoted){
+                        up.setEnabled(false);
+                        up.setBackgroundColor(Color.GRAY);
+                        down.setEnabled(false);
+                        down.setBackgroundColor(Color.GRAY);
+                    }
+
                     Log.i(TAG, "UpVote erfolgreich");
                 }
                 else if(code == 2) {
@@ -315,6 +348,15 @@ public class LocationActivity extends AppCompatActivity {
                     }
                     String newVoteValue = String.valueOf(location.getVoteValue());
                     exampleVote.setText(newVoteValue);
+
+                    boolean isVoted = location.isVoted();
+                    if(isVoted){
+                        up.setEnabled(false);
+                        up.setBackgroundColor(Color.GRAY);
+                        down.setEnabled(false);
+                        down.setBackgroundColor(Color.GRAY);
+                    }
+
                     Log.i(TAG, "DownVote erfolgreich");
                 }
                 else if(code == 2) {
@@ -352,7 +394,8 @@ public class LocationActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        else if(item.getItemId() == R.id.home_button) {
+        // Home Button
+        else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             return true;
