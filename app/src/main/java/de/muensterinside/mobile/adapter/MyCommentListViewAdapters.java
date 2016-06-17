@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
+import de.muensterinside.mobile.MyCommentActivity;
 import de.muensterinside.mobile.PrefsActivity;
 import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.entities.Comment;
@@ -85,11 +86,12 @@ public class MyCommentListViewAdapters extends BaseAdapter{
 
         if(convertView == null){
 
-            convertView=inflater.inflate(R.layout.my_comment_colmn_row, null);
+           convertView=inflater.inflate(R.layout.my_comment_colmn_row, null);
 
             txtFirst=(TextView) convertView.findViewById(R.id.comment);
             txtSecond=(TextView) convertView.findViewById(R.id.created_at);
             deleteBtn = (Button)convertView.findViewById(R.id.delete_btn);
+
 
         }
 
@@ -97,16 +99,21 @@ public class MyCommentListViewAdapters extends BaseAdapter{
         txtFirst.setText(map.get(FIRST_COLUMN));
         txtSecond.setText(map.get(SECOND_COLUMN));
 
+
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
 
 
                 id = comments.get(position).getId();
                 DeleteCommentTask deleteCommentTask = new DeleteCommentTask(activity, myApp, id);
                 deleteCommentTask.execute();
 
-                Intent i = new Intent(activity, PrefsActivity.class);
+
+              // list.remove(); //or some other task
+
+                Intent i = new Intent(activity, MyCommentActivity.class);
                 activity.startActivity(i);
 
             }

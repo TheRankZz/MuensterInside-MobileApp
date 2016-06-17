@@ -66,7 +66,7 @@ public class MyCommentActivity extends AppCompatActivity {
             list.add(temp);
         }
 
-        // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+        // Es wird ein Adapter erstellt der die listView mit Einträgen befüllt
         adapter = new MyCommentListViewAdapters(this, list, comments, myApp);
 
         listView.setAdapter(adapter);
