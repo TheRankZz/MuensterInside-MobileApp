@@ -3,8 +3,6 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -72,12 +70,10 @@ public class CategoryActivity extends AppCompatActivity {
         // Es wird ein Button erzeugt, um eine neue Location anlegen zu können
         Button newLocation = (Button) findViewById(R.id.newLocation);
 
-
-            // Der LocationListTask wird aufgerufen
-            LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, listView, newLocation);
-            locationListTask.execute();
-        }
-
+        // Der LocationListTask wird aufgerufen
+        LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, listView, newLocation);
+        locationListTask.execute();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

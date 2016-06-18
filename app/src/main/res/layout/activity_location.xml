@@ -162,7 +162,8 @@
                 android:id="@+id/KommentarAnzeigen"
                 android:background="@android:color/transparent"
                 android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/textViewExampleDescription" />
+                android:layout_toEndOf="@+id/textView3" />
+
         </RelativeLayout>
 
         <Button style="?android:attr/buttonStyleSmall"
@@ -173,8 +174,7 @@
             android:id="@+id/button1"
             android:clickable="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            />
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 </ScrollView>

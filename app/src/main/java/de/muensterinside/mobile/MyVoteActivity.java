@@ -1,8 +1,7 @@
 package de.muensterinside.mobile;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,8 +23,7 @@ import de.muensterinside.mobile.tasks.MyVoteTask;
  */
 public class MyVoteActivity extends AppCompatActivity {
 
-    public static final String TAG = "MyVoteActivity";
-
+    public static final String TAG ="MyVoteActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,36 +33,39 @@ public class MyVoteActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
         ListView listView = (ListView) findViewById(R.id.liste);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        int device_id = sharedPreferences.getInt("deviceId", 0);
 
+        MyVoteTask myVoteTask = new MyVoteTask(this, myApp, device_id);
+        myVoteTask.execute();
 
-            MyVoteTask myVoteTask = new MyVoteTask(this, myApp);
-            myVoteTask.execute();
+        List<Location> votes;
+        try{
+            votes = myVoteTask.get();
+        }
+        catch (Exception e){
+            votes = null;
+            e.printStackTrace();
+        }
 
-            List<Location> votes;
-            try {
-                votes = myVoteTask.get();
-            } catch (Exception e) {
-                votes = null;
-                e.printStackTrace();
+        if(votes == null){
+            CharSequence text = "Bisher keine Votes abgegeben.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+            Log.d(TAG, "Keine Liste mit Votes gefunden.");
+        }
+        else {
+            List myList = new ArrayList<String>();
+            for (int i = 0; i < votes.size(); i++) {
+                myList.add(votes.get(i).getName());
             }
 
-            if (votes == null) {
-                CharSequence text = "Bisher keine Votes abgegeben.";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(this, text, duration);
-                toast.show();
-                Log.d(TAG, "Keine Liste mit Votes gefunden.");
-            } else {
-                List myList = new ArrayList<String>();
-                for (int i = 0; i < votes.size(); i++) {
-                    myList.add(votes.get(i).getName());
-                }
+            ArrayAdapter<String> adapter;
+            adapter = new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
 
-                ArrayAdapter<String> adapter;
-                adapter = new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
-
-                listView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }
     }
+}

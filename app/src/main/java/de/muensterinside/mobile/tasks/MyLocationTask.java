@@ -29,11 +29,12 @@ public class MyLocationTask extends AsyncTask<Void,Void, List<Location>> {
      * @param context der Inhalt Activity
      * @param myApp repräsentiert den Zustand der Application
      */
-    public MyLocationTask(Context context, MuensterInsideAndroidApplication myApp)
+    public MyLocationTask(Context context, MuensterInsideAndroidApplication myApp, int device_id)
 
     {
         this.myApp = myApp;
         this.context = context;
+        this.device_id = device_id;
     }
 
     // Im Hintergrund wird der Webservice aufgerufen
@@ -43,7 +44,6 @@ public class MyLocationTask extends AsyncTask<Void,Void, List<Location>> {
         Log.d(TAG, "doInBackground() gestartet" );
 
         try{
-            device_id = this.myApp.getDevice().getId();
             locations = this.myApp.getMuensterInsideImpl().getMyLocations(device_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return locations;

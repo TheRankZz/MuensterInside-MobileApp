@@ -25,6 +25,7 @@ public class NewLocationTask extends AsyncTask<Void, Void, Integer> {
     private String locationDescription;
     private String locationLink;
     private int cat_id;
+    private int device_id;
     private int code = 1;
     public static final String TAG = "NewLocationTask";
 
@@ -39,13 +40,14 @@ public class NewLocationTask extends AsyncTask<Void, Void, Integer> {
      */
     public NewLocationTask(Context context, MuensterInsideAndroidApplication myApp,
                            String locationName, String locationDescription,
-                           String locationLink, int cat_id) {
+                           String locationLink, int cat_id, int device_id) {
         this.context = context;
         this.myApp = myApp;
         this.locationName = locationName;
         this.locationDescription = locationDescription;
         this.locationLink = locationLink;
         this.cat_id = cat_id;
+        this.device_id = device_id;
     }
 
     // Im Hintergrund wird der Webservice aufgerufen.
@@ -53,10 +55,9 @@ public class NewLocationTask extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         Log.d(TAG, "doInBackground() gestartet");
         try {
-            Device d = myApp.getDevice();
             int temp_cat_id = this.cat_id + 1;
             code = myApp.getMuensterInsideImpl().saveLocation(locationName,locationDescription,
-                    locationLink,temp_cat_id,d.getId());
+                    locationLink,temp_cat_id,device_id);
 
             Log.i(TAG, "doInBackground() erfolgreich");
             return code;

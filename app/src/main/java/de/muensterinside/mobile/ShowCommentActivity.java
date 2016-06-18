@@ -3,8 +3,6 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,41 +68,41 @@ public class ShowCommentActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.commentList);
 
 
+        ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id);
+        showCommentTask.execute();
 
-            ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id);
-            showCommentTask.execute();
-
-            try {
-                comments = showCommentTask.get();
-            } catch (Exception e) {
-                comments = null;
-                e.printStackTrace();
-            }
-
-            if (comments == null) {
-                CharSequence text = "Keine Kommentare vorhanden.";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(this, text, duration);
-                toast.show();
-            } else {
-                Comment comment;
-                ArrayList<HashMap<String, String>> list;
-                list = new ArrayList<HashMap<String, String>>();
-                for (int i = 0; i < comments.size(); i++) {
-                    comment = comments.get(i);
-                    HashMap<String, String> temp = new HashMap<String, String>();
-                    temp.put(FIRST_COLUMN, comment.getText());
-                    temp.put(SECOND_COLUMN, comment.getDate());
-                    list.add(temp);
-                }
-
-                // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
-                adapter = new CommentListViewAdapters(this, list);
-
-                listView.setAdapter(adapter);
-            }
+        try{
+            comments = showCommentTask.get();
+        }
+        catch (Exception e){
+            comments = null;
+            e.printStackTrace();
         }
 
+        if(comments == null){
+            CharSequence text = "Keine Kommentare vorhanden.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+        }
+        else {
+            Comment comment;
+            ArrayList<HashMap<String, String>> list;
+            list = new ArrayList<HashMap<String,String>>();
+            for(int i=0; i < comments.size(); i++){
+                comment = comments.get(i);
+                HashMap<String,String> temp = new HashMap<String, String>();
+                temp.put(FIRST_COLUMN, comment.getText());
+                temp.put(SECOND_COLUMN, comment.getDate());
+                list.add(temp);
+            }
+
+            // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+            adapter = new CommentListViewAdapters(this, list);
+
+            listView.setAdapter(adapter);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

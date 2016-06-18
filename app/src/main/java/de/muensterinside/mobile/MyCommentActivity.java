@@ -1,8 +1,7 @@
 package de.muensterinside.mobile;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,12 +34,17 @@ public class MyCommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_comment);
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+
         ListView listView = (ListView) findViewById(R.id.liste);
+
         MyCommentListViewAdapters adapter;
-		Button button = (Button) findViewById(R.id.delete_btn);
 
+        Button button = (Button) findViewById(R.id.delete_btn);
 
-        MyCommentTask myCommentTask = new MyCommentTask(this, myApp);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        int device_id = sharedPreferences.getInt("deviceId", 0);
+
+        MyCommentTask myCommentTask = new MyCommentTask(this, myApp, device_id);
         myCommentTask.execute();
 
         List<Comment> comments;
@@ -60,6 +64,7 @@ public class MyCommentActivity extends AppCompatActivity {
             Log.e(TAG, "Keine Liste mit Kommentaren gefunden.");
         }
 
+        else {
         Comment comment;
         ArrayList<HashMap<String, String>> list;
         list = new ArrayList<HashMap<String,String>>();
@@ -75,6 +80,7 @@ public class MyCommentActivity extends AppCompatActivity {
         adapter = new MyCommentListViewAdapters(this, list, comments, myApp);
 
         listView.setAdapter(adapter);
+        }
 
     }
 }

@@ -4,8 +4,6 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +23,7 @@ import java.util.List;
 
 import de.muensterinside.mobile.adapter.SlidingMenuAdapter;
 import de.muensterinside.mobile.entities.Category;
+import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.fragments.Category1;
 import de.muensterinside.mobile.fragments.Category2;
 import de.muensterinside.mobile.fragments.Category3;
@@ -83,26 +82,33 @@ public class MainActivity extends AppCompatActivity {
 
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+        Device device = new Device();
+        try{
+            device = myApp.getDevice();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
-            // Kategorien werden im Hintergrund geladen
-            CategoryTask categoryTask = new CategoryTask(this, myApp);
-            categoryTask.execute();
+        // Kategorien werden im Hintergrund geladen
+        CategoryTask categoryTask = new CategoryTask(this,myApp);
+        categoryTask.execute();
 
-            List<Category> categories;
-            try {
-                // Kategorien aus dem CategoryTask werden für die Weiterverwendung gespeichert
-                categories = categoryTask.get();
-            } catch (Exception e) {
-                categories = null;
-                e.printStackTrace();
-            }
+        List<Category> categories;
+        try{
+            // Kategorien aus dem CategoryTask werden für die Weiterverwendung gespeichert
+            categories = categoryTask.get();
+        }
+        catch (Exception e){
+            categories = null;
+            e.printStackTrace();
+        }
 
-
-            // Die Namen der Kategorien werden in eine Liste gespeichert
-            List myList = new ArrayList<String>();
-            for (int i = 0; i < categories.size(); i++) {
-                myList.add(categories.get(i).getName());
-            }
+        // Die Namen der Kategorien werden in eine Liste gespeichert
+        List myList = new ArrayList<String>();
+        for (int i = 0; i < categories.size(); i++) {
+            myList.add(categories.get(i).getName());
+        }
 
         // NavigationBar
         listViewSliding = (ListView) findViewById(R.id.lv_sliding_menu);
@@ -129,7 +135,15 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawer(listViewSliding);
 
         //Fragment Category1 wird beim Start gezeigt
-        replaceFragment(0);
+        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        boolean test = pref.getBoolean("test", false);
+
+        if(test){
+            replaceFragment(1);
+        }
+        else {
+            replaceFragment(0);
+        }
 
         //Zeigt das ausgewählte Fragment an
         listViewSliding.setOnItemClickListener(new AdapterView.OnItemClickListener() {

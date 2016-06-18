@@ -3,8 +3,6 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -25,9 +23,9 @@ import de.muensterinside.mobile.tasks.WriteCommentTask;
  * Created by Julia Bracht and Nicolas Burchert
  *  @author Julia Bracht, Nicolas Burchert
  */
-public class CommentActivity extends AppCompatActivity{
+public class WriteCommentActivity extends AppCompatActivity{
 
-    public static final String TAG = "CommentActivity";
+    public static final String TAG = "WriteCommentActivity";
     private EditText kommentar;
     private int cat_id;
     private int loc_id;
@@ -55,12 +53,15 @@ public class CommentActivity extends AppCompatActivity{
         cat_id = intent.getIntExtra("selected", 0);
         loc_id = intent.getIntExtra("locId", 0);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        final int device_id = sharedPreferences.getInt("deviceId", 0);
+
          /* In der SharedPreference wird die vorher ausgewählte
          * ID einer Kategorie gespeichert.
          */
-        SharedPreferences sharedPreferences;
-        sharedPreferences = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences sharedPreferences1;
+        sharedPreferences1 = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences1.edit();
         editor.putInt("catId", cat_id);
         editor.commit();
 
@@ -71,10 +72,9 @@ public class CommentActivity extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Device device;
                 Log.d(TAG, "button.onClick() gestartet");
                 String s = kommentar.getText().toString();
-                Intent intent = new Intent(CommentActivity.this,  LocationActivity.class);
+                Intent intent = new Intent(WriteCommentActivity.this,  LocationActivity.class);
                 SharedPreferences newCommentLocationId = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = newCommentLocationId.edit();
                 editor.putInt("loc_id", loc_id);
@@ -82,37 +82,34 @@ public class CommentActivity extends AppCompatActivity{
                 editor.putBoolean("newCommentBool", true);
                 editor.commit();
 
-
-                    WriteCommentTask writeCommentTask = new WriteCommentTask(context, myApp, s, loc_id);
-                    writeCommentTask.execute();
-
-
-                    int code = 1;
-                    try {
-                        code = writeCommentTask.get();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
-                    if (code == 0) {
-                        intent.putExtra("name", s);
-
-                        CharSequence text = "Kommentar " + s + " wurde erstellt.";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                        Log.i(TAG, "Kommentar wurde erfolgreich erstellt");
-                    } else {
-                        CharSequence text = "Kommentar " + s + " wurde nicht erstellt.";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                        Log.i(TAG, "Kommentar wurde nicht erfolgreich erstellt");
-                    }
-                    startActivity(intent);
+                WriteCommentTask writeCommentTask = new WriteCommentTask(context,myApp,s,loc_id, device_id);
+                writeCommentTask.execute();
+                int code = 1;
+                try{
+                   code = writeCommentTask.get();
+                }
+                catch(Exception e) {
+                   e.printStackTrace();
                 }
 
+                if(code == 0){
+                    intent.putExtra("name", s);
+
+                    CharSequence text = "Kommentar " + s + " wurde erstellt.";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Kommentar wurde erfolgreich erstellt");
+                }
+                else {
+                    CharSequence text = "Kommentar " + s + " wurde nicht erstellt.";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.i(TAG, "Kommentar wurde nicht erfolgreich erstellt");
+                }
+                startActivity(intent);
+            }
         });
 
 

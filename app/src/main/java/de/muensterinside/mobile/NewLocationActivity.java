@@ -3,8 +3,6 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,8 +55,7 @@ public class NewLocationActivity extends AppCompatActivity {
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         final int cat_id = myCatIdPref.getInt("catId", 1);
-        final String androidId = sharedPreferences.getString("androidId", "Default");
-        final String username = sharedPreferences.getString("username", "Default");
+        final int device_id = sharedPreferences.getInt("deviceId", 0);
         context = this;
 
 
@@ -70,14 +67,14 @@ public class NewLocationActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(NewLocationActivity.this, MainActivity.class);
                 myIntent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
 
-                Device device;
                 MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
                 String locationName = name.getText().toString();
                 String locationDescription = description.getText().toString();
                 String locationLink = link.getText().toString();
 
+
                 NewLocationTask newLocationTask = new NewLocationTask(context,myApp,
-                        locationName,locationDescription,locationLink, cat_id);
+                        locationName,locationDescription,locationLink, cat_id, device_id);
                 newLocationTask.execute();
                 int code = 1;
                 try {
@@ -98,6 +95,11 @@ public class NewLocationActivity extends AppCompatActivity {
                     editor.putBoolean("newLocationBool", true);
                     editor.putInt("cat_id", cat_id);
                     editor.commit();
+
+                    SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = pref.edit();
+                    edit.putBoolean("test", true);
+                    edit.apply();
 
                     CharSequence text = "Location " + locationName + " wurde erstellt.";
                     int duration = Toast.LENGTH_SHORT;
