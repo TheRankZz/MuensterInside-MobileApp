@@ -4,6 +4,8 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,100 +86,108 @@ public class MainActivity extends AppCompatActivity {
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
         Device device = new Device();
-        try{
+        try {
             device = myApp.getDevice();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Kategorien werden im Hintergrund geladen
-        CategoryTask categoryTask = new CategoryTask(this,myApp);
-        categoryTask.execute();
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        List<Category> categories;
-        try{
-            // Kategorien aus dem CategoryTask werden für die Weiterverwendung gespeichert
-            categories = categoryTask.get();
-        }
-        catch (Exception e){
-            categories = null;
-            e.printStackTrace();
-        }
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // Kategorien werden im Hintergrund geladen
+            CategoryTask categoryTask = new CategoryTask(this, myApp);
+            categoryTask.execute();
 
-        // Die Namen der Kategorien werden in eine Liste gespeichert
-        List myList = new ArrayList<String>();
-        for (int i = 0; i < categories.size(); i++) {
-            myList.add(categories.get(i).getName());
-        }
-
-        // NavigationBar
-        listViewSliding = (ListView) findViewById(R.id.lv_sliding_menu);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        listSliding = new ArrayList<>();
-
-        listSliding.add(new ItemSlideMenu(R.drawable.ic_action_tiles_large, "Startseite"));
-        //Fügt Items in die NavigationBar ein
-        for(int i=0; i < myList.size();i++){
-            listSliding.add(new ItemSlideMenu(R.drawable.ic_action_tiles_large, myList.get(i).toString()));
-        }
-
-        adapter = new SlidingMenuAdapter(this, listSliding);
-        listViewSliding.setAdapter(adapter);
-
-        //Icon zum öffnen oder schließen der NavigationBar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //Setzt den Titel
-        setTitle(listSliding.get(0).getTitle());
-        //Ausgewähltes Item
-        listViewSliding.setItemChecked(0, true);
-        //Menü wird geschlossen
-        drawerLayout.closeDrawer(listViewSliding);
-
-        //Fragment Category1 wird beim Start gezeigt
-        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        boolean test = pref.getBoolean("test", false);
-
-        if(test){
-            replaceFragment(1);
-        }
-        else {
-            replaceFragment(0);
-        }
-
-        //Zeigt das ausgewählte Fragment an
-        listViewSliding.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Setzt den Titel
-                setTitle(listSliding.get(position).getTitle());
-                //Ausgewähltes Item
-                listViewSliding.setItemChecked(position, true);
-                //Fragment wird gewechselt
-                replaceFragment(position);
-                //Menü wird geschlossen
-                drawerLayout.closeDrawer(listViewSliding);
-            }
-        });
-
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_opened, R.string.drawer_closed){
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                invalidateOptionsMenu();
+            List<Category> categories;
+            try {
+                // Kategorien aus dem CategoryTask werden für die Weiterverwendung gespeichert
+                categories = categoryTask.get();
+            } catch (Exception e) {
+                categories = null;
+                e.printStackTrace();
             }
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                invalidateOptionsMenu();
+            // Die Namen der Kategorien werden in eine Liste gespeichert
+            List myList = new ArrayList<String>();
+            for (int i = 0; i < categories.size(); i++) {
+                myList.add(categories.get(i).getName());
             }
-        };
 
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+            // NavigationBar
+            listViewSliding = (ListView) findViewById(R.id.lv_sliding_menu);
+            drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            listSliding = new ArrayList<>();
+
+            listSliding.add(new ItemSlideMenu(R.drawable.ic_action_tiles_large, "Startseite"));
+            //Fügt Items in die NavigationBar ein
+            for (int i = 0; i < myList.size(); i++) {
+                listSliding.add(new ItemSlideMenu(R.drawable.ic_action_tiles_large, myList.get(i).toString()));
+            }
+
+            adapter = new SlidingMenuAdapter(this, listSliding);
+            listViewSliding.setAdapter(adapter);
+
+            //Icon zum öffnen oder schließen der NavigationBar
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            //Setzt den Titel
+            setTitle(listSliding.get(0).getTitle());
+            //Ausgewähltes Item
+            listViewSliding.setItemChecked(0, true);
+            //Menü wird geschlossen
+            drawerLayout.closeDrawer(listViewSliding);
+
+            //Fragment Category1 wird beim Start gezeigt
+            SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+            boolean test = pref.getBoolean("test", false);
+
+            if (test) {
+                replaceFragment(1);
+            } else {
+                replaceFragment(0);
+            }
+
+            //Zeigt das ausgewählte Fragment an
+            listViewSliding.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    //Setzt den Titel
+                    setTitle(listSliding.get(position).getTitle());
+                    //Ausgewähltes Item
+                    listViewSliding.setItemChecked(position, true);
+                    //Fragment wird gewechselt
+                    replaceFragment(position);
+                    //Menü wird geschlossen
+                    drawerLayout.closeDrawer(listViewSliding);
+                }
+            });
+
+            actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_opened, R.string.drawer_closed) {
+
+                @Override
+                public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
+                    invalidateOptionsMenu();
+                }
+
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    super.onDrawerClosed(drawerView);
+                    invalidateOptionsMenu();
+                }
+            };
+
+            drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        }
+        else{
+            Log.d(TAG, "Keine Internetverbindung");
+            Toast.makeText(MainActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
+        }
+
     }
+
 
 
     @Override

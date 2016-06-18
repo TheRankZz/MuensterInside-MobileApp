@@ -3,6 +3,8 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import de.muensterinside.mobile.tasks.LocationListTask;
 
@@ -70,9 +73,23 @@ public class CategoryActivity extends AppCompatActivity {
         // Es wird ein Button erzeugt, um eine neue Location anlegen zu können
         Button newLocation = (Button) findViewById(R.id.newLocation);
 
-        // Der LocationListTask wird aufgerufen
-        LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, listView, newLocation);
-        locationListTask.execute();
+
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // Der LocationListTask wird aufgerufen
+            LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, listView, newLocation);
+            locationListTask.execute();
+        }
+
+        else {
+
+            Log.d(TAG, "Keine Internetverbindung");
+            Toast.makeText(CategoryActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
+
+        }
     }
 
     @Override

@@ -3,21 +3,32 @@
     <string name="title_activity_kategorie">KategorieActivity</string>
     <string name="title_activity_location">LocationActivity</string>
     <string name="title_activity_category">CategoryActivity</string>
-    <string name="action_settings">Einstellung</string>
-    <string name="username">Benutzername</string>
-    <string name="usernameSummary">Default Benutzername</string>
+
+    <!-- Settings/Menue -->
     <string name="kommentare">Meine Kommentare</string>
     <string name="votes">Meine Votes</string>
     <string name="pref_user_title">Kommentardaten</string>
     <string name="title_activity_prefs">PrefsActivity</string>
+    <string name="location">Meine Locations</string>
+    <string name="action_settings">Einstellung</string>
+    <string name="username">Benutzername</string>
+    <string name="usernameSummary">Default Benutzername</string>
+
+
+
     <string name="intentExtra1">content</string>
     <string name="fail">Hier ist nichts übergeben worden.</string>
+
+    <!--Startseite Button -->
     <string name="home">Startseite</string>
-    <string name="location">Meine Locations</string>
     <string name="drawer_opened">Opened</string>
     <string name="drawer_closed">Closed</string>
-    <string name="welcome">Willkommen</string>
+
+
+    <!--- NewCommentActivity -->
     <string name="showComment">Schreiben Sie einen Kommentar...</string>
+
+    <!-- LocationActivity -->
     <string name="comment">Kommentar</string>
     <string name="location_name">Name:</string>
     <string name="location_vote">Votes:</string>
@@ -25,11 +36,19 @@
     <string name="example">EXAMPLE</string>
     <string name="showMoreComments">Weitere Kommentare anzeigen</string>
     <string name="description">Beschreibung:</string>
+
+    <!-- CategoryActivity -->
     <string name="newLocation">Erstelle Location</string>
+
+    <!-- Einloggen/Registrieren-->
     <string name="register">Registrieren</string>
     <string name="login">Login</string>
+
+    <!-- Eigene Kommentare Löschen -->
     <string name="delete">Löschen</string>
-    <string name="lets_go">Los gehts!</string>
+
+
+    <!-- Welcome Activity -->
    <string name="welcomeText">
        auf unserer App.
        \n \nLerne neue Locations in Münster kennen und lass dich von den Geschmäckern der Muensteraner inspirieren.
@@ -37,5 +56,8 @@
          \n\nNeue Locations können gerne angelegt werden.
          \n\n Überzeuge dich selbst!
    </string>
+
+    <string name="welcome">Willkommen</string>
+    <string name="lets_go">Los gehts!</string>
 
 </resources>

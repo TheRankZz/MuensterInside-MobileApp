@@ -3,6 +3,8 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,36 +40,46 @@ public class MyLocationActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         int device_id = sharedPreferences.getInt("deviceId", 0);
 
-        MyLocationTask myLocationTask = new MyLocationTask(this, myApp, device_id);
-        myLocationTask.execute();
 
-        List<Location> locations;
-        try{
-            locations = myLocationTask.get();
-        }
-        catch (Exception e){
-            locations = null;
-            e.printStackTrace();
-        }
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        if(locations == null){
-            CharSequence text = "Bisher keine Locations angelegt.";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
-            toast.show();
-            Log.i(TAG, "Keine Liste mit Locations gefunden.");
-        }
-        else {
-            List myList = new ArrayList<String>();
-            for (int i = 0; i < locations.size(); i++) {
-                myList.add(locations.get(i).getName());
+        if (networkInfo != null && networkInfo.isConnected()) {
+            MyLocationTask myLocationTask = new MyLocationTask(this, myApp, device_id);
+            myLocationTask.execute();
+
+            List<Location> locations;
+            try {
+                locations = myLocationTask.get();
+            } catch (Exception e) {
+                locations = null;
+                e.printStackTrace();
             }
 
-            ArrayAdapter<String> adapter;
-            adapter = new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
+            if (locations == null) {
+                CharSequence text = "Bisher keine Locations angelegt.";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(this, text, duration);
+                toast.show();
+                Log.i(TAG, "Keine Liste mit Locations gefunden.");
+            } else {
+                List myList = new ArrayList<String>();
+                for (int i = 0; i < locations.size(); i++) {
+                    myList.add(locations.get(i).getName());
+                }
 
-            listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+                ArrayAdapter<String> adapter;
+                adapter = new ArrayAdapter<String>(this, R.layout.content_item_list_category, myList);
+
+                listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+        }
+        else{
+
+
+            Log.d(TAG, "Keine Internetverbindung");
+            Toast.makeText(MyLocationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
     }
 }

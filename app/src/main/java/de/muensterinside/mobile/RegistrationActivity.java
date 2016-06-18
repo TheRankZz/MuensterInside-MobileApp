@@ -57,115 +57,130 @@ public class RegistrationActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
 
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        // Wenn ein Gerät schon registriert ist, wird beim Start automatisch ein Login durchgeführt
-        LoginTask loginTask = new LoginTask(this, myApp, android_id);
-        loginTask.execute();
+        if (networkInfo != null && networkInfo.isConnected()) {
 
-        Device device;
-        try {
-            device = loginTask.get();
-            Log.i(TAG, "DeviceID: " + device.getId());
-        }
-        catch(Exception e){
-            device = null;
-            Log.e(TAG, "Kein Device Objekt bekommen.");
-            e.printStackTrace();
-        }
+            // Wenn ein Gerät schon registriert ist, wird beim Start automatisch ein Login durchgeführt
+            LoginTask loginTask = new LoginTask(this, myApp, android_id);
+            loginTask.execute();
 
-        if (device != null) {
-            String name = device.getUsername();
-            Log.i(TAG, "Username: " + name);
+            Device device;
+            try {
+                device = loginTask.get();
+                Log.i(TAG, "DeviceID: " + device.getId());
+            } catch (Exception e) {
+                device = null;
+                Log.e(TAG, "Kein Device Objekt bekommen.");
+                e.printStackTrace();
+            }
+
+            if (device != null) {
+                String name = device.getUsername();
+                Log.i(TAG, "Username: " + name);
             /* In der SharedPreference wird die vorher ausgewählte
              * AnroidID des Gerätes und der Username gespeichert.
              */
-            editor.putString("androidId", android_id);
-            editor.putString("username", name);
-            editor.putInt("deviceId", device.getId());
-            editor.putBoolean("test", false);
-            editor.apply();
+                editor.putString("androidId", android_id);
+                editor.putString("username", name);
+                editor.putInt("deviceId", device.getId());
+                editor.putBoolean("test", false);
+                editor.apply();
 
-            Intent myIntent = new Intent(context, MainActivity.class);
-            myIntent.putExtra("username", name);
-            startActivity(myIntent);
+                Intent myIntent = new Intent(context, MainActivity.class);
+                myIntent.putExtra("username", name);
+                startActivity(myIntent);
 
-            CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
-                    + "AndroidId: " + device.getAndroidUuid();
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "Login erfolgreich");
+                CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
+                        + "AndroidId: " + device.getAndroidUuid();
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                Log.i(TAG, "Login erfolgreich");
+            } else {
+
+                CharSequence text = "Login fehlgeschlagen!";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                Log.i(TAG, "Login fehlgeschlagen");
+            }
+
         } else {
-
-            CharSequence text = "Login fehlgeschlagen!";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "Login fehlgeschlagen");
+            Log.d(TAG, "Keine Internetverbindung");
+            Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
     }
 
+    // Button für das Login wird angelegt
+    // Button login = (Button) findViewById(R.id.login);
 
 
-        // Button für das Login wird angelegt
-       // Button login = (Button) findViewById(R.id.login);
+    /* Wenn der Button login gedrückt wurde,
+     * soll der LoginTask ausgeführt werden.
+     */
+    public void login(View button) {
+        Log.d(TAG, "login.onClick() gestartet");
 
 
-        /* Wenn der Button login gedrückt wurde,
-         * soll der LoginTask ausgeführt werden.
-         */
-     public void login(View button)
-    {
-                Log.d(TAG, "login.onClick() gestartet");
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
 
 
-                LoginTask loginTask = new LoginTask(button.getContext(), myApp, android_id);
-                loginTask.execute();
-                Device device;
-                try {
-                    device = loginTask.get();
-                    Log.i(TAG, "login.onClick() erfolgreich");
-                } catch (Exception e) {
-                    Log.e(TAG, "login.onClick() fehlgeschlagen");
-                    device = null;
-                    e.printStackTrace();
-                }
+            LoginTask loginTask = new LoginTask(button.getContext(), myApp, android_id);
+            loginTask.execute();
+            Device device;
+            try {
+                device = loginTask.get();
+                Log.i(TAG, "login.onClick() erfolgreich");
+            } catch (Exception e) {
+                Log.e(TAG, "login.onClick() fehlgeschlagen");
+                device = null;
+                e.printStackTrace();
+            }
 
-                if (device != null) {
-                    String name = device.getUsername();
-                    Log.i(TAG, "Username: " + name);
+            if (device != null) {
+                String name = device.getUsername();
+                Log.i(TAG, "Username: " + name);
 
                     /* In der SharedPreference wird die vorher ausgewählte
                      * AnroidID des Gerätes und der Username gespeichert.
                      */
-                    SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.putString("androidId", android_id);
-                    editor.putString("username", name);
-                    editor.putInt("deviceId", device.getId());
-                    editor.putBoolean("test", false);
-                    editor.apply();
+                SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("androidId", android_id);
+                editor.putString("username", name);
+                editor.putInt("deviceId", device.getId());
+                editor.putBoolean("test", false);
+                editor.apply();
 
-                    Intent myIntent = new Intent(context, MainActivity.class);
-                    myIntent.putExtra("username", name);
-                    startActivity(myIntent);
+                Intent myIntent = new Intent(context, MainActivity.class);
+                myIntent.putExtra("username", name);
+                startActivity(myIntent);
 
-                    CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
-                            + "AndroidId: " + device.getAndroidUuid();
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.i(TAG, "Login erfolgreich");
-                } else {
-                    CharSequence text = "Login fehlgeschlagen!";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.i(TAG, "Login fehlgeschlagen");
-                }
-
+                CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
+                        + "AndroidId: " + device.getAndroidUuid();
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                Log.i(TAG, "Login erfolgreich");
+            } else {
+                CharSequence text = "Login fehlgeschlagen!";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                Log.i(TAG, "Login fehlgeschlagen");
             }
+        } else {
 
+            Log.d(TAG, "Keine Internetverbindung");
+            Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
+
+        }
+    }
 
 
     public void regristrieren(View button) {
@@ -178,39 +193,49 @@ public class RegistrationActivity extends AppCompatActivity {
         Log.d(TAG, "registration.onClick() gestartet");
         String name = username.getText().toString();
         Log.i(TAG, "Username: " + name);
-        RegistrationTask registrationTask = new RegistrationTask(context, myApp,
-                android_id, name);
-        registrationTask.execute(android_id, name);
-        Device device;
-        try {
-            device = registrationTask.get();
-            Log.i(TAG, "registration.onClick() erfolgreich");
-        } catch (Exception e) {
-            Log.e(TAG, "registration.onClick() fehlgeschlagen");
-            device = null;
-            e.printStackTrace();
-        }
 
-        if (device != null) {
-            CharSequence text = "Registrierung erfolgreich! Registrierter Benutzername: "
-                    + device.getUsername()
-                    + " Registrierte AndroidId: "
-                    + device.getAndroidUuid();
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(button.getContext(), text, duration);
-            toast.show();
-            button.setVisibility(View.INVISIBLE);
-            Log.i(TAG, "Registrierung erfolgreich");
+        if (networkInfo != null && networkInfo.isConnected()) {
+            RegistrationTask registrationTask = new RegistrationTask(context, myApp,
+                    android_id, name);
+            registrationTask.execute(android_id, name);
+            Device device;
+            try {
+                device = registrationTask.get();
+                Log.i(TAG, "registration.onClick() erfolgreich");
+            } catch (Exception e) {
+                Log.e(TAG, "registration.onClick() fehlgeschlagen");
+                device = null;
+                e.printStackTrace();
+            }
+
+            if (device != null) {
+                CharSequence text = "Registrierung erfolgreich! Registrierter Benutzername: "
+                        + device.getUsername()
+                        + " Registrierte AndroidId: "
+                        + device.getAndroidUuid();
+
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(button.getContext(), text, duration);
+                toast.show();
+                button.setVisibility(View.INVISIBLE);
+                Log.i(TAG, "Registrierung erfolgreich");
+            } else {
+                CharSequence text = "Registrierung fehlgeschlagen.";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                Log.e(TAG, "Registrierung fehlgeschlagen");
+            }
         } else {
-            CharSequence text = "Registrierung fehlgeschlagen.";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.e(TAG, "Registrierung fehlgeschlagen");
+
+            Log.d(TAG, "Keine Internetverbindung");
+            Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
+
         }
     }
 }
-
 
 

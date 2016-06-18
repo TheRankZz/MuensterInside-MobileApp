@@ -3,6 +3,8 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -72,50 +74,57 @@ public class NewLocationActivity extends AppCompatActivity {
                 String locationDescription = description.getText().toString();
                 String locationLink = link.getText().toString();
 
+                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-                NewLocationTask newLocationTask = new NewLocationTask(context,myApp,
-                        locationName,locationDescription,locationLink, cat_id, device_id);
-                newLocationTask.execute();
-                int code = 1;
-                try {
-                    code = newLocationTask.get();
-                }
-                catch(Exception e){
-                    e.printStackTrace();
-                }
+                if (networkInfo != null && networkInfo.isConnected()) {
 
-                if(code == 0) {
+                    NewLocationTask newLocationTask = new NewLocationTask(context, myApp,
+                            locationName, locationDescription, locationLink, cat_id, device_id);
+                    newLocationTask.execute();
+                    int code = 1;
+                    try {
+                        code = newLocationTask.get();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (code == 0) {
 
                     /* In der SharedPreference wird die vorher ausgewählte
                     * Id der Location(und ein Boolean der auf true gesetzt wird,
                      * wenn eine neue Location erzeugt wird) gespeichert.
                     */
-                    SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = boolPref.edit();
-                    editor.putBoolean("newLocationBool", true);
-                    editor.putInt("cat_id", cat_id);
-                    editor.commit();
+                        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = boolPref.edit();
+                        editor.putBoolean("newLocationBool", true);
+                        editor.putInt("cat_id", cat_id);
+                        editor.commit();
 
-                    SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor edit = pref.edit();
-                    edit.putBoolean("test", true);
-                    edit.apply();
+                        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = pref.edit();
+                        edit.putBoolean("test", true);
+                        edit.apply();
 
-                    CharSequence text = "Location " + locationName + " wurde erstellt.";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.i(TAG, "Location wurde erfolgreich erstellt");
+                        CharSequence text = "Location " + locationName + " wurde erstellt.";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.i(TAG, "Location wurde erfolgreich erstellt");
 
+                    } else {
+                        CharSequence text = "Location " + locationName + " wurde nicht erstellt.";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.i(TAG, "Location wurde nicht erfolgreich erstellt");
+                    }
+                    startActivity(myIntent);
                 }
-                else {
-                    CharSequence text = "Location " + locationName + " wurde nicht erstellt.";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.i(TAG, "Location wurde nicht erfolgreich erstellt");
+                else{
+                    Log.d(TAG, "Keine Internetverbindung");
+                    Toast.makeText(NewLocationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
                 }
-                startActivity(myIntent);
             }
         });
     }

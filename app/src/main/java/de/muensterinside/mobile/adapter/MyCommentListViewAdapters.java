@@ -111,10 +111,11 @@ public class MyCommentListViewAdapters extends BaseAdapter{
                 deleteCommentTask.execute();
 
 
-              // list.remove(); //or some other task
 
-                Intent i = new Intent(activity, MyCommentActivity.class);
+
+                Intent i = new Intent(activity, PrefsActivity.class);
                 activity.startActivity(i);
+                notifyDataSetChanged();
 
             }
         });
