@@ -3,6 +3,8 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +29,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private String android_id;
     private Context context;
     public static final String TAG = "RegistrationActivity";
-
 
 
     @Override
@@ -58,138 +59,139 @@ public class RegistrationActivity extends AppCompatActivity {
         editor.putString("username", username.getText().toString());
         editor.commit();
 
-        // Wenn ein Gerät schon registriert ist, wird beim Start automatisch ein Login durchgeführt
-        LoginTask loginTask = new LoginTask(this, myApp, android_id);
-        loginTask.execute();
 
-        Device device;
-        try {
-            device = loginTask.get();
-            Log.i(TAG, "login.onClick() erfolgreich");
-        }
-        catch(Exception e){
-            Log.e(TAG, "login.onClick() fehlgeschlagen");
-            device = null;
-            e.printStackTrace();
-        }
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        if(device != null){
-            String name = device.getUsername();
-            Intent myIntent = new Intent(context, MainActivity.class);
-            myIntent.putExtra("username", name);
-            startActivity(myIntent);
+        if (networkInfo != null && networkInfo.isConnected()) {
 
-            CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
-                    + "AndroidId: " + device.getAndroidUuid();
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "Login erfolgreich");
-        }
-        else {
-            CharSequence text = "Login fehlgeschlagen!";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            Log.i(TAG, "Login fehlgeschlagen");
-        }
+            // Wenn ein Gerät schon registriert ist, wird beim Start automatisch ein Login durchgeführt
+            LoginTask loginTask = new LoginTask(this, myApp, android_id);
+            loginTask.execute();
 
-        // Button für die Registrierung wird angelegt
-        final Button registration = (Button) findViewById(R.id.registration);
+            Device device;
+            try {
+                device = loginTask.get();
+                Log.i(TAG, "login.onClick() erfolgreich");
+            } catch (Exception e) {
+                Log.e(TAG, "login.onClick() fehlgeschlagen");
+                device = null;
+                e.printStackTrace();
+            }
 
-        // Button für das Login wird angelegt
-        Button login = (Button) findViewById(R.id.login);
+            if (device != null) {
+                String name = device.getUsername();
+                Intent myIntent = new Intent(context, MainActivity.class);
+                myIntent.putExtra("username", name);
+                startActivity(myIntent);
+
+                CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
+                        + "AndroidId: " + device.getAndroidUuid();
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                Log.i(TAG, "Login erfolgreich");
+            } else {
+                CharSequence text = "Login fehlgeschlagen!";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                Log.i(TAG, "Login fehlgeschlagen");
+            }
+
+            // Button für die Registrierung wird angelegt
+            final Button registration = (Button) findViewById(R.id.registration);
+
+            // Button für das Login wird angelegt
+            Button login = (Button) findViewById(R.id.login);
 
 
         /* Wenn der Button login gedrückt wurde,
          * soll der LoginTask ausgeführt werden.
          */
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "login.onClick() gestartet");
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d(TAG, "login.onClick() gestartet");
 
-                LoginTask loginTask = new LoginTask(view.getContext(), myApp, android_id);
-                loginTask.execute();
-                Device device;
-                try {
-                    device = loginTask.get();
-                    Log.i(TAG, "login.onClick() erfolgreich");
-                }
-                catch(Exception e){
-                    Log.e(TAG, "login.onClick() fehlgeschlagen");
-                    device = null;
-                    e.printStackTrace();
-                }
+                    LoginTask loginTask = new LoginTask(view.getContext(), myApp, android_id);
+                    loginTask.execute();
+                    Device device;
+                    try {
+                        device = loginTask.get();
+                        Log.i(TAG, "login.onClick() erfolgreich");
+                    } catch (Exception e) {
+                        Log.e(TAG, "login.onClick() fehlgeschlagen");
+                        device = null;
+                        e.printStackTrace();
+                    }
 
-                if(device != null){
-                    String name = device.getUsername();
-                    Log.i(TAG, "Username: " + name);
-                    Intent myIntent = new Intent(context, MainActivity.class);
-                    myIntent.putExtra("username", name);
-                    startActivity(myIntent);
+                    if (device != null) {
+                        String name = device.getUsername();
+                        Log.i(TAG, "Username: " + name);
+                        Intent myIntent = new Intent(context, MainActivity.class);
+                        myIntent.putExtra("username", name);
+                        startActivity(myIntent);
 
-                    CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
-                            + "AndroidId: " + device.getAndroidUuid();
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.i(TAG, "Login erfolgreich");
-                }
-                else {
-                    CharSequence text = "Login fehlgeschlagen!";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.i(TAG, "Login fehlgeschlagen");
-                }
+                        CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
+                                + "AndroidId: " + device.getAndroidUuid();
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.i(TAG, "Login erfolgreich");
+                    } else {
+                        CharSequence text = "Login fehlgeschlagen!";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.i(TAG, "Login fehlgeschlagen");
+                    }
 
-            }
-        });
+                }
+            });
 
         /* Wenn der Button registration gedrückt wurde,
          * soll der RegistrationTask ausgeführt werden
          */
-        registration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "registration.onClick() gestartet");
-                String name = username.getText().toString();
-                Log.i(TAG, "Username: " + name);
-                RegistrationTask registrationTask = new RegistrationTask(view.getContext(), myApp,
-                        android_id, name);
-                registrationTask.execute(android_id,name);
-                Device device;
-                try {
-                    device = registrationTask.get();
-                    Log.i(TAG, "registration.onClick() erfolgreich");
-                }
-                catch(Exception e){
-                    Log.e(TAG, "registration.onClick() fehlgeschlagen");
-                    device = null;
-                    e.printStackTrace();
-                }
+            registration.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d(TAG, "registration.onClick() gestartet");
+                    String name = username.getText().toString();
+                    Log.i(TAG, "Username: " + name);
+                    RegistrationTask registrationTask = new RegistrationTask(view.getContext(), myApp,
+                            android_id, name);
+                    registrationTask.execute(android_id, name);
+                    Device device;
+                    try {
+                        device = registrationTask.get();
+                        Log.i(TAG, "registration.onClick() erfolgreich");
+                    } catch (Exception e) {
+                        Log.e(TAG, "registration.onClick() fehlgeschlagen");
+                        device = null;
+                        e.printStackTrace();
+                    }
 
-                if(device != null){
-                    CharSequence text = "Registrierung erfolgreich! Registrierter Benutzername: "
-                            + device.getUsername()
-                            + " Registrierte AndroidId: "
-                            + device.getAndroidUuid();
+                    if (device != null) {
+                        CharSequence text = "Registrierung erfolgreich! Registrierter Benutzername: "
+                                + device.getUsername()
+                                + " Registrierte AndroidId: "
+                                + device.getAndroidUuid();
 
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    registration.setVisibility(View.INVISIBLE);
-                    Log.i(TAG, "Registrierung erfolgreich");
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        registration.setVisibility(View.INVISIBLE);
+                        Log.i(TAG, "Registrierung erfolgreich");
+                    } else {
+                        CharSequence text = "Registrierung fehlgeschlagen.";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.e(TAG, "Registrierung fehlgeschlagen");
+                    }
                 }
-                else {
-                    CharSequence text = "Registrierung fehlgeschlagen.";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.e(TAG, "Registrierung fehlgeschlagen");
-                }
-            }
-        });
+            });
+        }
     }
 }

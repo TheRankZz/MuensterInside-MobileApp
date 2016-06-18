@@ -4,6 +4,8 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -82,25 +84,29 @@ public class MainActivity extends AppCompatActivity {
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
-        // Kategorien werden im Hintergrund geladen
-        CategoryTask categoryTask = new CategoryTask(this,myApp);
-        categoryTask.execute();
+        ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        List<Category> categories;
-        try{
-            // Kategorien aus dem CategoryTask werden für die Weiterverwendung gespeichert
-            categories = categoryTask.get();
-        }
-        catch (Exception e){
-            categories = null;
-            e.printStackTrace();
-        }
+        if(networkInfo != null && networkInfo.isConnected()) {
+            // Kategorien werden im Hintergrund geladen
+            CategoryTask categoryTask = new CategoryTask(this, myApp);
+            categoryTask.execute();
 
-        // Die Namen der Kategorien werden in eine Liste gespeichert
-        List myList = new ArrayList<String>();
-        for (int i = 0; i < categories.size(); i++) {
-            myList.add(categories.get(i).getName());
-        }
+            List<Category> categories;
+            try {
+                // Kategorien aus dem CategoryTask werden für die Weiterverwendung gespeichert
+                categories = categoryTask.get();
+            } catch (Exception e) {
+                categories = null;
+                e.printStackTrace();
+            }
+
+
+            // Die Namen der Kategorien werden in eine Liste gespeichert
+            List myList = new ArrayList<String>();
+            for (int i = 0; i < categories.size(); i++) {
+                myList.add(categories.get(i).getName());
+            }
 
         // NavigationBar
         listViewSliding = (ListView) findViewById(R.id.lv_sliding_menu);
@@ -160,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-    }
+    }}
 
 
     @Override

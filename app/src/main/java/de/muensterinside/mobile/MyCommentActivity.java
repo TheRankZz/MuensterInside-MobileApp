@@ -1,5 +1,8 @@
 package de.muensterinside.mobile;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +38,11 @@ public class MyCommentActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.liste);
         MyCommentListViewAdapters adapter;
 		Button button = (Button) findViewById(R.id.delete_btn);
+
+        ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if(networkInfo != null && networkInfo.isConnected()) {
         MyCommentTask myCommentTask = new MyCommentTask(this, myApp);
         myCommentTask.execute();
 
@@ -72,4 +80,4 @@ public class MyCommentActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
     }
-}
+}}

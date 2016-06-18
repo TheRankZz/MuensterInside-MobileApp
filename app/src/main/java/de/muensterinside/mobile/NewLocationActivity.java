@@ -3,6 +3,8 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,7 +76,10 @@ public class NewLocationActivity extends AppCompatActivity {
                 String locationDescription = description.getText().toString();
                 String locationLink = link.getText().toString();
 
+                ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
+                if(networkInfo != null && networkInfo.isConnected()) {
                 NewLocationTask newLocationTask = new NewLocationTask(context,myApp,
                         locationName,locationDescription,locationLink, cat_id);
                 newLocationTask.execute();
@@ -111,7 +116,7 @@ public class NewLocationActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                     Log.i(TAG, "Location wurde nicht erfolgreich erstellt");
-                }
+                }}
                 startActivity(myIntent);
             }
         });

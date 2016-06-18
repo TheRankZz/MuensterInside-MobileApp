@@ -3,6 +3,8 @@ package de.muensterinside.mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -80,33 +82,40 @@ public class CommentActivity extends AppCompatActivity{
                 editor.putBoolean("newCommentBool", true);
                 editor.commit();
 
-                WriteCommentTask writeCommentTask = new WriteCommentTask(context,myApp,s,loc_id);
-                writeCommentTask.execute();
-                int code = 1;
-                try{
-                   code = writeCommentTask.get();
-                }
-                catch(Exception e) {
-                   e.printStackTrace();
-                }
+                ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-                if(code == 0){
-                    intent.putExtra("name", s);
+                if(networkInfo != null && networkInfo.isConnected()) {
 
-                    CharSequence text = "Kommentar " + s + " wurde erstellt.";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.i(TAG, "Kommentar wurde erfolgreich erstellt");
+                    WriteCommentTask writeCommentTask = new WriteCommentTask(context, myApp, s, loc_id);
+                    writeCommentTask.execute();
+
+
+                    int code = 1;
+                    try {
+                        code = writeCommentTask.get();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                    if (code == 0) {
+                        intent.putExtra("name", s);
+
+                        CharSequence text = "Kommentar " + s + " wurde erstellt.";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.i(TAG, "Kommentar wurde erfolgreich erstellt");
+                    } else {
+                        CharSequence text = "Kommentar " + s + " wurde nicht erstellt.";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.i(TAG, "Kommentar wurde nicht erfolgreich erstellt");
+                    }
+                    startActivity(intent);
                 }
-                else {
-                    CharSequence text = "Kommentar " + s + " wurde nicht erstellt.";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.i(TAG, "Kommentar wurde nicht erfolgreich erstellt");
-                }
-                startActivity(intent);
             }
         });
 
