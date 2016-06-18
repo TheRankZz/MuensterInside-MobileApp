@@ -267,6 +267,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
                 loc.setDescription(location.description);
                 loc.setLink(location.link);
                 loc.setVoteValue(location.votevalue);
+                loc.setId(location.id);
                 result.add(loc);
             }
         }
@@ -404,6 +405,7 @@ public class MuensterInsideImpl implements MobileWebserviceImpl{
                 loc.setDescription(location.description);
                 loc.setLink(location.link);
                 loc.setVoteValue(location.votevalue);
+                loc.setId((location.id));
                 result.add(loc);
             }
         }

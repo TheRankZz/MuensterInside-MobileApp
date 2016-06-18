@@ -59,23 +59,6 @@ public class MainActivity extends AppCompatActivity {
         // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_main);
 
-        /* In der SharedPreference wird die vorher ausgewählte
-         * Id der Location(und ein Boolean der auf true gesetzt wird, wenn ein neue Location erzeugt wird) gespeichert.
-         */
-        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor1 = boolPref.edit();
-        editor1.putBoolean("newLocationBool", false);
-        editor1.commit();
-
-        /* In der SharedPreference wird die vorher ausgewählte
-         * Id des Kommentars(und ein Boolean der auf true gesetzt wird, wenn ein neuer Kommentar erzeugt wird) gespeichert.
-         */
-        SharedPreferences boolPref1 = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = boolPref1.edit();
-        editor2.putBoolean("newCommentBool", false);
-        editor2.commit();
-
-
           /* In der SharedPreference wird die vorher ausgewählte
          * ID einer Kategorie  ausgelesen.
          */

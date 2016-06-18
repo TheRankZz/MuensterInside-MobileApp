@@ -1,12 +1,15 @@
 package de.muensterinside.mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.Toast;
@@ -57,7 +60,8 @@ public class MyCommentActivity extends AppCompatActivity {
             List<Comment> comments;
             try {
                 comments = myCommentTask.get();
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 comments = null;
                 e.printStackTrace();
             }
@@ -68,7 +72,8 @@ public class MyCommentActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(this, text, duration);
                 toast.show();
                 Log.e(TAG, "Keine Liste mit Kommentaren gefunden.");
-            } else {
+            }
+            else {
                 Comment comment;
                 ArrayList<HashMap<String, String>> list;
                 list = new ArrayList<HashMap<String, String>>();
@@ -85,11 +90,38 @@ public class MyCommentActivity extends AppCompatActivity {
 
                 listView.setAdapter(adapter);
             }
-
-        } else {
-            Log.d(TAG, "Keine Internetverbindung");
+        }
+        else {
+            Log.e(TAG, "Keine Internetverbindung");
             Toast.makeText(MyCommentActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
+        }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu() gestartet");
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected() gestartet");
+        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
+        if (item.getItemId() == R.id.action_settings) {
+            Intent i = new Intent(this, PrefsActivity.class);
+            startActivity(i);
+            return true;
+        }
+        // Home Button
+        else if(item.getItemId() == R.id.action_home){
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
         }
     }
 }

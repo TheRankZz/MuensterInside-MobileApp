@@ -98,8 +98,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
                 Log.i(TAG, "Login erfolgreich");
-            } else {
-
+            }
+            else {
                 CharSequence text = "Login fehlgeschlagen!";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
@@ -107,7 +107,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 Log.i(TAG, "Login fehlgeschlagen");
             }
 
-        } else {
+        }
+        else {
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
@@ -128,7 +129,6 @@ public class RegistrationActivity extends AppCompatActivity {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
-
 
             LoginTask loginTask = new LoginTask(button.getContext(), myApp, android_id);
             loginTask.execute();
@@ -167,14 +167,16 @@ public class RegistrationActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
                 Log.i(TAG, "Login erfolgreich");
-            } else {
+            }
+            else {
                 CharSequence text = "Login fehlgeschlagen!";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
                 Log.i(TAG, "Login fehlgeschlagen");
             }
-        } else {
+        }
+        else {
 
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
