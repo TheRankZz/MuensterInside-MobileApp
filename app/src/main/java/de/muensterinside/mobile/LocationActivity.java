@@ -60,10 +60,10 @@ public class LocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
-        // Hier wird das Aussehen der CategoryActivity ausgewählt
+        // Hier wird das Aussehen der LocationActivity ausgewählt
         setContentView(R.layout.activity_location);
 
-        // Die von der CategoryActivity übergebenden Parameter werden hier zugewiesen
+        // Die von den Category Fragments übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
 
         // Ein Application Objekt wird erzeugt
@@ -73,8 +73,6 @@ public class LocationActivity extends AppCompatActivity {
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
 
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        android_id = sharedpreferences.getString("androidId", "Default");
-        username = sharedpreferences.getString("username", "Default");
         device_id = sharedpreferences.getInt("deviceId", 0);
 
         context = this;
@@ -89,6 +87,15 @@ public class LocationActivity extends AppCompatActivity {
             loc_id = intent.getIntExtra("loc_id", 0);
             cat_id = myCatIdPref.getInt("catId", 0);
         }
+
+        /* Die newCommentBool ist dafür da, um auf die Location zurück zu kommen,
+         * auf der man vorher war, bevor man WriteCommentActivity aufgerufen hat.
+         * Und hier wird der boolean, der vorher für die Überprüfung gebraucht wurde, wieder auf false
+         * gesetzt.
+         */
+        SharedPreferences.Editor edit = bool.edit();
+        edit.putBoolean("newCommentBool", false);
+        edit.commit();
 
         // TextView für die Darstellung des Namens wird erzeugt
         TextView exampleName = (TextView) findViewById(R.id.textViewExampleName);

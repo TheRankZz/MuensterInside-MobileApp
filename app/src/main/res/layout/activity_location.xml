@@ -119,9 +119,9 @@
                 android:drawableBottom="@drawable/ic_action_dontlike"
                 android:background="@android:color/transparent"
                 android:id="@+id/down"
+                android:clickable="true"
                 android:layout_alignTop="@+id/up"
-                android:layout_alignParentEnd="true"
-                android:clickable="true" />
+                android:layout_toEndOf="@+id/textViewVote" />
 
 
             <TextView

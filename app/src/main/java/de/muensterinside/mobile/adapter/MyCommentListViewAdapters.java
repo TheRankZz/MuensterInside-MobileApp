@@ -113,7 +113,7 @@ public class MyCommentListViewAdapters extends BaseAdapter{
 
 
 
-                Intent i = new Intent(activity, PrefsActivity.class);
+                Intent i = new Intent(activity, MyCommentActivity.class);
                 activity.startActivity(i);
                 notifyDataSetChanged();
 

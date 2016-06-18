@@ -74,11 +74,11 @@ public class NewLocationActivity extends AppCompatActivity {
                 String locationDescription = description.getText().toString();
                 String locationLink = link.getText().toString();
 
+
                 ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
                 if (networkInfo != null && networkInfo.isConnected()) {
-
                     NewLocationTask newLocationTask = new NewLocationTask(context, myApp,
                             locationName, locationDescription, locationLink, cat_id, device_id);
                     newLocationTask.execute();
@@ -90,16 +90,6 @@ public class NewLocationActivity extends AppCompatActivity {
                     }
 
                     if (code == 0) {
-
-                    /* In der SharedPreference wird die vorher ausgewählte
-                    * Id der Location(und ein Boolean der auf true gesetzt wird,
-                     * wenn eine neue Location erzeugt wird) gespeichert.
-                    */
-                        SharedPreferences boolPref = getSharedPreferences("MyBoolPref", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = boolPref.edit();
-                        editor.putBoolean("newLocationBool", true);
-                        editor.putInt("cat_id", cat_id);
-                        editor.commit();
 
                         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                         SharedPreferences.Editor edit = pref.edit();

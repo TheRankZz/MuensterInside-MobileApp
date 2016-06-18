@@ -23,7 +23,7 @@
         android:isScrollContainer="true"
         android:minHeight="120dp"
         android:inputType="textMultiLine"
-        android:text="@string/comment"
+        android:hint="@string/comment"
         android:ems="10"
         android:id="@+id/editText"
         android:backgroundTint="@color/colorPrimary"
