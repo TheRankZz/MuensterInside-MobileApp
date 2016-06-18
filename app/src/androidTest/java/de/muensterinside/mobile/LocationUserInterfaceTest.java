@@ -70,23 +70,23 @@ public class LocationUserInterfaceTest {
     @Test
     public void test2ShowALocationTest() throws Exception {
 
-        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Pierhouse"))))
+        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("PierHouse"))))
                 .inAdapterView(withId(R.id.categoryList))
                 .perform(click());
 
         onView(withId(R.id.textViewExampleName))
-                .check(matches(withText("Pierhouse")));
+                .check(matches(withText("PierHouse")));
     }
 
     @Test
     public void test3UpVoteALocationTest() throws Exception {
 
-        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Pierhouse"))))
+        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("PierHouse"))))
                 .inAdapterView(withId(R.id.categoryList))
                 .perform(click());
 
         onView(withId(R.id.textViewExampleName))
-                .check(matches(withText("Pierhouse")));
+                .check(matches(withText("PierHouse")));
 
         onView(withId(R.id.up)).perform(click());
         onView(withId(R.id.up)).perform(click());
@@ -96,12 +96,12 @@ public class LocationUserInterfaceTest {
     @Test
     public void test4WriteCommentTest() throws Exception{
 
-        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Pierhouse"))))
+        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("PierHouse"))))
                 .inAdapterView(withId(R.id.categoryList))
                 .perform(click());
 
         onView(withId(R.id.textViewExampleName))
-                .check(matches(withText("Pierhouse")));
+                .check(matches(withText("PierHouse")));
 
         onView(withId(R.id.button1)).perform(scrollTo(), click());
         onView(withId(R.id.editText)).perform(clearText()).perform(typeText("Kommentar"));

@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
@@ -47,6 +48,20 @@ public class NewLocationUserInterfaceTest {
     public ActivityTestRule<MainActivity> rule =
             new ActivityTestRule<MainActivity>(MainActivity.class);
 
+    public String randomName() {
+        char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 20; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        String output = sb.toString();
+        return output;
+    }
+
+    public final String output = randomName();
+
     @Test
     public void test1Register(){
         Activity activity = rule.getActivity();
@@ -66,7 +81,7 @@ public class NewLocationUserInterfaceTest {
                 .perform(click());
 
         onView(withId(R.id.locationName))
-                .perform(typeText("LocationTest"), closeSoftKeyboard());
+                .perform(typeText(output), closeSoftKeyboard());
 
         onView(withId(R.id.locationDescription))
                 .perform(typeText("LocationDescription"), closeSoftKeyboard());
@@ -76,16 +91,5 @@ public class NewLocationUserInterfaceTest {
 
         onView(withId(R.id.confirmLocation))
                 .perform(click());
-    }
-
-    @Test
-    public void test3ShowNewLocationTest() throws Exception{
-
-        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("LocationTest"))))
-                .inAdapterView(withId(R.id.categoryList))
-                .perform(click());
-
-        onView(withId(R.id.textViewExampleName))
-                .check(matches(withText("LocationTest")));
     }
 }

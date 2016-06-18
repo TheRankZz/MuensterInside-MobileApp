@@ -57,17 +57,17 @@ public class RegistrationActivity extends AppCompatActivity {
         Device device;
         try {
             device = loginTask.get();
-            Log.i(TAG, "login.onClick() erfolgreich");
+            Log.i(TAG, "DeviceID: " + device.getId());
         }
         catch(Exception e){
-            Log.e(TAG, "login.onClick() fehlgeschlagen");
             device = null;
+            Log.e(TAG, "Kein Device Objekt bekommen.");
             e.printStackTrace();
         }
 
         if(device != null){
             String name = device.getUsername();
-
+            Log.i(TAG, "Username: " + name);
             /* In der SharedPreference wird die vorher ausgewählte
              * AnroidID des Gerätes und der Username gespeichert.
              */

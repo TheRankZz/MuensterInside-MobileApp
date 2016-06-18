@@ -96,6 +96,11 @@ public class NewLocationActivity extends AppCompatActivity {
                     editor.putInt("cat_id", cat_id);
                     editor.commit();
 
+                    SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor edit = pref.edit();
+                    edit.putBoolean("test", true);
+                    edit.apply();
+
                     CharSequence text = "Location " + locationName + " wurde erstellt.";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
