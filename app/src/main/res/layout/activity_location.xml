@@ -2,7 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+
+    >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -21,7 +23,8 @@
                 android:layout_height="300dp"
                 android:id="@+id/smallCommentList"
                 android:choiceMode="singleChoice"
-                android:layout_below="@+id/textViewExampleDescription" />
+                android:layout_below="@+id/textViewExampleDescription"
+                android:layout_alignParentEnd="true" />
 
 
 
@@ -150,6 +153,16 @@
                 android:textColor="#000000"
                 android:layout_below="@+id/textView3"
                 android:layout_toEndOf="@+id/textView3" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/showMoreComments"
+                android:textColor="#000000"
+                android:id="@+id/KommentarAnzeigen"
+                android:background="@android:color/transparent"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/textViewExampleDescription" />
         </RelativeLayout>
 
         <Button style="?android:attr/buttonStyleSmall"
@@ -160,15 +173,8 @@
             android:id="@+id/button1"
             android:clickable="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/locationLayout"/>
+            android:layout_alignParentBottom="true"
+            />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/showMoreComments"
-            android:textColor="#000000"
-            android:id="@+id/KommentarAnzeigen"
-            android:background="@android:color/transparent"
-            android:layout_below="@id/locationLayout"/>
     </RelativeLayout>
 </ScrollView>
