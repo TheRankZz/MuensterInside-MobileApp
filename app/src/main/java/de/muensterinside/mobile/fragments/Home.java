@@ -48,7 +48,7 @@ public class Home extends Fragment{
             name = "Default";
             e.printStackTrace();
         }
-        username.setText(name + ",");
+        username.setText(name + " !");
 
         return rootView;
     }
