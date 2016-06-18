@@ -35,7 +35,10 @@ public class MyLocationActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
         ListView listView = (ListView) findViewById(R.id.liste);
 
-        MyLocationTask myLocationTask = new MyLocationTask(this, myApp);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        int device_id = sharedPreferences.getInt("deviceId", 0);
+
+        MyLocationTask myLocationTask = new MyLocationTask(this, myApp, device_id);
         myLocationTask.execute();
 
         List<Location> locations;

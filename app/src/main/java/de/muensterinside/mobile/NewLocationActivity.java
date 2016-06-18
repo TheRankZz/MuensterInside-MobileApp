@@ -55,8 +55,7 @@ public class NewLocationActivity extends AppCompatActivity {
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         final int cat_id = myCatIdPref.getInt("catId", 1);
-        final String androidId = sharedPreferences.getString("androidId", "Default");
-        final String username = sharedPreferences.getString("username", "Default");
+        final int device_id = sharedPreferences.getInt("deviceId", 0);
         context = this;
 
 
@@ -68,7 +67,6 @@ public class NewLocationActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(NewLocationActivity.this, MainActivity.class);
                 myIntent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
 
-                Device device;
                 MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
                 String locationName = name.getText().toString();
                 String locationDescription = description.getText().toString();
@@ -76,7 +74,7 @@ public class NewLocationActivity extends AppCompatActivity {
 
 
                 NewLocationTask newLocationTask = new NewLocationTask(context,myApp,
-                        locationName,locationDescription,locationLink, cat_id);
+                        locationName,locationDescription,locationLink, cat_id, device_id);
                 newLocationTask.execute();
                 int code = 1;
                 try {

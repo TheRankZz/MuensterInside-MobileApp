@@ -1,5 +1,7 @@
 package de.muensterinside.mobile;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,7 +33,10 @@ public class MyVoteActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
         ListView listView = (ListView) findViewById(R.id.liste);
 
-        MyVoteTask myVoteTask = new MyVoteTask(this, myApp);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        int device_id = sharedPreferences.getInt("deviceId", 0);
+
+        MyVoteTask myVoteTask = new MyVoteTask(this, myApp, device_id);
         myVoteTask.execute();
 
         List<Location> votes;

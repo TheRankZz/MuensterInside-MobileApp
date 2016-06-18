@@ -23,6 +23,7 @@ public class WriteCommentTask extends AsyncTask<Void, Void, Integer> {
     private String text;
     private int loc_id;
     private int code = 1;
+    private int device_id;
     public static final String TAG = "WriteCommentTask";
 
     /**
@@ -33,11 +34,12 @@ public class WriteCommentTask extends AsyncTask<Void, Void, Integer> {
      * @param loc_id die Identifikation der Location
      */
     public WriteCommentTask(Context context, MuensterInsideAndroidApplication myApp,
-                            String text, int loc_id) {
+                            String text, int loc_id, int device_id) {
         this.context = context;
         this.myApp = myApp;
         this.text = text;
         this.loc_id = loc_id;
+        this.device_id = device_id;
     }
 
     // Im Hintergrund wird der Webservice aufgerufen.
@@ -45,8 +47,7 @@ public class WriteCommentTask extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         Log.d(TAG, "doInBackground() gestartet");
         try {
-            this.device = myApp.getDevice();
-            code = myApp.getMuensterInsideImpl().saveComment(this.text,this.device.getId(),
+            code = myApp.getMuensterInsideImpl().saveComment(this.text,this.device_id,
                     this.loc_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return code;

@@ -29,11 +29,12 @@ public class MyVoteTask extends AsyncTask<Void,Void, List<Location>> {
      * @param context der Inhalt der Activity
      * @param myApp der Zustand der Application
      */
-    public MyVoteTask(Context context, MuensterInsideAndroidApplication myApp)
+    public MyVoteTask(Context context, MuensterInsideAndroidApplication myApp, int device_id)
 
     {
         this.myApp = myApp;
         this.context = context;
+        this.device_id = device_id;
     }
 
     // Im Hintergrund wird der Webservice aufgerufen
@@ -43,7 +44,6 @@ public class MyVoteTask extends AsyncTask<Void,Void, List<Location>> {
         Log.d(TAG, "doInBackground() gestartet" );
 
         try{
-            device_id = this.myApp.getDevice().getId();
             votes = this.myApp.getMuensterInsideImpl().getMyVotes(device_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return votes;

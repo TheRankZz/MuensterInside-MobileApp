@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
@@ -22,14 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.muensterinside.mobile.adapter.CommentListViewAdapters;
-import de.muensterinside.mobile.adapter.LocationListViewAdapters;
 import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.tasks.DownVoteTask;
-import de.muensterinside.mobile.tasks.LocationCommentTask;
 import de.muensterinside.mobile.tasks.LocationTask;
-import de.muensterinside.mobile.tasks.LoginTask;
 import de.muensterinside.mobile.tasks.ShowCommentTask;
 import de.muensterinside.mobile.tasks.UpVoteTask;
 
@@ -53,6 +49,9 @@ public class LocationActivity extends AppCompatActivity {
     private Button up;
     private Button down;
     private TextView exampleVote;
+    private String android_id;
+    private String username;
+    private int device_id;
     public static final String TAG = "LocationActivity";
 
     @Override
@@ -70,6 +69,11 @@ public class LocationActivity extends AppCompatActivity {
 
         SharedPreferences bool = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
         SharedPreferences myCatIdPref = getSharedPreferences("MyCatIdPref", Context.MODE_PRIVATE);
+
+        SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        android_id = sharedpreferences.getString("androidId", "Default");
+        username = sharedpreferences.getString("username", "Default");
+        device_id = sharedpreferences.getInt("deviceId", 0);
 
         context = this;
 
@@ -114,7 +118,7 @@ public class LocationActivity extends AppCompatActivity {
 
 
         // LocationTask wird aufgerufen
-        LocationTask locationTask = new LocationTask(this, myApp, loc_id);
+        LocationTask locationTask = new LocationTask(this, myApp, loc_id, device_id);
         locationTask.execute();
 
         // ShowCommentTask wird aufgerufen
@@ -232,12 +236,12 @@ public class LocationActivity extends AppCompatActivity {
         }
 
 
-        // führt zur CommentActivity, wenn der Button gedrückt wird
+        // führt zur WriteCommentActivity, wenn der Button gedrückt wird
         writeComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "b.onClick() gestartet");
-                Intent myIntent = new Intent(context, CommentActivity.class);
+                Intent myIntent = new Intent(context, WriteCommentActivity.class);
                 myIntent.putExtra("selected", cat_id);
                 myIntent.putExtra ("locId", loc_id);
                 startActivity(myIntent);
@@ -259,7 +263,7 @@ public class LocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "up.onClick() gestartet");
-                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device.getId());
+                UpVoteTask upVoteTask = new UpVoteTask(context, myApp, loc_id, device_id);
                 upVoteTask.execute();
                 int code;
                 try{
@@ -275,7 +279,7 @@ public class LocationActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
 
-                    LocationTask locationTask1 = new LocationTask(context,myApp,loc_id);
+                    LocationTask locationTask1 = new LocationTask(context,myApp,loc_id, device_id);
                     locationTask1.execute();
                     Location location;
                     try{
@@ -320,7 +324,7 @@ public class LocationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "down.onClick() gestartet");
-                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device.getId());
+                DownVoteTask downVoteTask = new DownVoteTask(context, myApp, loc_id, device_id);
                 downVoteTask.execute();
                 int code;
                 try{
@@ -336,7 +340,7 @@ public class LocationActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
 
-                    LocationTask locationTask1 = new LocationTask(context,myApp,loc_id);
+                    LocationTask locationTask1 = new LocationTask(context,myApp,loc_id, device_id);
                     locationTask1.execute();
                     Location location;
                     try{

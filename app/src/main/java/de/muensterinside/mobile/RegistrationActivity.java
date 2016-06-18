@@ -49,14 +49,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         context = this;
 
-       /* In der SharedPreference wird die vorher ausgewählte
-         * AnroidID des Gerätes und der Username gespeichert.
-         */
-        SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("androidId", android_id);
-        editor.putString("username", username.getText().toString());
-        editor.commit();
 
         // Wenn ein Gerät schon registriert ist, wird beim Start automatisch ein Login durchgeführt
         LoginTask loginTask = new LoginTask(this, myApp, android_id);
@@ -75,6 +67,17 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if(device != null){
             String name = device.getUsername();
+
+            /* In der SharedPreference wird die vorher ausgewählte
+             * AnroidID des Gerätes und der Username gespeichert.
+             */
+            SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString("androidId", android_id);
+            editor.putString("username", name);
+            editor.putInt("deviceId", device.getId());
+            editor.commit();
+
             Intent myIntent = new Intent(context, MainActivity.class);
             myIntent.putExtra("username", name);
             startActivity(myIntent);
@@ -125,6 +128,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 if(device != null){
                     String name = device.getUsername();
                     Log.i(TAG, "Username: " + name);
+
+                    /* In der SharedPreference wird die vorher ausgewählte
+                     * AnroidID des Gerätes und der Username gespeichert.
+                     */
+                    SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("androidId", android_id);
+                    editor.putString("username", name);
+                    editor.putInt("deviceId", device.getId());
+                    editor.commit();
+
                     Intent myIntent = new Intent(context, MainActivity.class);
                     myIntent.putExtra("username", name);
                     startActivity(myIntent);

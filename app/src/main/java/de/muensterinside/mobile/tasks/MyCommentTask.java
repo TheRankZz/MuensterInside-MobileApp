@@ -26,11 +26,12 @@ public class MyCommentTask extends AsyncTask<Void,Void, List<Comment>> {
      * @param context der Inhalt der Activity
      * @param myApp repräsentiert den Zustand der Application
      */
-    public MyCommentTask(Context context, MuensterInsideAndroidApplication myApp)
+    public MyCommentTask(Context context, MuensterInsideAndroidApplication myApp, int device_id)
 
     {
         this.myApp = myApp;
         this.context = context;
+        this.device_id = device_id;
     }
 
     // Im Hintergrund wird der Webservice aufgerufen
@@ -40,7 +41,6 @@ public class MyCommentTask extends AsyncTask<Void,Void, List<Comment>> {
         Log.d(TAG, "doInBackground() gestartet" );
 
         try{
-            device_id = this.myApp.getDevice().getId();
             comments = myApp.getMuensterInsideImpl().getMyComments(device_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;
