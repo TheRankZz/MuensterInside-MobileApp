@@ -84,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
-        ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        if(networkInfo != null && networkInfo.isConnected()) {
             // Kategorien werden im Hintergrund geladen
             CategoryTask categoryTask = new CategoryTask(this, myApp);
             categoryTask.execute();
@@ -166,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-    }}
+    }
 
 
     @Override

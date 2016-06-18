@@ -70,10 +70,7 @@ public class ShowCommentActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.commentList);
 
 
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        if (networkInfo != null && networkInfo.isConnected()) {
             ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id);
             showCommentTask.execute();
 
@@ -107,7 +104,7 @@ public class ShowCommentActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
             }
         }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

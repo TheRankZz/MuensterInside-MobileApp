@@ -24,7 +24,8 @@
             android:id="@+id/registration_username"
             android:layout_below="@+id/linearLayout"
             android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/colorPrimary"/>
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="login"/>
 
         <Button
         android:id="@+id/registration"
@@ -35,7 +36,8 @@
         android:padding="12dp"
         android:text="@string/register"
         android:background="#3030c0"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+            android:onClick="regristrieren"/>
 
         <Button
             android:id="@+id/login"

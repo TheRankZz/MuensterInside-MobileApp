@@ -37,10 +37,6 @@ public class MyLocationActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
         ListView listView = (ListView) findViewById(R.id.liste);
 
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        if (networkInfo != null && networkInfo.isConnected()) {
 
             MyLocationTask myLocationTask = new MyLocationTask(this, myApp);
             myLocationTask.execute();
@@ -73,4 +69,3 @@ public class MyLocationActivity extends AppCompatActivity {
             }
         }
     }
-}

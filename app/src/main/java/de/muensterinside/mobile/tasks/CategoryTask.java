@@ -1,6 +1,8 @@
 package de.muensterinside.mobile.tasks;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -35,18 +37,20 @@ public class CategoryTask extends AsyncTask<Void, Void, List<Category>> {
     // Im Hintergrund soll der Webservice aufgerufen werden
     @Override
     protected List<Category> doInBackground(Void... params) {
-        Log.d(TAG, "doInBackground() gestartet");
-        try {
-            // Die Methode getCategories liefert eine Liste zurück
-            this.categories = myApp.getMuensterInsideImpl().getCategories();
-            Log.i(TAG, "doInBackground() erfolgreich");
-            return this.categories;
-        } catch (Exception e) {
-            Log.e(TAG, "doInBackground() fehlgeschlagen");
-            e.printStackTrace();
+
+            Log.d(TAG, "doInBackground() gestartet");
+            try {
+                // Die Methode getCategories liefert eine Liste zurück
+                    this.categories = myApp.getMuensterInsideImpl().getCategories();
+                    Log.i(TAG, "doInBackground() erfolgreich");
+                    return this.categories;
+
+            } catch (Exception e) {
+                Log.e(TAG, "doInBackground() fehlgeschlagen");
+                e.printStackTrace();
+            }
+            return null;
         }
-        return null;
-    }
 
 
 

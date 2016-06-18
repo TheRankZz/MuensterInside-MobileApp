@@ -35,10 +35,7 @@ public class MyVoteActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
         ListView listView = (ListView) findViewById(R.id.liste);
 
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        if (networkInfo != null && networkInfo.isConnected()) {
 
             MyVoteTask myVoteTask = new MyVoteTask(this, myApp);
             myVoteTask.execute();
@@ -71,4 +68,3 @@ public class MyVoteActivity extends AppCompatActivity {
             }
         }
     }
-}

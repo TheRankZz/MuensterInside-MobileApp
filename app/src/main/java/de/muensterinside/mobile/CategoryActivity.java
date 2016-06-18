@@ -72,15 +72,12 @@ public class CategoryActivity extends AppCompatActivity {
         // Es wird ein Button erzeugt, um eine neue Location anlegen zu können
         Button newLocation = (Button) findViewById(R.id.newLocation);
 
-        ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        if(networkInfo != null && networkInfo.isConnected()) {
             // Der LocationListTask wird aufgerufen
             LocationListTask locationListTask = new LocationListTask(this, cat_id, myApp, listView, newLocation);
             locationListTask.execute();
         }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

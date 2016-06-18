@@ -82,10 +82,6 @@ public class CommentActivity extends AppCompatActivity{
                 editor.putBoolean("newCommentBool", true);
                 editor.commit();
 
-                ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-                if(networkInfo != null && networkInfo.isConnected()) {
 
                     WriteCommentTask writeCommentTask = new WriteCommentTask(context, myApp, s, loc_id);
                     writeCommentTask.execute();
@@ -116,7 +112,7 @@ public class CommentActivity extends AppCompatActivity{
                     }
                     startActivity(intent);
                 }
-            }
+
         });
 
 

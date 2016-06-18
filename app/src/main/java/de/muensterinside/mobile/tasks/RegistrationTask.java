@@ -1,8 +1,11 @@
 package de.muensterinside.mobile.tasks;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
@@ -36,23 +39,27 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
 
     // Im Hintergrund wird der Webservice aufgerufen.
     @Override
-    protected Device doInBackground(String... params){
+    protected Device doInBackground(String... params) {
         Log.d(TAG, "doInBackground() gestartet");
-        try {
+
+
+            try {
             /* Die register Methode liefert anhand der Android Device-ID
              * und des Usernames ein Device Objekt.
              */
-            Device device = this.myApp.getMuensterInsideImpl().register(android_id, username);
-            this.myApp.setDevice(device);
-            Log.i(TAG, "doInBackground() erfolgreich");
-            return device;
+                Device device = this.myApp.getMuensterInsideImpl().register(android_id, username);
+                this.myApp.setDevice(device);
+                Log.i(TAG, "doInBackground() erfolgreich");
+                return device;
 
+            } catch (Exception e) {
+                Log.e(TAG, "doInBackground() fehlgeschlagen");
+                e.printStackTrace();
+            }
+            return null;
         }
-        catch (Exception e){
-            Log.e(TAG, "doInBackground() fehlgeschlagen");
-            e.printStackTrace();
-        }
-        return null;
+
+
+
     }
 
-}

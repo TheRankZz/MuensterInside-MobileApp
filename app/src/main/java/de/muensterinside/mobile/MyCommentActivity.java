@@ -39,10 +39,7 @@ public class MyCommentActivity extends AppCompatActivity {
         MyCommentListViewAdapters adapter;
 		Button button = (Button) findViewById(R.id.delete_btn);
 
-        ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        if(networkInfo != null && networkInfo.isConnected()) {
         MyCommentTask myCommentTask = new MyCommentTask(this, myApp);
         myCommentTask.execute();
 
@@ -80,4 +77,4 @@ public class MyCommentActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
     }
-}}
+}

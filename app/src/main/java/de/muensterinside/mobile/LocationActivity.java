@@ -114,10 +114,6 @@ public class LocationActivity extends AppCompatActivity {
         showComment.setPaintFlags(showComment.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        if (networkInfo != null && networkInfo.isConnected()) {
             // LocationTask wird aufgerufen
             LocationTask locationTask = new LocationTask(this, myApp, loc_id);
             locationTask.execute();
@@ -374,7 +370,7 @@ public class LocationActivity extends AppCompatActivity {
                 }
             });
         }
-    }
+
 
         @Override
         public boolean onCreateOptionsMenu (Menu menu){
