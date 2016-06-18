@@ -76,7 +76,8 @@ public class RegistrationActivity extends AppCompatActivity {
             editor.putString("androidId", android_id);
             editor.putString("username", name);
             editor.putInt("deviceId", device.getId());
-            editor.commit();
+            editor.putBoolean("test", false);
+            editor.apply();
 
             Intent myIntent = new Intent(context, MainActivity.class);
             myIntent.putExtra("username", name);
@@ -137,7 +138,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     editor.putString("androidId", android_id);
                     editor.putString("username", name);
                     editor.putInt("deviceId", device.getId());
-                    editor.commit();
+                    editor.putBoolean("test", false);
+                    editor.apply();
 
                     Intent myIntent = new Intent(context, MainActivity.class);
                     myIntent.putExtra("username", name);

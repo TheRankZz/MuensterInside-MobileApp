@@ -64,6 +64,7 @@ public class MyCommentActivity extends AppCompatActivity {
             Log.e(TAG, "Keine Liste mit Kommentaren gefunden.");
         }
 
+        else {
         Comment comment;
         ArrayList<HashMap<String, String>> list;
         list = new ArrayList<HashMap<String,String>>();
@@ -79,6 +80,7 @@ public class MyCommentActivity extends AppCompatActivity {
         adapter = new MyCommentListViewAdapters(this, list, comments, myApp);
 
         listView.setAdapter(adapter);
+        }
 
     }
 }

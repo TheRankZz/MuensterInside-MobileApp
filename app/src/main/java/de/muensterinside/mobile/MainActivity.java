@@ -23,6 +23,7 @@ import java.util.List;
 
 import de.muensterinside.mobile.adapter.SlidingMenuAdapter;
 import de.muensterinside.mobile.entities.Category;
+import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.fragments.Category1;
 import de.muensterinside.mobile.fragments.Category2;
 import de.muensterinside.mobile.fragments.Category3;
@@ -81,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+        Device device = new Device();
+        try{
+            device = myApp.getDevice();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
         // Kategorien werden im Hintergrund geladen
         CategoryTask categoryTask = new CategoryTask(this,myApp);
@@ -127,7 +135,15 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawer(listViewSliding);
 
         //Fragment Category1 wird beim Start gezeigt
-        replaceFragment(0);
+        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        boolean test = pref.getBoolean("test", false);
+
+        if(test){
+            replaceFragment(1);
+        }
+        else {
+            replaceFragment(0);
+        }
 
         //Zeigt das ausgewählte Fragment an
         listViewSliding.setOnItemClickListener(new AdapterView.OnItemClickListener() {

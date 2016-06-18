@@ -1,6 +1,9 @@
 package de.muensterinside.mobile;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.TextView;
@@ -38,26 +41,51 @@ import static org.hamcrest.core.IsNot.not;
  */
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ACUpVoteUserInterfaceTest {
+public class NewLocationUserInterfaceTest {
 
     @Rule
-    public ActivityTestRule<RegistrationActivity> upVoteTestRule =
-            new ActivityTestRule<RegistrationActivity>(RegistrationActivity.class);
+    public ActivityTestRule<MainActivity> rule =
+            new ActivityTestRule<MainActivity>(MainActivity.class);
 
     @Test
-    public void testVoteALocationInstrumentedUnitTest() throws Exception {
+    public void test1Register(){
+        Activity activity = rule.getActivity();
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("androidId", "MeineAndroidUuid1");
+        editor.putString("username", "User");
+        editor.putInt("deviceId", 1);
+        editor.putBoolean("test", true);
+        editor.apply();
+    }
 
-        onView(withId(R.id.button2)).perform(click());
+    @Test
+    public void test2NewLocationTest() throws Exception {
 
-        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("Burger Cult"))))
+        onView(withId(R.id.newLocation))
+                .perform(click());
+
+        onView(withId(R.id.locationName))
+                .perform(typeText("LocationTest"), closeSoftKeyboard());
+
+        onView(withId(R.id.locationDescription))
+                .perform(typeText("LocationDescription"), closeSoftKeyboard());
+
+        onView(withId(R.id.locationLink))
+                .perform(typeText("LocationLink"), closeSoftKeyboard());
+
+        onView(withId(R.id.confirmLocation))
+                .perform(click());
+    }
+
+    @Test
+    public void test3ShowNewLocationTest() throws Exception{
+
+        onData(allOf(is(instanceOf(HashMap.class)), hasEntry(equalTo("First"), is("LocationTest"))))
                 .inAdapterView(withId(R.id.categoryList))
                 .perform(click());
 
         onView(withId(R.id.textViewExampleName))
-                .check(matches(withText("Burger Cult")));
-
-        onView(withId(R.id.up)).perform(click());
-        onView(withId(R.id.up)).perform(click());
-        onView(withId(R.id.up)).check(matches(not(isEnabled())));
+                .check(matches(withText("LocationTest")));
     }
 }
