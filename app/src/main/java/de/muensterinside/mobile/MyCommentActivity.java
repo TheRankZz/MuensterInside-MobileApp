@@ -42,7 +42,7 @@ public class MyCommentActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         //ListView für die Darstellung der eigenen Kommentare wird erzeugt
-        ListView listView = (ListView) findViewById(R.id.liste);
+        ListView listView = (ListView) findViewById(R.id.myCommentList);
 
         //Adapter zum Darstellen der eigenen Kommentare wird deklariert
         MyCommentListViewAdapters adapter;

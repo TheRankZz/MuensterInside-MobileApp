@@ -45,7 +45,7 @@ public class MyLocationActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         //ListView für die Darstellung der eigenen Locations wird erzeugt
-        ListView listView = (ListView) findViewById(R.id.liste);
+        ListView listView = (ListView) findViewById(R.id.myLocationlist);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         int device_id = sharedPreferences.getInt("deviceId", 0);

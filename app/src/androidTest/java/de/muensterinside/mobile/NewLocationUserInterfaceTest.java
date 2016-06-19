@@ -24,6 +24,7 @@ import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -60,7 +61,7 @@ public class NewLocationUserInterfaceTest {
         return output;
     }
 
-    public final String output = randomName();
+    public final String output = "Test " + randomName();
 
     @Test
     public void test1Register(){
@@ -92,4 +93,5 @@ public class NewLocationUserInterfaceTest {
         onView(withId(R.id.confirmLocation))
                 .perform(click());
     }
+
 }

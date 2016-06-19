@@ -48,7 +48,7 @@ public class MyVoteActivity extends AppCompatActivity {
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
         //ListView zum Anzeigen der bewerteten Locations wird erzeugt
-        ListView listView = (ListView) findViewById(R.id.liste);
+        ListView listView = (ListView) findViewById(R.id.myVoteList);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         int device_id = sharedPreferences.getInt("deviceId", 0);

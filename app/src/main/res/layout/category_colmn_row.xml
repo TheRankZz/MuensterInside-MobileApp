@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- Location Name -->
     <TextView
         android:id="@+id/name"
         android:paddingTop="30dip"
@@ -15,6 +16,7 @@
         android:textColor="#ffffff"
         android:background="#7383fd" />
 
+    <!-- Location VoteValue -->
     <TextView
         android:id="@+id/vote"
         android:paddingTop="30dip"

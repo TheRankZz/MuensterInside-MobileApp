@@ -6,7 +6,7 @@
     android:background="#ffffff"
     tools:context="de.muensterinside.mobile.ShowCommentActivity">
 
-
+    <!-- Alle Kommentare einer Location Liste -->
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -103,10 +103,10 @@ public class LocationUserInterfaceTest {
         onView(withId(R.id.textViewExampleName))
                 .check(matches(withText("PierHouse")));
 
-        onView(withId(R.id.button1)).perform(scrollTo(), click());
+        onView(withId(R.id.writeComment)).perform(scrollTo(), click());
         onView(withId(R.id.editText)).perform(clearText()).perform(typeText("Kommentar"));
-        onView(withId(R.id.button)).perform(click());
-        onView(withId(R.id.KommentarAnzeigen)).perform(scrollTo(), click());
+        onView(withId(R.id.confirmComment)).perform(click());
+        onView(withId(R.id.showComment)).perform(scrollTo(), click());
         onView(withId(R.id.commentList)).check(matches(isDisplayed()));
     }
 }

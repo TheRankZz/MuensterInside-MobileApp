@@ -6,11 +6,11 @@
     android:background="#ffffff"
     tools:context="de.muensterinside.mobile.MyLocationActivity">
 
-
+    <!-- Eigene Beschreibung Liste -->
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/liste"
+        android:id="@+id/myLocationlist"
         android:choiceMode="singleChoice"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />

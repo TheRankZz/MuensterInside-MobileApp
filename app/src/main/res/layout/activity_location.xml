@@ -19,7 +19,6 @@
             android:id="@+id/locationLayout">
 
             <!-- Letzten 3 Kommentare -->
-
             <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="300dp"
@@ -38,8 +37,7 @@
                 android:layout_alignParentStart="true"
                 android:background="@drawable/ic_launcher" />
 
-            <!-- Locationname -->
-
+            <!-- Überschrift: Name -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +48,7 @@
                 android:layout_toEndOf="@+id/button"
                 android:textStyle="bold" />
 
-            <!-- Vote -->
+            <!-- Überschrift: VoteValue -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,8 +61,7 @@
                 android:layout_marginTop="55dp"
                 android:textStyle="bold" />
 
-            <!--Link -->
-
+            <!-- Überschrift: Link -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,7 +72,7 @@
                 android:layout_below="@+id/button"
                 android:textStyle="bold" />
 
-            <!-- Example Name-->
+            <!-- Location Name -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +83,7 @@
                 android:layout_below="@+id/textViewName"
                 android:layout_toEndOf="@+id/button" />
 
-            <!-- Example Vote-->
+            <!-- Location VoteValue -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +95,7 @@
                 android:layout_toEndOf="@+id/button" />
 
 
-            <!-- Example Link -->
+            <!-- Location Link -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,8 +130,6 @@
                 android:layout_alignTop="@+id/up"
                 android:layout_toEndOf="@+id/textViewVote" />
 
-
-            <!-- Example Linkju -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,7 +139,7 @@
                 android:layout_below="@+id/textViewExampleLink"
                 android:layout_alignParentStart="true" />
 
-            <!--Decription-->
+            <!-- Überschrift: Beschreibung -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,6 +151,7 @@
                 android:layout_alignParentStart="true"
                 android:textStyle="bold" />
 
+            <!-- Location Description -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -166,6 +162,7 @@
                 android:layout_below="@+id/textView3"
                 android:layout_toEndOf="@+id/textView3" />
 
+            <!-- Weitere Kommentare Anzeigen Button -->
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -178,12 +175,13 @@
 
         </RelativeLayout>
 
+        <!-- Neuen Kommentar schreiben Button -->
         <Button style="?android:attr/buttonStyleSmall"
             android:layout_width="70dp"
             android:layout_height="50dp"
             android:drawableBottom="@drawable/ic_action_add"
             android:background="@android:color/transparent"
-            android:id="@+id/button1"
+            android:id="@+id/writeComment"
             android:clickable="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"/>

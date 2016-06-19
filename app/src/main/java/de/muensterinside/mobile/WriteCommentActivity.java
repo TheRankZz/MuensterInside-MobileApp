@@ -50,7 +50,7 @@ public class WriteCommentActivity extends AppCompatActivity{
         kommentar = (EditText)findViewById(R.id.editText);
 
         //Button zum Abschicken des Kommentars wird erstellt
-        Button button = (Button) findViewById(R.id.button);
+        Button confirmComment = (Button) findViewById(R.id.confirmComment);
 
         //Die von der MainActivity übergebenden Parameter werden hier zugewiesen
         Intent intent = getIntent();
@@ -73,7 +73,7 @@ public class WriteCommentActivity extends AppCompatActivity{
 
 
         //Wenn der Button angeklickt wird, wird zur LocationActivity gewechselt
-        button.setOnClickListener(new View.OnClickListener() {
+        confirmComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Log.d(TAG, "button.onClick() gestartet");

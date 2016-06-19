@@ -16,57 +16,61 @@
         android:paddingRight="24dp"
         android:id="@+id/NewLocationRelativeLayout">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/location_name"
-        android:ems="10"
-        android:id="@+id/locationName"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="50dp"
-        android:isScrollContainer="true"
-        android:minHeight="120dp"
-        android:inputType="textMultiLine"
-        android:hint="@string/description"
-        android:ems="10"
-        android:id="@+id/locationDescription"
-        android:layout_below="@+id/locationName"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="50dp"
-        android:inputType="textPersonName"
-        android:hint="@string/location_link"
-        android:ems="10"
-        android:id="@+id/locationLink"
-        android:layout_below="@+id/locationDescription"
-        android:layout_alignParentStart="true" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/locationLink"
-        android:paddingTop="50dp">
-
-        <Button
+        <!-- Hier kann man den Namen der Location schreiben -->
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/newLocation"
-            android:id="@+id/confirmLocation"
-            android:clickable="true"
-            android:layout_alignParentStart="true"
-            android:background="#3030c0"
-            android:textColor="#ffffff" />
+            android:inputType="textPersonName"
+            android:hint="@string/location_name"
+            android:ems="10"
+            android:id="@+id/locationName"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
-    </LinearLayout>
+        <!-- Hier kann man die Beschreibung der Location schreiben -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:isScrollContainer="true"
+            android:minHeight="120dp"
+            android:inputType="textMultiLine"
+            android:hint="@string/description"
+            android:ems="10"
+            android:id="@+id/locationDescription"
+            android:layout_below="@+id/locationName"
+            android:layout_alignParentStart="true" />
+
+        <!-- Hier kann man den Link der Location schreiben -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            android:inputType="textPersonName"
+            android:hint="@string/location_link"
+            android:ems="10"
+            android:id="@+id/locationLink"
+            android:layout_below="@+id/locationDescription"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/locationLink"
+            android:paddingTop="50dp">
+
+            <!-- Neue Location wird angelegt -->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/newLocation"
+                android:id="@+id/confirmLocation"
+                android:clickable="true"
+                android:layout_alignParentStart="true"
+                android:background="#3030c0"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>
 

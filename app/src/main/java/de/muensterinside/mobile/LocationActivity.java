@@ -113,7 +113,7 @@ public class LocationActivity extends AppCompatActivity {
         ListView kommentare = (ListView) findViewById(R.id.smallCommentList);
 
         // Button zum Schreiben eines Kommentares wird erzeugt
-        Button writeComment = (Button) findViewById(R.id.button1);
+        Button writeComment = (Button) findViewById(R.id.writeComment);
 
         // Button für den Upvote wird erzeugt
         up = (Button) findViewById(R.id.up);
@@ -132,7 +132,7 @@ public class LocationActivity extends AppCompatActivity {
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            // LocationTask wird aufgerufen, um Locations abzurufen
+            // LocationTask wird aufgerufen, um eine Location abzurufen
             LocationTask locationTask = new LocationTask(this, myApp, loc_id, device_id);
             locationTask.execute();
 
@@ -169,10 +169,9 @@ public class LocationActivity extends AppCompatActivity {
                     size = comments.size();
                 }
 
-/**
- * Es sollen nur die ersten 3 Kommentare in der LocationActivity ausgegebn werden.
- * Überprüft, ob es überhaupt 3 Kommentare ausgegebn werden können/ es überhaupt 3 Kommentare gibt.
- */
+                /** Es sollen nur die ersten 3 Kommentare in der LocationActivity ausgegebn werden.
+                 *  Überprüft, ob es überhaupt 3 Kommentare ausgegebn werden können/ es überhaupt 3 Kommentare gibt.
+                 */
                 //Erstellt eine Liste der angezeigten Kommentare
                 ArrayList<HashMap<String, String>> list;
                 list = new ArrayList<HashMap<String, String>>();

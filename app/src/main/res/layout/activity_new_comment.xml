@@ -6,6 +6,7 @@
     tools:context=".WriteCommentActivity"
     android:background="#ffffff">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +17,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
-
+    <!-- Hier kann man einen Kommentar schreiben -->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,16 +31,16 @@
         android:layout_below="@+id/textView_Comment"
         android:layout_alignParentStart="true"
         android:layout_marginTop="63dp"
-        android:layout_toStartOf="@+id/button" />
+        android:layout_toStartOf="@+id/confirmComment" />
 
-
+    <!-- Neuen Kommentar bestätigen Button -->
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:drawableBottom="@drawable/ic_action_send"
         android:background="@android:color/transparent"
-        android:id="@+id/button"
+        android:id="@+id/confirmComment"
         android:clickable="true"
         android:layout_alignBottom="@+id/editText"
         android:layout_alignParentEnd="true" />
