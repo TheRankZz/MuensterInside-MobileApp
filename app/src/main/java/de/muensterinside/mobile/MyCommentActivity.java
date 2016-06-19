@@ -112,7 +112,11 @@ public class MyCommentActivity extends AppCompatActivity {
             Toast.makeText(MyCommentActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, PrefsActivity.class);
+        startActivity(i);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");

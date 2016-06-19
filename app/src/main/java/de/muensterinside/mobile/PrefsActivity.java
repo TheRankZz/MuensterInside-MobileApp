@@ -1,6 +1,7 @@
 package de.muensterinside.mobile;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -41,8 +42,15 @@ public class PrefsActivity extends PreferenceActivity {
             usernamePreference.setSummary(username);
 
 
+        }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
     }
 
 
 
-}
