@@ -205,14 +205,6 @@ public class LocationActivity extends AppCompatActivity {
                         break;
 
 
-                    case 3:
-                        for (int i = 0; i < 3; i++) {
-                            HashMap<String, String> temp = new HashMap<String, String>();
-                            temp.put(FIRST_COLUMN, comments.get(i).getText());
-                            temp.put(SECOND_COLUMN, String.valueOf(comments.get(i).getDate()));
-                            list.add(temp);
-                        }
-                        break;
 
                     // Bei  drei oder mehr Kommentare, werden die letzten drei ausgegebn
                     default:

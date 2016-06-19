@@ -7,13 +7,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.List;
+
 
 import de.muensterinside.mobile.entities.Category;
-import de.muensterinside.mobile.entities.Comment;
+
 import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Location;
-import de.muensterinside.mobile.entities.Vote;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
