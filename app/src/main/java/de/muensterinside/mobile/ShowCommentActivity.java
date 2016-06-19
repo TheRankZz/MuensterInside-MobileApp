@@ -66,17 +66,24 @@ public class ShowCommentActivity extends AppCompatActivity {
         editor.commit();
 
 
+        //repräsentiert den übergreifenden Zustand einer App
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+
+        //ListView zum speichern der Kommentare wird erzeugt
         ListView listView = (ListView) findViewById(R.id.commentList);
 
 
+        //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
+
+            //ShowCommentTask wird aufgerufen, um alle Kommentare der Location abzrufen
             ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id);
             showCommentTask.execute();
 
+            //Speichert die in der TaskKlasse aufgerufenen Kommentare in eine Variable/Liste
             try {
                 comments = showCommentTask.get();
             } catch (Exception e) {
@@ -84,12 +91,15 @@ public class ShowCommentActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            //Wenn keine Kommentare vorhanden sinid
             if (comments == null) {
                 CharSequence text = "Keine Kommentare vorhanden.";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(this, text, duration);
                 toast.show();
             } else {
+
+                //Wenn KOmmentare vorhanden sind, werden sie in einer Liste gespeichert
                 Comment comment;
                 ArrayList<HashMap<String, String>> list;
                 list = new ArrayList<HashMap<String, String>>();
@@ -109,6 +119,7 @@ public class ShowCommentActivity extends AppCompatActivity {
         }
         else{
 
+            //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(ShowCommentActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
@@ -126,14 +137,13 @@ public class ShowCommentActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected() gestartet");
-        //Hier prüfen wir, ob unser Menüeintrag angeklickt wurde und führen die gewünschte Aktion aus.
+        ///Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf.
         if (item.getItemId() == R.id.action_settings) {
-            //Beim Klicken auf dem Button "Einstellung" öffnet es die passende Activity
             Intent i = new Intent(this, PrefsActivity.class);
             startActivity(i);
             return true;
         }
-        // Home Button
+        // /Wenn "Home" gedrückt wurde, rufen wir die MainActivity auf
         else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

@@ -58,9 +58,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
     protected List<Location> doInBackground(Integer... params){
         Log.d(TAG, "doInBackground() gestartet");
         try {
-            /* Die Methode getLocationsByCateogry liefert anhand
-             * der cat_id eine Liste mit Locations.
-             */
+       // Gibt alle Locations der Kategorie (cat_id) zurück
             this.cat_id = this.cat_id +1;
             locations = myApp.getMuensterInsideImpl().getLocationsByCategory(this.cat_id);
             Log.i(TAG, "doInBackground() erfolgreich");
@@ -95,17 +93,14 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
         }
 
 
-        // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+        // Es wird ein Adapter erstellt, der die ListView mit Einträgen befüllt
         adapter = new LocationListViewAdapters(context, list);
 
         listView.setAdapter(adapter);
         final List<Location> test = locations;
 
-        /* Wenn ein Eintrag in der Liste ausgewählt wird,
-         * soll die LocationActivity starten. Anhand der
-         * mitgegebenen loc_id, soll die richtige Location in der
-         * LocationActivity angezeigt werden.
-         */
+
+        //Beim Klicken auf eine Location wird die LocationActivity aufgerufen
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -121,7 +116,7 @@ public class LocationListTask extends AsyncTask<Integer, Void, List<Location>> {
             }
         });
 
-        // Wenn der Button newLocation angeklickt wurde, soll die NewLocationActivity aufgerufen werden
+        //Beim Klicken auf den + Button wird die NewLocationActivity aufgerufen werden
         newLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

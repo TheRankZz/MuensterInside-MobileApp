@@ -41,6 +41,7 @@ public class MyCommentTask extends AsyncTask<Void,Void, List<Comment>> {
         Log.d(TAG, "doInBackground() gestartet" );
 
         try{
+            //Gibt anhand der Device_ID eine Liste der eigenen Kommentare zurück
             comments = myApp.getMuensterInsideImpl().getMyComments(device_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;

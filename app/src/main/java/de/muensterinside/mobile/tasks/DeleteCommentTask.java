@@ -33,6 +33,7 @@ public class DeleteCommentTask extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         Log.d(TAG, "doInBackground() gestartet");
         try {
+            //Gibt aus, ob Löschen des Kommentars erfolgreich (0 = erfolgreich, 1 = nicht erfolgreich)
             code = myApp.getMuensterInsideImpl().deleteComment(id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return code;

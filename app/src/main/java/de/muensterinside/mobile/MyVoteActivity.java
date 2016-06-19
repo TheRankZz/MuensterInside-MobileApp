@@ -44,7 +44,10 @@ public class MyVoteActivity extends AppCompatActivity {
         // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_my_vote);
 
+        //Repräsentiert den übergreifenden Zustand einer App. Android verwaltet je App nur eine einzige Application-Instanz(Singleton)
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+
+        //ListView zum Anzeigen der bewerteten Locations wird erzeugt
         ListView listView = (ListView) findViewById(R.id.liste);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -52,13 +55,17 @@ public class MyVoteActivity extends AppCompatActivity {
 
         context = this;
 
+        //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
+
+            //MyVoteTask wird aufgerufen, um eigene bewertete Locations abzurufen
             MyVoteTask myVoteTask = new MyVoteTask(this, myApp, device_id);
             myVoteTask.execute();
 
+            //Speichert die in den TaskKlassen aufgerufen Locations in eine Variable/Liste
             List<Location> votes;
             try {
                 votes = myVoteTask.get();
@@ -68,6 +75,7 @@ public class MyVoteActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            //Wenn keine bewerteten Locations vorhanden, wir ein Toast ausgegeben (Bisher keine Votes abgegeben)
             if (votes == null) {
                 CharSequence text = "Bisher keine Votes abgegeben.";
                 int duration = Toast.LENGTH_SHORT;
@@ -92,13 +100,14 @@ public class MyVoteActivity extends AppCompatActivity {
                     list.add(temp);
                 }
 
-                // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+                // Es wird ein Adapter erstellt, der die listView mit einträgen befüllt
                 adapter = new LocationListViewAdapters(this, list);
 
                 listView.setAdapter(adapter);
 
                 final List<Location> test = votes;
 
+                //Beim Klicken auf eine Location wird die LocationActivity aufgerufen
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
                     @Override
@@ -116,6 +125,7 @@ public class MyVoteActivity extends AppCompatActivity {
             }
         }
         else{
+            //Ist keien Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(MyVoteActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
@@ -124,7 +134,8 @@ public class MyVoteActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        // Inflate the menu; this adds items to the action bar if it is present.
+      //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
+        // den wir in der XML-Datei menu_main.xml definiert haben.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -138,7 +149,7 @@ public class MyVoteActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        // Home Button
+        //Wenn "Home" gedrückt wurde, rufen wir die MainActivity auf
         else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

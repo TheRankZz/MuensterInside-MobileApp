@@ -41,6 +41,7 @@ public class LocationCommentTask extends AsyncTask<Void, Void ,List <Comment>> {
     {
         Log.d(TAG, "doInBackground() gestartet");
         try {
+            //Gibt eine Liste alle Kommentare der Location zurück
             this.comments = myApp.getMuensterInsideImpl().getCommentsByLocation(loc_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;
@@ -66,6 +67,7 @@ public class LocationCommentTask extends AsyncTask<Void, Void ,List <Comment>> {
             myList.add(comments.get(i).getText());
         }
 
+        // Es wird ein Adapter erstellt, der die ListView mit Einträgen befüllt
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<String>(context, R.layout.activity_location);
 

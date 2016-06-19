@@ -15,6 +15,7 @@ import de.muensterinside.mobile.model.ItemSlideMenu;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * Adapter für die NavigationBar
  * @author Julia Bracht, Nicolas Burchert
  */
 public class SlidingMenuAdapter extends BaseAdapter {

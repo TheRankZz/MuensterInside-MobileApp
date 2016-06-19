@@ -38,25 +38,35 @@ public class MyCommentActivity extends AppCompatActivity {
         // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_my_comment);
 
+        //repräsentiert den übergreifenden Zustand einer App
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
 
+        //ListView für die Darstellung der eigenen Kommentare wird erzeugt
         ListView listView = (ListView) findViewById(R.id.liste);
 
+        //Adapter zum Darstellen der eigenen Kommentare wird deklariert
         MyCommentListViewAdapters adapter;
 
+        //Button für das Löschen der Kommentare wird erzeugt
         Button button = (Button) findViewById(R.id.delete_btn);
+
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         int device_id = sharedPreferences.getInt("deviceId", 0);
 
+
+        //Netz erreichbar vohranden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
+            //MyCommentTask wird geladen, um eigenen Kommentare abzurufen
             MyCommentTask myCommentTask = new MyCommentTask(this, myApp, device_id);
             myCommentTask.execute();
 
+
+            //Speichert die in der TaskKlasse aufgerufenen Kommentare in eine Variable/Liste
             List<Comment> comments;
             try {
                 comments = myCommentTask.get();
@@ -66,6 +76,7 @@ public class MyCommentActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            //Wenn es keine eigenen Kommentare gibt, wird ein Toast ausgegeben
             if (comments == null) {
                 CharSequence text = "Bisher keine Kommentare angelegt.";
                 int duration = Toast.LENGTH_SHORT;
@@ -73,6 +84,8 @@ public class MyCommentActivity extends AppCompatActivity {
                 toast.show();
                 Log.e(TAG, "Keine Liste mit Kommentaren gefunden.");
             }
+
+            //Wenn eigene Kommentare vorhanden sind, werden diese in eine Liste gespeichert
             else {
                 Comment comment;
                 ArrayList<HashMap<String, String>> list;
@@ -85,13 +98,14 @@ public class MyCommentActivity extends AppCompatActivity {
                     list.add(temp);
                 }
 
-                // Es wird ein Adapter erstellt der die listView mit Einträgen befüllt
+                // Es wird ein Adapter erstellt, der die listView mit Einträgen befüllt
                 adapter = new MyCommentListViewAdapters(this, list, comments, myApp);
 
                 listView.setAdapter(adapter);
             }
         }
         else {
+            //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben
             Log.e(TAG, "Keine Internetverbindung");
             Toast.makeText(MyCommentActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
@@ -100,7 +114,8 @@ public class MyCommentActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
+        // den wir in der XML-Datei menu_main.xml definiert haben.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -114,7 +129,7 @@ public class MyCommentActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        // Home Button
+        // Wenn "Home" gedrückt wurde, rufen wir die MainActivity auf
         else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

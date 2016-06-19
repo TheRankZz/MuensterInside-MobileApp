@@ -61,6 +61,7 @@ public class NewLocationActivity extends AppCompatActivity {
         context = this;
 
 
+        //Wenn der Button zum Speichern der Location gedrückt wird
         Button saveLocation = (Button) findViewById(R.id.confirmLocation);
         saveLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,26 +70,34 @@ public class NewLocationActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(NewLocationActivity.this, MainActivity.class);
                 myIntent.setClassName(getPackageName(), getPackageName() + ".MainActivity");
 
+                //Repräsentiert den übergreifenden Zustand einer App
                 MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
                 String locationName = name.getText().toString();
                 String locationDescription = description.getText().toString();
                 String locationLink = link.getText().toString();
 
 
+                //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
                 ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
                 if (networkInfo != null && networkInfo.isConnected()) {
+
+                    //NewLocationTask wird aufgerufen, um zu überprüfen, ob speichern erfolgreich war
                     NewLocationTask newLocationTask = new NewLocationTask(context, myApp,
                             locationName, locationDescription, locationLink, cat_id, device_id);
                     newLocationTask.execute();
+
+                    //Return Code wird zunächst auf 1 gesetzt (nicht erfolgreich)
                     int code = 1;
                     try {
+                        //Speichert den in der TaskKlasse aufgerufenen ReturnCode in eine Variable
                         code = newLocationTask.get();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
+                    //Wird ausgeführt, wenn Speichern erfolgreich war (Location wurde erstellt)
                     if (code == 0) {
 
                         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -102,7 +111,9 @@ public class NewLocationActivity extends AppCompatActivity {
                         toast.show();
                         Log.i(TAG, "Location wurde erfolgreich erstellt");
 
-                    } else {
+                    }
+                    //Wird ausgeführt, wenn Speichern nicht erfolgreich war (Location wurde nicht erstellt)
+                    else {
                         CharSequence text = "Location " + locationName + " wurde nicht erstellt.";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
@@ -112,6 +123,7 @@ public class NewLocationActivity extends AppCompatActivity {
                     startActivity(myIntent);
                 }
                 else{
+                    //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
                     Log.d(TAG, "Keine Internetverbindung");
                     Toast.makeText(NewLocationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
                 }
@@ -131,14 +143,13 @@ public class NewLocationActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected() gestartet");
-        //Hier prüfen wir, ob unser Menüeintrag angeklickt wurde und führen die gewünschte Aktion aus.
+        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
         if (item.getItemId() == R.id.action_settings) {
-            //Beim Klicken auf dem Button "Einstellung" öffnet es die passende Activity
             Intent i = new Intent(this, PrefsActivity.class);
             startActivity(i);
             return true;
         }
-        // Home Button
+        // Wenn "Home" gedrückt wurde, rufen wir die MainActivity auf
         else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

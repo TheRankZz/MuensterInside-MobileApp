@@ -25,16 +25,19 @@ public class PrefsActivity extends PreferenceActivity {
         Log.d(TAG, "onCreate() gestartet");
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.prefs);
+
+        //Preference zum Anzeigen des Username wird erstellt
         usernamePreference = (Preference)findPreference("username");
 
         myApp = (MuensterInsideAndroidApplication)getApplication();
         try {
+            //Abrufen des Usernames
             username = myApp.getUsername();
         }
         catch(Exception e){e.printStackTrace();}
 
 
-        //setzt den Untertitel des Users PreferenceScreen auf username
+        //setzt den Untertitel des Users Preference auf username
             usernamePreference.setSummary(username);
 
 

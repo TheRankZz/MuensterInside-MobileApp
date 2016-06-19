@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
 
 
+        //repräsentiert den übergreifenden Zustand einer App
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
         Device device = new Device();
         try {
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //Netz erreichbar vohranden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 // Kategorien aus dem CategoryTask werden für die Weiterverwendung gespeichert
                 categories = categoryTask.get();
             } catch (Exception e) {
+                //Wenn keine Kategorien vorhanden sind, werden die Kategorien auf null gesetzt
                 categories = null;
                 e.printStackTrace();
             }
@@ -99,10 +102,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // NavigationBar
+            //Die ListView der einzelnen Fragments
             listViewSliding = (ListView) findViewById(R.id.lv_sliding_menu);
             drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             listSliding = new ArrayList<>();
-
             listSliding.add(new ItemSlideMenu(R.drawable.ic_action_tiles_large, "Startseite"));
             //Fügt Items in die NavigationBar ein
             for (int i = 0; i < myList.size(); i++) {
@@ -163,47 +166,13 @@ public class MainActivity extends AppCompatActivity {
             };
 
             drawerLayout.setDrawerListener(actionBarDrawerToggle);
-        }
-        else{
+        } else {
+
+            //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(MainActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
 
-    }
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
-        // den wir in der XML-Datei menu_menu_main.xml definiert haben.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        //Wenn "Einstellungen" gedrückt wurde, rufen wir die PrefsActivity auf
-        if (item.getItemId() == R.id.action_settings) {
-            Intent i = new Intent(this, PrefsActivity.class);
-            startActivity(i);
-            return true;
-        }
-        // Home Button
-        else if(item.getItemId() == R.id.action_home){
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-        // NavigationBar wird geöffnet
-        else if(actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        else {
-            return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override
@@ -249,12 +218,47 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
+        //führt dieses aus, wenn keine Kategorien vorhanden sind
         if(null!=fragment) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.main_content, fragment);
             transaction.addToBackStack(null);
             transaction.commit();
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu() gestartet");
+        //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
+        // den wir in der XML-Datei menu_menu_main.xml definiert haben.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onCreateOptionsMenu() gestartet");
+        //Wenn "Einstellungen" gedrückt wurde, rufen wir die PrefsActivity auf
+        if (item.getItemId() == R.id.action_settings) {
+            Intent i = new Intent(this, PrefsActivity.class);
+            startActivity(i);
+            return true;
+        }
+        // Wenn "Home" gedrückt wurde, rufen wir die MainActivity auf
+        else if(item.getItemId() == R.id.action_home){
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        // Wenn die Navigationbar gedrückt wurde, rufen wir diese auf
+        else if(actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

@@ -33,6 +33,8 @@ public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
     protected Integer doInBackground(String... params){
         int result;
         try{
+
+            //Gibt aus, ob DownVote erfolgreich war (0 = erfolgreich, 1/2 = nicht erfolgreich)
             result = this.myApp.getMuensterInsideImpl().downVote(this.loc_id, this.deviceId);
         }
         catch(Exception e){
@@ -42,8 +44,4 @@ public class DownVoteTask extends AsyncTask<String, Integer, Integer> {
         return result;
     }
 
-    @Override
-    public void onPostExecute(Integer result){
-
-    }
 }

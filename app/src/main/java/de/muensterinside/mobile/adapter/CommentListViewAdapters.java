@@ -15,6 +15,8 @@ import de.muensterinside.mobile.R;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * Adapter zum Anzeigen der Kommentare
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class CommentListViewAdapters extends BaseAdapter{
     public ArrayList<HashMap<String, String>> list;
@@ -68,15 +70,24 @@ public class CommentListViewAdapters extends BaseAdapter{
 
         if(convertView == null){
 
+            //Hier wird dem Adapter das Aussehen zugeordnet
             convertView=inflater.inflate(R.layout.comment_colmn_row, null);
 
+            //TextView für die Darstellung des Kommentars
             txtFirst=(TextView) convertView.findViewById(R.id.comment);
+
+            //TextView für die Darstellung des Datums
             txtSecond=(TextView) convertView.findViewById(R.id.created_at);
 
         }
 
+        //Hashmap für den Kommentar und das Datum
         HashMap<String, String> map=list.get(position);
+
+        //Erster TextView wird das Kommentar zugeordnet
         txtFirst.setText(map.get(FIRST_COLUMN));
+
+        //Zweiter TextView wird das Datum zugeordnet
         txtSecond.setText(map.get(SECOND_COLUMN));
 
         return convertView;

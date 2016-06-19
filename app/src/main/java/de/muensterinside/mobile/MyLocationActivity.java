@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.muensterinside.mobile.adapter.LocationListViewAdapters;
-import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.tasks.MyLocationTask;
 
@@ -43,21 +41,29 @@ public class MyLocationActivity extends AppCompatActivity {
         // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_my_location);
 
-
+        //Repräsentiert den übergreifenden Zustand einer App
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
+
+        //ListView für die Darstellung der eigenen Locations wird erzeugt
         ListView listView = (ListView) findViewById(R.id.liste);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         int device_id = sharedPreferences.getInt("deviceId", 0);
 
         context = this;
+
+        //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
+
+            //MyLocationTask wird aufgerufen, um eigene Locations abzurufen
             MyLocationTask myLocationTask = new MyLocationTask(this, myApp, device_id);
             myLocationTask.execute();
 
+
+            //Speichert die in den TaskKlassen aufgerufenen eigenen Locations in eine Variable/Liste
             List<Location> locations;
             try {
                 locations = myLocationTask.get();
@@ -67,6 +73,7 @@ public class MyLocationActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            //Wenn es keine eigenen Locations gibt, wird ein Toast ausgegeben
             if (locations == null) {
                 CharSequence text = "Bisher keine Locations angelegt.";
                 int duration = Toast.LENGTH_SHORT;
@@ -91,13 +98,14 @@ public class MyLocationActivity extends AppCompatActivity {
                     list.add(temp);
                 }
 
-                // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+                // Es wird ein Adapter erstellt, der die ListView mit Einträgen befüllt
                 adapter = new LocationListViewAdapters(this, list);
-
                 listView.setAdapter(adapter);
 
                 final List<Location> test = locations;
 
+
+                //Beim Klicken auf eine Location wird die LocationActivity aufgerufen
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                 {
                     @Override
@@ -115,6 +123,7 @@ public class MyLocationActivity extends AppCompatActivity {
             }
         }
         else{
+            //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
             Log.e(TAG, "Keine Internetverbindung");
             Toast.makeText(MyLocationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
@@ -122,7 +131,8 @@ public class MyLocationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
+        // den wir in der XML-Datei menu_main.xml definiert haben.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -136,7 +146,7 @@ public class MyLocationActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        // Home Button
+        // Wenn "Home" gedrückt wurde, rufen wir die MainActivity auf
         else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

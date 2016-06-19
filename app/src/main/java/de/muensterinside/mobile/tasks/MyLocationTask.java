@@ -44,6 +44,7 @@ public class MyLocationTask extends AsyncTask<Void,Void, List<Location>> {
         Log.d(TAG, "doInBackground() gestartet" );
 
         try{
+            //Gibt anhand der Device_ID eine Liste der eigenen Locations zurück
             locations = this.myApp.getMuensterInsideImpl().getMyLocations(device_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return locations;

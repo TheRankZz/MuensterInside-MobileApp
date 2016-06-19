@@ -57,6 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
 
+        //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
@@ -109,6 +110,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         }
         else {
+            //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
@@ -125,6 +127,7 @@ public class RegistrationActivity extends AppCompatActivity {
         Log.d(TAG, "login.onClick() gestartet");
 
 
+        //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
@@ -178,6 +181,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
         else {
 
+            //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
 
@@ -196,6 +200,7 @@ public class RegistrationActivity extends AppCompatActivity {
         String name = username.getText().toString();
         Log.i(TAG, "Username: " + name);
 
+        //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
@@ -233,6 +238,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         } else {
 
+            //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
 

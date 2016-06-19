@@ -55,6 +55,8 @@ public class NewLocationTask extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         Log.d(TAG, "doInBackground() gestartet");
         try {
+
+            //Gibt aus ob Speichern der Location erfolgreich war
             int temp_cat_id = this.cat_id + 1;
             code = myApp.getMuensterInsideImpl().saveLocation(locationName,locationDescription,
                     locationLink,temp_cat_id,device_id);

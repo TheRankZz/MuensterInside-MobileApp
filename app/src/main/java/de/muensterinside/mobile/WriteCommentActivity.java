@@ -46,8 +46,10 @@ public class WriteCommentActivity extends AppCompatActivity{
         setContentView(R.layout.activity_new_comment);
         myApp = (MuensterInsideAndroidApplication) getApplication();
 
-        //Zuweisung der XML Objekte an unsere Variablen
+        //EditText für das Schreiben eines Kommentars wird erstellt
         kommentar = (EditText)findViewById(R.id.editText);
+
+        //Button zum Abschicken des Kommentars wird erstellt
         Button button = (Button) findViewById(R.id.button);
 
         //Die von der MainActivity übergebenden Parameter werden hier zugewiesen
@@ -70,12 +72,15 @@ public class WriteCommentActivity extends AppCompatActivity{
         context = this;
 
 
-        //ClickListener implementieren für den Button zum Wechsel der Activity
+        //Wenn der Button angeklickt wird, wird zur LocationActivity gewechselt
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Log.d(TAG, "button.onClick() gestartet");
+
+                //der erstellte Kommentar wird in eine Variable geschrieben
                 String s = kommentar.getText().toString();
+
                 Intent intent = new Intent(WriteCommentActivity.this,  LocationActivity.class);
                 SharedPreferences newCommentLocationId = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = newCommentLocationId.edit();
@@ -84,20 +89,27 @@ public class WriteCommentActivity extends AppCompatActivity{
                 editor.putBoolean("newCommentBool", true);
                 editor.commit();
 
+
+                //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
                 ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
                 if (networkInfo != null && networkInfo.isConnected()) {
 
+                    //WriteCommentTask wird aufgerufen, um ReturnCode abzurufen
                     WriteCommentTask writeCommentTask = new WriteCommentTask(context, myApp, s, loc_id, device_id);
                     writeCommentTask.execute();
+
+                    //Der ReturnCode wird zunächst auf 1 gesetzt
                     int code = 1;
                     try {
+                        //Speichert den in der TaskKlasse aufgerufenen/erhaltenen ReturnCode in eine Variable
                         code = writeCommentTask.get();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
+                    //Wenn der ReturnCode 0 ist, war die Erstellung des Kommentars erfolgreich (Kommentar erfolgreich erstellt)
                     if (code == 0) {
                         intent.putExtra("name", s);
 
@@ -106,7 +118,9 @@ public class WriteCommentActivity extends AppCompatActivity{
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
                         Log.i(TAG, "Kommentar wurde erfolgreich erstellt");
-                    } else {
+                    }
+                    //Wenn der ReturnCode nicht 0 ist, wurde der Kommentar nicht erstellt (Kommentar nicht erstellt)
+                    else {
                         CharSequence text = "Kommentar " + s + " wurde nicht erstellt.";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
@@ -117,6 +131,7 @@ public class WriteCommentActivity extends AppCompatActivity{
                 }
                 else{
 
+                    //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
                     Log.d(TAG, "Keine Internetverbindung");
                     Toast.makeText(WriteCommentActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
                 }
@@ -140,14 +155,13 @@ public class WriteCommentActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected() gestartet");
-        //Hier prüfen wir, ob unser Menüeintrag angeklickt wurde und führen die gewünschte Aktion aus.
+        //Wenn "Settings" gedrückt wurde, rufen wir die PrefsActivity auf
         if (item.getItemId() == R.id.action_settings) {
-            //Beim Klicken auf dem Button "Einstellung" öffnet es die passende Activity
             Intent i = new Intent(this, PrefsActivity.class);
             startActivity(i);
             return true;
         }
-        // Home Button
+        // Wenn "Home" gedrückt wurde, rufen wir die MainActivity auf
         else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

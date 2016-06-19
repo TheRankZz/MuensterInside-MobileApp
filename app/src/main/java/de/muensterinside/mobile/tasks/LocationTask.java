@@ -38,9 +38,8 @@ public class LocationTask extends AsyncTask<Integer, Void, Location> {
     protected Location doInBackground(Integer... params){
         Log.d(TAG, "doInBackground() gestartet");
         try {
-            /* Die Methode getLocationsByCategory liefert anhand der ID der ausgewählten
-             * Kategorie eine Liste mit Locations zurück.
-             */
+
+            //Gibt anhand der Location_ID eine Liste mit Locations zurück
             Location location = myApp.getMuensterInsideImpl().getLocation(this.loc_id);
             boolean isVoted = myApp.getMuensterInsideImpl().isVoted(this.loc_id, device_id);
             location.vote(isVoted);

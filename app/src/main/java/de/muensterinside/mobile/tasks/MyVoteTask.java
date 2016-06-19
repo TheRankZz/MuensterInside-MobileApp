@@ -44,6 +44,7 @@ public class MyVoteTask extends AsyncTask<Void,Void, List<Location>> {
         Log.d(TAG, "doInBackground() gestartet" );
 
         try{
+            //Gibt anhand der Device_ID eine Liste der bewerteten Locations zurück
             votes = this.myApp.getMuensterInsideImpl().getMyVotes(device_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return votes;

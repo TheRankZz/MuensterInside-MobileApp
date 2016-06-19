@@ -42,6 +42,7 @@ public class ShowCommentTask extends AsyncTask<Void, Void, List<Comment>> {
     protected List<Comment> doInBackground(Void... params){
         Log.d(TAG, "doInBackground() gestartet" );
         try{
+            //Gibt anhand der Location_ID eine Liste aller Kommentare der Locations zurück
             comments = myApp.getMuensterInsideImpl().getCommentsByLocation(this.loc_id);
             Log.i(TAG, "doInBackground() erfolgreich");
             return comments;

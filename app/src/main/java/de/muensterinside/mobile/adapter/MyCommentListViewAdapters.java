@@ -24,6 +24,8 @@ import de.muensterinside.mobile.tasks.DeleteCommentTask;
 
 /**
  * Created by Julia Bracht and Nicolas Burchert
+ * Adapter zum Anzeigen der eigenen Kommentare
+ * @author Julia Bracht, Nicolas Burchert
  */
 public class MyCommentListViewAdapters extends BaseAdapter{
     public ArrayList<HashMap<String, String>> list;
@@ -86,33 +88,44 @@ public class MyCommentListViewAdapters extends BaseAdapter{
 
         if(convertView == null){
 
+            //Hier wird dem Adapter das Aussehen zugeordnet
            convertView=inflater.inflate(R.layout.my_comment_colmn_row, null);
 
+            //TextView für die Darstellung des Kommentars
             txtFirst=(TextView) convertView.findViewById(R.id.comment);
+
+            //TextView für die Darstellung des Datums
             txtSecond=(TextView) convertView.findViewById(R.id.created_at);
+
+            //Button zum Löschen des eigenen Kommentars
             deleteBtn = (Button)convertView.findViewById(R.id.delete_btn);
 
 
         }
 
+        //Hashmap für Kommentar und das Datum
         HashMap<String, String> map=list.get(position);
+
+        //Erste TextView wird das Kommentar zugeordnet
         txtFirst.setText(map.get(FIRST_COLUMN));
+
+        //Zweiter TextView wird das Datum zugeordnet
         txtSecond.setText(map.get(SECOND_COLUMN));
 
 
+        //Wird ausgeführt, wenn auf den Delete Button geklickt wird
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
-
-
+                //Die Id des Kommentars
                 id = comments.get(position).getId();
+
+                //DeleteCommentTask wird aufgerufen, um Kommentar zu löschen
                 DeleteCommentTask deleteCommentTask = new DeleteCommentTask(activity, myApp, id);
                 deleteCommentTask.execute();
 
-
-
-
+                //Aktualisiert die Activity, damit gelöschte Kommentare verschwinden
                 Intent i = new Intent(activity, MyCommentActivity.class);
                 activity.startActivity(i);
                 notifyDataSetChanged();

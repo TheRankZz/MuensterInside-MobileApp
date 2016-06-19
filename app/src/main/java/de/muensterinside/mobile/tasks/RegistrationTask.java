@@ -44,9 +44,7 @@ public class RegistrationTask extends AsyncTask<String, Integer, Device> {
 
 
             try {
-            /* Die register Methode liefert anhand der Android Device-ID
-             * und des Usernames ein Device Objekt.
-             */
+                //Gibt anhand der Android Device_ID und des Usernames ein Device_Objekt zurück
                 Device device = this.myApp.getMuensterInsideImpl().register(android_id, username);
                 this.myApp.setDevice(device);
                 Log.i(TAG, "doInBackground() erfolgreich");

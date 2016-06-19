@@ -112,7 +112,7 @@ public class LocationActivity extends AppCompatActivity {
         // ListView für die Darstellung der 3 neusten Kommentare wird erzeugt
         ListView kommentare = (ListView) findViewById(R.id.smallCommentList);
 
-        // Button für wird erzeugt
+        // Button zum Schreiben eines Kommentares wird erzeugt
         Button writeComment = (Button) findViewById(R.id.button1);
 
         // Button für den Upvote wird erzeugt
@@ -121,23 +121,26 @@ public class LocationActivity extends AppCompatActivity {
         // Button für den Downvote wird erzeugt
         down = (Button) findViewById(R.id.down);
 
-        // Button zum anzeigen der Kommentare wird erzeugt
+        // Button zum Anzeigen der Kommentare wird erzeugt
         Button showComment = (Button) findViewById(R.id.KommentarAnzeigen);
         showComment.setPaintFlags(showComment.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
+
+        //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            // LocationTask wird aufgerufen
+            // LocationTask wird aufgerufen, um Locations abzurufen
             LocationTask locationTask = new LocationTask(this, myApp, loc_id, device_id);
             locationTask.execute();
 
-            // ShowCommentTask wird aufgerufen
+            // ShowCommentTask wird aufgerufen, um alle Kommentare der Location abzurufen
             ShowCommentTask showCommentTask = new ShowCommentTask(this, myApp, loc_id);
             showCommentTask.execute();
 
+            //Speichert die in den TaskKlassen aufgerufen Locationen, Comments in Variablen/Listen
             try {
                 location = locationTask.get();
                 comments = showCommentTask.get();
@@ -149,26 +152,38 @@ public class LocationActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            // Wenn keine Kommentare vorhanden ist, wird ein Toast ausgegeben (Keine Kommentare vorhanden)
             if (comments == null) {
                 CharSequence text = "Keine Kommentare vorhanden.";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(this, text, duration);
                 toast.show();
-            } else {
+            }
+            else {
 
+                //Wenn keine Kommentare vorhanden sind, wird die Anzahl der Kommentare auf 0 gesetzt
                 int size;
                 if (comments == null) {
                     size = 0;
                 } else {
                     size = comments.size();
                 }
+
+/**
+ * Es sollen nur die ersten 3 Kommentare in der LocationActivity ausgegebn werden.
+ * Überprüft, ob es überhaupt 3 Kommentare ausgegebn werden können/ es überhaupt 3 Kommentare gibt.
+ */
+                //Erstellt eine Liste der angezeigten Kommentare
                 ArrayList<HashMap<String, String>> list;
                 list = new ArrayList<HashMap<String, String>>();
 
                 switch (size) {
+
+                    //wenn keine Kommentare vorhanden sind, passiert nichts
                     case 0:
                         break;
 
+                    //wenn nur ein Kommentar vorhanden ist, wird nur der erste ausgegeben
                     case 1:
                         for (int i = 0; i < 1; i++) {
                             HashMap<String, String> temp = new HashMap<String, String>();
@@ -178,6 +193,7 @@ public class LocationActivity extends AppCompatActivity {
                         }
                         break;
 
+                    //Wenn nur zwei Kommentare vorhanden sind, werden nur die ersten zwei ausgegebn
                     case 2:
                         for (int i = 0; i < 2; i++) {
                             HashMap<String, String> temp = new HashMap<String, String>();
@@ -186,6 +202,7 @@ public class LocationActivity extends AppCompatActivity {
                             list.add(temp);
                         }
                         break;
+
 
                     case 3:
                         for (int i = 0; i < 3; i++) {
@@ -196,6 +213,7 @@ public class LocationActivity extends AppCompatActivity {
                         }
                         break;
 
+                    // Bei  drei oder mehr Kommentare, werden die letzten drei ausgegebn
                     default:
                         for (int i = 0; i < 3; i++) {
                             HashMap<String, String> temp = new HashMap<String, String>();
@@ -206,21 +224,24 @@ public class LocationActivity extends AppCompatActivity {
                         break;
                 }
 
-                // Es wird ein Adapter erstellt der die listView mit einträgen befüllt
+                // Es wird ein Adapter erstellt der die listView mit Einträgen befüllt
                 adapter = new CommentListViewAdapters(context, list);
-
                 kommentare.setAdapter(adapter);
             }
 
+
+            //Überprüft, ob ein Device Objekt vorhanden ist
             if (device == null) {
                 Log.e(TAG, "Device Objekt nicht gefunden.");
             }
 
+            //Überprüft, ob ein Location Objekt vorhanden ist
             if (location == null) {
                 Log.e(TAG, "Location Objekt nicht gefunden.");
             }
 
             final Location l = location;
+
 
             voteString = String.valueOf(location.getVoteValue());
 
@@ -233,6 +254,8 @@ public class LocationActivity extends AppCompatActivity {
             // TextView für den Link der Location wird befüllt
             exampleLink.setText(location.getLink());
 
+
+            //Wenn schon gevotet wurde, wird die Hintergrundfarbe für den Down/Up Vote  auf grau gesetzt
             boolean isVoted = location.isVoted();
             if (isVoted) {
                 up.setEnabled(false);
@@ -241,9 +264,12 @@ public class LocationActivity extends AppCompatActivity {
                 down.setBackgroundColor(Color.GRAY);
             }
 
+            //Wenn eine Description vorhanden ist, wird diese ausgegebn
             if (location.getDescription() != null) {
                 exampleDescription.setText(location.getDescription());
-            } else {
+            }
+            //Wenn keine Description vorhanden ist, wird "Beschreibung" und der Beschreibungstext ausgeblendet
+            else {
                 TextView locationDescription = (TextView) findViewById(R.id.textViewDescription);
                 locationDescription.setVisibility(View.INVISIBLE);
                 exampleDescription.setVisibility(View.INVISIBLE);
@@ -255,6 +281,8 @@ public class LocationActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "b.onClick() gestartet");
+
+                    //Übergibt die Kategorie_Id und die Location_Id der WriteCommentActivity, um diese richtig zuzuordnern
                     Intent myIntent = new Intent(context, WriteCommentActivity.class);
                     myIntent.putExtra("selected", cat_id);
                     myIntent.putExtra("locId", loc_id);
@@ -262,17 +290,20 @@ public class LocationActivity extends AppCompatActivity {
                 }
             });
 
+            //führt zur ShowCommentActivity, wenn der Button gedrückt wird
             showComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "c.onClick() gestartet");
+
+                    //Übergibt die Location_Id der ShowCommentActivity, um die richtigen Kommentare anzuzeigen
                     Intent myIntent = new Intent(context, ShowCommentActivity.class);
                     myIntent.putExtra("selected", loc_id);
                     startActivity(myIntent);
                 }
             });
 
-            // Es wird ein Upvote durchgeführt
+            //führt ein UpVote durch, wenn der Button gedrückt wird
             up.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -281,11 +312,15 @@ public class LocationActivity extends AppCompatActivity {
                     upVoteTask.execute();
                     int code;
                     try {
+                        //Wir holen uns den Return Code des Servers aus dem upVoteTask
                         code = upVoteTask.get();
                     } catch (Exception e) {
+                        //Bei einem Fehler, wird der Return Code auf 1 gesetzt
                         code = 1;
                         e.printStackTrace();
                     }
+
+                    //Bei einem Return Code von 0 war der UpVote erfolgreich und es wird ein Toast ausgegeben (UpVote erfolgreich)
                     if (code == 0) {
                         CharSequence text = "UpVote erfolgreich";
                         int duration = Toast.LENGTH_SHORT;
@@ -294,16 +329,20 @@ public class LocationActivity extends AppCompatActivity {
 
                         LocationTask locationTask1 = new LocationTask(context, myApp, loc_id, device_id);
                         locationTask1.execute();
+
                         Location location;
                         try {
+                            //Wir holen uns den Return Code des Servers aus der locationTask
                             location = locationTask1.get();
                         } catch (Exception e) {
+                            //Bei einem Fehler, wird der Return Code auf 1 gesetzt
                             location = l;
                             e.printStackTrace();
                         }
                         String newVoteValue = String.valueOf(location.getVoteValue());
                         exampleVote.setText(newVoteValue);
 
+                        //Wenn schon gevotet wurde, wird die Hintergrundfarbe für den Down/Up Vote  auf grau gesetzt
                         boolean isVoted = location.isVoted();
                         if (isVoted) {
                             up.setEnabled(false);
@@ -313,13 +352,19 @@ public class LocationActivity extends AppCompatActivity {
                         }
 
                         Log.i(TAG, "UpVote erfolgreich");
-                    } else if (code == 2) {
+                    }
+
+                    //Wenn der ReturnCode = 2 ist, dann gab es schon ein Vote
+                    else if (code == 2) {
                         CharSequence text = "Es gab schon ein Vote";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
                         Log.i(TAG, "Es gab schon ein Vote");
-                    } else {
+                    }
+
+                    //Wenn der ReturnCode nicht 0, dann war der UpVote nicht erfolgreich
+                    else {
                         CharSequence text = "UpVote nicht erfolgreich";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
@@ -329,7 +374,7 @@ public class LocationActivity extends AppCompatActivity {
                 }
             });
 
-            // Es wird ein Downvote durchgeführt
+            //führt ein DownVote durch, wenn der Button gedrückt wird
             down.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -338,29 +383,40 @@ public class LocationActivity extends AppCompatActivity {
                     downVoteTask.execute();
                     int code;
                     try {
+                        //Wir holen uns den Return Code des Servers aus dem downVoteTask
                         code = downVoteTask.get();
                     } catch (Exception e) {
+                        //Bei einem Fehler, wird der Return Code auf 1 gesetzt
                         code = 1;
                         e.printStackTrace();
                     }
+
+                    //Bei einem Return Code von 0 war der DownVote erfolgreich und es wird ein Toast ausgegebn (DownVote erfolgreich)
                     if (code == 0) {
                         CharSequence text = "DownVote erfolgreich";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
 
+
                         LocationTask locationTask1 = new LocationTask(context, myApp, loc_id, device_id);
                         locationTask1.execute();
+
                         Location location;
                         try {
+                            //Wir holen uns den Return Code des Servers aus der locationTask
                             location = locationTask1.get();
                         } catch (Exception e) {
+                            //Bei einem Fehler, wird der Return Code auf 1 gesetzt
                             location = l;
                             e.printStackTrace();
                         }
+
+                        //Die Zahl der Votes verringert sich
                         String newVoteValue = String.valueOf(location.getVoteValue());
                         exampleVote.setText(newVoteValue);
 
+                        //Wenn schon gevotet wurde, wird die Hintergrundfarbe für den Down/Up Vote  auf grau gesetzt
                         boolean isVoted = location.isVoted();
                         if (isVoted) {
                             up.setEnabled(false);
@@ -370,13 +426,17 @@ public class LocationActivity extends AppCompatActivity {
                         }
 
                         Log.i(TAG, "DownVote erfolgreich");
-                    } else if (code == 2) {
+                    }
+                    //Wenn der ReturnCode = 2 ist, dann gab es schon ein Vote
+                    else if (code == 2) {
                         CharSequence text = "Es gab schon ein Vote";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
                         Log.i(TAG, "Es gab schon ein Vote");
-                    } else {
+                    }
+                    //Wenn der ReturnCode nicht 0, dann war der DownVote nicht erfolgreich
+                    else {
                         CharSequence text = "UpVote nicht erfolgreich";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, text, duration);
@@ -389,6 +449,7 @@ public class LocationActivity extends AppCompatActivity {
         }
         else{
 
+            //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
             Log.d(TAG, "Keine Internetverbindung");
             Toast.makeText(LocationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
         }
@@ -397,7 +458,8 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu() gestartet");
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //Hier füllen (inflate) wir das Options Menu mit dem Menüeintrag,
+        // den wir in der XML-Datei menu_main.xml definiert haben.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -411,7 +473,7 @@ public class LocationActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
-        // Home Button
+        //Wenn "Home" gedrückt wurde, rufen wir die MainActivity auf
         else if(item.getItemId() == R.id.action_home){
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

@@ -35,49 +35,88 @@ public class MuensterInsideAndroidApplication extends Application{
 
     }
 
-    // Gibt die Category zurück
+    /**
+     * Gibt die Kategorie aus
+     * @return die Kategorie
+     * @throws Exception falls zurückgeben der Kategorie nicht erfolgreich war
+     */
     public Category getCategory() throws Exception{
         return this.category;
     }
 
-    //Setzt den Username
+    /**
+     * Setzt den UserName
+     * @param username Neuer UserName
+     * @throws Exception falls das Setzten des UserNames nicht erfolgreich war
+     */
     public void setUsername(String username) throws Exception{
         this.username = username;
     }
 
-    //Gibt den Username zurück
+    /**
+     * Gibt den UserName zurück
+     * @return username
+     * @throws Exception falls das Zurückgeben des UserNames nicht erfolgreich war
+     */
     public String getUsername()throws Exception{
         return username;
     }
 
-    // Gibt die Location zurück
+    /**
+     * Gibt die Location zurück
+     * @return location
+     * @throws Exception falls das Zurückgeben der Location nicht erfolgreich war
+     */
     public Location getLocation() throws Exception{
         return this.location;
     }
 
-    //GIbt den Kommentar zurueck
+    /**
+     * Gibt den Kommentar zurück
+     * @return comment
+     * @throws Exception falls das Zurückgeben des Kommentar nicht erfolgreich war
+     */
     public Comment getComment() throws Exception{
         return this.comment;
     }
 
+    /**
+     * Setzt die Device
+     * @param device Neue Device
+     */
     public void setDevice(Device device) {
         this.device = device;
     }
 
+    /**
+     * Gibt die Device zurück
+     * @return device
+     * @throws Exception falls das Zurückgeben der Device nicht erfolgreich war
+     */
     public Device getDevice() throws Exception{
         return this.device;
     }
 
+    /**
+     *
+     * @return
+     */
     public ActionBarDrawerToggle getActionBarDrawerToggle() {
         return actionBarDrawerToggle;
     }
 
+    /**
+     *
+     * @param actionBarDrawerToggle
+     */
     public void setActionBarDrawerToggle(ActionBarDrawerToggle actionBarDrawerToggle) {
         this.actionBarDrawerToggle = actionBarDrawerToggle;
     }
 
     /**
      * Gibt das implementierte Serverinterface zurück
+     * @return muensterInsideImpl
+     * @throws Exception falls Zurückgeben des Serverinterface nicht erfolgreich war
      */
     public MobileWebserviceImpl getMuensterInsideImpl() throws Exception{
         return this.muensterInsideImpl;

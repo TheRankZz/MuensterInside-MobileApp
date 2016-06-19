@@ -47,6 +47,7 @@ public class WriteCommentTask extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         Log.d(TAG, "doInBackground() gestartet");
         try {
+            //Gibt zurück, ob das Speichern des Kommentars erfolgreich war ( 0 = erfolgreich)
             code = myApp.getMuensterInsideImpl().saveComment(this.text,this.device_id,
                     this.loc_id);
             Log.i(TAG, "doInBackground() erfolgreich");

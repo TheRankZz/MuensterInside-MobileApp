@@ -40,6 +40,7 @@ public class UpVoteTask extends AsyncTask<String, Integer, Integer> {
     protected Integer doInBackground(String... params){
         int result;
         try{
+            //Gibt zurück, ob UpVote erfolgreich war (0 = erfolgreich, 1/2 = nicht erfolgreich)
             result = this.myApp.getMuensterInsideImpl().upVote(loc_id, deviceId);
         }
         catch(Exception e){
