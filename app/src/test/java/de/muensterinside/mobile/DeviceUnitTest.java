@@ -30,18 +30,12 @@ public class DeviceUnitTest {
     private static final int id = 1;
     private static final String testName = "Nico";
     private static final String testAndroidID = "AndroidID";
-    private List<Comment> commentList;
-    private List<Location> locationList;
-    private List<Vote> voteList;
 
     @Before
     public void prepareMocks() {
         when(mockDevice.getUsername()).thenReturn(testName);
         when(mockDevice.getId()).thenReturn(id);
-        when(mockDevice.getComments()).thenReturn(commentList);
-        when(mockDevice.getLocations()).thenReturn(locationList);
         when(mockDevice.getAndroidUuid()).thenReturn(testAndroidID);
-        when(mockDevice.getVotes()).thenReturn(voteList);
     }
 
     @Test
@@ -51,27 +45,9 @@ public class DeviceUnitTest {
     }
 
     @Test
-    public void getCommentsTestCase() {
-        List<Comment> result = mockDevice.getComments();
-        assertEquals(result, commentList);
-    }
-
-    @Test
-    public void getLocationsTestCase() {
-        List<Location> result = mockDevice.getLocations();
-        assertEquals(result, locationList);
-    }
-
-    @Test
     public void getAndroidIDTestCase() {
         String result = mockDevice.getAndroidUuid();
         assertEquals(result, testAndroidID);
-    }
-
-    @Test
-    public void getVotesTestCase() {
-        List<Vote> result = mockDevice.getVotes();
-        assertEquals(result, voteList);
     }
 
     @Test

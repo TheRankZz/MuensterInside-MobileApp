@@ -34,9 +34,7 @@ public class LocationUnitTest {
     private static final int downInt = 0;
     private Device device;
     private Category category;
-    private List<Comment> commentList;
     private static final String testLink = "Link";
-    private List<Vote> voteList;
     private static final int testVoteValue = 1;
     private static final String testDescription = "Beschreibung";
 
@@ -46,12 +44,11 @@ public class LocationUnitTest {
         when(mockLocation.getDevice()).thenReturn(device);
         when(mockLocation.getDescription()).thenReturn(testDescription);
         when(mockLocation.getCategory()).thenReturn(category);
-        when(mockLocation.getComments()).thenReturn(commentList);
         when(mockLocation.getLink()).thenReturn(testLink);
-        when(mockLocation.getVotes()).thenReturn(voteList);
         when(mockLocation.getVoteValue()).thenReturn(testVoteValue);
         when(mockLocation.downVote()).thenReturn(downInt);
         when(mockLocation.upVote()).thenReturn(upInt);
+        when(mockLocation.getId()).thenReturn(id);
     }
 
     @Test
@@ -79,21 +76,9 @@ public class LocationUnitTest {
     }
 
     @Test
-    public void getCommentsTestCase() {
-        List<Comment> result = mockLocation.getComments();
-        assertEquals(result, commentList);
-    }
-
-    @Test
     public void getLinkTestCase() {
         String result = mockLocation.getLink();
         assertEquals(result, testLink);
-    }
-
-    @Test
-    public void getVotesTestCase() {
-        List<Vote> result = mockLocation.getVotes();
-        assertEquals(result, voteList);
     }
 
     @Test
