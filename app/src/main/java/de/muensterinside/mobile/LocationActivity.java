@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
@@ -256,16 +257,21 @@ public class LocationActivity extends AppCompatActivity {
             exampleLink.setPaintFlags(exampleLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
             url = exampleLink.getText().toString();
-            if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                url = "http://" + url;
-            }
 
             exampleLink.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "exampleLink.onClick() gestartet");
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(browserIntent);
+                    if(URLUtil.isValidUrl(url)){
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(browserIntent);
+                    }
+                    else {
+                        CharSequence text = "Kein valider Link";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
                 }
             });
 
