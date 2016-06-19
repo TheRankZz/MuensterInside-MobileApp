@@ -38,6 +38,7 @@ public class MyLocationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate() gestartet");
         // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_my_location);
 
@@ -67,6 +68,7 @@ public class MyLocationActivity extends AppCompatActivity {
             List<Location> locations;
             try {
                 locations = myLocationTask.get();
+                Log.i(TAG, "Anzahl eigene Locations: " + locations.size());
             }
             catch (Exception e) {
                 locations = null;

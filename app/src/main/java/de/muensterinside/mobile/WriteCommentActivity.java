@@ -79,7 +79,7 @@ public class WriteCommentActivity extends AppCompatActivity{
 
                 //der erstellte Kommentar wird in eine Variable geschrieben
                 String s = kommentar.getText().toString();
-
+                Log.i(TAG, "Neuer Kommentar: " + s);
                 Intent intent = new Intent(WriteCommentActivity.this,  LocationActivity.class);
                 SharedPreferences newCommentLocationId = getSharedPreferences("MyCommentBoolPref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = newCommentLocationId.edit();
@@ -170,9 +170,4 @@ public class WriteCommentActivity extends AppCompatActivity{
             return super.onOptionsItemSelected(item);
         }
     }
-
-
-
-
-
 }

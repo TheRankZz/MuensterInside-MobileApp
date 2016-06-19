@@ -35,6 +35,7 @@ public class MyCommentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate() gestartet");
         // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_my_comment);
 
@@ -70,6 +71,7 @@ public class MyCommentActivity extends AppCompatActivity {
             List<Comment> comments;
             try {
                 comments = myCommentTask.get();
+                Log.i(TAG, "Anzahl eigene Kommentare: " + comments.size());
             }
             catch (Exception e) {
                 comments = null;

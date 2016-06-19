@@ -33,7 +33,6 @@ public class ShowCommentActivity extends AppCompatActivity {
 
     private MuensterInsideAndroidApplication myApp;
     private List<Comment> comments;
-    private ListView listView;
     private int loc_id;
     private CommentListViewAdapters adapter;
     public static final String TAG = "ShowCommentActivity";

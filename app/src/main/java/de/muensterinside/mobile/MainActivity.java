@@ -69,12 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         //repräsentiert den übergreifenden Zustand einer App
         MuensterInsideAndroidApplication myApp = (MuensterInsideAndroidApplication) getApplication();
-        Device device = new Device();
-        try {
-            device = myApp.getDevice();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         //Netz erreichbar vohranden ? Konnektivität wird geprüft.
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -131,8 +125,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (test) {
                 replaceFragment(1);
+                Log.i(TAG, "Fragment 1 wird angezeigt");
             } else {
                 replaceFragment(0);
+                Log.i(TAG, "Fragment 0 (Startseite) wird angezeigt");
             }
 
             //Zeigt das ausgewählte Fragment an
@@ -145,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     listViewSliding.setItemChecked(position, true);
                     //Fragment wird gewechselt
                     replaceFragment(position);
+                    Log.i(TAG, "Fragment: " + position + " wird angezeigt");
                     //Menü wird geschlossen
                     drawerLayout.closeDrawer(listViewSliding);
                 }

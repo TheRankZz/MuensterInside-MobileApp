@@ -38,6 +38,7 @@ public class MyVoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate() gestartet");
         // Hier wird der Activity das Aussehen zugeordnet
         setContentView(R.layout.activity_my_vote);
 
@@ -66,6 +67,7 @@ public class MyVoteActivity extends AppCompatActivity {
             List<Location> votes;
             try {
                 votes = myVoteTask.get();
+                Log.d(TAG, "Anzahl eigene Votes: " + votes.size());
             }
             catch (Exception e) {
                 votes = null;

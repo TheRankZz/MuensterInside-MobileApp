@@ -89,7 +89,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 editor.apply();
 
                 Intent myIntent = new Intent(context, MainActivity.class);
-                myIntent.putExtra("username", name);
                 startActivity(myIntent);
 
                 CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
@@ -137,9 +136,9 @@ public class RegistrationActivity extends AppCompatActivity {
             Device device;
             try {
                 device = loginTask.get();
-                Log.i(TAG, "login.onClick() erfolgreich");
+                Log.i(TAG, "DeviceID: " + device.getId());
             } catch (Exception e) {
-                Log.e(TAG, "login.onClick() fehlgeschlagen");
+                Log.e(TAG, "Kein Device Objekt bekommen");
                 device = null;
                 e.printStackTrace();
             }
@@ -148,9 +147,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 String name = device.getUsername();
                 Log.i(TAG, "Username: " + name);
 
-                    /* In der SharedPreference wird die vorher ausgewählte
-                     * AnroidID des Gerätes und der Username gespeichert.
-                     */
+                /* In der SharedPreference wird die vorher ausgewählte
+                 * AnroidID des Gerätes und der Username gespeichert.
+                 */
                 SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putString("androidId", android_id);
@@ -160,7 +159,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 editor.apply();
 
                 Intent myIntent = new Intent(context, MainActivity.class);
-                myIntent.putExtra("username", name);
                 startActivity(myIntent);
 
                 CharSequence text = "Login erfolgreich! Benutzername: " + device.getUsername()
@@ -181,7 +179,7 @@ public class RegistrationActivity extends AppCompatActivity {
         else {
 
             //Ist keine Verbindung vorhanden, passiert nichts und der Toast wird ausgegeben (Verbindung fehlgeschlagen)
-            Log.d(TAG, "Keine Internetverbindung");
+            Log.e(TAG, "Keine Internetverbindung");
             Toast.makeText(RegistrationActivity.this, "Verbindung fehlgeschlagen", Toast.LENGTH_LONG).show();
 
         }
@@ -194,7 +192,6 @@ public class RegistrationActivity extends AppCompatActivity {
         /* Wenn der Button registration gedrückt wurde,
          * soll der RegistrationTask ausgeführt werden
          */
-
         Log.d(TAG, "registration.onClick() gestartet");
         String name = username.getText().toString();
         Log.i(TAG, "Username: " + name);
@@ -210,7 +207,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Device device;
             try {
                 device = registrationTask.get();
-                Log.i(TAG, "registration.onClick() erfolgreich");
+                Log.i(TAG, "DeviceID: " + device.getId());
             } catch (Exception e) {
                 Log.e(TAG, "registration.onClick() fehlgeschlagen");
                 device = null;

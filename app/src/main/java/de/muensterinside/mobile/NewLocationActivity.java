@@ -71,6 +71,9 @@ public class NewLocationActivity extends AppCompatActivity {
                 String locationName = name.getText().toString();
                 String locationDescription = description.getText().toString();
                 String locationLink = link.getText().toString();
+                Log.i(TAG, "Name der neuen Location: " + locationName);
+                Log.i(TAG, "Beschreibung der neuen Location: " + locationDescription);
+                Log.i(TAG, "Link der neuen Location: " + locationLink);
 
 
                 //Netz erreichbar vorhanden ? Konnektivität wird geprüft.
