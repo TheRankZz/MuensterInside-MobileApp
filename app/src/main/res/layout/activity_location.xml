@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/showMoreComments"
                 android:textColor="#000000"
-                android:id="@+id/KommentarAnzeigen"
+                android:id="@+id/showComment"
                 android:background="@android:color/transparent"
                 android:layout_alignParentBottom="true"
                 android:layout_toEndOf="@+id/textView3" />

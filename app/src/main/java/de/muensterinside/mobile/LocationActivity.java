@@ -121,8 +121,8 @@ public class LocationActivity extends AppCompatActivity {
         // Button für den Downvote wird erzeugt
         down = (Button) findViewById(R.id.down);
 
-        // Button zum Anzeigen der Kommentare wird erzeugt
-        Button showComment = (Button) findViewById(R.id.KommentarAnzeigen);
+        // Button zum anzeigen der Kommentare wird erzeugt
+        Button showComment = (Button) findViewById(R.id.showComment);
         showComment.setPaintFlags(showComment.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 

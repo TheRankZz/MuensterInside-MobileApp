@@ -17,7 +17,7 @@
 
     <!-- Erstellen einer Kategorie -->
     <Button
-        android:layout_width="70dp"
+        android:layout_width="60dp"
         android:layout_height="50dp"
         android:id="@+id/newLocation"
         android:background="@drawable/ic_action_add"
