@@ -10,7 +10,6 @@ import android.util.Log;
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 
-import de.muensterinside.mobile.entities.Device;
 
 
 

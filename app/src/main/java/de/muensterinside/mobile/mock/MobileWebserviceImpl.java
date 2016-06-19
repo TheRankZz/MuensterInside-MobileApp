@@ -1,7 +1,5 @@
 package de.muensterinside.mobile.mock;
 
-import com.Wsdl2Code.WebServices.MobileWebserviceImplService.*;
-
 import java.util.List;
 
 import de.muensterinside.mobile.entities.Category;
@@ -9,7 +7,6 @@ import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.entities.Image;
 import de.muensterinside.mobile.entities.Location;
-import de.muensterinside.mobile.entities.Vote;
 
 /**
  * 

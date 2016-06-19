@@ -18,12 +18,8 @@ import de.muensterinside.mobile.mock.MuensterInsideImplMock;
  */
 public class MuensterInsideAndroidApplication extends Application{
 
-    private Category category;
-    private Location location;
     private String username;
-    private Comment comment;
     private Device device;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
     private MobileWebserviceImpl muensterInsideImpl;
 
     /**
@@ -33,15 +29,6 @@ public class MuensterInsideAndroidApplication extends Application{
     public MuensterInsideAndroidApplication() {
         this.muensterInsideImpl = new MuensterInsideImpl(); // MuensterInsideImpl
 
-    }
-
-    /**
-     * Gibt die Kategorie aus
-     * @return die Kategorie
-     * @throws Exception falls zurückgeben der Kategorie nicht erfolgreich war
-     */
-    public Category getCategory() throws Exception{
-        return this.category;
     }
 
     /**
@@ -62,23 +49,6 @@ public class MuensterInsideAndroidApplication extends Application{
         return username;
     }
 
-    /**
-     * Gibt die Location zurück
-     * @return location
-     * @throws Exception falls das Zurückgeben der Location nicht erfolgreich war
-     */
-    public Location getLocation() throws Exception{
-        return this.location;
-    }
-
-    /**
-     * Gibt den Kommentar zurück
-     * @return comment
-     * @throws Exception falls das Zurückgeben des Kommentar nicht erfolgreich war
-     */
-    public Comment getComment() throws Exception{
-        return this.comment;
-    }
 
     /**
      * Setzt die Device
@@ -95,22 +65,6 @@ public class MuensterInsideAndroidApplication extends Application{
      */
     public Device getDevice() throws Exception{
         return this.device;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ActionBarDrawerToggle getActionBarDrawerToggle() {
-        return actionBarDrawerToggle;
-    }
-
-    /**
-     *
-     * @param actionBarDrawerToggle
-     */
-    public void setActionBarDrawerToggle(ActionBarDrawerToggle actionBarDrawerToggle) {
-        this.actionBarDrawerToggle = actionBarDrawerToggle;
     }
 
     /**

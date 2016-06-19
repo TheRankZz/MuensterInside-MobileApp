@@ -1,14 +1,7 @@
 package de.muensterinside.mobile.mock;
 
-
-
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import de.muensterinside.mobile.entities.*;
 

@@ -1,14 +1,10 @@
 package de.muensterinside.mobile.tasks;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import de.muensterinside.mobile.MainActivity;
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.entities.Device;
 

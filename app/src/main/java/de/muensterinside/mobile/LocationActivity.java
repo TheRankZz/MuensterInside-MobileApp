@@ -51,8 +51,6 @@ public class LocationActivity extends AppCompatActivity {
     private Button up;
     private Button down;
     private TextView exampleVote;
-    private String android_id;
-    private String username;
     private int device_id;
     public static final String TAG = "LocationActivity";
 
@@ -121,8 +119,9 @@ public class LocationActivity extends AppCompatActivity {
         // Button für den Downvote wird erzeugt
         down = (Button) findViewById(R.id.down);
 
-        // Button zum anzeigen der Kommentare wird erzeugt
+        // Button zum Anzeigen der Kommentare wird erzeugt
         Button showComment = (Button) findViewById(R.id.showComment);
+        // Button zum Anzeigen der Kommentare wird unterstrichen
         showComment.setPaintFlags(showComment.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
 

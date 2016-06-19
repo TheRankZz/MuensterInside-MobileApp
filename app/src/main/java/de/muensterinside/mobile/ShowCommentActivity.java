@@ -10,9 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,9 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.muensterinside.mobile.adapter.CommentListViewAdapters;
-import de.muensterinside.mobile.adapter.LocationListViewAdapters;
 import de.muensterinside.mobile.entities.Comment;
-import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.tasks.ShowCommentTask;
 import static de.muensterinside.mobile.Constants.FIRST_COLUMN;
 import static de.muensterinside.mobile.Constants.SECOND_COLUMN;

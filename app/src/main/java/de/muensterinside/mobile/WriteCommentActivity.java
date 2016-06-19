@@ -18,7 +18,6 @@ import android.widget.Toast;
 import java.util.List;
 
 import de.muensterinside.mobile.entities.Comment;
-import de.muensterinside.mobile.entities.Device;
 import de.muensterinside.mobile.tasks.WriteCommentTask;
 
 /**

@@ -18,9 +18,7 @@ public class Location {
 	private String link;
 	private int voteValue;
 	private Device device;
-	private List<Comment> comments;
 	private Category category;
-	private List<Vote> votes;
 	boolean isVoted;
 
 
@@ -121,13 +119,6 @@ public class Location {
 	}
 
 	/**
-	 * @return the comments
-	 */
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	/**
 	 * @return the category
 	 */
 	public Category getCategory() {
@@ -140,13 +131,6 @@ public class Location {
 	 */
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-
-	/**
-	 * @return the votes
-	 */
-	public List<Vote> getVotes() {
-		return votes;
 	}
 
 	public boolean isVoted(){

@@ -2,9 +2,6 @@ package de.muensterinside.mobile.tasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;

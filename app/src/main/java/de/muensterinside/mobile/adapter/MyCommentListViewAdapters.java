@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import de.muensterinside.mobile.MuensterInsideAndroidApplication;
 import de.muensterinside.mobile.MyCommentActivity;
-import de.muensterinside.mobile.PrefsActivity;
 import de.muensterinside.mobile.R;
 import de.muensterinside.mobile.entities.Comment;
 import de.muensterinside.mobile.tasks.DeleteCommentTask;

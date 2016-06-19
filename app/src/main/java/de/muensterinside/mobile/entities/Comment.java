@@ -1,8 +1,6 @@
 package de.muensterinside.mobile.entities;
 
 
-import java.util.Date;
-
 /**
  * Datenklasse: Kommentar
  *

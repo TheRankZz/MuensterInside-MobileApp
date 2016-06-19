@@ -15,10 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
-
-import de.muensterinside.mobile.entities.Device;
-import de.muensterinside.mobile.entities.Location;
 import de.muensterinside.mobile.tasks.NewLocationTask;
 
 /**
