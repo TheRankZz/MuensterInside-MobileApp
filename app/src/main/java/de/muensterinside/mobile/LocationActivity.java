@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -52,6 +53,7 @@ public class LocationActivity extends AppCompatActivity {
     private Button down;
     private TextView exampleVote;
     private int device_id;
+    private String url;
     public static final String TAG = "LocationActivity";
 
     @Override
@@ -251,6 +253,21 @@ public class LocationActivity extends AppCompatActivity {
 
             // TextView für den Link der Location wird befüllt
             exampleLink.setText(location.getLink());
+            exampleLink.setPaintFlags(exampleLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+            url = exampleLink.getText().toString();
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "http://" + url;
+            }
+
+            exampleLink.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "exampleLink.onClick() gestartet");
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(browserIntent);
+                }
+            });
 
 
             //Wenn schon gevotet wurde, wird die Hintergrundfarbe für den Down/Up Vote  auf grau gesetzt
